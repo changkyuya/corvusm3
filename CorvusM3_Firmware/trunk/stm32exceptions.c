@@ -247,10 +247,10 @@
 	}*/
 
 	/* [0xB4] TIM3 Interrupt */
-	void TIM3_IRQHandler(void)
+	/*void TIM3_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(TIM3_IRQHandler, "TIM3", 45, 0xB4);
-	}
+	}*/
 
 	/* [0xB8] TIM4 Interrupt */
 	void TIM4_IRQHandler(void)

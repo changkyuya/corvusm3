@@ -20,71 +20,45 @@
 	Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+/* Include ------------------------------------------------------------------*/
 #include "main.h"
-#include "initsystem.h"
-
-#include <stdio.h>
+#include "statemachine.h"
 #include "serial.h"
-
+#include <stdio.h>
 #include "led.h"
 
-#include "eeprom.h" 
-
 /* Variables ----------------------------------------------------------------*/
-
-
-
-// EEPROM - TEST
-/* Virtual address defined by the user: 0xFFFF value is prohibited */
-u16 VirtAddVarTab[NumbOfVar] = {0x5555, 0x6666, 0x7777};
+extern vu16 ADCSensorValue[6];
+char x [10];  // for Sensor Tests
+vu8 test = 0;
 	
-int main(void)
+/* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
+void TIM3_IRQHandler(void)
 {
-	/* Initialize S ystem */
-	initSystem();
-
-	char x [10];  // for Sensor Tests
-	
-	/* Test EEPROM -------------------------------------------------------------*/
-
-	/* Unlock the Flash Program Erase controller */
-	FLASH_Unlock();
-
-	/* EEPROM Init */
-	EE_Init();
-
-
-	EE_WriteVariable(VirtAddVarTab[0], 1234);
-	
-	u16 testvar;
-	EE_ReadVariable(VirtAddVarTab[0], &testvar);
-	//sprintf(x,"%d",testvar);
-	
-	// in wrong order
-	u8 ii = 0;
-	while (testvar != 0) {
-		x[ii++] = (testvar % 10) + 0x30;  // 0x30 is ansi 0
-		testvar = testvar / 10;
-	}
-	
-	print_uart1(x);
-  
-	// test LED
-	//setLEDStatus(LED_FLASH);
-  
-	while (1)
-	{
-		// Mainloop --> statemachine() --> Timer 3
-	}
+	statemachine();
 }
 
+/* Main Control Loop --------------------------------------------------------*/
+void statemachine(void)
+{
+	/* Clear TIM3 update interrupt */
+	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+	
 
+	/* Test ADC DMA 
+	sprintf(x,"-%d-",ADCSensorValue[GYRO_X]);
+	print_uart1(x);
+	sprintf(x,"-%d-",ADCSensorValue[GYRO_Y]);
+	print_uart1(x);
+	sprintf(x,"-%d-",ADCSensorValue[GYRO_Z]);
+	print_uart1(x);
+	sprintf(x,"-%d-",ADCSensorValue[ACC_X]);
+	print_uart1(x);
+	sprintf(x,"-%d-",ADCSensorValue[ACC_Y]);
+	print_uart1(x);
+	sprintf(x,"-%d-\r\n",ADCSensorValue[ACC_Z]);
+	print_uart1(x);
+	test++;*/
+	*LED ^= 1;
 
-
-
-
-
-
-
-
-
+}

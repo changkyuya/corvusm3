@@ -103,8 +103,10 @@ void RCC_Configuration(void)
 		}
 	}
 
-	/* Enable TIM2 clocks  for LED */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);  // Timer
+	/* Enable TIM2 clocks  for LED, Enable TIM3 clocks  for Statemachine */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3, ENABLE);  // Timer
+	
+	/* Enable Clock for Port C - Sensors */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_LED, ENABLE); // GPIOc
 	
 	/* Enable GPIOx and AFIO clocks UART*/
@@ -123,7 +125,8 @@ void RCC_Configuration(void)
 void TIM_Configuration(void)
 { 
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-	TIM_OCInitTypeDef  TIM_OCInitStructure;
+	TIM_OCInitTypeDef  TIM_OCInitStructure2;
+	TIM_OCInitTypeDef  TIM_OCInitStructure3;
 
 	/* TIM2 configuration for LED -------------------------------------------*/
 	TIM_TimeBaseStructure.TIM_Period = 0x12B; //alle 250ms = 299
@@ -132,11 +135,11 @@ void TIM_Configuration(void)
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
 	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 	/* Outoput Compare Init */
-	TIM_OCStructInit(&TIM_OCInitStructure);
+	TIM_OCStructInit(&TIM_OCInitStructure2);
 	/* Output Compare Timing Mode configuration: Channel1 */
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Timing;
-	TIM_OCInitStructure.TIM_Pulse = 0x0;  
-	TIM_OCInit(TIM2, &TIM_OCInitStructure);
+	TIM_OCInitStructure2.TIM_OCMode = TIM_OCMode_Timing;
+	TIM_OCInitStructure2.TIM_Pulse = 0x0;  
+	TIM_OCInit(TIM2, &TIM_OCInitStructure2);
 	/* TIM2 enable counter */
 	TIM_Cmd(TIM2, ENABLE);
 	/* Immediate load of TIM2 Precaler value */
@@ -145,6 +148,27 @@ void TIM_Configuration(void)
 	TIM_ClearFlag(TIM2, TIM_FLAG_Update);
 	/* Enable TIM2 Update interrupt */
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+
+	/* TIM3 configuration for Statemachine (main control loop) --------------*/
+	TIM_TimeBaseStructure.TIM_Period = 0x4AF; //alle 1s = 1199
+	TIM_TimeBaseStructure.TIM_Prescaler = 0xEA5F;       	//59999
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+	/* Outoput Compare Init */
+	TIM_OCStructInit(&TIM_OCInitStructure3);
+	/* Output Compare Timing Mode configuration: Channel1 */
+	TIM_OCInitStructure3.TIM_OCMode = TIM_OCMode_Timing;
+	TIM_OCInitStructure3.TIM_Pulse = 0x0;  
+	TIM_OCInit(TIM3, &TIM_OCInitStructure3);
+	/* TIM3 enable counter */
+	TIM_Cmd(TIM3, ENABLE);
+	/* Immediate load of TIM3 Precaler value */
+	TIM_PrescalerConfig(TIM3, 0xEA5F, TIM_PSCReloadMode_Immediate);
+	/* Clear TIM3 update pending flag */
+	TIM_ClearFlag(TIM3, TIM_FLAG_Update);
+	/* Enable TIM3 Update interrupt */
+	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 }
 
 /* Configures the different GPIO ports.  ------------------------------------*/
@@ -199,6 +223,14 @@ void NVIC_Configuration(void)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
+	
+	/* Interrupt for Mainloop -----------------------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
 }
 
 /* Init UART1 --------------------------------------------------------------------*/

@@ -21,23 +21,21 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __SERIAL_H
-#define __SERIAL_H
+#ifndef __STATEMACHINE_H
+#define __STATEMACHINE_H
 
 #include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define TxBufferSize   (countof(TxBuffer) - 1)
-#define RxBufferSize   0xFF
+
 
 /* Private macro -------------------------------------------------------------*/
-#define countof(a)   (sizeof(a) / sizeof(*(a)))
+
 
 /* Exported functions ------------------------------------------------------- */
-void print_uart1 (char *);
-void USART1_IRQHandler(void);
+void TIM3_IRQHandler(void);
+void statemachine(void);
 
-
-#endif /* __SERIAL_H */
+#endif /* __STATEMACHINE_H */
 
