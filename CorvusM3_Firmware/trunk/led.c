@@ -47,7 +47,7 @@ void TIM2_IRQHandler(void)
 	{
 		/* switch led off */
 		case LED_OFF:
-			*LED = 0;
+			//*LED = 0;
 			break;
 		/* switch led on */
 		case LED_ON:

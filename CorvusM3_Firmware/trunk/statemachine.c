@@ -30,7 +30,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[6];
 char x [10];  // for Sensor Tests
-vu8 test = 0;
+vu16 stateLoopCount = 0;
 	
 /* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
 void TIM3_IRQHandler(void)
@@ -45,20 +45,32 @@ void statemachine(void)
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	
 
-	/* Test ADC DMA 
-	sprintf(x,"-%d-",ADCSensorValue[GYRO_X]);
-	print_uart1(x);
-	sprintf(x,"-%d-",ADCSensorValue[GYRO_Y]);
-	print_uart1(x);
-	sprintf(x,"-%d-",ADCSensorValue[GYRO_Z]);
-	print_uart1(x);
-	sprintf(x,"-%d-",ADCSensorValue[ACC_X]);
-	print_uart1(x);
-	sprintf(x,"-%d-",ADCSensorValue[ACC_Y]);
-	print_uart1(x);
-	sprintf(x,"-%d-\r\n",ADCSensorValue[ACC_Z]);
-	print_uart1(x);
-	test++;*/
-	*LED ^= 1;
-
+	// test LED
+	//setLEDStatus(LED_FLASH);
+	
+	/* Debug Output 100Hz ---------------------------------------------------*/
+	if (stateLoopCount % 100 == 0)
+	{
+		sprintf(x,"-%d-",ADCSensorValue[GYRO_X]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[GYRO_Y]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[GYRO_Z]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[ACC_X]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[ACC_Y]);
+		print_uart1(x);
+		sprintf(x,"-%d-\r\n",ADCSensorValue[ACC_Z]);
+		print_uart1(x);
+		/* toggle LED */
+		*LED ^= 1;
+	}
+	
+	/* Count Loops till 1 second */
+	stateLoopCount++;
+	if (stateLoopCount > 1000) 
+	{ 
+		stateLoopCount = 0; 
+	}
 }

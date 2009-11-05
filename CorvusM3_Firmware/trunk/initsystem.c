@@ -103,7 +103,8 @@ void RCC_Configuration(void)
 		}
 	}
 
-	/* Enable TIM2 clocks  for LED, Enable TIM3 clocks  for Statemachine */
+	/* Enable TIM2 clocks  for LED, 
+	   Enable TIM3 clocks  for Statemachine */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3, ENABLE);  // Timer
 	
 	/* Enable Clock for Port C - Sensors */
@@ -129,7 +130,7 @@ void TIM_Configuration(void)
 	TIM_OCInitTypeDef  TIM_OCInitStructure3;
 
 	/* TIM2 configuration for LED -------------------------------------------*/
-	TIM_TimeBaseStructure.TIM_Period = 0x12B; //alle 250ms = 299
+	TIM_TimeBaseStructure.TIM_Period = 0x12B; 				//299
 	TIM_TimeBaseStructure.TIM_Prescaler = 0xEA5F;       	//59999
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
@@ -150,8 +151,8 @@ void TIM_Configuration(void)
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 
 	/* TIM3 configuration for Statemachine (main control loop) --------------*/
-	TIM_TimeBaseStructure.TIM_Period = 0x4AF; //alle 1s = 1199
-	TIM_TimeBaseStructure.TIM_Prescaler = 0xEA5F;       	//59999
+	TIM_TimeBaseStructure.TIM_Period = 1000; 				//alle 1ms
+	TIM_TimeBaseStructure.TIM_Prescaler = 0x48;       	//72
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
@@ -164,7 +165,7 @@ void TIM_Configuration(void)
 	/* TIM3 enable counter */
 	TIM_Cmd(TIM3, ENABLE);
 	/* Immediate load of TIM3 Precaler value */
-	TIM_PrescalerConfig(TIM3, 0xEA5F, TIM_PSCReloadMode_Immediate);
+	TIM_PrescalerConfig(TIM3, 0x48, TIM_PSCReloadMode_Immediate);
 	/* Clear TIM3 update pending flag */
 	TIM_ClearFlag(TIM3, TIM_FLAG_Update);
 	/* Enable TIM3 Update interrupt */
