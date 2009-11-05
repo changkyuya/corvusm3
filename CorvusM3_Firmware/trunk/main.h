@@ -25,6 +25,8 @@
 #define __MAIN_H
 
 /* Define for STM fwlib load ------------------------------------------------*/
+#define _DMA
+#define _DMA_Channel1
 #define _TIM
 #define _EXTI
 #define _GPIO
@@ -55,12 +57,11 @@
 #define GPIO_LEDPIN GPIO_Pin_13
 #define GPIO_LED GPIOC
 /* Map Pins for ACC */
-#define GPIO_ACC GPIOC
+#define GPIO_SEN GPIOC  // for ACC and Gyro
 #define GPIO_ACC_Z GPIO_Pin_3
 #define GPIO_ACC_Y GPIO_Pin_4
 #define GPIO_ACC_X GPIO_Pin_5
 /* Map Pins for Gyro */
-#define GPIO_GYRO GPIOC
 #define GPIO_GYRO_Z GPIO_Pin_0
 #define GPIO_GYRO_X GPIO_Pin_1
 #define GPIO_GYRO_Y GPIO_Pin_2
@@ -71,6 +72,13 @@
 #define LED_FLASH 1
 #define LED_BLINK 2
 #define LED_ON 3
+/* XYZ */
+#define GYRO_X 	0
+#define GYRO_Y 	1
+#define GYRO_Z 	2
+#define ACC_X	3
+#define ACC_Y	4
+#define ACC_Z	5
 
 
 

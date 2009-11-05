@@ -24,6 +24,9 @@
 #include "main.h"
 #include "initsystem.h"
 
+/* Variables ----------------------------------------------------------------*/
+vu16 ADCSensorValue[6];
+
 /* Main Initfunction --------------------------------------------------------*/
 void initSystem()
 {
@@ -36,6 +39,10 @@ void initSystem()
 	/* UART Interrupt */
 	NVIC_Configuration();
 	initUART1();
+	/* initDMA for Sensors */
+	initDMA();
+	/* initADC for Sensros */
+	initADC(); 
 }
 
 /* Configures the different system clocks  ----------------------------------*/
@@ -73,6 +80,9 @@ void RCC_Configuration(void)
 		/* PCLK1 = HCLK/2 */
 		RCC_PCLK1Config(RCC_HCLK_Div2);
 
+		/* ADCCLK = PCLK2/4 */
+		RCC_ADCCLKConfig(RCC_PCLK2_Div6); // 72MHz/6=12 MHz range must be 0.6-14MHz;
+
 		/* PLLCLK = 8MHz * 9 = 72 MHz */
 		RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);
 
@@ -104,6 +114,9 @@ void RCC_Configuration(void)
 	
 	/* Enable ADC1 and GPIOC clock */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_GPIOC, ENABLE);
+	
+	/* Enable DMA1 clock */
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA, ENABLE);
 }
 
 /* Configures the used Timers. ----------------------------------------------*/
@@ -158,26 +171,10 @@ void GPIO_Configuration(void)
 	
 	/* ADC for ACC and Gyro -------------------------------------------------*/
 	// 16 & 17 no need GPIO_Mode_AIN
-	/* Gyro Z */
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
-	GPIO_InitStructure.GPIO_Pin = GPIO_GYRO_Z;
-	GPIO_Init(GPIO_GYRO, &GPIO_InitStructure); 
-	/* Gyro X */
-	GPIO_InitStructure.GPIO_Pin = GPIO_GYRO_X;
-	GPIO_Init(GPIO_GYRO, &GPIO_InitStructure); 
-	/* Gyro Y */
-	GPIO_InitStructure.GPIO_Pin = GPIO_GYRO_Y;
-	GPIO_Init(GPIO_GYRO, &GPIO_InitStructure); 
-	/* ACC X */
-	GPIO_InitStructure.GPIO_Pin = GPIO_ACC_X;
-	GPIO_Init(GPIO_ACC, &GPIO_InitStructure); 
-	/* ACC Y */
-	GPIO_InitStructure.GPIO_Pin = GPIO_ACC_Y;
-	GPIO_Init(GPIO_ACC, &GPIO_InitStructure); 
-	/* ACC Z */
-	GPIO_InitStructure.GPIO_Pin = GPIO_ACC_Z;
-	GPIO_Init(GPIO_ACC, &GPIO_InitStructure); 
+	GPIO_InitStructure.GPIO_Pin = GPIO_GYRO_X | GPIO_GYRO_Y | GPIO_GYRO_Z | GPIO_ACC_X | GPIO_ACC_Y | GPIO_ACC_Z;
+	GPIO_Init(GPIO_SEN, &GPIO_InitStructure); 
 
 }
 
@@ -229,3 +226,72 @@ void initUART1 (void)
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);	
 }
 
+/* Init DMA for Sensor ------------------------------------------------------*/
+void initDMA (void)
+{
+	/* DMA1 channel1 configuration for Sensors */
+	DMA_InitTypeDef DMA_InitStructure;
+
+	DMA_DeInit(DMA_Channel1);
+	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
+	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)&ADCSensorValue[0];
+	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+	DMA_InitStructure.DMA_BufferSize = 6;
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+	DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+	DMA_Init(DMA_Channel1, &DMA_InitStructure);
+
+	/* Enable DMA1 channel1 */
+	DMA_Cmd(DMA_Channel1, ENABLE);
+}
+
+/* ADC1 configuration for Sensors (Gyro, ACC) -------------------------------*/
+void initADC (void) 
+{
+	ADC_InitTypeDef  ADC_InitStructure;
+	
+	/* ADC1 configuration */
+	ADC_DeInit(ADC1);
+		
+	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+	ADC_InitStructure.ADC_ScanConvMode = ENABLE;
+	ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+	//ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+	//ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+	ADC_InitStructure.ADC_NbrOfChannel = 6;
+	ADC_Init(ADC1, &ADC_InitStructure);
+
+	/* ADC1 regular channel11 configuration */ 
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 1, ADC_SampleTime_55Cycles5); //-> Gyro X
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_11, 2, ADC_SampleTime_55Cycles5); //-> Gyro Y
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 3, ADC_SampleTime_55Cycles5); //-> Gyro Z
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_15, 4, ADC_SampleTime_55Cycles5); //-> ACC X
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 5, ADC_SampleTime_55Cycles5); //-> ACC Y
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_13, 6, ADC_SampleTime_55Cycles5); //-> ACC Z
+
+	/* Enable ADC1 DMA */
+	ADC_DMACmd(ADC1, ENABLE);
+
+	/* Enable ADC1 */
+	ADC_Cmd(ADC1, ENABLE);
+
+	/* Enable ADC1 reset calibaration register */   
+	ADC_ResetCalibration(ADC1);
+	/* Check the end of ADC1 reset calibration register */
+	while(ADC_GetResetCalibrationStatus(ADC1));
+
+	/* Start ADC1 calibaration */
+	ADC_StartCalibration(ADC1);
+	/* Check the end of ADC1 calibration */
+	while(ADC_GetCalibrationStatus(ADC1));
+	 
+	/* Start ADC1 Software Conversion */ 
+	ADC_SoftwareStartConvCmd(ADC1, ENABLE);  
+}

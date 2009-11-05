@@ -31,89 +31,21 @@
 
 #include "eeprom.h" 
 
-
-
+/* Variables ----------------------------------------------------------------*/
+extern vu16 ADCSensorValue[6];
 
 
 // EEPROM - TEST
 /* Virtual address defined by the user: 0xFFFF value is prohibited */
 u16 VirtAddVarTab[NumbOfVar] = {0x5555, 0x6666, 0x7777};
-
-
-
-
-
-
-
-
-
-	
 	
 int main(void)
 {
 	/* Initialize System */
 	initSystem();
 
-
+	char x [10];  // for Sensor Tests
 	
-	
-	
-	/* TEST ADC --------------------------------------------------------------------------------*/
-
-	u16 test;
-	char x [10];
-	
-	test = 1111;
-	sprintf(x,"%d",test);
-	print_uart1(x);
-
-
-	
-
-	ADC_InitTypeDef  ADC_InitStructure;
-	RCC_ADCCLKConfig(RCC_PCLK2_Div6); // 72MHz/6=12 MHz range must be 0.6-14MHz
-
-    ADC_DeInit(ADC1);
-	
-	ADC_InitStructure.ADC_Mode = ADC_Mode_Independent; // This ADC independent from other ADC
-	ADC_InitStructure.ADC_ScanConvMode = DISABLE; // Convert only specified chanel	
-	ADC_InitStructure.ADC_ContinuousConvMode = DISABLE; // Convert on demand only
-	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None; // Do conversion on demand
-	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right; // ADC 12 bits data into 16 bits with 0 paddings
-	ADC_InitStructure.ADC_NbrOfChannel = 1; 
-	ADC_Init(ADC1, &ADC_InitStructure);	// Put all settings into structure
-
-	ADC_Cmd(ADC1, ENABLE);				// Start ADCn
-	ADC_ResetCalibration(ADC1);			// Reset calibration
-	while(ADC_GetResetCalibrationStatus(ADC1));
-	ADC_StartCalibration(ADC1);			// Start final calibration
-	while(ADC_GetCalibrationStatus(ADC1));
-  
-
-
-	
-	  
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 1, ADC_SampleTime_1Cycles5);
-	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
-	
-	
-
-	
-	while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
-
-	
-	
-	test =  ADC_GetConversionValue(ADC1);
-  
-	
-	sprintf(x,"%d",test);
-	print_uart1(x);
-
-
-
-
-
-
 	/* Test EEPROM -------------------------------------------------------------*/
 
 	/* Unlock the Flash Program Erase controller */
@@ -141,13 +73,20 @@ int main(void)
   
   while (1)
 	{
-		//PWR_EnterSTANDBYMode(); // Interrupt does not wake up ...
-		
-		//*LED ^= 1;											// toggle led
-		//for (int i = 4; i > 0; i--)							// wait
-		//{
-		//	busyWait(0x8000);
-		//}
+		/* Test ADC DMA */
+		sprintf(x,"-%d-",ADCSensorValue[GYRO_X]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[GYRO_Y]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[GYRO_Z]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[ACC_X]);
+		print_uart1(x);
+		sprintf(x,"-%d-",ADCSensorValue[ACC_Y]);
+		print_uart1(x);
+		sprintf(x,"-%d-\r\n",ADCSensorValue[ACC_Z]);
+		print_uart1(x);
+		for(int i = 0;i < 100000000;i++);
 	}
 }
 
