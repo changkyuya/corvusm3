@@ -51,17 +51,18 @@ void statemachine(void)
 	/* Debug Output 100Hz ---------------------------------------------------*/
 	if (stateLoopCount % 100 == 0)
 	{
-		sprintf(x,"-%d-",ADCSensorValue[GYRO_X]);
+		/* Graphoutput must start with 'G' and first value is timer (not used) */
+		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
 		print_uart1(x);
-		sprintf(x,"-%d-",ADCSensorValue[GYRO_Y]);
+		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
 		print_uart1(x);
-		sprintf(x,"-%d-",ADCSensorValue[GYRO_Z]);
+		sprintf(x,"%d:",ADCSensorValue[GYRO_Z]);
 		print_uart1(x);
-		sprintf(x,"-%d-",ADCSensorValue[ACC_X]);
+		sprintf(x,"%d:",ADCSensorValue[ACC_X]);
 		print_uart1(x);
-		sprintf(x,"-%d-",ADCSensorValue[ACC_Y]);
+		sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
 		print_uart1(x);
-		sprintf(x,"-%d-\r\n",ADCSensorValue[ACC_Z]);
+		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
 		print_uart1(x);
 		/* toggle LED */
 		*LED ^= 1;
