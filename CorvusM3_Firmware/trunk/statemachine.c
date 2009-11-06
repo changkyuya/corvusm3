@@ -26,6 +26,7 @@
 #include "serial.h"
 #include <stdio.h>
 #include "led.h"
+#include "tools.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[6];
@@ -66,6 +67,7 @@ void statemachine(void)
 		print_uart1(x);
 		/* toggle LED */
 		*LED ^= 1;
+		Pause(1000);
 	}
 	
 	/* Count Loops till 1 second */

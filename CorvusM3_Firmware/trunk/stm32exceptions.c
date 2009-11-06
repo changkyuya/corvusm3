@@ -67,10 +67,10 @@
 	}
 
 	/* [0x3C] SysTick Exception */
-	void SysTickHandler(void)
+	/*void SysTickHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(SysTickHandler, "SysTick", 15, 0x3C);
-	}
+	}*/
 
 	/* [0x40] WWDG Interrupt */
 	void WWDG_IRQHandler(void)

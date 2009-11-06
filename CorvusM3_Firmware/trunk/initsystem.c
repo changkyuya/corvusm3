@@ -43,6 +43,10 @@ void initSystem()
 	initDMA();
 	/* initADC for Sensros */
 	initADC(); 
+	/* inti System Ticker */
+	/* does not work in Interrupt */
+	/* Pause(ms) function */
+	//initSysTick();
 }
 
 /* Configures the different system clocks  ----------------------------------*/
@@ -328,3 +332,14 @@ void initADC (void)
 	/* Start ADC1 Software Conversion */ 
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);  
 }
+
+/* init System Ticker with 1ms ----------------------------------------------*/
+void initSysTick()
+{
+	// config for systick - delay
+	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK);
+	SysTick_SetReload(72000);
+	SysTick_ITConfig(ENABLE);
+	SysTick_CounterCmd(SysTick_Counter_Enable);
+}
+

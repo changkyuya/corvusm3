@@ -27,7 +27,6 @@
 #include "serial.h"
 
 #include "led.h"
-
 #include "eeprom.h" 
 
 /* Variables ----------------------------------------------------------------*/

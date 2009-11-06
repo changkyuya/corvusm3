@@ -39,9 +39,12 @@
 #define _ADC
 #define _FLASH
 #define _FLASH_PROG
+#define _SysTick
 
 /* Include STM fwlib --------------------------------------------------------*/
 #include "stm32fwlib.h"
+/* tools */
+#include "tools.h"
 
 /* Define the hardware depending --------------------------------------------*/ 
 /* Map Pins to Serial 1 */
