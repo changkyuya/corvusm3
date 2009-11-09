@@ -5,19 +5,33 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 
 == Realisiert ==
 
-  * *PC13* : LED
   * *PA08* : PPM Empfänger (Summensignal)
-  * *PB10* : TX an UART Regler (oder I2C)
+  * *PA09* : TX-UART1 - PC
+  * *PA10* : RX-UART1 - PC
+  * *PC00* : Sensoren ACC / Gyro
+  * *PC01* : Sensoren ACC / Gyro
+  * *PC02* : Sensoren ACC / Gyro
+  * *PC03* : Sensoren ACC / Gyro
+  * *PC04* : Sensoren ACC / Gyro
+  * *PC05* : Sensoren ACC / Gyro
+  * *PC13* : LED
 
 == Geplant ==
 
-  * *PB11* : RX optional für Regler (oder I2C) - oder Spektrum Empfänger
+  * *PB10* : TX an UART Regler (UART2 oder I2C)
+  * *PB11* : RX optional für Regler (UART2 oder I2C)
   * *PB00* : Spannungsmessung
-  * *PA03* : Spektrum Empfänger UART-RX - dann muß GPS an SDIO-Port -> keine SD-Karte?
+  * *PA03* : Spektrum Empfänger UART-RX (UART3)
+  * *PC11* : RX für GPS (UART4)
+  * *PC10* : TX optional für GPS
+  * *PB12* : NSS - SD-Karte
+  * *PB13* : SCK - SD-Karte
+  * *PB14* : MISO - SD-Karte
+  * *PB15* : MOSI - SD-Karte
 
 == Infos ==
 
-*SD Karte über SDIO*
+*SD Karte über SDIO* (dann kein UART3/4 -> Empfänger muss an RX Regler)
 
   * *PC08* : D0
   * *PC09* : D1
@@ -25,3 +39,10 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PC11* : D3
   * *PC12* : CLK
   * *PD02* : CMD
+
+*SD Karte über SPI* (dann 2 UART frei!)
+
+  * *PB12* : NSS
+  * *PB13* : SCK
+  * *PB14* : MISO
+  * *PB15* : MOSI
