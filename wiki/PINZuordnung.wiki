@@ -1,0 +1,18 @@
+#labels Phase-Requirements
+#PIN Zuordnung
+
+= Headerboard =
+
+Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
+
+= Realisiert =
+
+  * *PC13* : LED
+  * *PA8* : PPM Empfänger (Summensignal)
+  * *PB10* : TX an UART Regler (oder I2C)
+
+= Geplant =
+
+  * *PB11* : RX optional für Regler (oder I2C) - oder Spektrum Empfänger
+  * *PB0* : Spannungsmessung
+  * *PA3* : Spektrum Empfänger UART-RX - dann muß GPS an SDIO-Port -> keine SD-Karte?
