@@ -124,6 +124,12 @@ void RCC_Configuration(void)
 	
 	/* Enable DMA1 clock */
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA, ENABLE);
+	
+	/* Enable for PPM decode -------------------------------------------*/
+	/* TIM1 clock enable */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+	/* GPIOA clock enable */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 }
 
 /* Configures the used Timers. ----------------------------------------------*/
@@ -174,6 +180,31 @@ void TIM_Configuration(void)
 	TIM_ClearFlag(TIM3, TIM_FLAG_Update);
 	/* Enable TIM3 Update interrupt */
 	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+	
+	/* Timer for PPM decode ---------------------------------------------------*/
+	TIM1_ICInitTypeDef TIM1_ICInitStructure; 
+	//TIM_ICInitStructure.TIM_ICMode = TIM_ICMode_ICAP; 
+	TIM1_ICInitStructure.TIM1_Channel = TIM1_Channel_1;   //Pin: PA8
+	TIM1_ICInitStructure.TIM1_ICPolarity = TIM1_ICPolarity_Falling; 
+	TIM1_ICInitStructure.TIM1_ICSelection = TIM1_ICSelection_DirectTI; 
+	TIM1_ICInitStructure.TIM1_ICPrescaler = TIM1_ICPSC_DIV1; 
+	TIM1_ICInitStructure.TIM1_ICFilter = 0x0; 
+	TIM1_ICInit(&TIM1_ICInitStructure); 
+
+	TIM1_SelectInputTrigger(TIM1_TS_TI2FP2); 
+
+	TIM1_InternalClockConfig(); 
+	TIM1_TimeBaseInitTypeDef TIM1_TimeBaseStructure; 
+	TIM1_TimeBaseStructure.TIM1_Period = 0xFFFF; 
+	TIM1_TimeBaseStructure.TIM1_Prescaler = 17; // fCK_PSC / (17 + 1) 1ms = 4000 
+	TIM1_TimeBaseStructure.TIM1_ClockDivision = TIM1_CKD_DIV1; 
+	TIM1_TimeBaseStructure.TIM1_CounterMode = TIM1_CounterMode_Up; 
+	TIM1_TimeBaseInit(& TIM1_TimeBaseStructure);
+
+	/* TIM enable counter */ 
+	TIM1_Cmd(ENABLE); 
+	/* Enable the CC1 Interrupt Request */ 
+	TIM1_ITConfig(TIM_IT_CC1, ENABLE); 
 }
 
 /* Configures the different GPIO ports.  ------------------------------------*/
@@ -204,6 +235,13 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
 	GPIO_InitStructure.GPIO_Pin = GPIO_GYRO_X | GPIO_GYRO_Y | GPIO_GYRO_Z | GPIO_ACC_X | GPIO_ACC_Y | GPIO_ACC_Z;
 	GPIO_Init(GPIO_SEN, &GPIO_InitStructure); 
+	
+	/* Configure PA8 for PPM Dekode -----------------------------------------*/
+	/* TIM1 channel 1 pin (PA.08) configuration */
+	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_8;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 }
 

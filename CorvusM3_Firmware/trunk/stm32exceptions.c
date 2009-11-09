@@ -235,10 +235,10 @@
 	}
 
 	/* [0xAC] TIM1 Capture/Compare Interrupt */
-	void TIM1_CC_IRQHandler(void)
+	/*void TIM1_CC_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(TIM1_CC_IRQHandler, "TIM1 Capture/Compare", 43, 0xAC);
-	}
+	}*/
 
 	/* [0xB0] TIM2 Interrupt */
 	/*void TIM2_IRQHandler(void)

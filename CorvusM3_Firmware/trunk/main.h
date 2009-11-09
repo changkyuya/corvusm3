@@ -28,6 +28,7 @@
 #define _DMA
 #define _DMA_Channel1
 #define _TIM
+#define _TIM1
 #define _EXTI
 #define _GPIO
 #define _RCC
