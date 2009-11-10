@@ -22,26 +22,48 @@
 
 #include "receiverppm.h"
 
+#include <stdio.h> //for debug
+#include "serial.h" //for debug
+
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
 vu16 	IC2Value;
 vu16 	lastIC2Value;
-vu8		channel;
+vu8		channelCount;
 
-typedef struct
+vu16 receiverChannel[9];
+vu16 receiverPPMChannel[9];
+//volatile pulswidthStruct pulswidth;
+//extern ChannelStruct receiverChannel;  //statemachine
+
+char x [10];  // for Debug
+
+/* read and trimm receiverChannels --------------------------------------------------*/
+void getPPMChannels()
 {
-  u16 ch1;
-  u16 ch2;
-  u16 ch3;
-  u16 ch4;
-  u16 ch5;
-  u16 ch6;
-  u16 ch7;
-  u16 ch8;
-}pulswidthStruct;
-
-volatile pulswidthStruct pulswidth;
+	if (receiverChannel[0] == PPM_OK)
+	{
+		// only for test
+		sprintf(x,"R-Receiver:1:%d:",receiverChannel[1]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[2]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[3]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[4]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[5]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[6]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[7]);
+		print_uart1(x);
+		sprintf(x,"%d:\r\n",receiverChannel[8]);
+		print_uart1(x);				
+		
+	}
+}
 
 /* Interrupt Handler for TIM1 -----------------------------------------------*/
 /* [0xAC] TIM1 Capture/Compare Interrupt */
@@ -51,51 +73,61 @@ void TIM1_CC_IRQHandler(void)
 	{ 
 		/* Clear TIM1 Capture compare interrupt pending bit */ 
 		TIM1_ClearITPendingBit(TIM1_IT_CC1); 
+		
 		//TIM_ClearITPendingBit(TIM1, TIM_IT_Update); 
 		TIM1_ClearFlag(TIM1_FLAG_CC1); 
 		GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
+		
 		// /* Get the Input Capture value */ 
 		IC2Value = TIM1_GetCapture1(); 
-		//vu16 length = IC2Value - lastIC2Value; 
 		vu16 length = IC2Value - lastIC2Value; 
 
 		if(length > 20000) 
 		{
-			channel = 0; 
+			channelCount = 0; 
+			receiverChannel[0] = PPM_SYNC;	
 		}
-		switch(channel) 
+		switch(channelCount) 
 		{ 
 			case 1: 
-				pulswidth.ch1 = length; 
+				receiverPPMChannel[1] = length>>2; 
 				break; 
 			case 2: 
-				pulswidth.ch2 = length; 
+				receiverPPMChannel[2] = length>>2; 
 				break; 
 			case 3: 
-				pulswidth.ch3 = length; 
+				receiverPPMChannel[3] = length>>2; 
 				break; 
 			case 4: 
-				pulswidth.ch4 = length; 
+				receiverPPMChannel[4] = length>>2; 
 				break; 
 			case 5: 
-				pulswidth.ch5 = length; 
+				receiverPPMChannel[5] = length>>2; 
 				break; 
 			case 6: 
-				pulswidth.ch6 = length; 
+				receiverPPMChannel[6] = length>>2; 
 				break; 
 			case 7: 
-				pulswidth.ch7 = length; 
+				receiverPPMChannel[7] = length>>2; 
 				break; 
 			case 8: 
-				pulswidth.ch8 = length; 
+				receiverPPMChannel[8] = length>>2; 
+				receiverPPMChannel[0] = PPM_OK;
+				
+				u8 i;
+				for (i = 0; i < 9; i++)
+				{
+					receiverChannel[i] = receiverPPMChannel[i];
+				}
 				break; 
 			default: 
-				channel = 0; 
+				channelCount = 0; 
+				receiverPPMChannel[0] = PPM_WRONG;
 				break; 
 		} 
 		lastIC2Value = IC2Value; 
-		if(channel == 6) GPIO_SetBits(GPIOA, GPIO_Pin_8); else GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
-		channel++; 
+		if(channelCount == 6) GPIO_SetBits(GPIOA, GPIO_Pin_8); else GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
+		channelCount++; 
 	} 
 }
 

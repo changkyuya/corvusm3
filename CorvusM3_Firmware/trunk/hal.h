@@ -21,23 +21,20 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __RECEIVERPPM_H
-#define __RECEIVERPPM_H
+#ifndef __HAL_H
+#define __HAL_H
 
 #include "main.h"
 
-/* Struct --------------------------------------------------------------------*/
+/* Struct -------------------------------------------------------------------*/
 
 
 /* Define --------------------------------------------------------------------*/
-#define PPM_NO		0
-#define PPM_SYNC 	1
-#define PPM_OK		2
-#define PPM_WRONG	3
+#define FALSE	0
+#define OK		1
 
 
 /* Function prototypes -------------------------------------------------------*/
-void TIM1_CC_IRQHandler(void);
-void getPPMChannels();
+void getChannels(void);
 
-#endif /* __RECEIVERPPM_H */
+#endif /* __HAL_H */

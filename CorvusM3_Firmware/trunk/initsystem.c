@@ -274,6 +274,13 @@ void NVIC_Configuration(void)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
+	/* Enable the TIM1 global Interrupt for PPM decode ----------------------*/ 
+	NVIC_InitStructure.NVIC_IRQChannel = TIM1_CC_IRQChannel; 
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; 
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; 
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 
+	NVIC_Init(&NVIC_InitStructure); 
+	
 }
 
 /* Init UART1 --------------------------------------------------------------------*/

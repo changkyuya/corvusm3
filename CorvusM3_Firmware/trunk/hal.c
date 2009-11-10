@@ -20,24 +20,33 @@
 	Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __RECEIVERPPM_H
-#define __RECEIVERPPM_H
+#include "hal.h"
+#include "receiverppm.h"
 
-#include "main.h"
+/* Enums --------------------------------------------------------------------*/
 
-/* Struct --------------------------------------------------------------------*/
-
-
-/* Define --------------------------------------------------------------------*/
-#define PPM_NO		0
-#define PPM_SYNC 	1
-#define PPM_OK		2
-#define PPM_WRONG	3
+/* Variables ----------------------------------------------------------------*/
 
 
-/* Function prototypes -------------------------------------------------------*/
-void TIM1_CC_IRQHandler(void);
-void getPPMChannels();
+/* fill channels in Struc ---------------------------------------------------*/
+void getChannels()
+{
+	/* decide receiver -> lookup parameterset */
+	if (1)
+	{
+		getPPMChannels();
+	}
+	else
+	{
+		// getSpektrumChannels
+	}
+	 // no valid channels -> Set CopterState
+}
 
-#endif /* __RECEIVERPPM_H */
+
+
+
+
+
+
+

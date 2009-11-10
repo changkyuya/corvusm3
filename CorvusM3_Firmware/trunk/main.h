@@ -83,7 +83,23 @@
 #define ACC_X	3
 #define ACC_Y	4
 #define ACC_Z	5
+/* Receiver state */
+#define REC_FALSE 	0
+#define REC_OK		1
 
+/* Struct --------------------------------------------------------------------*/
+typedef struct
+{
+  u8  state;
+  u16 ch1;
+  u16 ch2;
+  u16 ch3;
+  u16 ch4;
+  u16 ch5;
+  u16 ch6;
+  u16 ch7;
+  u16 ch8;
+}ChannelStruct;
 
 
 

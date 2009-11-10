@@ -35,38 +35,38 @@
 
 // EEPROM - TEST
 /* Virtual address defined by the user: 0xFFFF value is prohibited */
-u16 VirtAddVarTab[NumbOfVar] = {0x5555, 0x6666, 0x7777};
+//u16 VirtAddVarTab[NumbOfVar] = {0x5555, 0x6666, 0x7777};
 	
 int main(void)
 {
 	/* Initialize S ystem */
 	initSystem();
 
-	char x [10];  // for Sensor Tests
+	//char x [10];  // for Sensor Tests
 	
 	/* Test EEPROM -------------------------------------------------------------*/
 
 	/* Unlock the Flash Program Erase controller */
-	FLASH_Unlock();
+	//FLASH_Unlock();
 
 	/* EEPROM Init */
-	EE_Init();
+	//EE_Init();
 
 
-	EE_WriteVariable(VirtAddVarTab[0], 1234);
+	//EE_WriteVariable(VirtAddVarTab[0], 1234);
 	
-	u16 testvar;
-	EE_ReadVariable(VirtAddVarTab[0], &testvar);
+	//u16 testvar;
+	//EE_ReadVariable(VirtAddVarTab[0], &testvar);
 	//sprintf(x,"%d",testvar);
 	
 	// in wrong order
-	u8 ii = 0;
-	while (testvar != 0) {
-		x[ii++] = (testvar % 10) + 0x30;  // 0x30 is ansi 0
-		testvar = testvar / 10;
-	}
+	//u8 ii = 0;
+	//while (testvar != 0) {
+	//	x[ii++] = (testvar % 10) + 0x30;  // 0x30 is ansi 0
+	//	testvar = testvar / 10;
+	//}
 	
-	print_uart1(x);
+	//print_uart1(x);
   
 	// test LED
 	//setLEDStatus(LED_FLASH);

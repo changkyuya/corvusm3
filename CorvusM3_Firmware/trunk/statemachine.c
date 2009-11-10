@@ -28,11 +28,14 @@
 #include "led.h"
 #include "tools.h"
 #include "receiverppm.h"
+#include "hal.h"
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 ADCSensorValue[6];
+extern vu16 ADCSensorValue[6];  //initsystem
 char x [10];  // for Sensor Tests
 vu16 stateLoopCount = 0;
+extern vu16 receiverChannel[9]; 
+
 	
 /* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
 void TIM3_IRQHandler(void)
@@ -51,9 +54,10 @@ void statemachine(void)
 	//setLEDStatus(LED_FLASH);
 	
 	/* Debug Output 100Hz ---------------------------------------------------*/
-	if (stateLoopCount % 100 == 0)
+	if (stateLoopCount % 10 == 0)
 	{
 		/* Graphoutput must start with 'G' and first value is timer (not used) */
+		/*
 		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
 		print_uart1(x);
 		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
@@ -66,9 +70,35 @@ void statemachine(void)
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
 		print_uart1(x);
+		*/
+		
+		/* test receiver */
+		getChannels();
+		//here it does not work :-(
+		/*
+		sprintf(x,"R-Receiver:1:%d:",receiverChannel[0]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[1]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[2]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[3]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[4]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[5]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[6]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[7]);
+		print_uart1(x);
+		sprintf(x,"%d:\r\n",receiverChannel[8]);
+		print_uart1(x);	
+		*/
+		
 		/* toggle LED */
 		*LED ^= 1;
-		Pause(1000);
+		//Pause(1000);
 	}
 	
 	/* Count Loops till 1 second */
