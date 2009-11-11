@@ -34,7 +34,8 @@
 extern vu16 ADCSensorValue[6];  //initsystem
 char x [10];  // for Sensor Tests
 vu16 stateLoopCount = 0;
-extern vu16 receiverChannel[9]; 
+vu16 receiverChannel[9]; 
+
 
 	
 /* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
@@ -75,8 +76,9 @@ void statemachine(void)
 		/* test receiver */
 		getChannels();
 		//here it does not work :-(
-		/*
-		sprintf(x,"R-Receiver:1:%d:",receiverChannel[0]);
+
+		
+		sprintf(x,"R-state:1:%d:",receiverChannel[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[1]);
 		print_uart1(x);
@@ -94,7 +96,7 @@ void statemachine(void)
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",receiverChannel[8]);
 		print_uart1(x);	
-		*/
+		
 		
 		/* toggle LED */
 		*LED ^= 1;

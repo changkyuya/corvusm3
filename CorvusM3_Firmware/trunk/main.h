@@ -88,18 +88,7 @@
 #define REC_OK		1
 
 /* Struct --------------------------------------------------------------------*/
-typedef struct
-{
-  u8  state;
-  u16 ch1;
-  u16 ch2;
-  u16 ch3;
-  u16 ch4;
-  u16 ch5;
-  u16 ch6;
-  u16 ch7;
-  u16 ch8;
-}ChannelStruct;
+
 
 
 
