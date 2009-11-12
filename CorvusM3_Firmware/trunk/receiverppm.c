@@ -32,27 +32,25 @@ vu16 	IC2Value;
 vu16 	lastIC2Value;
 vu8		channelCount;
 
-extern vu16 receiverChannel[9];  //statemachine
+vu16 receiverChannel[9];
 vu16 receiverPPMChannel[9];
+//volatile pulswidthStruct pulswidth;
+//extern ChannelStruct receiverChannel;  //statemachine
 
 char x [10];  // for Debug
 
 /* read and trimm receiverChannels --------------------------------------------------*/
 void getPPMChannels()
 {
-	//if (receiverChannel[0] == PPM_OK)
+	u8 i;
+	for (i = 0; i < 9; i++)
 	{
-		
-		/* does not work here - must be in interrupt
-		u8 i;
-		for (i = 0; i < 9; i++)
-		{
-			receiverChannel[i] = receiverPPMChannel[i];
-		}
-		*/
+		receiverChannel[i] = receiverPPMChannel[i];
+	}
+	
+	if (receiverChannel[0] == PPM_OK)
+	{
 		// only for test
-		
-		/*		
 		sprintf(x,"R-Receiver:1:%d:",receiverChannel[1]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[2]);
@@ -69,7 +67,7 @@ void getPPMChannels()
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",receiverChannel[8]);
 		print_uart1(x);				
-		*/
+		
 	}
 }
 
@@ -121,13 +119,13 @@ void TIM1_CC_IRQHandler(void)
 			case 8: 
 				receiverPPMChannel[8] = length>>2; 
 				receiverPPMChannel[0] = PPM_OK;
-				/* works only here */
+				/*
 				u8 i;
 				for (i = 0; i < 9; i++)
 				{
 					receiverChannel[i] = receiverPPMChannel[i];
 				}
-				
+				*/
 				break; 
 			default: 
 				channelCount = 0; 
