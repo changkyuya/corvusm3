@@ -36,6 +36,20 @@ char x [10];  // for Sensor Tests
 vu16 stateLoopCount = 0;
 vu16 receiverChannel[9]; 
 
+//test
+extern vu8 TxBuffer1[0xFF];
+extern vu8 TxInCounter1;
+extern vu8 TxOutCounter1;
+extern vu8 RxBuffer1[0xFF];
+extern vu8 RxOutCounter1;
+extern vu8 RxInCounter1;
+
+extern vu8 TxBuffer3[0xFF];
+extern vu8 TxInCounter3;
+extern vu8 TxOutCounter3;
+extern vu8 RxBuffer3[0xFF];
+extern vu8 RxOutCounter3;
+extern vu8 RxInCounter3;
 
 	
 /* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
@@ -55,7 +69,20 @@ void statemachine(void)
 	getChannels();
 
 
-
+	// test spektrum
+	// write works
+	//TxBuffer1[TxInCounter1++] = '-';
+	TxBuffer3[TxInCounter3++] = '-';
+	
+	if (RxOutCounter1 != RxInCounter1)
+	{
+		TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
+	}
+	
+	//if (RxOutCounter3 != RxInCounter3)
+	{
+		TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
+	}
 
 
 	// test LED
@@ -64,8 +91,14 @@ void statemachine(void)
 	/* Debug Output 10Hz ---------------------------------------------------*/
 	if (stateLoopCount % 100 == 0)
 	{
+
+		// try to read
+		
+		
+		
 		/* Graphoutput must start with 'G' and first value is timer (not used) */
 		
+		/*
 		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
 		print_uart1(x);
 		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
@@ -78,9 +111,11 @@ void statemachine(void)
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
 		print_uart1(x);
-
+		*/
+		
 
 		/* Debug output for receiver channels */
+		/*
 		sprintf(x,"R-state:%d:",receiverChannel[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[1]);
@@ -99,10 +134,10 @@ void statemachine(void)
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",receiverChannel[8]);
 		print_uart1(x);	
-		
+		*/
 		
 		/* toggle LED */
-		*LED ^= 1;
+		//*LED ^= 1;
 		//Pause(1000);
 	}
 	

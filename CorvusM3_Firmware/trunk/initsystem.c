@@ -287,7 +287,7 @@ void NVIC_Configuration(void)
 	NVIC_Init(&NVIC_InitStructure);
 	
 	/* Enable the USART3 Interrupt --------------------------------------------*/
-	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQChannel;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -298,8 +298,8 @@ void NVIC_Configuration(void)
 	//NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	/* Enable the TIM2 Interrupt - LED */
 	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQChannel;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
@@ -336,7 +336,7 @@ void initUART1 (void)
 void initUART3 (void)
 {
 	USART_InitTypeDef USART_InitStructure;
-	/* USART1 configuration */
+	/* USART3 configuration */
 	USART_InitStructure.USART_BaudRate = 115200;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
