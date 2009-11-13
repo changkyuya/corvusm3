@@ -51,6 +51,13 @@ void statemachine(void)
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	
 
+	/* get Channels from receiver - over HAL */
+	getChannels();
+
+
+
+
+
 	// test LED
 	//setLEDStatus(LED_FLASH);
 	
@@ -58,7 +65,7 @@ void statemachine(void)
 	if (stateLoopCount % 100 == 0)
 	{
 		/* Graphoutput must start with 'G' and first value is timer (not used) */
-		/*
+		
 		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
 		print_uart1(x);
 		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
@@ -71,13 +78,9 @@ void statemachine(void)
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
 		print_uart1(x);
-		*/
-		
-		/* test receiver */
-		getChannels();
-		//here it does not work :-(
 
-		
+
+		/* Debug output for receiver channels */
 		sprintf(x,"R-state:%d:",receiverChannel[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[1]);
