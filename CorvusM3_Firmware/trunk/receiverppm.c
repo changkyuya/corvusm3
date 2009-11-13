@@ -42,35 +42,13 @@ char x [10];  // for Debug
 /* read and trimm receiverChannels --------------------------------------------------*/
 void getPPMChannels()
 {
+	receiverChannel[0] = receiverPPMChannel[0];
 	u8 i;
-	for (i = 0; i < 9; i++)
+	for (i = 1; i < 9; i++)
 	{
-		receiverChannel[i] = receiverPPMChannel[i]>>2;
+		// div values and set min max from 1000 to 2000
+		receiverChannel[i] = constrain(receiverPPMChannel[i]>>2, 1000, 2000);
 	}
-	
-	/*
-	if (receiverChannel[0] == PPM_OK)
-	{
-		// only for test
-		sprintf(x,"R-Receiver:1:%d:",receiverChannel[1]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[2]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[3]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[4]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[5]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[6]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[7]);
-		print_uart1(x);
-		sprintf(x,"%d:\r\n",receiverChannel[8]);
-		print_uart1(x);				
-		
-	}
-	*/
 }
 
 /* Interrupt Handler for TIM1 -----------------------------------------------*/
@@ -97,52 +75,32 @@ void TIM1_CC_IRQHandler(void)
 		}
 		else
 		{
-			// if signal is OK 
-			if (length > 3000 && length < 9000)
+			if(channelCount > 0 && channelCount < 9)
 			{
-				switch(channelCount) 
-				{ 
-					case 0:
-						receiverChannel[0] = PPM_SYNC;	
-						break;
-					case 1: 
-						receiverPPMChannel[1] = length; 
-						break; 
-					case 2: 
-						receiverPPMChannel[2] = length; 
-						break; 
-					case 3: 
-						receiverPPMChannel[3] = length; 
-						break; 
-					case 4: 
-						receiverPPMChannel[4] = length; 
-						break; 
-					case 5: 
-						receiverPPMChannel[5] = length; 
-						break; 
-					case 6: 
-						receiverPPMChannel[6] = length; 
-						break; 
-					case 7: 
-						receiverPPMChannel[7] = length; 
-						break; 
-					case 8: 
-						receiverPPMChannel[8] = length; 
+				// if signal is OK 
+				if (length > 3000 && length < 9000)
+				{
+					receiverPPMChannel[channelCount] = length;
+					// one set complete
+					if(channelCount == 8)
+					{
 						receiverPPMChannel[0] = PPM_OK;
-						break; 
-					default: 
-						channelCount = 0; 
-						receiverPPMChannel[0] = PPM_NO;
-						break; 
-				} 
+					} 
+				}
+				else
+				{
+					receiverPPMChannel[0] = PPM_NO;
+				}
 			}
 			else
 			{
 				receiverPPMChannel[0] = PPM_NO;
 			}
 		}
+		// store last time
 		lastIC2Value = IC2Value; 
 		if(channelCount == 6) GPIO_SetBits(GPIOA, GPIO_Pin_8); else GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
+		// increase channelCount
 		channelCount++; 
 	} 
 }

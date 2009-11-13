@@ -90,6 +90,14 @@
 /* Struct --------------------------------------------------------------------*/
 
 
-
+// General function - no external variable involved
+#define max(a,b) (((a) > (b)) ? (a) : (b))
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+#define map(x,inMin,inMax,outMin,outMax) ((((inMax)-(inMin))>((outMax)-(outMin)))?\
+					((((x)-(inMin))/(((inMax)-(inMin))/((outMax)-(outMin))))+(outMin)):\
+					((((x)-(inMin))*(((outMax)-(outMin))/((inMax)-(inMin))))+(outMin))\
+					)
+#define constrain(x,low,high) ((((x)>=(low))&&((x)<=(high)))?(x):((x)>(high)?(high):(low)))
+#define sq(x) ((x)*(x))
 
 #endif /* __MAIN_H */

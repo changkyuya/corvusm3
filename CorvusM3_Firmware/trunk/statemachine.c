@@ -78,7 +78,7 @@ void statemachine(void)
 		//here it does not work :-(
 
 		
-		sprintf(x,"R-state:1:%d:",receiverChannel[0]);
+		sprintf(x,"R-state:%d:",receiverChannel[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[1]);
 		print_uart1(x);
