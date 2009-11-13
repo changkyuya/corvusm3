@@ -45,7 +45,7 @@ void getPPMChannels()
 	u8 i;
 	for (i = 0; i < 9; i++)
 	{
-		receiverChannel[i] = receiverPPMChannel[i];
+		receiverChannel[i] = receiverPPMChannel[i]>>2;
 	}
 	
 	/*
@@ -90,50 +90,57 @@ void TIM1_CC_IRQHandler(void)
 		IC2Value = TIM1_GetCapture1(); 
 		vu16 length = IC2Value - lastIC2Value; 
 
+		// find the start sync gap
 		if(length > 20000) 
 		{
 			channelCount = 0; 
-			receiverChannel[0] = PPM_SYNC;	
 		}
-		switch(channelCount) 
-		{ 
-			case 1: 
-				receiverPPMChannel[1] = length>>2; 
-				break; 
-			case 2: 
-				receiverPPMChannel[2] = length>>2; 
-				break; 
-			case 3: 
-				receiverPPMChannel[3] = length>>2; 
-				break; 
-			case 4: 
-				receiverPPMChannel[4] = length>>2; 
-				break; 
-			case 5: 
-				receiverPPMChannel[5] = length>>2; 
-				break; 
-			case 6: 
-				receiverPPMChannel[6] = length>>2; 
-				break; 
-			case 7: 
-				receiverPPMChannel[7] = length>>2; 
-				break; 
-			case 8: 
-				receiverPPMChannel[8] = length>>2; 
-				receiverPPMChannel[0] = PPM_OK;
-				/*
-				u8 i;
-				for (i = 0; i < 9; i++)
-				{
-					receiverChannel[i] = receiverPPMChannel[i];
-				}
-				*/
-				break; 
-			default: 
-				channelCount = 0; 
-				receiverPPMChannel[0] = PPM_WRONG;
-				break; 
-		} 
+		else
+		{
+			// if signal is OK 
+			if (length > 3000 && length < 9000)
+			{
+				switch(channelCount) 
+				{ 
+					case 0:
+						receiverChannel[0] = PPM_SYNC;	
+						break;
+					case 1: 
+						receiverPPMChannel[1] = length; 
+						break; 
+					case 2: 
+						receiverPPMChannel[2] = length; 
+						break; 
+					case 3: 
+						receiverPPMChannel[3] = length; 
+						break; 
+					case 4: 
+						receiverPPMChannel[4] = length; 
+						break; 
+					case 5: 
+						receiverPPMChannel[5] = length; 
+						break; 
+					case 6: 
+						receiverPPMChannel[6] = length; 
+						break; 
+					case 7: 
+						receiverPPMChannel[7] = length; 
+						break; 
+					case 8: 
+						receiverPPMChannel[8] = length; 
+						receiverPPMChannel[0] = PPM_OK;
+						break; 
+					default: 
+						channelCount = 0; 
+						receiverPPMChannel[0] = PPM_NO;
+						break; 
+				} 
+			}
+			else
+			{
+				receiverPPMChannel[0] = PPM_NO;
+			}
+		}
 		lastIC2Value = IC2Value; 
 		if(channelCount == 6) GPIO_SetBits(GPIOA, GPIO_Pin_8); else GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
 		channelCount++; 

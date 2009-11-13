@@ -31,9 +31,8 @@
 
 /* Define --------------------------------------------------------------------*/
 #define PPM_NO		0
-#define PPM_SYNC 	1
-#define PPM_OK		2
-#define PPM_WRONG	3
+#define PPM_SYNC 	4
+#define PPM_OK		8
 
 
 /* Function prototypes -------------------------------------------------------*/
