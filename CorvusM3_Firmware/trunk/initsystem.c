@@ -249,30 +249,8 @@ void GPIO_Configuration(void)
 void NVIC_Configuration(void)
 {
 	NVIC_InitTypeDef NVIC_InitStructure;
-
-	/* Enable the USART1 Interrupt --------------------------------------------*/
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQChannel;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 8;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-  
-  	/* Interrupt for Status LED ---------------------------------------------*/
-	/* Configure two bits for preemption priority - LED*/
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-	/* Enable the TIM2 Interrupt - LED */
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQChannel;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
 	
-	/* Interrupt for Mainloop -----------------------------------------------*/
-	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQChannel;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 	
 	/* Enable the TIM1 global Interrupt for PPM decode ----------------------*/ 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM1_CC_IRQChannel; 
@@ -280,6 +258,32 @@ void NVIC_Configuration(void)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; 
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 
 	NVIC_Init(&NVIC_InitStructure); 
+	
+	/* Interrupt for Mainloop -----------------------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	/* Enable the USART1 Interrupt --------------------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+  
+  	/* Interrupt for Status LED ---------------------------------------------*/
+	/* Configure two bits for preemption priority - LED*/
+	//NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+	/* Enable the TIM2 Interrupt - LED */
+	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	
 	
 }
 

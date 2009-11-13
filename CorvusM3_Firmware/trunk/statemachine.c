@@ -54,8 +54,8 @@ void statemachine(void)
 	// test LED
 	//setLEDStatus(LED_FLASH);
 	
-	/* Debug Output 100Hz ---------------------------------------------------*/
-	if (stateLoopCount % 10 == 0)
+	/* Debug Output 10Hz ---------------------------------------------------*/
+	if (stateLoopCount % 100 == 0)
 	{
 		/* Graphoutput must start with 'G' and first value is timer (not used) */
 		/*

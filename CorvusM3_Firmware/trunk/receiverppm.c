@@ -48,6 +48,7 @@ void getPPMChannels()
 		receiverChannel[i] = receiverPPMChannel[i];
 	}
 	
+	/*
 	if (receiverChannel[0] == PPM_OK)
 	{
 		// only for test
@@ -69,6 +70,7 @@ void getPPMChannels()
 		print_uart1(x);				
 		
 	}
+	*/
 }
 
 /* Interrupt Handler for TIM1 -----------------------------------------------*/
