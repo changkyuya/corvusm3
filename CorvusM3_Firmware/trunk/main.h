@@ -49,19 +49,15 @@
 
 /* Define the hardware depending --------------------------------------------*/ 
 /* Map Pins to Serial 1 */
-#define  GPIO_SER                 GPIOA
-#define  RCC_APB2Periph_GPIOx     RCC_APB2Periph_GPIOA
-#define  GPIO_RTSPin              GPIO_Pin_12
-#define  GPIO_CTSPin              GPIO_Pin_11
-#define  GPIO_TxPin               GPIO_Pin_9
-#define  GPIO_RxPin               GPIO_Pin_10
+#define  GPIO_TxPin1               GPIO_Pin_9
+#define  GPIO_RxPin1               GPIO_Pin_10
+/* Map Pins to Serial 3 */
+#define  GPIO_TxPin3               GPIO_Pin_10
+#define  GPIO_RxPin3               GPIO_Pin_11
 /* Map Pin for LED 1 --> PC13 */
-#define LED PERIPHERAL_BIT(GPIOC->ODR, 13)					
-#define RCC_APB2Periph_GPIO_LED RCC_APB2Periph_GPIOC
+#define LED PERIPHERAL_BIT(GPIOC->ODR, 13)			
 #define GPIO_LEDPIN GPIO_Pin_13
-#define GPIO_LED GPIOC
 /* Map Pins for ACC */
-#define GPIO_SEN GPIOC  // for ACC and Gyro
 #define GPIO_ACC_Z GPIO_Pin_3
 #define GPIO_ACC_Y GPIO_Pin_4
 #define GPIO_ACC_X GPIO_Pin_5

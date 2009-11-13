@@ -95,13 +95,14 @@ void TIM1_CC_IRQHandler(void)
 			else
 			{
 				receiverPPMChannel[0] = PPM_NO;
+				channelCount = 0;
 			}
 		}
 		// store last time
 		lastIC2Value = IC2Value; 
 		if(channelCount == 6) GPIO_SetBits(GPIOA, GPIO_Pin_8); else GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
 		// increase channelCount
-		channelCount++; 
+		channelCount++;
 	} 
 }
 

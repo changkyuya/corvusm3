@@ -307,10 +307,10 @@
 	}
 
 	/* [0xDC] USART3 Interrupt */
-	void USART3_IRQHandler(void)
+	/*void USART3_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(USART3_IRQHandler, "USART3", 55, 0xDC);
-	}
+	}*/
 
 	/* [0xE0] EXTI Lines 10-15 Interrupt */
 	void EXTI15_10_IRQHandler(void)

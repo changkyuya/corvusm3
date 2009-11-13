@@ -42,6 +42,7 @@ void TIM_Configuration(void);
 void GPIO_Configuration(void);
 void NVIC_Configuration(void);
 void initUART1 (void);
+void initUART3 (void);
 void initDMA (void);
 void initADC (void) ;
 void initSysTick(void);

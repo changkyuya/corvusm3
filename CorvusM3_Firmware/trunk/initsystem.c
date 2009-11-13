@@ -39,6 +39,7 @@ void initSystem()
 	/* UART Interrupt */
 	NVIC_Configuration();
 	initUART1();
+	initUART3();
 	/* initDMA for Sensors */
 	initDMA();
 	/* initADC for Sensros */
@@ -110,26 +111,25 @@ void RCC_Configuration(void)
 	/* Enable TIM2 clocks  for LED, 
 	   Enable TIM3 clocks  for Statemachine */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3, ENABLE);  // Timer
+	/* Enable for PPM decode -------------------------------------------*/
+	/* TIM1 clock enable */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
 	
-	/* Enable Clock for Port C - Sensors */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_LED, ENABLE); // GPIOc
+	/* Enable GPIO clocks A(UART1),B(UART3),C(LED, Sensors), ...*/
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE);
 	
-	/* Enable GPIOx and AFIO clocks UART*/
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOx | RCC_APB2Periph_AFIO, ENABLE);
-	/* Enable USART1 clocks UART */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+	/* AFIO and USART1 clocks UART1*/
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_USART1, ENABLE);
+	/* UART3 clock (Motor/BLC) */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
 	
-	/* Enable ADC1 and GPIOC clock */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_GPIOC, ENABLE);
+	/* Enable ADC1 clock */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 	
 	/* Enable DMA1 clock */
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA, ENABLE);
 	
-	/* Enable for PPM decode -------------------------------------------*/
-	/* TIM1 clock enable */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
-	/* GPIOA clock enable */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+
 }
 
 /* Configures the used Timers. ----------------------------------------------*/
@@ -214,27 +214,40 @@ void GPIO_Configuration(void)
 
 	/* UART1 for main communication -----------------------------------------*/
 	/* Configure USART1 RTS and USART1 Tx as alternate function push-pull */
-	GPIO_InitStructure.GPIO_Pin = GPIO_RTSPin | GPIO_TxPin;
+	//GPIO_InitStructure.GPIO_Pin = GPIO_RTSPin | GPIO_TxPin;
+	GPIO_InitStructure.GPIO_Pin = GPIO_TxPin1;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_Init(GPIO_SER, &GPIO_InitStructure);  //GPIO_SER = GPIOA 
+	GPIO_Init(GPIOA, &GPIO_InitStructure);  
 	/* Configure USART1 CTS and USART1 Rx as input floating */
-	GPIO_InitStructure.GPIO_Pin = GPIO_CTSPin | GPIO_RxPin;
+	//GPIO_InitStructure.GPIO_Pin = GPIO_CTSPin | GPIO_RxPin;
+	GPIO_InitStructure.GPIO_Pin = GPIO_RxPin1;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-	GPIO_Init(GPIO_SER, &GPIO_InitStructure);  //GPIO_SER = GPIOA 
+	GPIO_Init(GPIOA, &GPIO_InitStructure);   
+	
+	/* UART3 for Motor/BLC --------------------------------------------------*/
+	/* Configure USART1 RTS and USART1 Tx as alternate function push-pull */
+	GPIO_InitStructure.GPIO_Pin = GPIO_TxPin3;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);   
+	/* Configure USART1 CTS and USART1 Rx as input floating */
+	GPIO_InitStructure.GPIO_Pin = GPIO_RxPin3;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);  
 	
 	/* Status LED -----------------------------------------------------------*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_LEDPIN;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_Init(GPIO_LED, &GPIO_InitStructure);  //GPIO_LED = GPIOC	
+	GPIO_Init(GPIOC, &GPIO_InitStructure);  //GPIO_LED = GPIOC	
 	
 	/* ADC for ACC and Gyro -------------------------------------------------*/
 	// 16 & 17 no need GPIO_Mode_AIN
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
 	GPIO_InitStructure.GPIO_Pin = GPIO_GYRO_X | GPIO_GYRO_Y | GPIO_GYRO_Z | GPIO_ACC_X | GPIO_ACC_Y | GPIO_ACC_Z;
-	GPIO_Init(GPIO_SEN, &GPIO_InitStructure); 
+	GPIO_Init(GPIOC, &GPIO_InitStructure); 
 	
 	/* Configure PA8 for PPM Dekode -----------------------------------------*/
 	/* TIM1 channel 1 pin (PA.08) configuration */
@@ -268,6 +281,13 @@ void NVIC_Configuration(void)
 	
 	/* Enable the USART1 Interrupt --------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	/* Enable the USART3 Interrupt --------------------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQChannel;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -310,6 +330,31 @@ void initUART1 (void)
 	/* Enable the EVAL_COM1 Receive interrupt: this interrupt is generated when the 
     EVAL_COM1 receive data register is not empty */
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);	
+}
+
+/* Init UART3 --------------------------------------------------------------------*/
+void initUART3 (void)
+{
+	USART_InitTypeDef USART_InitStructure;
+	/* USART1 configuration */
+	USART_InitStructure.USART_BaudRate = 115200;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No ;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+
+	USART_Init(USART3, &USART_InitStructure);
+	/* Enable the USART3 */
+	USART_Cmd(USART3, ENABLE);
+ 
+	/* Enable the EVAL_COM3 Transmoit interrupt: this interrupt is generated when the 
+    EVAL_COM3 transmit data register is empty */  
+	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
+
+	/* Enable the EVAL_COM3 Receive interrupt: this interrupt is generated when the 
+    EVAL_COM3 receive data register is not empty */
+	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);	
 }
 
 /* Init DMA for Sensor ------------------------------------------------------*/
