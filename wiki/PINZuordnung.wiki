@@ -8,6 +8,8 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PA08* : PPM Empfänger (Summensignal)
   * *PA09* : TX-UART1 - PC
   * *PA10* : RX-UART1 - PC
+  * *PB10* : TX-UART3 UART Regler
+  * *PB11* : RX-UART3 Spektrum Empfänger
   * *PC00* : Sensoren ACC / Gyro
   * *PC01* : Sensoren ACC / Gyro
   * *PC02* : Sensoren ACC / Gyro
@@ -18,18 +20,23 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 
 == Geplant ==
 
-  * *PB10* : TX an UART Regler (UART2 oder I2C)
-  * *PB11* : RX optional für Regler (UART2 oder I2C)
+  * *PA03* : frei halten für Option Spektrum an UART2-RX
   * *PB00* : Spannungsmessung
-  * *PA03* : Spektrum Empfänger UART-RX (UART3)
-  * *PC11* : RX für GPS (UART4)
-  * *PC10* : TX optional für GPS
   * *PB12* : NSS - SD-Karte
   * *PB13* : SCK - SD-Karte
   * *PB14* : MISO - SD-Karte
   * *PB15* : MOSI - SD-Karte
+  * *PC11* : UART4-RX für GPS
+  * *PC10* : UART4-TX optional für GPS
 
 == Infos ==
+
+*Optionale Zuordnung Regler (I2C) und Empfänger Spektrum*
+
+  * *PA03* : Spektrum Empfänger UART2-RX (optional wenn Regler I2C)
+  * *PB10* : TX an UART Regler (UART3 oder I2C)
+  * *PB11* : RX optional für Regler (UART3 oder I2C)
+ 
 
 *SD Karte über SDIO* (dann kein UART3/4 -> Empfänger muss an RX Regler)
 
