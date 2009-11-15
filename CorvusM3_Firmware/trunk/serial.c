@@ -52,6 +52,7 @@ void print_uart1 (char * s)
 		//while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 		TxBuffer1[TxInCounter1++] = *s++;
    	}
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 	
 }
 /* send byte array over TxBuffer and Interrupt ------------------------------*/
@@ -65,7 +66,7 @@ void print_uart3 (char * s)
 		//while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 		TxBuffer3[TxInCounter3++] = *s++;
    	}
-	
+	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
 }
 
 
@@ -89,6 +90,10 @@ void USART1_IRQHandler(void)
 		{
 			/* Write one byte to the transmit data register */
 			USART_SendData(USART1, TxBuffer1[TxOutCounter1++]);
+		} 
+		else
+		{
+			USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
 		}
 	}
 }
@@ -112,6 +117,10 @@ void USART3_IRQHandler(void)
 		{
 			/* Write one byte to the transmit data register */
 			USART_SendData(USART3, TxBuffer3[TxOutCounter3++]);
+		}
+		else
+		{
+			USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
 		}
 		
 	}

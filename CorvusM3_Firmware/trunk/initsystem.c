@@ -330,7 +330,8 @@ void initUART1 (void)
  
 	/* Enable the EVAL_COM1 Transmoit interrupt: this interrupt is generated when the 
     EVAL_COM1 transmit data register is empty */  
-	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);	
+	// enalble Interrupt if data send
+	//USART_ITConfig(USART1, USART_IT_TXE, ENABLE);	
 }
 
 /* Init UART3 --------------------------------------------------------------------*/
@@ -356,7 +357,8 @@ void initUART3 (void)
  
 	/* Enable the EVAL_COM3 Transmoit interrupt: this interrupt is generated when the 
     EVAL_COM3 transmit data register is empty */  
-	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
+	// enalble Interrupt if data send
+	//USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
 }
 
 /* Init DMA for Sensor ------------------------------------------------------*/

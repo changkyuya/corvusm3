@@ -56,10 +56,18 @@ int main(void)
 	{
 		// Controlloop --> statemachine() --> Timer 3
 		
+		TxBuffer1[TxInCounter1++] = 0x33;
+		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+			
+			
 		setLEDStatus(LED_ON);
 		Delay(1000);
 		setLEDStatus(LED_OFF);
 		Delay(1000);
+		
+		//Read Serial Ports
+		
+		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 	}
 }
 
