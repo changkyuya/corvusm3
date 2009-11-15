@@ -47,7 +47,7 @@ void initSystem()
 	/* inti System Ticker */
 	/* does not work in Interrupt */
 	/* Pause(ms) function */
-	//initSysTick();
+	initSysTick();
 }
 
 /* Configures the different system clocks  ----------------------------------*/

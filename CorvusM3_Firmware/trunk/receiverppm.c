@@ -32,7 +32,7 @@ vu16 	IC2Value;
 vu16 	lastIC2Value;
 vu8		channelCount;
 
-vu16 receiverChannel[9];
+extern vu16 receiverChannel[9];
 vu16 receiverPPMChannel[9];
 //volatile pulswidthStruct pulswidth;
 //extern ChannelStruct receiverChannel;  //statemachine

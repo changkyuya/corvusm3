@@ -33,7 +33,7 @@
 void getChannels()
 {
 	/* decide receiver -> lookup parameterset */
-	if (0)
+	if (0) // 1...PPM, 0...Spektrum
 	{
 		getPPMChannels();
 	}

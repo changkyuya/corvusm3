@@ -22,15 +22,43 @@
 
 #include "receiverspektrum.h"
 
+#include "led.h" //test
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+extern vu16 receiverChannel[9];
+extern vu8 RxBuffer3[0xFF];
+extern vu8 RxInCounter3;
+extern vu8 RxOutCounter3; 
 
+u8 sync = 0;
+u8 channelCount = 0;
 
 /* read receiverChannels ----------------------------------------------------*/
 void getSpektrumChannels()
 {
-	
+	while (RxInCounter3 != RxOutCounter3)
+	{
+		//find sync
+		if (RxBuffer3[RxOutCounter3] == 0x00)
+		{
+			//first sync byte
+			sync = 1;
+			channelCount = 0;
+			receiverChannel[0] = SPEKTRUM_NO;
+		}
+		// second sync byte
+		if (RxBuffer3[RxOutCounter3] == 0x03 && sync == 1)
+		{
+			sync = 0;
+			receiverChannel[channelCount++] = SPEKTRUM_OK;
+			*LED ^= 1;
+		}
+		
+		// for next loop
+		RxOutCounter3++;
+		
+	}
 }
 
 

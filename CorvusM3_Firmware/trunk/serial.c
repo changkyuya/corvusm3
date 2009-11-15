@@ -80,33 +80,6 @@ void USART1_IRQHandler(void)
 	{		
 		/* Read one byte from the receive data register */
 		RxBuffer1[RxInCounter1++] = (USART_ReceiveData(USART1) & 0x7F);
-
-		/* ECHO TEST */
-		// Try to send byte to register --> only for test
-		//TxBuffer1[TxInCounter1++] = RxBuffer1[RxInCounter1-1];
-		
-		
-		// test LED and USART receive
-		if (TxBuffer1[TxInCounter1-1] == '0')
-		{
-			setLEDStatus(LED_OFF);
-		}
-		
-		if (TxBuffer1[TxInCounter1-1] == '1')
-		{
-			setLEDStatus(LED_FLASH);
-		}
-		
-		if (TxBuffer1[TxInCounter1-1] == '2')
-		{
-			setLEDStatus(LED_BLINK);
-		}
-		
-		if (TxBuffer1[TxInCounter1-1] == '3')
-		{
-			setLEDStatus(LED_ON);
-		}
-		
 	}
 
 	
@@ -117,11 +90,7 @@ void USART1_IRQHandler(void)
 			/* Write one byte to the transmit data register */
 			USART_SendData(USART1, TxBuffer1[TxOutCounter1++]);
 		}
-
 	}
-	
-  
-  
 }
 
 

@@ -25,9 +25,6 @@
 #include "statemachine.h"
 #include "serial.h"
 #include <stdio.h>
-#include "led.h"
-#include "tools.h"
-#include "receiverppm.h"
 #include "hal.h"
 
 /* Variables ----------------------------------------------------------------*/
@@ -66,27 +63,56 @@ void statemachine(void)
 	
 
 	/* get Channels from receiver - over HAL */
-	getChannels();
+	//getChannels();
 
-
+	
+		
+		
+		// ECHO TEST
+		if (RxOutCounter1 != RxInCounter1)
+		{
+			TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
+		}
+		
+		
+		/*
+		// Test Output - Spektrum to pc
+		if (RxOutCounter3 != RxInCounter3)
+		{
+			TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
+		}
+		*/
+	
+		// test LED and USART receive
+		
+		if (RxBuffer1[RxInCounter1-1] == '0')
+		{
+			setLEDStatus(LED_OFF);
+		}
+		
+		if (RxBuffer1[RxInCounter1-1] == '1')
+		{
+			setLEDStatus(LED_FLASH);
+		}
+		
+		if (RxBuffer1[RxInCounter1-1] == '2')
+		{
+			setLEDStatus(LED_BLINK);
+		}
+		
+		if (RxBuffer1[RxInCounter1-1] == '3')
+		{
+			setLEDStatus(LED_ON);
+		}
+		
+		
 	// test spektrum
 	// write works
 	//TxBuffer1[TxInCounter1++] = '-';
 	//TxBuffer3[TxInCounter3++] = '-';
 	
-	if (RxOutCounter1 != RxInCounter1)
-	{
-		TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
-	}
-	
 	//sprintf(x,"rxtx:%d:%d:\r\n",RxOutCounter3,RxInCounter3);
 	//print_uart1(x);
-		
-	if (RxOutCounter3 != RxInCounter3)
-	{
-		TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
-	}
-
 
 	// test LED
 	//setLEDStatus(LED_FLASH);
@@ -94,8 +120,9 @@ void statemachine(void)
 	/* Debug Output 10Hz ---------------------------------------------------*/
 	if (stateLoopCount % 100 == 0)
 	{
-
-		// try to read
+		// Spektrum Sync Test
+		//TxBuffer1[TxInCounter1++] = receiverChannel[0];
+		
 		
 		//TxBuffer1[TxInCounter1++] = '-';
 		
