@@ -289,7 +289,7 @@ void NVIC_Configuration(void)
 	/* Enable the USART3 Interrupt --------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQChannel;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
   
@@ -322,14 +322,15 @@ void initUART1 (void)
 	USART_Init(USART1, &USART_InitStructure);
 	/* Enable the USART1 */
 	USART_Cmd(USART1, ENABLE);
+
+	/* if I enable TXE befor RXNE then it does not work - no idea why ??? */
+	/* Enable the EVAL_COM1 Receive interrupt: this interrupt is generated when the 
+    EVAL_COM1 receive data register is not empty */
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
  
 	/* Enable the EVAL_COM1 Transmoit interrupt: this interrupt is generated when the 
     EVAL_COM1 transmit data register is empty */  
-	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-
-	/* Enable the EVAL_COM1 Receive interrupt: this interrupt is generated when the 
-    EVAL_COM1 receive data register is not empty */
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);	
+	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);	
 }
 
 /* Init UART3 --------------------------------------------------------------------*/
@@ -347,14 +348,15 @@ void initUART3 (void)
 	USART_Init(USART3, &USART_InitStructure);
 	/* Enable the USART3 */
 	USART_Cmd(USART3, ENABLE);
+
+	/* if I enable TXE befor RXNE then it does not work - no idea why ??? */
+	/* Enable the EVAL_COM3 Receive interrupt: this interrupt is generated when the 
+    EVAL_COM3 receive data register is not empty */
+	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);	
  
 	/* Enable the EVAL_COM3 Transmoit interrupt: this interrupt is generated when the 
     EVAL_COM3 transmit data register is empty */  
 	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
-
-	/* Enable the EVAL_COM3 Receive interrupt: this interrupt is generated when the 
-    EVAL_COM3 receive data register is not empty */
-	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);	
 }
 
 /* Init DMA for Sensor ------------------------------------------------------*/

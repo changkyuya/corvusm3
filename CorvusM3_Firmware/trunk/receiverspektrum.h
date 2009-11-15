@@ -20,34 +20,18 @@
 	Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "hal.h"
-#include "receiverppm.h"
-#include "receiverspektrum.h"
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __RECEIVERSPEKTRUM_H
+#define __RECEIVERSPEKTRUM_H
 
-/* Enums --------------------------------------------------------------------*/
+#include "main.h"
 
-/* Variables ----------------------------------------------------------------*/
-
-
-/* fill channels in Struc ---------------------------------------------------*/
-void getChannels()
-{
-	/* decide receiver -> lookup parameterset */
-	if (0)
-	{
-		getPPMChannels();
-	}
-	else
-	{
-		getSpektrumChannels();
-	}
-	 // no valid channels -> Set CopterState
-}
+/* Define --------------------------------------------------------------------*/
+#define SPEKTRUM_NO		0
+#define SPEKTRUM_OK 	1
 
 
+/* Function prototypes -------------------------------------------------------*/
+void getSpektrumChannels(void);
 
-
-
-
-
-
+#endif /* __RECEIVERSPEKTRUM_H */

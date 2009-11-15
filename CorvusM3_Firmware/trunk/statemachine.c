@@ -72,14 +72,17 @@ void statemachine(void)
 	// test spektrum
 	// write works
 	//TxBuffer1[TxInCounter1++] = '-';
-	TxBuffer3[TxInCounter3++] = '-';
+	//TxBuffer3[TxInCounter3++] = '-';
 	
 	if (RxOutCounter1 != RxInCounter1)
 	{
 		TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
 	}
 	
-	//if (RxOutCounter3 != RxInCounter3)
+	//sprintf(x,"rxtx:%d:%d:\r\n",RxOutCounter3,RxInCounter3);
+	//print_uart1(x);
+		
+	if (RxOutCounter3 != RxInCounter3)
 	{
 		TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
 	}
@@ -94,7 +97,7 @@ void statemachine(void)
 
 		// try to read
 		
-		
+		//TxBuffer1[TxInCounter1++] = '-';
 		
 		/* Graphoutput must start with 'G' and first value is timer (not used) */
 		

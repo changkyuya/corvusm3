@@ -1,5 +1,26 @@
-#include "serial.h"
+/*	Part of the Corvus M3 project
 
+	http://corvusm3.blogspot.com/
+	http://code.google.com/p/corvusm3/	
+
+	Copyright (c) 2009 Thorsten Raab - thorsten.raab@gmx.at
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software Foundation,
+	Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+#include "serial.h"
 #include "led.h"
 
 
@@ -53,15 +74,42 @@ void print_uart3 (char * s)
 /* Fill RX/TX Buffer --------------------------------------------------------*/
 void USART1_IRQHandler(void)
 {
+	
 	//DEFAULT_EXCEPTION_HANDLER(USART1_IRQHandler, "USART1", 53, 0xD4);
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-	{
-		//if (RxInCounter1 != RxOutCounter1)
+	{		
+		/* Read one byte from the receive data register */
+		RxBuffer1[RxInCounter1++] = (USART_ReceiveData(USART1) & 0x7F);
+
+		/* ECHO TEST */
+		// Try to send byte to register --> only for test
+		//TxBuffer1[TxInCounter1++] = RxBuffer1[RxInCounter1-1];
+		
+		
+		// test LED and USART receive
+		if (TxBuffer1[TxInCounter1-1] == '0')
 		{
-			RxBuffer1[RxInCounter1++] = (USART_ReceiveData(USART1) & 0x7F);
+			setLEDStatus(LED_OFF);
 		}
+		
+		if (TxBuffer1[TxInCounter1-1] == '1')
+		{
+			setLEDStatus(LED_FLASH);
+		}
+		
+		if (TxBuffer1[TxInCounter1-1] == '2')
+		{
+			setLEDStatus(LED_BLINK);
+		}
+		
+		if (TxBuffer1[TxInCounter1-1] == '3')
+		{
+			setLEDStatus(LED_ON);
+		}
+		
 	}
 
+	
 	if(USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
 	{   
 		if (TxInCounter1 != TxOutCounter1)
@@ -69,8 +117,9 @@ void USART1_IRQHandler(void)
 			/* Write one byte to the transmit data register */
 			USART_SendData(USART1, TxBuffer1[TxOutCounter1++]);
 		}
-		
+
 	}
+	
   
   
 }
@@ -84,10 +133,8 @@ void USART3_IRQHandler(void)
 	//DEFAULT_EXCEPTION_HANDLER(USART1_IRQHandler, "USART1", 53, 0xD4);
 	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
 	{
-		//if (RxInCounter3 != RxOutCounter3)
-		{
-			RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
-		}
+		/* write byte to receive buffer */
+		RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
 	}
 
 	if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET)
@@ -99,6 +146,7 @@ void USART3_IRQHandler(void)
 		}
 		
 	}
+	
 	
 }
 

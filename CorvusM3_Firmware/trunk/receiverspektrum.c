@@ -20,56 +20,17 @@
 	Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "led.h"
+#include "receiverspektrum.h"
 
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-/* Led Status */
-u8 ledStatus = LED_OFF;
-/* Count for flash */
-vu8 ledCount = 0;
 
-/* Set Led status -----------------------------------------------------------*/
-void setLEDStatus(u8 stat)
+
+/* read receiverChannels ----------------------------------------------------*/
+void getSpektrumChannels()
 {
-	ledStatus = stat;
-}
-
-/* Interrupt Handler for LED ------------------------------------------------*/
-void TIM2_IRQHandler(void)
-{
-	/* Clear TIM2 update interrupt */
-	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-
-	/* switch LED */
-	switch (ledStatus)
-	{
-		/* switch led off */
-		case LED_OFF:
-			*LED = 0;
-			break;
-		/* switch led on */
-		case LED_ON:
-			*LED = 1;
-			break;
-		/* flash/toggle led in 250ms */
-		case LED_FLASH:
-			*LED ^= 1;
-			break;
-		/* blink/toggle led all 2 circles - 750ms */
-		case LED_BLINK:
-			if (ledCount == 3)
-			{
-				*LED ^= 1;
-				ledCount = 0;
-			}
-			ledCount++;
-			break;
-		default:
-			*LED = 0;
-			ledCount = 0;
-	}
+	
 }
 
 

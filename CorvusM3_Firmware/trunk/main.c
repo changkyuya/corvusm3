@@ -41,8 +41,7 @@ int main(void)
 {
 	/* Initialize S ystem */
 	initSystem();
-
-	//char x [10];  // for Sensor Tests
+	
 	
 	/* Test EEPROM -------------------------------------------------------------*/
 
