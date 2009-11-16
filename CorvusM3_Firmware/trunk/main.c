@@ -50,24 +50,34 @@ int main(void)
 	/* Initialize System */
 	initSystem();
   
-	
+	char x[] = "CorvusM3\r\n";
+	//print_uart1(x);
   
 	while (1)
 	{
 		// Controlloop --> statemachine() --> Timer 3
 		
-		TxBuffer1[TxInCounter1++] = 0x33;
-		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-			
-			
-		setLEDStatus(LED_ON);
-		Delay(1000);
-		setLEDStatus(LED_OFF);
-		Delay(1000);
 		
-		//Read Serial Ports
+		// send Spektrum to uart1
+		if (RxInCounter3 != RxOutCounter3)
+		{
+			TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
+			if (TxBuffer1[TxInCounter1-1] == 0x00 && TxBuffer1[TxInCounter1-2] == 0x06)
+			{
+				TxBuffer1[TxInCounter1++] = 0x0d; //CR \r
+				TxBuffer1[TxInCounter1++] = 0x0a; //LF \n
+			}
+			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+		}
+	
 		
-		USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+		// ECHO TEST
+		if (RxOutCounter1 != RxInCounter1)
+		{
+			TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
+			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+		}
+		
 	}
 }
 

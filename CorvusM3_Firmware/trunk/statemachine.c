@@ -68,12 +68,7 @@ void statemachine(void)
 	
 		
 		
-		// ECHO TEST
-		if (RxOutCounter1 != RxInCounter1)
-		{
-			TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
-			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-		}
+
 		
 		
 		/*
@@ -85,7 +80,7 @@ void statemachine(void)
 		*/
 	
 		// test LED and USART receive
-		
+		/*
 		if (RxBuffer1[RxInCounter1-1] == '0')
 		{
 			setLEDStatus(LED_OFF);
@@ -105,15 +100,9 @@ void statemachine(void)
 		{
 			setLEDStatus(LED_ON);
 		}
+		*/
 		
-		
-	// test spektrum
-	// write works
-	//TxBuffer1[TxInCounter1++] = '-';
-	//TxBuffer3[TxInCounter3++] = '-';
-	
-	//sprintf(x,"rxtx:%d:%d:\r\n",RxOutCounter3,RxInCounter3);
-	//print_uart1(x);
+
 
 	// test LED
 	//setLEDStatus(LED_FLASH);

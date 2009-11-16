@@ -30,32 +30,80 @@ extern vu16 receiverChannel[9];
 extern vu8 RxBuffer3[0xFF];
 extern vu8 RxInCounter3;
 extern vu8 RxOutCounter3; 
+vu8 syncByte[2];
+vu8 syncCount = 0;
+vu8 byteCount = 0;
+vu8 channelByteCount = 0;
 
-u8 sync = 0;
 u8 channelCount = 0;
+
+volatile union byteMap {
+	u8 byte[2];
+	u16 word;
+} byteMapping;
+
 
 /* read receiverChannels ----------------------------------------------------*/
 void getSpektrumChannels()
 {
 	while (RxInCounter3 != RxOutCounter3)
 	{
-		//find sync
-		if (RxBuffer3[RxOutCounter3] == 0x00)
+		// sync not OK - search sync gap
+		if (receiverChannel[0] == SPEKTRUM_NO)
 		{
-			//first sync byte
-			sync = 1;
-			channelCount = 0;
-			receiverChannel[0] = SPEKTRUM_NO;
-		}
-		// second sync byte
-		if (RxBuffer3[RxOutCounter3] == 0x03 && sync == 1)
-		{
-			sync = 0;
-			receiverChannel[channelCount++] = SPEKTRUM_OK;
-			*LED ^= 1;
+			if (RxBuffer3[RxOutCounter3] == 0x00 && syncCount == 0)
+			{
+				syncCount++;
+				syncByte[0] = [RxOutCounter3];
+			}
+			if (RxBuffer3[RxOutCounter3] != 0x00 && syncCount == 1)
+			{
+				syncCount++;
+				syncByte[1] = [RxOutCounter3];
+			}
+			if (RxBuffer3[RxOutCounter3] == syncByte[0] && syncCount == 2)
+			{
+				syncCount++;
+			}
+			if (RxBuffer3[RxOutCounter3] == syncByte[1] && syncCount == 3)
+			{
+				syncCount++;
+				byteCount = 1;
+				receiverChannel[0] == SPEKTRUM_OK;
+			}
 		}
 		
-		// for next loop
+		// test sync all 16byte
+		if (byteCount == 0 && RxBuffer3[RxOutCounter3] != syncByte[0] && receiverChannel[0] == SPEKTRUM_OK ||
+			byteCount == 1 && RxBuffer3[RxOutCounter3] != syncByte[1] && receiverChannel[0] == SPEKTRUM_OK)
+		{
+			receiverChannel[0] == SPEKTRUM_NO;
+			syncCount = 0;
+		}
+		
+		// if all is OK map channels
+		if (receiverChannel[0] == SPEKTRUM_OK && byteCount > 1)
+		{
+			if (channelByteCount == 0)
+			{
+				channelByteCount++;
+				byteMapping.byte[0] = RxBuffer3[RxOutCounter3];
+			}
+			if (channelByteCount == 1)
+			{
+				channelByteCount = 0;
+				byteMapping.byte[1] = RxBuffer3[RxOutCounter3];
+				receiverChannel[channelCount++] = byteMapping.word;
+			}
+		}
+		
+		
+		byteCount++;
+		if (byteCount > 15)
+		{
+			byteCount = 0;
+		}
+		
 		RxOutCounter3++;
 		
 	}
