@@ -3,5 +3,5 @@
 
 == Funktionen ==
 
-[http://www.dspguru.com/comp.dsp/tricks/alg/fxdatan2.htm] schnelle ATAN2 Funktion
-[http://www.mikrocontroller.net/articles/Sinus_berechnung] Sin/Cos mit Stütztabelle
+ * schnelle ATAN2 Funktion: [http://www.dspguru.com/comp.dsp/tricks/alg/fxdatan2.htm] 
+ * Sin/Cos mit Stütztabelle: [http://www.mikrocontroller.net/articles/Sinus_berechnung] 
