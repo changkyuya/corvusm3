@@ -68,6 +68,13 @@ void getSpektrumChannels_IT()
 			byteCount = 0;
 		}
 		
+		// something wrong - no GAP found
+		if (oldUptimeMs + SYNC_GAP > uptimeMs && byteCount == 0)
+		{
+			receiverSpektrumChannel[0] = SPEKTRUM_NO;
+			byteCount = 0;
+		}
+		
 		// if all is OK map channels
 		if (receiverSpektrumChannel[0] == SPEKTRUM_OK && byteCount > 1)
 		{
@@ -80,10 +87,11 @@ void getSpektrumChannels_IT()
 				byteMapping.byte[1] = RxBuffer3[RxOutCounter3];
 				receiverSpektrumChannel[channelCount++] = byteMapping.word;
 			}
+			
+			byteCount++;
 		}
 		
 		
-		byteCount++;
 		if (byteCount > 15)
 		{
 			byteCount = 0;
