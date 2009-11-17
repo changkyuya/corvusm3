@@ -101,7 +101,6 @@ void USART1_IRQHandler(void)
 
 
 /* [0xDC] USART3 Interrupt */
-/* Used for Spektrum RX ! ---------------------------------------------------*/
 /* Fill RX/TX Buffer --------------------------------------------------------*/
 void USART3_IRQHandler(void)
 {
@@ -110,7 +109,7 @@ void USART3_IRQHandler(void)
 	{
 		/* write byte to receive buffer */
 		RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
-		getSpektrumChannels_IT();  //receiverspektrum.c
+		getSpektrumChannels_IT();
 	}
 
 	if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET)

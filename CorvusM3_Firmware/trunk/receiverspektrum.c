@@ -22,85 +22,54 @@
 
 #include "receiverspektrum.h"
 
-#include "led.h" //test
+#include "serial.h" //test
+#include <stdio.h> //test 
+
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-vu16 receiverSpektrumChannel[9];
-extern vu16 receiverChannel[9];
-extern vu8 RxBuffer3[0xFF];
-extern vu8 RxInCounter3;
-extern vu8 RxOutCounter3; 
-extern vu32 uptimeMs; //to finde the sync gap all 11ms update from statemachine all 1ms
+extern vu32 msCount;
+vu32 oldSpektrumMsCount = 0;
 
-vu32 oldUptimeMs = 0;
-vu8 byteCount = 0;
-u8 channelCount = 0;
+//test
+extern vu8 TxBuffer1[0xFF];
+extern vu8 TxInCounter1;
+extern vu8 TxOutCounter1;
+extern vu8 RxBuffer1[0xFF];
+extern vu8 RxOutCounter1;
+extern vu8 RxInCounter1;
+
+extern vu8 TxBuffer3[0xFF];
+extern vu8 TxInCounter3;
+extern vu8 TxOutCounter3;
+extern vu8 RxBuffer3[0xFF];
+extern vu8 RxOutCounter3;
+extern vu8 RxInCounter3;
+
+
 
 volatile union byteMap {
 	u8 byte[2];
 	u16 word;
 } byteMapping;
 
-/* map spektrum channels to channels if spektrum is used ----------------------------*/
+
+/* read receiverChannels ----------------------------------------------------*/
 void getSpektrumChannels()
 {
-	receiverChannel[0] = receiverSpektrumChannel[0];
-	u8 i;
-	for (i = 1; i < 9; i++)
-	{
-		// div values and set min max from 1000 to 2000
-		receiverChannel[i] = receiverSpektrumChannel[i];  //calc the right values open!
-	}
+	
 }
 
-
-/* read receiverSpektrumChannels ----------------------------------------------------*/
-/* used by uart3 RXNE interrupt -----------------------------------------------------*/
+/* read receiverChannels Interrupt from UART3 -------------------------------*/
 void getSpektrumChannels_IT()
 {
-	while (RxInCounter3 != RxOutCounter3)
+	if (oldSpektrumMsCount + 7 < msCount)
 	{
-		// sync not OK - search sync gap		
-		if (oldUptimeMs + SYNC_GAP < uptimeMs)  // found gap
-		{
-			receiverSpektrumChannel[0] = SPEKTRUM_OK;
-			byteCount = 0;
-		}
-		
-		// something wrong - no GAP found
-		if (oldUptimeMs + SYNC_GAP > uptimeMs && byteCount == 0)
-		{
-			receiverSpektrumChannel[0] = SPEKTRUM_NO;
-			byteCount = 0;
-		}
-		
-		// if all is OK map channels
-		if (receiverSpektrumChannel[0] == SPEKTRUM_OK && byteCount > 1)
-		{
-			if (byteCount%2 == 0)
-			{
-				byteMapping.byte[0] = RxBuffer3[RxOutCounter3];
-			} 
-			else
-			{
-				byteMapping.byte[1] = RxBuffer3[RxOutCounter3];
-				receiverSpektrumChannel[channelCount++] = byteMapping.word;
-			}
-			
-			byteCount++;
-		}
-		
-		
-		if (byteCount > 15)
-		{
-			byteCount = 0;
-		}
-		
-		RxOutCounter3++;
-		oldUptimeMs = uptimeMs;
-		
+			TxBuffer1[TxInCounter1++] = '*';
+			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 	}
+	
+	oldSpektrumMsCount = msCount;
 }
 
 

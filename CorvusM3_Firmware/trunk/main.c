@@ -62,11 +62,6 @@ int main(void)
 		if (RxInCounter3 != RxOutCounter3)
 		{
 			TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
-			if (TxBuffer1[TxInCounter1-1] == 0x00 && TxBuffer1[TxInCounter1-2] == 0x06)
-			{
-				TxBuffer1[TxInCounter1++] = 0x0d; //CR \r
-				TxBuffer1[TxInCounter1++] = 0x0a; //LF \n
-			}
 			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		}
 	

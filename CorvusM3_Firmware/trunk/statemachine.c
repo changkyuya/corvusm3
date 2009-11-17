@@ -30,7 +30,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[6];  //initsystem
 char x [10];  // for Sensor Tests
-vu32 uptimeMs = 0;
+vu32 msCount = 0;
 vu16 receiverChannel[9]; 
 
 //test
@@ -108,7 +108,7 @@ void statemachine(void)
 	//setLEDStatus(LED_FLASH);
 	
 	/* Debug Output 10Hz ---------------------------------------------------*/
-	if (uptimeMs % 100 == 0)
+	if (msCount % 100 == 0)
 	{
 		// Spektrum Sync Test
 		//TxBuffer1[TxInCounter1++] = receiverChannel[0];
@@ -130,7 +130,7 @@ void statemachine(void)
 		sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
-		print_uart1(x); 
+		print_uart1(x);
 		*/
 		
 
@@ -161,5 +161,6 @@ void statemachine(void)
 		//Pause(1000);
 	}
 	
-
+	/* Count Loops from Statemachine 1ms */
+	msCount++;
 }
