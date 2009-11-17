@@ -33,6 +33,7 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
+void getSpektrumChannels_IT(void);
 void getSpektrumChannels(void);
 
 #endif /* __RECEIVERSPEKTRUM_H */

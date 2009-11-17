@@ -26,6 +26,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+vu16 receiverSpektrumChannel[9];
 extern vu16 receiverChannel[9];
 extern vu8 RxBuffer3[0xFF];
 extern vu8 RxInCounter3;
@@ -34,7 +35,6 @@ extern vu32 uptimeMs; //to finde the sync gap all 11ms update from statemachine 
 
 vu32 oldUptimeMs = 0;
 vu8 byteCount = 0;
-vu8 channelByteCount = 0;
 u8 channelCount = 0;
 
 volatile union byteMap {
@@ -42,21 +42,34 @@ volatile union byteMap {
 	u16 word;
 } byteMapping;
 
-
-/* read receiverChannels ----------------------------------------------------*/
+/* map spektrum channels to channels if spektrum is used ----------------------------*/
 void getSpektrumChannels()
+{
+	receiverChannel[0] = receiverSpektrumChannel[0];
+	u8 i;
+	for (i = 1; i < 9; i++)
+	{
+		// div values and set min max from 1000 to 2000
+		receiverChannel[i] = receiverSpektrumChannel[i];  //calc the right values open!
+	}
+}
+
+
+/* read receiverSpektrumChannels ----------------------------------------------------*/
+/* used by uart3 RXNE interrupt -----------------------------------------------------*/
+void getSpektrumChannels_IT()
 {
 	while (RxInCounter3 != RxOutCounter3)
 	{
 		// sync not OK - search sync gap		
 		if (oldUptimeMs + SYNC_GAP < uptimeMs)  // found gap
 		{
-			receiverChannel[0] = SPEKTRUM_OK;
+			receiverSpektrumChannel[0] = SPEKTRUM_OK;
 			byteCount = 0;
 		}
 		
 		// if all is OK map channels
-		if (receiverChannel[0] == SPEKTRUM_OK && byteCount > 1)
+		if (receiverSpektrumChannel[0] == SPEKTRUM_OK && byteCount > 1)
 		{
 			if (byteCount%2 == 0)
 			{
@@ -65,7 +78,7 @@ void getSpektrumChannels()
 			else
 			{
 				byteMapping.byte[1] = RxBuffer3[RxOutCounter3];
-				receiverChannel[channelCount++] = byteMapping.word;
+				receiverSpektrumChannel[channelCount++] = byteMapping.word;
 			}
 		}
 		
