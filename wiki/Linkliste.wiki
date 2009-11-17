@@ -1,0 +1,6 @@
+#labels Phase-Implementation,Links
+= Nützliche Links =
+
+== Funktionen ==
+
+[http://www.dspguru.com/comp.dsp/tricks/alg/fxdatan2.htm] schnelle ATAN2 Funktion
