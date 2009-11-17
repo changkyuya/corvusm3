@@ -8,3 +8,15 @@
  * Sin/Cos aus MK Projekt: [http://svn.mikrokopter.de/mikrowebsvn/filedetails.php?repname=FlightCtrl&path=/tags/V0.76g/mymath.c]
  * Simultaneous Parabolic Approximation of Sin and Cos: [http://www.dspguru.com/comp.dsp/tricks/alg/sincos.htm]
  * Lookup table: [http://en.wikipedia.org/wiki/Lookup_table]
+
+== Infos und Beispiele ==
+
+ * Spektrum bei MK: [http://svn.mikrokopter.de/mikrowebsvn/filedetails.php?repname=FlightCtrl&path=/tags/V0.76g/Spectrum.c]
+ * PPM Signal: [http://www.mftech.de/ppm.htm]
+
+== Infos zur Lageregelung ==
+
+ * Komplementärfilter: [http://forum.mikrokopter.de/topic-post74573.html]
+ * Kalman Filter: [http://forum.xufo.net/bb/viewtopic.php?t=3717]
+ * PID: [http://forum.mikrokopter.de/topic-post76057.html]
+ * Achsenkopplung: [http://forum.mikrokopter.de/topic-2319.html]
