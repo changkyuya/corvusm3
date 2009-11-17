@@ -29,6 +29,7 @@
 /* Define --------------------------------------------------------------------*/
 #define SPEKTRUM_NO		0
 #define SPEKTRUM_OK 	1
+#define SYNC_GAP 		7 // min frame GAP - 1 Frame every 11ms
 
 
 /* Function prototypes -------------------------------------------------------*/
