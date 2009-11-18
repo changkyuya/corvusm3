@@ -34,6 +34,7 @@ vu32 msCount = 0;
 vu16 receiverChannel[9]; 
 
 //test
+extern vu16 spektrumBytes[33];
 extern vu8 TxBuffer1[0xFF];
 extern vu8 TxInCounter1;
 extern vu8 TxOutCounter1;
@@ -63,7 +64,7 @@ void statemachine(void)
 	
 
 	/* get Channels from receiver - over HAL */
-	//getChannels();
+	getChannels();
 
 	
 		
@@ -110,11 +111,8 @@ void statemachine(void)
 	/* Debug Output 10Hz ---------------------------------------------------*/
 	if (msCount % 100 == 0)
 	{
-		// Spektrum Sync Test
-		//TxBuffer1[TxInCounter1++] = receiverChannel[0];
 		
 		
-		//TxBuffer1[TxInCounter1++] = '-';
 		
 		/* Graphoutput must start with 'G' and first value is timer (not used) */
 		
@@ -135,7 +133,7 @@ void statemachine(void)
 		
 
 		/* Debug output for receiver channels */
-		/*
+		
 		sprintf(x,"R-state:%d:",receiverChannel[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[1]);
@@ -154,7 +152,7 @@ void statemachine(void)
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",receiverChannel[8]);
 		print_uart1(x);	
-		*/
+		
 		
 		/* toggle LED */
 		//*LED ^= 1;

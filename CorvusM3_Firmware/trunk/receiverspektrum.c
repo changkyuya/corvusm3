@@ -22,55 +22,60 @@
 
 #include "receiverspektrum.h"
 
-#include "serial.h" //test
-#include <stdio.h> //test 
+//#include "serial.h" //test
+//#include <stdio.h> //test 
 
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu32 msCount;
-vu32 oldSpektrumMsCount = 0;
+extern vu8 spektrumBytes[33];  // 0 ... status 1-32 ... bytes from receiver
+extern vu16 receiverChannel[9];
+vu16 receiverSpektrumChannel[17];
 
-//test
-extern vu8 TxBuffer1[0xFF];
-extern vu8 TxInCounter1;
-extern vu8 TxOutCounter1;
-extern vu8 RxBuffer1[0xFF];
-extern vu8 RxOutCounter1;
-extern vu8 RxInCounter1;
-
-extern vu8 TxBuffer3[0xFF];
-extern vu8 TxInCounter3;
-extern vu8 TxOutCounter3;
-extern vu8 RxBuffer3[0xFF];
-extern vu8 RxOutCounter3;
-extern vu8 RxInCounter3;
-
-
-
-volatile union byteMap {
-	u8 byte[2];
-	u16 word;
-} byteMapping;
 
 
 /* read receiverChannels ----------------------------------------------------*/
 void getSpektrumChannels()
 {
+	//char x[100];
+	u8 i;
 	
+	// OK Byte
+	receiverChannel[0] = spektrumBytes[0];
+	// first 2 bytes are not used
+	for (i = 2; i < 17; i++)
+	{
+		// first 2 byte from 2. frame also not used
+		if (i != 9)
+		{
+			receiverSpektrumChannel[i] = (spektrumBytes[i*2-1] << 8) + spektrumBytes[i*2]; 
+			if (receiverSpektrumChannel[i] < 1024)
+			{
+				// Nick
+				receiverChannel[3] = constrain(receiverSpektrumChannel[i] + 1000, 1000, 2000);
+			}
+			else if (receiverSpektrumChannel[i] < 2048)
+			{
+				// Pitch
+				receiverChannel[1] = constrain(receiverSpektrumChannel[i] -24, 1000, 2000);
+			}
+			else if (receiverSpektrumChannel[i] < 3072)
+			{
+				// Roll
+				receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1024, 1000, 2000);
+			}
+			else if (receiverSpektrumChannel[i] < 4096)
+			{
+				//Yaw
+				receiverChannel[4] = constrain(receiverSpektrumChannel[i] - 2048, 1000, 2000);
+			}
+		}
+	}
+		//sprintf(x,"%d:%d-%d-%d-%d\r\n",receiverChannel[0],receiverChannel[1],receiverChannel[2],receiverChannel[3],receiverChannel[4]);
+		//print_uart1(x);
+
 }
 
-/* read receiverChannels Interrupt from UART3 -------------------------------*/
-void getSpektrumChannels_IT()
-{
-	if (oldSpektrumMsCount + 7 < msCount)
-	{
-			TxBuffer1[TxInCounter1++] = '*';
-			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-	}
-	
-	oldSpektrumMsCount = msCount;
-}
 
 
 

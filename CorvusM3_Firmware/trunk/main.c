@@ -57,14 +57,7 @@ int main(void)
 	{
 		// Controlloop --> statemachine() --> Timer 3
 		
-		
-		// send Spektrum to uart1
-		if (RxInCounter3 != RxOutCounter3)
-		{
-			TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
-			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
-		}
-	
+
 		
 		// ECHO TEST
 		if (RxOutCounter1 != RxInCounter1)

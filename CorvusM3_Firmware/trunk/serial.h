@@ -28,8 +28,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define TxBufferSize   0xFF  //(countof(TxBuffer) - 1)
-#define RxBufferSize   0xFF
+#define TxBufferSize   	0xFF  //(countof(TxBuffer) - 1)
+#define RxBufferSize   	0xFF
 
 /* Private macro -------------------------------------------------------------*/
 #define countof(a)   (sizeof(a) / sizeof(*(a)))

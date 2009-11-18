@@ -25,6 +25,11 @@
 
 
 /* Private variables UART Interrupt---------------------------------------------------------*/
+extern vu32 msCount;
+vu32 oldSpektrumMsCount = 0;
+vu8 spektrumBytes[33];  // 0 ... status 1-32 ... bytes from receiver
+vu8 byteCount = 1;
+
 
 vu8 TxBuffer1[TxBufferSize]; // = "\n\rUSART Hyperterminal Interrupts Example: USART-Hyperterminal communication using Interrupt\n\r";
 vu8 RxBuffer1[RxBufferSize];
@@ -107,9 +112,44 @@ void USART3_IRQHandler(void)
 	//DEFAULT_EXCEPTION_HANDLER(USART1_IRQHandler, "USART1", 53, 0xD4);
 	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
 	{
-		/* write byte to receive buffer */
 		RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
-		getSpektrumChannels_IT();
+		
+		/* 	find gap
+		there is a gap all 16 byte with 11ms
+		2 frames are a complete set
+		1.2. byte unknow
+		3.4. high/low byte 10bit resolution 4bit channel
+		...
+		*/
+		if (oldSpektrumMsCount + 7 < msCount)
+		{
+			// second gap - 1 frame complete
+			if (byteCount == 17)
+			{
+				spektrumBytes[0] = SPEKTRUM_OK;
+			}
+			// frame not OK - new sync
+			else if (byteCount == 33)
+			{
+				spektrumBytes[0] = SPEKTRUM_OK;
+				// start new frame
+				byteCount = 1;
+			}
+			else
+			{
+				spektrumBytes[0] = SPEKTRUM_NO;
+				// start new frame
+				byteCount = 1;
+			}
+		}
+		
+		spektrumBytes[byteCount++] = RxBuffer3[RxOutCounter3++];
+
+		//test receiver output
+		//TxBuffer1[TxInCounter1++] = spektrumBytes[byteCount-1];
+		//USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+		
+		oldSpektrumMsCount = msCount;
 	}
 
 	if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET)

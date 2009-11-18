@@ -81,8 +81,12 @@
 #define ACC_Y	4
 #define ACC_Z	5
 /* Receiver state */
-#define REC_FALSE 	0
+#define REC_NO 	0
 #define REC_OK		1
+#define PPM_NO		0
+#define PPM_OK 		1
+#define SPEKTRUM_NO		0
+#define SPEKTRUM_OK 	1
 
 /* Struct --------------------------------------------------------------------*/
 

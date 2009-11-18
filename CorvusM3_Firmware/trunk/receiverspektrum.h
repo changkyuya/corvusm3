@@ -27,12 +27,9 @@
 #include "main.h"
 
 /* Define --------------------------------------------------------------------*/
-#define SPEKTRUM_NO		0
-#define SPEKTRUM_OK 	1
 
 
 /* Function prototypes -------------------------------------------------------*/
 void getSpektrumChannels(void);
-void getSpektrumChannels_IT(void);
 
 #endif /* __RECEIVERSPEKTRUM_H */
