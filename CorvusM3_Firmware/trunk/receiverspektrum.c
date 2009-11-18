@@ -28,9 +28,11 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+extern vu32 msCount;
 extern vu8 spektrumBytes[33];  // 0 ... status 1-32 ... bytes from receiver
 extern vu16 receiverChannel[9];
 vu16 receiverSpektrumChannel[17];
+extern vu32 oldSpektrumMsCount; // for failsave
 
 
 
@@ -40,8 +42,17 @@ void getSpektrumChannels()
 	//char x[100];
 	u8 i;
 	
-	// OK Byte
-	receiverChannel[0] = spektrumBytes[0];
+	// OK Byte - test if uart3 interrupt is running
+	// each 11ms one frame comes - 
+	if ((oldSpektrumMsCount + 12) > msCount)
+	{
+		receiverChannel[0] = spektrumBytes[0];
+	}
+	// interrupt for uart3 is delay - no signal
+	else
+	{
+		receiverChannel[0] = SPEKTRUM_NO;
+	}
 	// first 2 bytes are not used
 	for (i = 2; i < 17; i++)
 	{
