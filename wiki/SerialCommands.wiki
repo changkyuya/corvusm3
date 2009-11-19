@@ -1,0 +1,17 @@
+#labels Phase-Implementation,Serial
+= Serial Commands =
+
+== Input ==
+
+=== l ... LED ===
+l0 ... LED off
+l1 ... LED flash
+l2 ... LED blink
+l3 ... LED on
+
+=== d ... Debug ===
+d0 ... Debug off
+dr ... Toggle Receiver on/off
+
+
+== Output ==
