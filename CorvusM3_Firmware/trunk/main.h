@@ -88,6 +88,10 @@
 #define SPEKTRUM_NO		0
 #define SPEKTRUM_OK 	1
 
+/* define Parameter Array */
+#define PARA_SET	0
+#define PARA_DEBUG 	1
+
 /* Struct --------------------------------------------------------------------*/
 
 

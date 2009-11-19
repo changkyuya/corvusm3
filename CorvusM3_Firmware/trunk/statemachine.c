@@ -32,22 +32,8 @@ extern vu16 ADCSensorValue[6];  //initsystem
 char x [10];  // for Sensor Tests
 vu32 msCount = 0;
 vu16 receiverChannel[9]; 
+vu16 parameter[0xFF];
 
-//test
-extern vu16 spektrumBytes[33];
-extern vu8 TxBuffer1[0xFF];
-extern vu8 TxInCounter1;
-extern vu8 TxOutCounter1;
-extern vu8 RxBuffer1[0xFF];
-extern vu8 RxOutCounter1;
-extern vu8 RxInCounter1;
-
-extern vu8 TxBuffer3[0xFF];
-extern vu8 TxInCounter3;
-extern vu8 TxOutCounter3;
-extern vu8 RxBuffer3[0xFF];
-extern vu8 RxOutCounter3;
-extern vu8 RxInCounter3;
 
 	
 /* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
@@ -67,97 +53,8 @@ void statemachine(void)
 	getChannels();
 
 	
-		
-		
-
-		
-		
-		/*
-		// Test Output - Spektrum to pc
-		if (RxOutCounter3 != RxInCounter3)
-		{
-			TxBuffer1[TxInCounter1++] = RxBuffer3[RxOutCounter3++];
-		}
-		*/
 	
-		// test LED and USART receive
-		/*
-		if (RxBuffer1[RxInCounter1-1] == '0')
-		{
-			setLEDStatus(LED_OFF);
-		}
-		
-		if (RxBuffer1[RxInCounter1-1] == '1')
-		{
-			setLEDStatus(LED_FLASH);
-		}
-		
-		if (RxBuffer1[RxInCounter1-1] == '2')
-		{
-			setLEDStatus(LED_BLINK);
-		}
-		
-		if (RxBuffer1[RxInCounter1-1] == '3')
-		{
-			setLEDStatus(LED_ON);
-		}
-		*/
-		
 
-
-	// test LED
-	//setLEDStatus(LED_FLASH);
-	
-	/* Debug Output 10Hz ---------------------------------------------------*/
-	if (msCount % 100 == 0)
-	{
-		
-		
-		
-		/* Graphoutput must start with 'G' and first value is timer (not used) */
-		
-		/*
-		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
-		print_uart1(x);
-		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
-		print_uart1(x);
-		sprintf(x,"%d:",ADCSensorValue[GYRO_Z]);
-		print_uart1(x);
-		sprintf(x,"%d:",ADCSensorValue[ACC_X]);
-		print_uart1(x);
-		sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
-		print_uart1(x);
-		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
-		print_uart1(x);
-		*/
-		
-
-		/* Debug output for receiver channels */
-		
-		sprintf(x,"R-state:%d:",receiverChannel[0]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[1]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[2]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[3]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[4]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[5]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[6]);
-		print_uart1(x);
-		sprintf(x,"%d:",receiverChannel[7]);
-		print_uart1(x);
-		sprintf(x,"%d:\r\n",receiverChannel[8]);
-		print_uart1(x);	
-		
-		
-		/* toggle LED */
-		//*LED ^= 1;
-		//Pause(1000);
-	}
 	
 	/* Count Loops from Statemachine 1ms */
 	msCount++;

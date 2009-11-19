@@ -25,10 +25,12 @@
 #include "comm.h"
 #include "serial.h"
 #include "eeprom.h" 
+#include "debug.h"
 
 /* Variables ----------------------------------------------------------------*/
-extern vu8 RxOutCounter1;
-extern vu8 RxInCounter1;
+extern vu8 RxOutCounter1; //serial
+extern vu8 RxInCounter1; //serial
+extern vu32 msCount; //statemachine
 
 	
 int main(void)
@@ -49,6 +51,12 @@ int main(void)
 		if (RxOutCounter1 != RxInCounter1)
 		{
 			getComm();
+		}
+		
+		/* Debug Output 10Hz ---------------------------------------------------*/
+		if (msCount % 100 == 0)
+		{
+			doDebug();
 		}
 		
 	}

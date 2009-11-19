@@ -39,8 +39,8 @@
 
 
 /* EEPROM start address in Flash */
-#define EEPROM_START_ADDRESS    ((u32)0x08010000) /* EEPROM emulation start address:
-                                                  after 64KByte of used Flash memory */
+#define EEPROM_START_ADDRESS    ((u32)0x08064000) /* EEPROM emulation start address:
+                                                  with page 200 (*2kb = 400kb) */
 
 /* Pages 0 and 1 base and end addresses */
 #define PAGE0_BASE_ADDRESS      ((u32)(EEPROM_START_ADDRESS + 0x000))

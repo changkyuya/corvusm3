@@ -21,7 +21,62 @@
 */
 
 #include "debug.h"
+#include "serial.h"
+#include <stdio.h>
+
 
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+extern vu16 parameter[0xFF];  //statemachine
+extern vu16 receiverChannel[9];  //statemachine
+
+/* doDebug - send Debug infos over Serial -----------------------------------*/
+void doDebug()
+{
+	char x [80];			
+	/* Graphoutput must start with 'G' and first value is timer (not used) */
+	/*
+	sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
+	print_uart1(x);
+	sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
+	print_uart1(x);
+	sprintf(x,"%d:",ADCSensorValue[GYRO_Z]);
+	print_uart1(x);
+	sprintf(x,"%d:",ADCSensorValue[ACC_X]);
+	print_uart1(x);
+	sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
+	print_uart1(x);
+	sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
+	print_uart1(x);
+	*/
+	
+
+	/* Debug output for receiver channels */
+	// if parameter value is 1 - 1. bit is set
+	if (parameter[PARA_DEBUG] & 0x01)
+	{
+		sprintf(x,"R-state:%d:",receiverChannel[0]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[1]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[2]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[3]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[4]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[5]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[6]);
+		print_uart1(x);
+		sprintf(x,"%d:",receiverChannel[7]);
+		print_uart1(x);
+		sprintf(x,"%d:\r\n",receiverChannel[8]);
+		print_uart1(x);	
+	}
+	
+	/* toggle LED */
+	//*LED ^= 1;
+	//Pause(1000);
+}

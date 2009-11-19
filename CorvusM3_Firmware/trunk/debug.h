@@ -30,7 +30,7 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-
+void doDebug();
 
 
 #endif /* __DEBUG_H */

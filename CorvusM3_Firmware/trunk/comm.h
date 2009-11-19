@@ -27,11 +27,17 @@
 #include "main.h"
 
 /* Define --------------------------------------------------------------------*/
-
+#define ERROR	0
+#define OK		1
 
 /* Function prototypes -------------------------------------------------------*/
 void getComm(void);
 void doComm(void);
+void dolComm(void);
+void dodComm(void);
+void dopComm(void);
+u16 readInt(u8);
+void send(u8);
 
 
 #endif /* __COMM_H */

@@ -59,26 +59,28 @@ void getSpektrumChannels()
 		// first 2 byte from 2. frame also not used
 		if (i != 9)
 		{
-			receiverSpektrumChannel[i] = (spektrumBytes[i*2-1] << 8) + spektrumBytes[i*2]; 
+			// shift first byte 8 steps to high and add low byte
+			receiverSpektrumChannel[i] = (spektrumBytes[(i << 1) - 1] << 8) + spektrumBytes[i << 1]; 
 			if (receiverSpektrumChannel[i] < 1024)
 			{
+				// resolution is 10bit ... 0 - 1024 ... add 988 for middle
 				// Nick
-				receiverChannel[3] = constrain(receiverSpektrumChannel[i] + 1000, 1000, 2000);
+				receiverChannel[3] = constrain(receiverSpektrumChannel[i] + 988, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 2048)
 			{
 				// Pitch
-				receiverChannel[1] = constrain(receiverSpektrumChannel[i] -24, 1000, 2000);
+				receiverChannel[1] = constrain(receiverSpektrumChannel[i] - 36, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 3072)
 			{
 				// Roll
-				receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1024, 1000, 2000);
+				receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 4096)
 			{
 				//Yaw
-				receiverChannel[4] = constrain(receiverSpektrumChannel[i] - 2048, 1000, 2000);
+				receiverChannel[4] = constrain(receiverSpektrumChannel[i] - 2084, 1000, 2000);
 			}
 		}
 	}
