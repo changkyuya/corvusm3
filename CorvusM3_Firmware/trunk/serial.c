@@ -25,7 +25,7 @@
 
 
 /* Private variables UART Interrupt---------------------------------------------------------*/
-extern vu32 msCount;
+extern vu32 msCount;  //statemachine
 vu32 oldSpektrumMsCount = 0;
 vu8 spektrumBytes[33];  // 0 ... status 1-32 ... bytes from receiver
 vu8 byteCount = 1;
