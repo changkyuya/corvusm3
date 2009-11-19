@@ -4,19 +4,20 @@
 == Input ==
 Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
 
-=== l ... LED ===
-l0 ... LED off
-l1 ... LED flash
-l2 ... LED blink
-l3 ... LED on
+*LED*
+ * l0 ... LED off
+ * l1 ... LED flash
+ * l2 ... LED blink
+ * l3 ... LED on
 
-=== d ... Debug ===
-d0 ... Debug off
-dr ... Toggle Receiver on/off
+*Debug*
+ * d0 ... Debug off
+ * dr ... Toggle Receiver on/off
 
 
 == Output ==
 
-=== Debug Receiver ===
-Output all 100ms, Status 1=OK, CH Bereich 1000-2000
-`R-state:Status 0/1:[CH1]:[CH2]:[CH3]:[CH4]:[CH5]:[CH6]:[CH7]:[CH8]:\r\n`
+=== Debug ===
+*Receiver*<br />
+Output all 100ms, Status 1=OK, CH Bereich 1000-2000<br />
+{{{R-state:Status 0/1:[CH1]:[CH2]:[CH3]:[CH4]:[CH5]:[CH6]:[CH7]:[CH8]:\r\n}}}
