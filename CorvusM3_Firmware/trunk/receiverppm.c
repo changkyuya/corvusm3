@@ -37,7 +37,6 @@ vu16 receiverPPMChannel[9];
 //volatile pulswidthStruct pulswidth;
 //extern ChannelStruct receiverChannel;  //statemachine
 
-char x [10];  // for Debug
 
 /* read and trimm receiverChannels --------------------------------------------------*/
 void getPPMChannels()

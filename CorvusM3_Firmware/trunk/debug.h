@@ -20,47 +20,17 @@
 	Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __DEBUG_H
+#define __DEBUG_H
+
 #include "main.h"
-#include "initsystem.h"    
-#include "comm.h"
-#include "serial.h"
-#include "eeprom.h" 
 
-/* Variables ----------------------------------------------------------------*/
-extern vu8 RxOutCounter1;
-extern vu8 RxInCounter1;
+/* Define --------------------------------------------------------------------*/
 
-	
-int main(void)
-{
-	/* Initialize System */
-	initSystem();
-  
-	char x[] = "CorvusM3 - Version 0.0a\r\n";
-	print_uart1(x);
-  
-	while (1)
-	{
-		// Controlloop --> statemachine() --> Timer 3
-		
 
-		
-		// if something in RxBuffer
-		if (RxOutCounter1 != RxInCounter1)
-		{
-			getComm();
-		}
-		
-	}
-}
+/* Function prototypes -------------------------------------------------------*/
 
 
 
-
-
-
-
-
-
-
-
+#endif /* __DEBUG_H */

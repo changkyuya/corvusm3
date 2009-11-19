@@ -20,40 +20,70 @@
 	Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "main.h"
-#include "initsystem.h"    
 #include "comm.h"
 #include "serial.h"
-#include "eeprom.h" 
+
+/* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+extern vu8 TxBuffer1[0xFF];
+extern vu8 TxInCounter1;
+extern vu8 TxOutCounter1;
+extern vu8 RxBuffer1[0xFF];
 extern vu8 RxOutCounter1;
 extern vu8 RxInCounter1;
 
-	
-int main(void)
-{
-	/* Initialize System */
-	initSystem();
-  
-	char x[] = "CorvusM3 - Version 0.0a\r\n";
-	print_uart1(x);
-  
-	while (1)
-	{
-		// Controlloop --> statemachine() --> Timer 3
-		
+char line[80];
+u8 l = 0;
 
-		
-		// if something in RxBuffer
-		if (RxOutCounter1 != RxInCounter1)
+
+/* getComm - get message from serial ----------------------------------------*/
+void getComm()
+{
+	// read all incoming bytes
+	while(RxInCounter1 != RxOutCounter1)
+	{
+		char byte = RxBuffer1[RxOutCounter1++];
+		// if one line is complete
+		if (byte == '\n')
 		{
-			getComm();
+			doComm();
+		}
+		// don't use \r
+		else if (byte != '\r')
+		{
+			line[l++] = byte;
 		}
 		
 	}
 }
 
+/* doComm - if one line is complete do Command ------------------------------*/
+void doComm()
+{
+	// do one byte commands
+	switch (line[0])
+	{
+		case '0':
+			setLEDStatus(LED_OFF);
+			break;
+		case '1':
+			setLEDStatus(LED_FLASH);
+			break;
+		case '2':
+			setLEDStatus(LED_BLINK);
+			break;
+		case '3':
+			setLEDStatus(LED_ON);
+			break;
+	}
+	
+	// clear line
+	l = 0;
+	// send info to user
+	char message [] = "OK\r\n";
+	print_uart1(message);
+}
 
 
 
