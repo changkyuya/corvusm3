@@ -14,6 +14,11 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
  * d0 ... Debug off
  * dr ... Toggle Receiver on/off
 
+*Parameter*<br />
+Format: p 00(-99, 2-stelliger Parameter) : 12345 (Wert max 5 Stellen) : \r\n
+ * p00:1: ... Parameterset 0 oder 1
+ * p01:12345: ... Debug (1.Receiver,)
+
 
 == Output ==
 
