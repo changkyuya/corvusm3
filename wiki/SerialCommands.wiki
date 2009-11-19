@@ -2,6 +2,7 @@
 = Serial Commands =
 
 == Input ==
+Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
 
 === l ... LED ===
 l0 ... LED off
@@ -15,3 +16,7 @@ dr ... Toggle Receiver on/off
 
 
 == Output ==
+
+=== Debug Receiver ===
+Output all 100ms, Status 1=OK, CH Bereich 1000-2000
+R-state:[Status 0/1]:[CH1]:[CH2]:[CH3]:[CH4]:[CH5]:[CH6]:[CH7]:[CH8]:\r\n
