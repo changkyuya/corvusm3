@@ -54,7 +54,7 @@ void getComm()
 			l = 0;
 		}
 		// don't use \r
-		else if (byte != '\r')
+		else// if (byte != '\r') // use \r as limitter
 		{
 			line[l++] = byte;
 		}
@@ -172,8 +172,8 @@ void dopComm()
 u16 readInt(u8 start) {
 	char value[5];
 	u8 count = 0;  // arraycount
-	// read int to ;
-	while (line[start] != 0x3a && count < 5)  // 0x3a = ':'
+	// read int to : or end \r
+	while (line[start] != ':' && line[start] != '\r' && count <5 ) 
 	{	
 		value[count++] = line[start++];
 	} 
