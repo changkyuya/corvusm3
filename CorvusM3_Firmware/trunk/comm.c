@@ -135,6 +135,13 @@ void dodComm()
 			parameter[PARA_DEBUG] = parameter[PARA_DEBUG] ^ 0x01;
 			send(OK);
 			break;
+		case 's':
+			// switch on
+			//parameter[PARA_DEBUG] =| 0x02;
+			// toggle
+			parameter[PARA_DEBUG] = parameter[PARA_DEBUG] ^ 0x02;
+			send(OK);
+			break;
 		default:
 			send(ERROR);
 	}

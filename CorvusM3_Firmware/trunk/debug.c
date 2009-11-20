@@ -29,26 +29,29 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0xFF];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
+extern vu16 ADCSensorValue[6]; //initsystem
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
 {
 	char x [80];			
+	
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
-	/*
-	sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
-	print_uart1(x);
-	sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
-	print_uart1(x);
-	sprintf(x,"%d:",ADCSensorValue[GYRO_Z]);
-	print_uart1(x);
-	sprintf(x,"%d:",ADCSensorValue[ACC_X]);
-	print_uart1(x);
-	sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
-	print_uart1(x);
-	sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
-	print_uart1(x);
-	*/
+	if (parameter[PARA_DEBUG] & 0x02)
+	{
+		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
+		print_uart1(x);
+		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
+		print_uart1(x);
+		sprintf(x,"%d:",ADCSensorValue[GYRO_Z]);
+		print_uart1(x);
+		sprintf(x,"%d:",ADCSensorValue[ACC_X]);
+		print_uart1(x);
+		sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
+		print_uart1(x);
+		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
+		print_uart1(x);
+	}
 	
 
 	/* Debug output for receiver channels */
@@ -75,7 +78,4 @@ void doDebug()
 		print_uart1(x);	
 	}
 	
-	/* toggle LED */
-	//*LED ^= 1;
-	//Pause(1000);
 }
