@@ -13,11 +13,12 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
 *Debug*
  * d0 ... Debug off
  * dr ... Toggle Receiver on/off
+ * ds ... Toggle Sensor RAW on/off 
 
 *Parameter*<br />
-Format: p 00(-99, 2-stelliger Parameter) : 12345 (Wert max 5 Stellen) : \r\n
- * p00:1: ... Parameterset 0 oder 1
- * p01:12345: ... Debug (1.Receiver,)
+Format: p 00(-99, 2-stelliger Parameter) : 12345 (0 bis 65535) \r\n
+ * p00:1 ... Parameterset 0 oder 1
+ * p01:12345 ... Debug (1.Receiver,)
 
 
 == Output ==
@@ -26,3 +27,6 @@ Format: p 00(-99, 2-stelliger Parameter) : 12345 (Wert max 5 Stellen) : \r\n
 *Receiver*<br />
 Output all 100ms, Status 1=OK, CH Bereich 1000-2000<br />
 {{{R-state:Status 0/1:[CH1]:[CH2]:[CH3]:[CH4]:[CH5]:[CH6]:[CH7]:[CH8]:\r\n}}}
+*Sensor*<br />
+Output all 100ms, 0-3,3V 12 Bit Auflösung 0-4095
+{{{G-Gyro-ACC:1:[Gyro X]:[Gyro Y]:[Gyro Z]:[ACC X]:[ACC Y]:[ACC Z]}}}
