@@ -69,7 +69,7 @@
 #define PAGE_FULL               ((u8)0x80)
 
 /* Variables' number */
-#define NumbOfVar               ((u8)0x03)
+#define NumbOfVar               ((u8)0xC8)    		// 0 - 199
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/

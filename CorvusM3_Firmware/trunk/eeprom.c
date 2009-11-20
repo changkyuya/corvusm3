@@ -269,7 +269,7 @@ u16 EE_ReadVariable(u16 VirtAddress, u16* Data)
 {
   u16 ValidPage = PAGE0;
   u16 AddressValue = 0x5555, ReadStatus = 1;
-  u32 Address = 0x08010000, PageStartAddress = 0x08010000;
+  u32 Address = EEPROM_START_ADDRESS, PageStartAddress = EEPROM_START_ADDRESS;
 
   /* Get active Page for read operation */
   ValidPage = EE_FindValidPage(READ_FROM_VALID_PAGE);
@@ -462,7 +462,7 @@ static u16 EE_VerifyPageFullWriteVariable(u16 VirtAddress, u16 Data)
 {
   FLASH_Status FlashStatus = FLASH_COMPLETE;
   u16 ValidPage = PAGE0;
-  u32 Address = 0x08010000, PageEndAddress = 0x080107FF;
+  u32 Address = EEPROM_START_ADDRESS, PageEndAddress = PAGE0_END_ADDRESS;
 
   /* Get valid Page for write operation */
   ValidPage = EE_FindValidPage(WRITE_IN_VALID_PAGE);
@@ -522,7 +522,7 @@ static u16 EE_VerifyPageFullWriteVariable(u16 VirtAddress, u16 Data)
 static u16 EE_PageTransfer(u16 VirtAddress, u16 Data)
 {
   FLASH_Status FlashStatus = FLASH_COMPLETE;
-  u32 NewPageAddress = 0x080103FF, OldPageAddress = 0x08010000;
+  u32 NewPageAddress = PAGE1_BASE_ADDRESS, OldPageAddress = EEPROM_START_ADDRESS;
   u16 ValidPage = PAGE0, VarIdx = 0;
   u16 EepromStatus = 0, ReadStatus = 0;
 

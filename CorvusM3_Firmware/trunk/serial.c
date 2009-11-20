@@ -21,6 +21,7 @@
 
 #include "serial.h"
 #include "receiverspektrum.h"
+#include <stdio.h>
 
 
 /* Private variables UART Interrupt---------------------------------------------------------*/
@@ -59,6 +60,7 @@ void print_uart1 (char * s)
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 	
 }
+
 /* send byte array over TxBuffer and Interrupt ------------------------------*/
 void print_uart3 (char * s)
 {

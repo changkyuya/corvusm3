@@ -34,9 +34,13 @@ void getComm(void);
 void doComm(void);
 void dolComm(void);
 void dodComm(void);
+void dorComm(void);
+void dosComm(void);
 void dopComm(void);
+void dofComm(void);
 u16 readInt(u8);
 void send(u8);
+void print_para (u8 para, u16 value);
 
 
 #endif /* __COMM_H */

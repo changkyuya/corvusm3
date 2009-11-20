@@ -15,10 +15,22 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
  * dr ... Toggle Receiver on/off
  * ds ... Toggle Sensor RAW on/off 
 
-*Parameter*<br />
-Format: p 00(-99, 2-stelliger Parameter) : 12345 (0 bis 65535) \r\n
- * p00:1 ... Parameterset 0 oder 1
- * p01:12345 ... Debug (1.Receiver,)
+*Parameter SET*<br />
+Format: s 00(-99, 2-stelliger Parameter) : 12345 (0 bis 65535) \r\n
+ * s00:0 ... Parameterset 0 oder 100 (Set 2)
+ * s01:12345 ... Debug (1.Receiver,)
+*Parameter FLASH*<br />
+Format: f 00(-99, 2-stelliger Parameter) : 12345 (0 bis 65535) \r\n
+ * f00:0 ... Parameterset 0 oder 100 (Set 2)
+ * f01:12345 ... Debug (1.Receiver,)   
+*Parameter PRINT*<br />
+Format: p 00(-99, 2-stelliger Parameter)
+ * p00 ... Parameterset 0 oder 100 (Set 2)
+ * p01 ... Debug (1.Receiver,)    
+*Parameter READ from FLASH*<br />
+Format: r 00(-99, 2-stelliger Parameter)
+ * r00 ... Parameterset 0 oder 100 (Set 2)
+ * r01 ... Debug (1.Receiver,) 
 
 
 == Output ==

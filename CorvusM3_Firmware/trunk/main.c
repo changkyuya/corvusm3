@@ -25,17 +25,34 @@
 #include "serial.h"
 #include "eeprom.h" 
 #include "debug.h"
+#include "eeprom.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
 
+/* Virtual address defined by the user: 0xFFFF value is prohibited */
+// we use 0 - 199
+u16 VirtAddVarTab[NumbOfVar];
+
 	
 int main(void)
 {
 	/* Initialize System */
 	initSystem();
+
+	/* Init virtual EEPROM */
+	/* Set virtual address */
+	u16 i;
+	for (i = 0; i < 0xC8; i++)
+	{
+		VirtAddVarTab[i] = i;
+	}
+	/* Unlock the Flash Program Erase controller */
+	FLASH_Unlock();
+	/* EEPROM Init */
+	EE_Init();
   
 	char x[] = "CorvusM3 - Version 0.0a\r\n";
 	print_uart1(x);
