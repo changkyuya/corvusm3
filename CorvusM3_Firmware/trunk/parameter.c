@@ -58,9 +58,7 @@ void loadParameter()
 	if (val > USED_PARAMETER)
 	{
 		// store default set if flash
-		EE_WriteVariable(VirtAddVarTab[PARA_SET], 0x00);
-		EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0x00);
-		send(DEFAULT);
+		loadDefault();
 		
 	}
 	
@@ -74,3 +72,11 @@ void loadParameter()
 }
 
 
+void loadDefault()
+{
+	// store default set if flash
+	EE_WriteVariable(VirtAddVarTab[PARA_SET], 0x00);
+	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0x00);
+	// info user over uart1
+	send(DEFAULT);
+}

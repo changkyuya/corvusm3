@@ -95,6 +95,10 @@ void doComm()
 		case 'r':
 			dorComm();
 			break;
+		// laod default parameter
+		case '#':
+			loadDefault();
+			break;
 		default:
 			send(ERROR);
 	}

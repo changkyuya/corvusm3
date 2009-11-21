@@ -31,5 +31,6 @@
 /* Function prototypes -------------------------------------------------------*/
 void initEEPROM(void);
 void loadParameter(void);
+void loadDefault(void);
 
 #endif /* __PARAMETER_H */
