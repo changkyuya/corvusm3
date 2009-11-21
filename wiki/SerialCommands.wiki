@@ -32,6 +32,8 @@ Format: r 00(-99, 2-stelliger Parameter)
  * r00 ... Parameterset 0 oder 100 (Set 2)
  * r01 ... Debug (1.Receiver,) 
 
+*Spezial Commands*
+ * # ... lade Standard Parameter und schreibe in Flash
 
 == Output ==
 
