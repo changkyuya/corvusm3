@@ -32,6 +32,7 @@
 extern vu16 ADCSensorValue[6];  //initsystem
 char x [10];  // for Sensor Tests
 vu32 msCount = 0;
+vu32 msOldCount = 0;
 vu16 receiverChannel[9]; 
 extern vu16 parameter[0xFF]; //parameter
 u8 bootState = SWITCH_ON;
@@ -69,12 +70,17 @@ void statemachine(void)
 		case LOAD_PARA:
 			loadParameter();
 			bootState = CALIBRATE_SENSOR;
+			msOldCount = msCount;
 			break;
 		// calibrate sensor
 		case CALIBRATE_SENSOR:
-			// function open ....
-			setLEDStatus(LED_ON);
-			bootState = GO_FLIGHT;
+			// wait 1 secound for calibrate
+			if (msOldCount + 1000 < msCount)
+			{
+				// function open ....
+				setLEDStatus(LED_ON);
+				bootState = GO_FLIGHT;
+			}
 			break;
 	}
 	

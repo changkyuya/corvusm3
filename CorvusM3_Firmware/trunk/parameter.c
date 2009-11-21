@@ -72,9 +72,12 @@ void loadParameter()
 /* load default parameter to flash ------------------------------------------*/
 void loadDefault()
 {
+	//#########################################################################
 	// store default set if flash
+	//#########################################################################
 	EE_WriteVariable(VirtAddVarTab[PARA_SET], 0x00);
-	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0xFF);
+	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0x00);
+	//#########################################################################
 	// info user over uart1
 	send(DEFAULT);
 }
