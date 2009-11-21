@@ -28,6 +28,7 @@
 /* Define --------------------------------------------------------------------*/
 #define ERROR	0
 #define OK		1
+#define DEFAULT 2
 
 /* Function prototypes -------------------------------------------------------*/
 void getComm(void);

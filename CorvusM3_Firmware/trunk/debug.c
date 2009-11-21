@@ -37,7 +37,7 @@ void doDebug()
 	char x [80];			
 	
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
-	if (parameter[PARA_DEBUG] & 0x02)
+	if (parameter[PARA_DEBUG+parameter[PARA_SET]] & 0x02)
 	{
 		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
 		print_uart1(x);
@@ -56,7 +56,7 @@ void doDebug()
 
 	/* Debug output for receiver channels */
 	// if parameter value is 1 - 1. bit is set
-	if (parameter[PARA_DEBUG] & 0x01)
+	if (parameter[PARA_DEBUG+parameter[PARA_SET]] & 0x01)
 	{
 		sprintf(x,"R-state:%d:",receiverChannel[0]);
 		print_uart1(x);

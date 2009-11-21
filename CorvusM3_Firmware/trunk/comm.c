@@ -147,14 +147,14 @@ void dodComm()
 			// switch on
 			//parameter[PARA_DEBUG] =| 0x01;
 			// toggle
-			parameter[PARA_DEBUG] = parameter[PARA_DEBUG] ^ 0x01;
+			parameter[PARA_DEBUG+parameter[PARA_SET]] = parameter[PARA_DEBUG+parameter[PARA_SET]] ^ 0x01;
 			send(OK);
 			break;
 		case 's':
 			// switch on
 			//parameter[PARA_DEBUG] =| 0x02;
 			// toggle
-			parameter[PARA_DEBUG] = parameter[PARA_DEBUG] ^ 0x02;
+			parameter[PARA_DEBUG+parameter[PARA_SET]] = parameter[PARA_DEBUG+parameter[PARA_SET]] ^ 0x02;
 			send(OK);
 			break;
 		default:
@@ -260,14 +260,19 @@ u16 readInt(u8 start) {
 /* send Error/OK to User ----------------------------------------------------*/
 void send(u8 infoText)
 {
-	if (infoText == 0)
+	if (infoText == ERROR)
 	{
 		char message[] = "ERROR\r\n";
 		print_uart1(message);
 	}
-	else if (infoText == 1)
+	else if (infoText == OK)
 	{
 		char message[] = "OK\r\n";
+		print_uart1(message);
+	}
+	else if (infoText == DEFAULT)
+	{
+		char message[] = "Load default settings to flash\r\n";
 		print_uart1(message);
 	}
 }

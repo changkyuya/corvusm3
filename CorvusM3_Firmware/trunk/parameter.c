@@ -52,6 +52,18 @@ void loadParameter()
 {
 	u16 val;
 	u8 i;
+	
+	// test if flash is OK
+	EE_ReadVariable(VirtAddVarTab[0], &val);
+	if (val > USED_PARAMETER)
+	{
+		// store default set if flash
+		EE_WriteVariable(VirtAddVarTab[PARA_SET], 0x00);
+		EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0x00);
+		send(DEFAULT);
+		
+	}
+	
 	for (i = 0;i <= USED_PARAMETER; i++)
 	{
 		EE_ReadVariable(VirtAddVarTab[i], &val);
