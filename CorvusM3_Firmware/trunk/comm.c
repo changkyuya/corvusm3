@@ -151,14 +151,14 @@ void dodComm()
 			// switch on
 			//parameter[PARA_DEBUG] =| 0x01;
 			// toggle
-			parameter[PARA_DEBUG+parameter[PARA_SET]] = parameter[PARA_DEBUG+parameter[PARA_SET]] ^ 0x01;
+			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ 0x01);
 			send(OK);
 			break;
 		case 's':
 			// switch on
 			//parameter[PARA_DEBUG] =| 0x02;
 			// toggle
-			parameter[PARA_DEBUG+parameter[PARA_SET]] = parameter[PARA_DEBUG+parameter[PARA_SET]] ^ 0x02;
+			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ 0x02);
 			send(OK);
 			break;
 		default:
@@ -172,14 +172,7 @@ void dopComm()
 {
 	// add 2 chars to int from 0..99
 	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
-	if (set == 0)
-	{
-		print_para(set, parameter[PARA_SET]);
-	}
-	else
-	{
-		print_para(set, parameter[set]+parameter[PARA_SET]);
-	}
+	print_para(set, getParameter(set));
 	send(OK);
 }
 
@@ -187,21 +180,9 @@ void dopComm()
 /* do read from flash and print Parameter -----------------------------------------*/
 void dorComm()
 {
-	u16 val;
 	// add 2 chars to int from 0..99
 	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
-	if (set == 0)
-	{
-		EE_ReadVariable(VirtAddVarTab[PARA_SET], &val);
-		parameter[PARA_SET] = val;
-		print_para(set, parameter[PARA_SET]);
-	}
-	else
-	{
-		EE_ReadVariable(VirtAddVarTab[set+parameter[PARA_SET]], &val);
-		parameter[set+parameter[PARA_SET]] = val;
-		print_para(set, parameter[set+parameter[PARA_SET]]);
-	}
+	print_para(set, readFlashParameter(set));
 	send(OK);
 }
 
@@ -211,14 +192,7 @@ void dosComm()
 {
 	// add 2 chars to int from 0..99
 	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
-	if (set == 0)
-	{
-		parameter[PARA_SET] = readInt(4);
-	}
-	else
-	{
-		parameter[set+parameter[PARA_SET]] = readInt(4);
-	}
+	setParameter(set, readInt(4));
 	send(OK);
 }
 
@@ -228,20 +202,7 @@ void dofComm()
 {
 	// add 2 chars to int from 0..99
 	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
-	if (set == 0)
-	{
-		// starte with position 4
-		// s00:12345:
-		parameter[PARA_SET] = readInt(4);
-		EE_WriteVariable(VirtAddVarTab[PARA_SET], parameter[PARA_SET]);
-	} 
-	else 
-	{
-		// starte with position 4
-		// s01:12345:
-		parameter[set+parameter[PARA_SET]] = readInt(4);
-		EE_WriteVariable(VirtAddVarTab[set+parameter[PARA_SET]], parameter[set+parameter[PARA_SET]]);
-	}
+	writeFlashParameter(set, readInt(4));
 	send(OK);
 }
 

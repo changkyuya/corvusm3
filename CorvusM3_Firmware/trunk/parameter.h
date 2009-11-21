@@ -32,5 +32,10 @@
 void initEEPROM(void);
 void loadParameter(void);
 void loadDefault(void);
+u16 getParameter(u8 para);
+void setParameter(u8 para, u16 value);
+u16 readFlashParameter(u8 para);
+void writeFlashParameter(u8 para, u16 value);
+
 
 #endif /* __PARAMETER_H */

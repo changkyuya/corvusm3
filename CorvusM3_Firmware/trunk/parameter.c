@@ -52,14 +52,12 @@ void loadParameter()
 {
 	u16 val;
 	u8 i;
-	
 	// test if flash is OK
 	EE_ReadVariable(VirtAddVarTab[0], &val);
 	if (val > USED_PARAMETER)
 	{
 		// store default set if flash
 		loadDefault();
-		
 	}
 	
 	for (i = 0;i <= USED_PARAMETER; i++)
@@ -71,12 +69,75 @@ void loadParameter()
 	}
 }
 
-
+/* load default parameter to flash ------------------------------------------*/
 void loadDefault()
 {
 	// store default set if flash
 	EE_WriteVariable(VirtAddVarTab[PARA_SET], 0x00);
-	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0x00);
+	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0xFF);
 	// info user over uart1
 	send(DEFAULT);
 }
+
+
+/* read parameter -----------------------------------------------------------*/
+u16 getParameter(u8 para)
+{
+	if (para == PARA_SET)
+	{
+		return parameter[PARA_SET];
+	}
+	else
+	{
+		return parameter[para + parameter[PARA_SET]];
+	}
+}
+
+/* set parameter ------------------------------------------------------------*/
+void setParameter(u8 para, u16 value)
+{
+	if (para == PARA_SET)
+	{
+		parameter[PARA_SET] = value;
+	}
+	else
+	{
+		parameter[para+parameter[PARA_SET]] = value;
+	}
+}
+
+/* read from flash and set --------------------------------------------------*/
+u16 readFlashParameter(u8 para)
+{
+	u16 val;
+	if (para == PARA_SET)
+	{
+		EE_ReadVariable(VirtAddVarTab[PARA_SET], &val);
+		parameter[PARA_SET] = val;
+	}
+	else
+	{		
+		EE_ReadVariable(VirtAddVarTab[para+parameter[PARA_SET]], &val);
+		parameter[para+parameter[PARA_SET]] = val;
+	}
+	return val;
+}
+
+
+/* write parameter to flash -------------------------------------------------*/
+void writeFlashParameter(u8 para, u16 value)
+{
+	if (para == PARA_SET)
+	{
+		EE_WriteVariable(VirtAddVarTab[PARA_SET], value);
+		parameter[PARA_SET] = value;
+	}
+	else
+	{
+		EE_WriteVariable(VirtAddVarTab[para+parameter[PARA_SET]], value);
+		parameter[para+parameter[PARA_SET]] = value;
+	}
+}
+
+
+
