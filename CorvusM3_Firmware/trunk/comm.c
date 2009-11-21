@@ -22,6 +22,7 @@
 #include "comm.h"
 #include "serial.h"
 #include "eeprom.h"
+#include "parameter.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -34,7 +35,7 @@ extern vu8 TxOutCounter1; //serial
 extern vu8 RxBuffer1[0xFF]; //serial
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
-extern vu16 parameter[0xFF]; //statemachine
+extern vu16 parameter[0xFF]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
 
 

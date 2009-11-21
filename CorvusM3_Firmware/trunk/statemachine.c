@@ -31,7 +31,7 @@ extern vu16 ADCSensorValue[6];  //initsystem
 char x [10];  // for Sensor Tests
 vu32 msCount = 0;
 vu16 receiverChannel[9]; 
-vu16 parameter[0xFF];
+extern vu16 parameter[0xFF]; //parameter
 
 
 	
