@@ -21,6 +21,7 @@
 
 #include "parameter.h"
 #include "eeprom.h"
+#include "comm.h"
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -46,6 +47,18 @@ void initEEPROM()
 	EE_Init();
 }
 
-
+/* load Parameter from virtual EEPROM ---------------------------------------*/
+void loadParameter()
+{
+	u16 val;
+	u8 i;
+	for (i = 0;i <= USED_PARAMETER; i++)
+	{
+		EE_ReadVariable(VirtAddVarTab[i], &val);
+		parameter[i] = val;
+		// for test
+		print_para(i, parameter[i]);
+	}
+}
 
 

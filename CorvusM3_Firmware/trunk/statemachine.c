@@ -25,6 +25,8 @@
 #include "serial.h"
 #include <stdio.h>
 #include "hal.h"
+#include "led.h"
+#include "parameter.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[6];  //initsystem
@@ -32,6 +34,8 @@ char x [10];  // for Sensor Tests
 vu32 msCount = 0;
 vu16 receiverChannel[9]; 
 extern vu16 parameter[0xFF]; //parameter
+u8 bootState = SWITCH_ON;
+u8 flightState = FLIGHT_START;
 
 
 	
@@ -47,11 +51,47 @@ void statemachine(void)
 	/* Clear TIM3 update interrupt */
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	
-
-	/* get Channels from receiver - over HAL */
-	getChannels();
-
+	// statemachine for flight
+	switch (bootState)
+	{
+		// switched on board
+		case SWITCH_ON:
+			setLEDStatus(LED_OFF);
+			bootState = READ_SENSOR_FIRST;
+			break;
+		// read sensor data for gyro calibration
+		case READ_SENSOR_FIRST:
+			setLEDStatus(LED_FLASH);
+			// function open ....
+			bootState = LOAD_PARA;
+			break;
+		// read parameters from flash
+		case LOAD_PARA:
+			loadParameter();
+			bootState = CALIBRATE_SENSOR;
+			break;
+		// calibrate sensor
+		case CALIBRATE_SENSOR:
+			// function open ....
+			setLEDStatus(LED_ON);
+			bootState = GO_FLIGHT;
+			break;
+	}
 	
+	// flight states
+	if (bootState == GO_FLIGHT)
+	{
+		if (flightState == FLIGHT_START)
+		{
+			// do something - beep?
+			flightState = FLIGHT_RC_ON;
+		}
+		// first step is to activate RC
+		if (flightState > FLIGHT_START)
+		{
+			getChannels();
+		}
+	}
 	
 
 	

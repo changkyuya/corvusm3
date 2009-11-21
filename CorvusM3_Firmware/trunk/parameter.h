@@ -26,9 +26,10 @@
 #include "main.h"
 
 /* Define --------------------------------------------------------------------*/
-
+#define USED_PARAMETER 0x01
 
 /* Function prototypes -------------------------------------------------------*/
 void initEEPROM(void);
+void loadParameter(void);
 
 #endif /* __PARAMETER_H */
