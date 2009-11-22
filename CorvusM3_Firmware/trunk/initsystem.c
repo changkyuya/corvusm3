@@ -24,7 +24,7 @@
 #include "initsystem.h"
 
 /* Variables ----------------------------------------------------------------*/
-vu16 ADCSensorValue[6];
+vu16 ADCSensorValue[7];
 
 /* Main Initfunction --------------------------------------------------------*/
 void initSystem()
@@ -239,14 +239,25 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_LEDPIN;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);  //GPIO_LED = GPIOC	
+	GPIO_Init(GPIOC, &GPIO_InitStructure); 
+	// for Debug and Beeper Pin
+	GPIO_InitStructure.GPIO_Pin = GPIO_DBG | GPIO_BEEPER;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);  
 	
-	/* ADC for ACC and Gyro -------------------------------------------------*/
+	/* ADC for ACC, Gyro, .. -------------------------------------------------*/
 	// 16 & 17 no need GPIO_Mode_AIN
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
 	GPIO_InitStructure.GPIO_Pin = GPIO_GYRO_X | GPIO_GYRO_Y | GPIO_GYRO_Z | GPIO_ACC_X | GPIO_ACC_Y | GPIO_ACC_Z;
 	GPIO_Init(GPIOC, &GPIO_InitStructure); 
+	// Voltage
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+	GPIO_InitStructure.GPIO_Pin = GPIO_V;
+	GPIO_Init(GPIOB, &GPIO_InitStructure); 
+	
 	
 	/* Configure PA8 for PPM Dekode -----------------------------------------*/
 	/* TIM1 channel 1 pin (PA.08) configuration */
@@ -370,7 +381,7 @@ void initDMA (void)
 	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
 	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)&ADCSensorValue[0];
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	DMA_InitStructure.DMA_BufferSize = 6;
+	DMA_InitStructure.DMA_BufferSize = 7;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
@@ -399,7 +410,7 @@ void initADC (void)
 	//ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
 	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
 	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-	ADC_InitStructure.ADC_NbrOfChannel = 6;
+	ADC_InitStructure.ADC_NbrOfChannel = 7;
 	ADC_Init(ADC1, &ADC_InitStructure);
 
 	/* ADC1 regular channel11 configuration */ 
@@ -409,6 +420,7 @@ void initADC (void)
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_15, 4, ADC_SampleTime_55Cycles5); //-> ACC X
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 5, ADC_SampleTime_55Cycles5); //-> ACC Y
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_13, 6, ADC_SampleTime_55Cycles5); //-> ACC Z
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 7, ADC_SampleTime_55Cycles5);  //-> Volt
 
 	/* Enable ADC1 DMA */
 	ADC_DMACmd(ADC1, ENABLE);

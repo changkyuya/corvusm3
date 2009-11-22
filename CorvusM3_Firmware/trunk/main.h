@@ -57,6 +57,12 @@
 /* Map Pin for LED 1 --> PC13 */
 #define LED PERIPHERAL_BIT(GPIOC->ODR, 13)			
 #define GPIO_LEDPIN GPIO_Pin_13
+/* Map Pin for Debug --> PA00 */
+#define DBG PERIPHERAL_BIT(GPIOA->ODR, 00)			
+#define GPIO_DBG GPIO_Pin_0
+/* Map Pin for Beeper --> PA01 */
+#define BEEPER PERIPHERAL_BIT(GPIOA->ODR, 01)			
+#define GPIO_BEEPER GPIO_Pin_1
 /* Map Pins for ACC */
 #define GPIO_ACC_Z GPIO_Pin_3
 #define GPIO_ACC_Y GPIO_Pin_4
@@ -65,6 +71,8 @@
 #define GPIO_GYRO_Z GPIO_Pin_0
 #define GPIO_GYRO_X GPIO_Pin_1
 #define GPIO_GYRO_Y GPIO_Pin_2
+/* Map Pin for V */
+#define GPIO_V GPIO_Pin_0
 
 /* Define -------------------------------------------------------------------*/
 /* define led statis */

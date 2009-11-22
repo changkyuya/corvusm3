@@ -32,7 +32,20 @@
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
+//test
+extern vu8 TxBuffer1[0xFF];
+extern vu8 TxInCounter1;
+extern vu8 TxOutCounter1;
+extern vu8 RxBuffer1[0xFF];
+extern vu8 RxOutCounter1;
+extern vu8 RxInCounter1;
 
+extern vu8 TxBuffer3[0xFF];
+extern vu8 TxInCounter3;
+extern vu8 TxOutCounter3;
+extern vu8 RxBuffer3[0xFF];
+extern vu8 RxOutCounter3;
+extern vu8 RxInCounter3;
 
 
 	
@@ -57,8 +70,17 @@ int main(void)
 		// if something in RxBuffer
 		if (RxOutCounter1 != RxInCounter1)
 		{
-			getComm();
+			//getComm();
+			
 		}
+		
+		// ECHO TEST
+		if (RxOutCounter1 != RxInCounter1)
+		{
+			TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
+			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+		}
+		
 		
 		/* Debug Output 10Hz ---------------------------------------------------*/
 		if (msCount % 100 == 0)

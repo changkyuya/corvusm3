@@ -29,7 +29,7 @@
 #include "parameter.h"
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 ADCSensorValue[6];  //initsystem
+extern vu16 ADCSensorValue[7];  //initsystem
 char x [10];  // for Sensor Tests
 vu32 msCount = 0;
 vu32 msOldCount = 0;

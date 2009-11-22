@@ -29,7 +29,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0xFF];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
-extern vu16 ADCSensorValue[6]; //initsystem
+extern vu16 ADCSensorValue[7]; //initsystem
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
