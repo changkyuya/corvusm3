@@ -27,15 +27,10 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* boot states */
-#define SWITCH_ON			0
-#define READ_SENSOR_FIRST	1
-#define LOAD_PARA			2
-#define CALIBRATE_SENSOR	3
-#define GO_FLIGHT			4
 /* flight states */
 #define FLIGHT_START		0
-#define FLIGHT_RC_ON 		1
+#define FLIGHT_RC			1
+#define FLIGHT_RC_ON 		2
 
 /* Private macro -------------------------------------------------------------*/
 

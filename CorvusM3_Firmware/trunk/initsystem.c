@@ -178,7 +178,8 @@ void TIM_Configuration(void)
 	/* Clear TIM3 update pending flag */
 	TIM_ClearFlag(TIM3, TIM_FLAG_Update);
 	/* Enable TIM3 Update interrupt */
-	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+	// enable in main after powerup
+	//TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 	
 	/* Timer for PPM decode ---------------------------------------------------*/
 	TIM1_ICInitTypeDef TIM1_ICInitStructure; 

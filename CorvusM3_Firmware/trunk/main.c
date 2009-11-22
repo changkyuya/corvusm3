@@ -27,12 +27,14 @@
 #include "debug.h"
 #include "eeprom.h"
 #include "parameter.h"
+#include "hal.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
 extern vu16 ADCSensorValue[7];  //initsystem
+extern vu16 receiverChannel[9];  //statemachine
 //test
 extern vu8 TxBuffer1[0xFF];
 extern vu8 TxInCounter1;
@@ -61,10 +63,37 @@ int main(void)
   
 	char x[] = "CorvusM3 - Version 0.0a\r\n";
 	print_uart1(x);
+	
+	
+	// read sensors for calibration
+	setLEDStatus(LED_FLASH);
+	// function open ....
+	
+	// read parameters from flash
+	loadParameter();
+	
+	// calibrate sensor
+	// wait 1 secound for calibrate
+	Delay(1000);
+	// function open ....
+	setLEDStatus(LED_BLINK);
+
+	// test channels
+	getChannels();
+	// test if valid signal
+	while (receiverChannel[0])
+	{
+		;
+	}	
+	
+	// all OK - start controlloop
+	setLEDStatus(LED_ON);
+	// Controlloop --> statemachine() --> Timer 3
+	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
   
 	while (1)
 	{
-		// Controlloop --> statemachine() --> Timer 3
+		
 		
 		// test accu
 		if (getParameter(PARA_VOLT) > ADCSensorValue[VOLT])
