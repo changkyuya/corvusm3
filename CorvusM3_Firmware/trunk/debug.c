@@ -61,7 +61,7 @@ void doDebug()
 	// if parameter value is 1 - 1. bit is set
 	if (getParameter(PARA_DEBUG) & 0x01)
 	{
-		sprintf(x,"R-state:%d:",receiverChannel[0]);
+		sprintf(x,"R-conf-%d:%d:",getParameter(getParameter(PARA_HW) & 0x01),receiverChannel[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[1]);
 		print_uart1(x);
