@@ -5,9 +5,12 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 
 == Realisiert ==
 
+  * *PA00* : Debug PIN
+  * *PA01* : Beeper
   * *PA08* : PPM Empfänger (Summensignal)
   * *PA09* : TX-UART1 - PC
   * *PA10* : RX-UART1 - PC
+  * *PB00* : Spannungsmessung
   * *PB10* : TX-UART3 UART Regler
   * *PB11* : RX-UART3 Spektrum Empfänger
   * *PC00* : Sensoren ACC / Gyro
@@ -21,7 +24,6 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 == Geplant ==
 
   * *PA03* : frei halten für Option Spektrum an UART2-RX
-  * *PB00* : Spannungsmessung
   * *PB12* : NSS - SD-Karte
   * *PB13* : SCK - SD-Karte
   * *PB14* : MISO - SD-Karte
