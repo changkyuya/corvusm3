@@ -1,0 +1,15 @@
+= Regler =
+
+als Regler können z.B. umgebaute China-Regler mit Quax-UART Software verwendet werden.
+Ich verwende die Regler nach Quax Layout [http://home.versanet.de/~b-konze/] mit dem Platinendesign von sprotte24 [http://stichw.at/UFO/ARM/BL4428/]
+
+==Das Protokoll sieht 1-12 Regler vor==
+bei 4 Regler: *F5 00 00 00 00*<br />
+F5 ... Start<br />
+00 - F0 ... Motorwerte (wobei nur 0x00-0xC8 (0-200) verwendet wird, Standgas ca. 0x20 (32))
+
+Die Regler sind dabei wie folgt nummeriert: <br />
+1 ... vorne<br />
+2 ... hinten<br />
+3 ... rechts<br />
+4 ... links
