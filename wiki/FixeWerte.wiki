@@ -1,5 +1,0 @@
-#labels Phase-Implementation
-= fixe Werte im Code =
-
- * virtual EEPROM startet bei Page 200 (0x08064000) nach 400kb
- 
