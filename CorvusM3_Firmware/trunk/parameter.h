@@ -26,7 +26,7 @@
 #include "main.h"
 
 /* Define --------------------------------------------------------------------*/
-#define USED_PARAMETER 0x02
+
 
 /* Function prototypes -------------------------------------------------------*/
 void initEEPROM(void);

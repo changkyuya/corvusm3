@@ -100,6 +100,8 @@
 #define PARA_SET	0
 #define PARA_DEBUG 	1
 #define PARA_HW		2
+#define PARA_VOLT   3
+#define USED_PARAMETER 0x03
 
 /* Struct --------------------------------------------------------------------*/
 

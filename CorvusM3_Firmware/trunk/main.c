@@ -32,6 +32,7 @@
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
+extern vu16 ADCSensorValue[7];  //initsystem
 //test
 extern vu8 TxBuffer1[0xFF];
 extern vu8 TxInCounter1;
@@ -65,7 +66,12 @@ int main(void)
 	{
 		// Controlloop --> statemachine() --> Timer 3
 		
-
+		// test accu
+		if (getParameter(PARA_VOLT) > ADCSensorValue[VOLT])
+		{
+			// low accu
+			setLEDStatus(LED_FLASH);
+		}
 		
 		// if something in RxBuffer
 		if (RxOutCounter1 != RxInCounter1)
