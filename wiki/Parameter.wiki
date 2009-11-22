@@ -1,0 +1,17 @@
+#labels Phase-Deploy,Parameter
+= Parameter =
+Möglich wären 255 Parameter - es sind vorerst 2 Sets mit je 100 Parameter geplant wobei der Parameter 00 das Startset angibt.
+Es werden alle Parameter geladen und können jederzeit umgeschaltet werden. 
+
+===00 - Parameter Set===
+Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2)
+===01 - Debugoutput===
+Dieser Parameter gibt den Debugoutput an.
+  * 0 ... Debug aus
+  * 1 ... Empfängersignale
+  * 2 ... ADC Werte (6x Sensoren, Spannungsmessung)
+  * 4 ...
+===02 - Hardware===
+Einstellung der verwendeten Hardware. 
+  * 0 ... PPM Empfänger
+  * 1 ... Spektrum Empfänger
