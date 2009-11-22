@@ -43,4 +43,4 @@ Output all 100ms, Status 1=OK, CH Bereich 1000-2000<br />
 {{{R-state:Status 0/1:[CH1]:[CH2]:[CH3]:[CH4]:[CH5]:[CH6]:[CH7]:[CH8]:\r\n}}}<br />
 *Sensor*<br />
 Output all 100ms, 0-3,3V 12 Bit Aufloesung 0-4095<br />
-{{{G-Gyro-ACC:1:[Gyro X]:[Gyro Y]:[Gyro Z]:[ACC X]:[ACC Y]:[ACC Z]:\r\n}}}<br />
+{{{G-Gyro-ACC:1:[Gyro X]:[Gyro Y]:[Gyro Z]:[ACC X]:[ACC Y]:[ACC Z]:[VOLT]:\r\n}}}<br />
