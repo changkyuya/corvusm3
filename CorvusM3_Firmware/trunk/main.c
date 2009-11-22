@@ -70,15 +70,8 @@ int main(void)
 		// if something in RxBuffer
 		if (RxOutCounter1 != RxInCounter1)
 		{
-			//getComm();
+			getComm();
 			
-		}
-		
-		// ECHO TEST
-		if (RxOutCounter1 != RxInCounter1)
-		{
-			TxBuffer1[TxInCounter1++] = RxBuffer1[RxOutCounter1++];
-			USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		}
 		
 		
