@@ -22,6 +22,7 @@
 #include "debug.h"
 #include "serial.h"
 #include <stdio.h>
+#include "parameter.h"
 
 
 /* Enums --------------------------------------------------------------------*/
