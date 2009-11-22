@@ -51,6 +51,9 @@ void statemachine(void)
 {
 	/* Clear TIM3 update interrupt */
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+	// Debug to measure time for loop - toggle debug-Pin PA00
+	*DBG ^= 1;
+	
 	
 	// statemachine for flight
 	switch (bootState)

@@ -51,6 +51,8 @@ void doDebug()
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
 		print_uart1(x);
+		sprintf(x,"%d:\r\n",ADCSensorValue[VOLT]);
+		print_uart1(x);
 	}
 	
 

@@ -80,13 +80,14 @@
 #define LED_FLASH 1
 #define LED_BLINK 2
 #define LED_ON 3
-/* XYZ */
+/* places for ADC*/
 #define GYRO_X 	0
 #define GYRO_Y 	1
 #define GYRO_Z 	2
 #define ACC_X	3
 #define ACC_Y	4
 #define ACC_Z	5
+#define VOLT	6
 /* Receiver state */
 #define REC_NO 	0
 #define REC_OK		1

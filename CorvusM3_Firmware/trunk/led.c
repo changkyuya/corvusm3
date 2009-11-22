@@ -47,26 +47,31 @@ void TIM2_IRQHandler(void)
 		/* switch led off */
 		case LED_OFF:
 			*LED = 0;
+			*BEEPER = 1;
 			break;
 		/* switch led on */
 		case LED_ON:
 			*LED = 1;
+			*BEEPER = 0;
 			break;
 		/* flash/toggle led in 250ms */
 		case LED_FLASH:
 			*LED ^= 1;
+			*BEEPER ^= 1;
 			break;
 		/* blink/toggle led all 2 circles - 750ms */
 		case LED_BLINK:
 			if (ledCount == 3)
 			{
 				*LED ^= 1;
+				*BEEPER ^= 1;
 				ledCount = 0;
 			}
 			ledCount++;
 			break;
 		default:
 			*LED = 0;
+			*BEEPER = 0;
 			ledCount = 0;
 	}
 }
