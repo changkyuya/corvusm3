@@ -22,6 +22,7 @@
 #include "hal.h"
 #include "receiverppm.h"
 #include "receiverspektrum.h"
+#include "parameter.h"
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -32,13 +33,13 @@
 void getChannels()
 {
 	/* decide receiver -> lookup parameterset */
-	if (0) // 1...PPM, 0...Spektrum
+	if (getParameter(PARA_HW) & 0x01) 
 	{
-		getPPMChannels();
+		getSpektrumChannels();
 	}
 	else
 	{
-		getSpektrumChannels();
+		getPPMChannels();
 	}
 	 // no valid channels -> Set CopterState
 }

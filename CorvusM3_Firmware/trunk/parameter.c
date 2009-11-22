@@ -77,6 +77,7 @@ void loadDefault()
 	//#########################################################################
 	EE_WriteVariable(VirtAddVarTab[PARA_SET], 0x00);
 	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0x00);
+	EE_WriteVariable(VirtAddVarTab[PARA_HW], 0x01);
 	//#########################################################################
 	// info user over uart1
 	send(DEFAULT);

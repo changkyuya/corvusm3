@@ -99,6 +99,7 @@
 /* define Parameter Array */
 #define PARA_SET	0
 #define PARA_DEBUG 	1
+#define PARA_HW		2
 
 /* Struct --------------------------------------------------------------------*/
 
