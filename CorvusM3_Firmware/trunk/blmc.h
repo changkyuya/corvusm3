@@ -20,25 +20,15 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __SERIAL_H
-#define __SERIAL_H
+#ifndef __BLMC_H
+#define __BLMC_H
 
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-#define TxBufferSize   	0xFF  //(countof(TxBuffer) - 1)
-#define RxBufferSize   	0xFF
-
-/* Private macro -------------------------------------------------------------*/
-#define countof(a)   (sizeof(a) / sizeof(*(a)))
-
-/* Exported functions ------------------------------------------------------- */
-void print_uart1 (char *);
-void print_uart3 (volatile char *);
-void USART1_IRQHandler(void);
+/* Define --------------------------------------------------------------------*/
 
 
+/* Function prototypes -------------------------------------------------------*/
+void sendMotor(void);
 
-#endif /* __SERIAL_H */
-
+#endif /* __BLMC_H */

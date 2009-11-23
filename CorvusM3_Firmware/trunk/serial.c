@@ -62,17 +62,24 @@ void print_uart1 (char * s)
 }
 
 /* send byte array over TxBuffer and Interrupt ------------------------------*/
-void print_uart3 (char * s)
+void print_uart3 (volatile char * s)
 {
 
-	while(*s)   // Check for end of string
+	// does not work - we will send 0x00 also
+	//while(*s)   // Check for end of string
+	u8 i;
+	for(i = 0; i < 5; i++)
 	{
 		// this 2 lines are for direct output without interrupt
 		//USART_SendData(USART1, *s++);
 		//while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+		
+		//TxBuffer1[TxInCounter1++] = *s++;
 		TxBuffer3[TxInCounter3++] = *s++;
+		
    	}
 	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
+	//USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 }
 
 

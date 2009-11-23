@@ -19,26 +19,17 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __SERIAL_H
-#define __SERIAL_H
+#include "led.h"
+#include "serial.h"
 
-#include "main.h"
+/* Enums --------------------------------------------------------------------*/
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-#define TxBufferSize   	0xFF  //(countof(TxBuffer) - 1)
-#define RxBufferSize   	0xFF
+/* Variables ----------------------------------------------------------------*/
+volatile char motor[5];
 
-/* Private macro -------------------------------------------------------------*/
-#define countof(a)   (sizeof(a) / sizeof(*(a)))
-
-/* Exported functions ------------------------------------------------------- */
-void print_uart1 (char *);
-void print_uart3 (volatile char *);
-void USART1_IRQHandler(void);
-
-
-
-#endif /* __SERIAL_H */
-
+/* send Motorcommands to BLMC over UART3 ------------------------------------*/
+void sendMotor()
+{
+	motor[0] = 0xF5;
+	print_uart3(motor);
+}

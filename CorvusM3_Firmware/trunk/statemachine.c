@@ -27,6 +27,7 @@
 #include "hal.h"
 #include "led.h"
 #include "parameter.h"
+#include "blmc.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[7];  //initsystem
@@ -36,6 +37,7 @@ vu32 msOldCount = 0;
 vu16 receiverChannel[9]; 
 extern vu16 parameter[0xFF]; //parameter
 u8 flightState = FLIGHT_START;
+extern volatile char motor[5]; //blmc
 
 
 	
@@ -55,9 +57,11 @@ void statemachine(void)
 	
 	
 
+
+	
+	
 	
 	// flight states
-
 	if (flightState == FLIGHT_START)
 	{
 		// do something - beep?
@@ -68,14 +72,16 @@ void statemachine(void)
 	{
 		getChannels();
 		// test if valid signal
-		if (receiverChannel[0])
-		{
-			flightState = FLIGHT_RC_ON;
-			setLEDStatus(LED_ON);
-		}
+
 	}
 
-	
+	// only for test brushless controller !
+	// map receiverChannel 1 to BLMC Motor 1
+	motor[1] = map(receiverChannel[1],1000,2000,0,200);
+	motor[2] = 0x00;
+	motor[3] = 0x00;
+	motor[4] = 0x00;
+	sendMotor();
 
 	
 	/* Count Loops from Statemachine 1ms */

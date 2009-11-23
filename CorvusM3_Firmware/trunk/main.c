@@ -28,6 +28,7 @@
 #include "eeprom.h"
 #include "parameter.h"
 #include "hal.h"
+#include "blmc.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu8 RxOutCounter1; //serial
@@ -35,6 +36,7 @@ extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
 extern vu16 ADCSensorValue[7];  //initsystem
 extern vu16 receiverChannel[9];  //statemachine
+extern volatile char motor[5]; //blmc
 //test
 extern vu8 TxBuffer1[0xFF];
 extern vu8 TxInCounter1;
@@ -78,22 +80,23 @@ int main(void)
 	// function open ....
 	setLEDStatus(LED_BLINK);
 
-	// test channels
+	// test channels not used for test
 	getChannels();
-	// test if valid signal
-	while (receiverChannel[0])
+	if (receiverChannel[0])
 	{
-		;
-	}	
+		setLEDStatus(LED_ON);
+	}
 	
-	// all OK - start controlloop
-	setLEDStatus(LED_ON);
 	// Controlloop --> statemachine() --> Timer 3
 	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
   
 	while (1)
 	{
-		
+
+
+
+
+	
 		
 		// test accu
 		if (getParameter(PARA_VOLT) > ADCSensorValue[VOLT])
