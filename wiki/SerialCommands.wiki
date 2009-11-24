@@ -13,7 +13,8 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
 *Debug*
  * d0 ... Debug off
  * dr ... Toggle Receiver on/off
- * ds ... Toggle Sensor RAW on/off 
+ * da ... Toggle Sensor RAW on/off 
+ * ds ... Toggle Sensor Data on/off
 
 *Parameter SET*<br />
 Format: s 00(-99, 2-stelliger Parameter) : 12345 (0 bis 65535) \r\n
