@@ -148,11 +148,18 @@ void dodComm()
 			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_REC);
 			send(OK);
 			break;
-		case 's':
+		case 'a':
 			// switch on
 			//parameter[PARA_DEBUG] =| 0x02;
 			// toggle
 			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_ADC);
+			send(OK);
+			break;
+		case 's':
+			// switch on
+			//parameter[PARA_DEBUG] =| 0x02;
+			// toggle
+			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_SENSOR);
 			send(OK);
 			break;
 		default:
@@ -241,7 +248,8 @@ void send(u8 infoText)
 		Delay(20);
 		print_uart1("d0 ... Debug off\r\n");
 		print_uart1("dr ... Toggle Receiver on/off\r\n");
-		print_uart1("ds ... Toggle Sensor RAW on/off\r\n");
+		print_uart1("da ... Toggle Sensor RAW on/off\r\n");
+		print_uart1("ds ... Toggle Sensor Data on/off\r\n");
 		print_uart1("# ... Load default parameter to flash\r\n");
 		Delay(20);
 		print_uart1("s00:0 ... Set parameterset 0 or 100(Set2)\r\n");

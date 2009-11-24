@@ -78,6 +78,9 @@
 #define FALSE	0
 #define OK		1
 #define TRUE	1
+#define X		0
+#define Y		1
+#define Z		2
 /* define led statis */
 #define LED_OFF 0
 #define LED_FLASH 1
@@ -106,8 +109,9 @@
 #define PARA_VOLT   3
 #define USED_PARAMETER 0x03
 /* define Para debug values */
-#define PARA_DEBUG_ADC	0x02
-#define PARA_DEBUG_REC  0x01
+#define PARA_DEBUG_REC  	0x01
+#define PARA_DEBUG_ADC		0x02
+#define PARA_DEBUG_SENSOR 	0x04
 /* define Para HW values */
 #define PARA_HW_PPM			0x00
 #define PARA_HW_SPEKTRUM	0x01

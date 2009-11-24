@@ -29,6 +29,7 @@
 #include "parameter.h"
 #include "hal.h"
 #include "blmc.h"
+#include "sensor.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu8 RxOutCounter1; //serial
@@ -61,8 +62,10 @@ int main(void)
 	loadParameter();
 	
 	// calibrate sensor
-	// wait 1 secound for calibrate
+	// wait 1 secound befor calibrate
 	Delay(1000);
+	zeroGyro();
+	
 	// function open ....
 	setLEDStatus(LED_BLINK);
 

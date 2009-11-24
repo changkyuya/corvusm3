@@ -77,12 +77,16 @@ namespace CorvusM3
 
         void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            while (serial.BytesToRead > 0)
+            try
             {
-                dataLine = serial.ReadLine();
-                dataTextBox.AppendText(dataLine + "\r\n");
-                addGraph();
+                while (serial.BytesToRead > 0)
+                {
+                    dataLine = serial.ReadLine();
+                    dataTextBox.AppendText(dataLine + "\r\n");
+                    addGraph();
+                }
             }
+            catch { }
         }
 
         private void closeToolStripButton_Click(object sender, EventArgs e)

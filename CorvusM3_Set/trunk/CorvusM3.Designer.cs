@@ -398,6 +398,7 @@
             // 
             // nickRollRadioButton
             // 
+            this.nickRollRadioButton.AutoCheck = false;
             this.nickRollRadioButton.AutoSize = true;
             this.nickRollRadioButton.Location = new System.Drawing.Point(168, 168);
             this.nickRollRadioButton.Name = "nickRollRadioButton";
