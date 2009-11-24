@@ -37,20 +37,7 @@ extern vu32 msCount; //statemachine
 extern vu16 ADCSensorValue[7];  //initsystem
 extern vu16 receiverChannel[9];  //statemachine
 extern volatile char motor[5]; //blmc
-//test
-extern vu8 TxBuffer1[0xFF];
-extern vu8 TxInCounter1;
-extern vu8 TxOutCounter1;
-extern vu8 RxBuffer1[0xFF];
-extern vu8 RxOutCounter1;
-extern vu8 RxInCounter1;
 
-extern vu8 TxBuffer3[0xFF];
-extern vu8 TxInCounter3;
-extern vu8 TxOutCounter3;
-extern vu8 RxBuffer3[0xFF];
-extern vu8 RxOutCounter3;
-extern vu8 RxInCounter3;
 
 
 	
@@ -63,8 +50,7 @@ int main(void)
 	initEEPROM();
 	
   
-	char x[] = "CorvusM3 - Version 0.0a\r\n";
-	print_uart1(x);
+	print_uart1("CorvusM3 - Version 0.0a\r\n");
 	
 	
 	// read sensors for calibration
@@ -81,7 +67,7 @@ int main(void)
 	setLEDStatus(LED_BLINK);
 
 	// test channels not used for test
-	getChannels();
+	getChannels(receiverChannel);
 	if (receiverChannel[0])
 	{
 		setLEDStatus(LED_ON);
@@ -106,7 +92,7 @@ int main(void)
 		}
 		
 		// if something in RxBuffer
-		if (RxOutCounter1 != RxInCounter1)
+		if (is_read_uart1())
 		{
 			getComm();
 			

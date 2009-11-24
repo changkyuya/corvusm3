@@ -34,8 +34,12 @@
 #define countof(a)   (sizeof(a) / sizeof(*(a)))
 
 /* Exported functions ------------------------------------------------------- */
-void print_uart1 (char *);
+void print_uart1 (const char *);
+char read_uart1 (void);
+s8 is_read_uart1(void);
 void print_uart3 (volatile char *);
+char read_uart3 (void);
+s8 is_read_uart3(void);
 void USART1_IRQHandler(void);
 
 

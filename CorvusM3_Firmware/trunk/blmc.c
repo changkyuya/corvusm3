@@ -25,10 +25,10 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-volatile char motor[5];
+
 
 /* send Motorcommands to BLMC over UART3 ------------------------------------*/
-void sendMotor()
+void sendMotor(volatile char * motor)
 {
 	motor[0] = 0xF5;
 	print_uart3(motor);

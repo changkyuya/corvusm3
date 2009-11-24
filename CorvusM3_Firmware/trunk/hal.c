@@ -30,16 +30,16 @@
 
 
 /* fill channels in Struc ---------------------------------------------------*/
-void getChannels()
+void getChannels(vu16 *receiverChannel)
 {
 	/* decide receiver -> lookup parameterset */
-	if (getParameter(PARA_HW) & 0x01) 
+	if (getParameter(PARA_HW) & PARA_HW_SPEKTRUM) 
 	{
-		getSpektrumChannels();
+		getSpektrumChannels(receiverChannel);
 	}
 	else
 	{
-		getPPMChannels();
+		getPPMChannels(receiverChannel);
 	}
 	 // no valid channels -> Set CopterState
 }

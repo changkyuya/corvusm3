@@ -33,6 +33,6 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void TIM1_CC_IRQHandler(void);
-void getPPMChannels(void);
+void getPPMChannels(vu16 *receiverChannel);
 
 #endif /* __RECEIVERPPM_H */

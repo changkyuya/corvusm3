@@ -31,13 +31,12 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[7];  //initsystem
-char x [10];  // for Sensor Tests
 vu32 msCount = 0;
 vu32 msOldCount = 0;
 vu16 receiverChannel[9]; 
 extern vu16 parameter[0xFF]; //parameter
 u8 flightState = FLIGHT_START;
-extern volatile char motor[5]; //blmc
+volatile char motor[5]; //blmc
 
 
 	
@@ -70,7 +69,7 @@ void statemachine(void)
 	// first step is to activate RC
 	if (flightState > FLIGHT_START)
 	{
-		getChannels();
+		getChannels(receiverChannel);
 		// test if valid signal
 
 	}
@@ -81,7 +80,7 @@ void statemachine(void)
 	motor[2] = 0x00;
 	motor[3] = 0x00;
 	motor[4] = 0x00;
-	sendMotor();
+	sendMotor(motor);
 
 	
 	/* Count Loops from Statemachine 1ms */

@@ -29,6 +29,6 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-void getSpektrumChannels(void);
+void getSpektrumChannels(vu16 *receiverChannel);
 
 #endif /* __RECEIVERSPEKTRUM_H */

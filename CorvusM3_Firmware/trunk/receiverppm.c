@@ -31,14 +31,11 @@ vu16 	IC2Value;
 vu16 	lastIC2Value;
 vu8		channelCount;
 
-extern vu16 receiverChannel[9];
 vu16 receiverPPMChannel[9];
-//volatile pulswidthStruct pulswidth;
-//extern ChannelStruct receiverChannel;  //statemachine
 
 
 /* read and trimm receiverChannels --------------------------------------------------*/
-void getPPMChannels()
+void getPPMChannels(vu16 * receiverChannel)
 {
 	receiverChannel[0] = receiverPPMChannel[0];
 	u8 i;

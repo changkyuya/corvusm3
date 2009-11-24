@@ -29,14 +29,13 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu32 msCount;  //statemachine
 extern vu8 spektrumBytes[33];  //serial, 0 ... status 1-32 ... bytes from receiver
-extern vu16 receiverChannel[9];  //statemachine
 vu16 receiverSpektrumChannel[17];
 extern vu32 oldSpektrumMsCount; //serial, for failsave
 
 
 
 /* read receiverChannels ----------------------------------------------------*/
-void getSpektrumChannels()
+void getSpektrumChannels(vu16 * receiverChannel)
 {
 	//char x[100];
 	u8 i;

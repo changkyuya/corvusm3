@@ -29,11 +29,9 @@
 
 
 /* Define --------------------------------------------------------------------*/
-#define FALSE	0
-#define OK		1
 
 
 /* Function prototypes -------------------------------------------------------*/
-void getChannels(void);
+void getChannels(vu16 *receiverChannel);
 
 #endif /* __HAL_H */

@@ -29,6 +29,6 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-void sendMotor(void);
+void sendMotor(volatile char * motor);
 
 #endif /* __BLMC_H */

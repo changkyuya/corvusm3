@@ -29,12 +29,6 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu8 TxBuffer1[0xFF]; //serial
-extern vu8 TxInCounter1; //serial
-extern vu8 TxOutCounter1; //serial
-extern vu8 RxBuffer1[0xFF]; //serial
-extern vu8 RxOutCounter1; //serial
-extern vu8 RxInCounter1; //serial
 extern vu16 parameter[0xFF]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
 
@@ -47,9 +41,9 @@ u8 l = 0;
 void getComm()
 {
 	// read all incoming bytes
-	while(RxInCounter1 != RxOutCounter1)
+	while(is_read_uart1())
 	{
-		char byte = RxBuffer1[RxOutCounter1++];
+		char byte = read_uart1();
 		// if one line is complete
 		if (byte == '\n')
 		{
@@ -100,7 +94,7 @@ void doComm()
 			loadDefault();
 			break;
 		default:
-			send(ERROR);
+			send(HELP);
 	}
 	
 	// clear line
@@ -151,18 +145,18 @@ void dodComm()
 			// switch on
 			//parameter[PARA_DEBUG] =| 0x01;
 			// toggle
-			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ 0x01);
+			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_REC);
 			send(OK);
 			break;
 		case 's':
 			// switch on
 			//parameter[PARA_DEBUG] =| 0x02;
 			// toggle
-			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ 0x02);
+			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_ADC);
 			send(OK);
 			break;
 		default:
-			send(ERROR);
+			send(HELP);
 	}
 }
 
@@ -227,18 +221,35 @@ void send(u8 infoText)
 {
 	if (infoText == ERROR)
 	{
-		char message[] = "ERROR\r\n";
-		print_uart1(message);
+		print_uart1("ERROR\r\n");
 	}
 	else if (infoText == OK)
 	{
-		char message[] = "OK\r\n";
-		print_uart1(message);
+		print_uart1("OK\r\n");
 	}
 	else if (infoText == DEFAULT)
 	{
-		char message[] = "Load default settings to flash\r\n";
-		print_uart1(message);
+		print_uart1("Load default settings to flash\r\n");
+	}
+	else if (infoText == HELP)
+	{
+		print_uart1("Serial Commands:\r\n");
+		print_uart1("l0 ... LED off\r\n");
+		print_uart1("l1 ... LED flash\r\n");
+		print_uart1("l2 ... LED blink\r\n");
+		print_uart1("l3 ... LED on\r\n");
+		Delay(20);
+		print_uart1("d0 ... Debug off\r\n");
+		print_uart1("dr ... Toggle Receiver on/off\r\n");
+		print_uart1("ds ... Toggle Sensor RAW on/off\r\n");
+		print_uart1("# ... Load default parameter to flash\r\n");
+		Delay(20);
+		print_uart1("s00:0 ... Set parameterset 0 or 100(Set2)\r\n");
+		print_uart1("s01:65535 ... Set parameter 01, 0 - 65535\r\n");
+		print_uart1("f01:65535 ... Flash parameter 01, 0 - 65535\r\n");
+		Delay(20);
+		print_uart1("p01:65535 ... Print parameter 01, 0 - 65535\r\n");
+		print_uart1("r01:65535 ... Read parameter from flash 01, 0 - 65535\r\n");
 	}
 }
 
