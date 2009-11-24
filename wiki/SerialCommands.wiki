@@ -34,6 +34,7 @@ Format: r 00(-99, 2-stelliger Parameter)
 
 *Spezial Commands*
  * # ... lade Standard Parameter und schreibe in Flash
+ * ? ... Help
 
 == Output ==
 
