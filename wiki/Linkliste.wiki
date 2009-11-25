@@ -20,3 +20,5 @@
  * Kalman Filter: [http://forum.xufo.net/bb/viewtopic.php?t=3717]
  * PID: [http://forum.mikrokopter.de/topic-post76057.html]
  * Achsenkopplung: [http://forum.mikrokopter.de/topic-2319.html]
+
+ * Kompass 3-Achs: [http://forum.xufo.net/bb/viewtopic.php?t=6302&highlight=]
