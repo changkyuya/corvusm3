@@ -2,28 +2,15 @@
 = Parameter =
 Möglich wären 255 Parameter - es sind vorerst 2 Sets mit je 100 Parameter geplant wobei der Parameter 00 das Startset angibt.
 Es werden alle Parameter geladen und können jederzeit umgeschaltet werden. 
+Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 
-===00 - Parameter Set===
-Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2)
-===01 - Debugoutput===
-Dieser Parameter gibt den Debugoutput an.
-  * 0 ... Debug aus
-  * 1 ... Empfängersignale
-  * 2 ... ADC Werte (6x Sensoren, Spannungsmessung)
-  * 4 ...
-===02 - Hardware===
-Einstellung der verwendeten Hardware. 
-  * 0 ... PPM Empfänger
-  * 1 ... Spektrum Empfänger
-===03 - Unterspannungsgrenze===
-Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = Spannung/5,55). 1 Volt entspricht 223,64 Punte. Default = 2236 = 10 Volt.
-===04 - Software===
-Einstellung der SW Regelung. 
-  * 0 ... Heading Hold
-  * 1 ... ACC
-===05 - ACC-X-Zero===
-Horizontalwert X-Achse für ACC
-===06 - ACC-Y-Zero===
-Horizontalwert Y-Achse für ACC
-===07 - ACC-Z-Zero===
-Horizontalwert Z-Achse für ACC
+|| Nr || Parameter || Default || mögliche Werte || Info ||
+|| 00 || Para-Set || 0 || 0 || Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2) ||
+|| 01 || Debugoutput || 0 || 0...Debug aus<br />1...Empfängersignale<br />2...ADC Werte (6x Sensoren, Spannungsmessung)<br />4...Sensoren (Gyro,ACC) || Bitfeld Kombinationen möglich ||
+|| 02 || HAL || 1 || 0...PPM Empfänger<br />1...Spektrum Empfänger || Bitfeld Kombinationen möglich ||
+|| 03 || Akku || 2236 || || Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = Spannung/5,55). 1 Volt entspricht 223,64 Punte. Default = 2236 = 10 Volt. ||
+|| 04 || SAL || 1 || 0...HH Regelung<br />1...ACC Regelung || Bitfeld Kombinationen möglich ||
+|| 05 || ACC-X-ZERO || || || Horizontalwert X-Achse für ACC ||
+|| 06 || ACC-Y-ZERO || || || Horizontalwert Y-Achse für ACC ||
+|| 07 || ACC-Z-ZERO || || || Horizontalwert Z-Achse für ACC ||
+
