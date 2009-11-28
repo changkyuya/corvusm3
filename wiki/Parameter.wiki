@@ -17,3 +17,7 @@ Einstellung der verwendeten Hardware.
   * 1 ... Spektrum Empfänger
 ===03 - Unterspannungsgrenze===
 Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = Spannung/5,55). 1 Volt entspricht 223,64 Punte. Default = 2236 = 10 Volt.
+===04 - Software===
+Einstellung der SW Regelung. 
+  * 0 ... Heading Hold
+  * 1 ... ACC
