@@ -17,6 +17,7 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
  * ds ... Toggle Sensor Data on/off
 
 *Parameter SET*<br />
+ * sa ... Speichern der ACC-Ebenenwerte (auch im Flash)
 Format: s 00(-99, 2-stelliger Parameter) : 12345 (0 bis 65535) \r\n
  * s00:0 ... Parameterset 0 oder 100 (Set 2)
  * s01:12345 ... Debug (1.Receiver,)
