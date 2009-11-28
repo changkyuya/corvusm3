@@ -23,6 +23,7 @@
 #include "serial.h"
 #include "eeprom.h"
 #include "parameter.h"
+#include "sensor.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -191,10 +192,17 @@ void dorComm()
 /* do set Parameter -------------------------------------------------------------*/
 void dosComm()
 {
-	// add 2 chars to int from 0..99
-	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
-	setParameter(set, readInt(4));
-	send(OK);
+	if (line[1] == 'a')
+	{
+		zeroACC();
+	}
+	else
+	{
+		// add 2 chars to int from 0..99
+		u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
+		setParameter(set, readInt(4));
+		send(OK);
+	}
 }
 
 
@@ -252,6 +260,7 @@ void send(u8 infoText)
 		print_uart1("ds ... Toggle Sensor Data on/off\r\n");
 		print_uart1("# ... Load default parameter to flash\r\n");
 		Delay(20);
+		print_uart1("sa ... save ACC Zero\r\n");
 		print_uart1("s00:0 ... Set parameterset 0 or 100(Set2)\r\n");
 		print_uart1("s01:65535 ... Set parameter 01, 0 - 65535\r\n");
 		print_uart1("f01:65535 ... Flash parameter 01, 0 - 65535\r\n");

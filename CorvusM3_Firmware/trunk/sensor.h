@@ -31,5 +31,6 @@
 /* Function prototypes -------------------------------------------------------*/
 void zeroGyro(void);
 void getGyroValues(vs16 * gyroValues);
+void zeroACC(void);
 
 #endif /* __SENSOR_H */

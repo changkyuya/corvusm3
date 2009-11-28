@@ -20,6 +20,7 @@
 */
 
 #include "sensor.h"
+#include "parameter.h"
 //for debug
 #include "serial.h"
 #include <stdio.h>
@@ -29,6 +30,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[7];  //initsystem
 vu16 gyroZero[3];
+vu16 accZero[3];
 
 
 /* initGyros to set Baise ---------------------------------------------------*/
@@ -48,9 +50,26 @@ void zeroGyro()
 	}
 	
 	char x [80];
-	sprintf(x,"G-Gyro-Zero:1:%d:%d:%d:\r\n",gyroZero[X],gyroZero[Y],gyroZero[Z]);
+	sprintf(x,"Gyro-Zero:%d:%d:%d:\r\n",gyroZero[X],gyroZero[Y],gyroZero[Z]);
 	print_uart1(x);
 }
+
+
+void zeroACC()
+{
+	accZero[X] = ADCSensorValue[ACC_X];
+	accZero[Y] = ADCSensorValue[ACC_Y];
+	accZero[Z] = ADCSensorValue[ACC_Z];
+	
+	setParameter(PARA_ACC_X_ZERO, accZero[X]);
+	setParameter(PARA_ACC_Y_ZERO, accZero[Y]);
+	setParameter(PARA_ACC_Z_ZERO, accZero[Z]);
+	
+	char x [80];
+	sprintf(x,"ACC-Zero:%d:%d:%d:\r\n",accZero[X],accZero[Y],accZero[Z]);
+	print_uart1(x);
+}
+
 
 /* get GyroValues - calculate Gyrovalues and Baise --------------------------*/
 void getGyroValues(vs16 * gyroValues)

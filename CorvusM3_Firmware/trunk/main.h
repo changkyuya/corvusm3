@@ -103,11 +103,15 @@
 #define SPEKTRUM_OK 	1
 
 /* define Parameter Array */
-#define PARA_SET	0
-#define PARA_DEBUG 	1
-#define PARA_HW		2
-#define PARA_VOLT   3
-#define USED_PARAMETER 0x03
+#define PARA_SET			0
+#define PARA_DEBUG 			1
+#define PARA_HW				2
+#define PARA_VOLT   		3	
+#define PARA_SW				4
+#define PARA_ACC_X_ZERO		5
+#define PARA_ACC_Y_ZERO		6
+#define PARA_ACC_Z_ZERO		7
+#define USED_PARAMETER 0x07
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02
@@ -115,6 +119,10 @@
 /* define Para HW values */
 #define PARA_HW_PPM			0x00
 #define PARA_HW_SPEKTRUM	0x01
+/* define Para SW values */
+#define PARA_SW_HH			0x00
+#define PARA_SW_ACC			0x01
+
 
 /* Struct --------------------------------------------------------------------*/
 
