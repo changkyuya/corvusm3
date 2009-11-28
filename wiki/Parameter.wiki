@@ -21,3 +21,9 @@ Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = S
 Einstellung der SW Regelung. 
   * 0 ... Heading Hold
   * 1 ... ACC
+===05 - ACC-X-Zero===
+Horizontalwert X-Achse für ACC
+===06 - ACC-Y-Zero===
+Horizontalwert Y-Achse für ACC
+===07 - ACC-Z-Zero===
+Horizontalwert Z-Achse für ACC
