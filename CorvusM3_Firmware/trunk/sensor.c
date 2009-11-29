@@ -95,16 +95,29 @@ void getGyroValues(vs16 * gyroValues)
 /* calculate ACC Angles -----------------------------------------------------*/
 void getACCAngles (vs16 * accAngles)
 {
+	u8 i; 
 	// x = (x - corrACC) * factorACC * 180 / PI
 	// z = (z - corrACC) * factorACC * 180 / PI
 	// 180 / PI = 57.2957795
 	// minus 90 grad für level
 	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
-	double test = sin(1324);
-	double x = 1.000000001;
-	double z = 1234.34;
-	double y;
-	y = atan2(x,z);
-	accAngles[X] = (vu16)y;
 	
+	
+	u16 x[2];
+	x[0] =  12;
+	//double xx = x;
+	volatile double z;
+	z = 12;
+	
+	//double zz = z;
+	double	y = atan2 (z, x[0]);
+
+	
+	//accAngles[X] = y * 57.2957795 + 90;
+	
+	// save values for smooth
+	for (i = 3; i < 5; i++)
+	{
+		oldADCSensorValue[i] = ADCSensorValue[i];
+	}
 }
