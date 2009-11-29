@@ -28,8 +28,10 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu32 msCount;  //statemachine
+extern vu16 parameter[0xFF]; //parameter
 extern vu8 spektrumBytes[33];  //serial, 0 ... status 1-32 ... bytes from receiver
 vu16 receiverSpektrumChannel[17];
+vu16 oldReceiverSpektrumChannel[17];
 extern vu32 oldSpektrumMsCount; //serial, for failsave
 
 
@@ -63,22 +65,26 @@ void getSpektrumChannels(vu16 * receiverChannel)
 			{
 				// resolution is 10bit ... 0 - 1024 ... add 988 for middle
 				// Nick
-				receiverChannel[3] = constrain(receiverSpektrumChannel[i] + 988, 1000, 2000);
+				receiverChannel[3] = smoothValue(constrain(receiverSpektrumChannel[i] + 988, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[3];
 			}
 			else if (receiverSpektrumChannel[i] < 2048)
 			{
 				// Pitch
-				receiverChannel[1] = constrain(receiverSpektrumChannel[i] - 36, 1000, 2000);
+				receiverChannel[1] = smoothValue(constrain(receiverSpektrumChannel[i] - 36, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[1];
 			}
 			else if (receiverSpektrumChannel[i] < 3072)
 			{
 				// Roll
-				receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
+				receiverChannel[2] = smoothValue(constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[2];
 			}
 			else if (receiverSpektrumChannel[i] < 4096)
 			{
 				//Yaw
-				receiverChannel[4] = constrain(receiverSpektrumChannel[i] - 2084, 1000, 2000);
+				receiverChannel[4] = smoothValue(constrain(receiverSpektrumChannel[i] - 2084, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[4];
 			}
 		}
 	}

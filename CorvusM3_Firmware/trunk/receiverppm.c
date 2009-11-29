@@ -30,8 +30,10 @@
 vu16 	IC2Value;
 vu16 	lastIC2Value;
 vu8		channelCount;
+extern vu16 parameter[0xFF]; //parameter
 
 vu16 receiverPPMChannel[9];
+vu16 oldReceiverPPMChannel[9];
 
 
 /* read and trimm receiverChannels --------------------------------------------------*/
@@ -42,7 +44,8 @@ void getPPMChannels(vu16 * receiverChannel)
 	for (i = 1; i < 9; i++)
 	{
 		// div values and set min max from 1000 to 2000
-		receiverChannel[i] = constrain(receiverPPMChannel[i]>>2, 1000, 2000);
+		receiverChannel[i] = smoothValue(constrain(receiverPPMChannel[i]>>2, 1000, 2000),oldReceiverPPMChannel[i],parameter[PARA_SMOOTH_RC]);
+		oldReceiverPPMChannel[i] = receiverChannel[i];
 	}
 }
 

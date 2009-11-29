@@ -111,7 +111,10 @@
 #define PARA_ACC_X_ZERO		5
 #define PARA_ACC_Y_ZERO		6
 #define PARA_ACC_Z_ZERO		7
-#define USED_PARAMETER 0x07
+#define PARA_SMOOTH_ACC		8
+#define PARA_SMOOTH_GYRO	9
+#define PARA_SMOOTH_RC		10
+#define USED_PARAMETER 		10
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02
