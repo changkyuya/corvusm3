@@ -13,3 +13,6 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 05 || ACC-X-ZERO || 2047 || || Horizontalwert X-Achse für ACC ||
 || 06 || ACC-Y-ZERO || 2033 || || Horizontalwert Y-Achse für ACC ||
 || 07 || ACC-Z-ZERO || 2445 || || Horizontalwert Z-Achse für ACC ||
+|| 08 || SMOOTH_ACC || 0 || 0-99 || Glättung zum letzten Wert (100 wäre immer letzter Wert) || 
+|| 09 || SMOOTH_GYRO || 0 || 0-99 || Glättung zum letzten Wert (100 wäre immer letzter Wert) || 
+|| 10 || SMOOTH_RC || 0 || 0-99 || Glättung zum letzten Wert (100 wäre immer letzter Wert) || 
