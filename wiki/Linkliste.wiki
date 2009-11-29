@@ -18,6 +18,9 @@
 
  * Komplementärfilter: [http://forum.mikrokopter.de/topic-post74573.html]
  * Kalman Filter: [http://forum.xufo.net/bb/viewtopic.php?t=3717]
+ * Kalman Demo: [http://tom.pycke.be/mav/92/kalman-demo-application]
+ * ACC: [http://tom.pycke.be/mav/69/accelerometer-to-attitude]
+ * Gyro: [http://tom.pycke.be/mav/70/gyroscope-to-roll-pitch-and-yaw]
  * PID: [http://forum.mikrokopter.de/topic-post76057.html]
  * Achsenkopplung: [http://forum.mikrokopter.de/topic-2319.html]
 
