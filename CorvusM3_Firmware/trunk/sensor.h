@@ -32,5 +32,6 @@
 void zeroGyro(void);
 void getGyroValues(vs16 * gyroValues);
 void zeroACC(void);
+void getACCAngles (vs16 * accAngles);
 
 #endif /* __SENSOR_H */

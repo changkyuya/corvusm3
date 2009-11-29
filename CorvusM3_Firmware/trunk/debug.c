@@ -32,7 +32,7 @@ extern vu16 parameter[0xFF];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
 extern vu16 ADCSensorValue[7]; //initsystem
 extern vs16 gyroValues[3];  //statemachine
-extern vs16 accValues[3];  //statemachine
+extern vs16 accAngles[2];  //statemachine
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
@@ -67,11 +67,9 @@ void doDebug()
 		print_uart1(x);
 		sprintf(x,"%d:",gyroValues[Z]);
 		print_uart1(x);
-		sprintf(x,"%d:",ADCSensorValue[ACC_X]);
+		sprintf(x,"%d:",accAngles[X]);
 		print_uart1(x);
-		sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
-		print_uart1(x);
-		sprintf(x,"%d:\r\n",ADCSensorValue[ACC_Z]);
+		sprintf(x,"%d:\r\n",accAngles[Z]);
 		print_uart1(x);
 	}
 	

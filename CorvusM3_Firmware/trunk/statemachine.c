@@ -39,7 +39,7 @@ extern vu16 parameter[0xFF]; //parameter
 u8 flightState = FLIGHT_START;
 volatile char motor[5]; //blmc
 vs16 gyroValues[3];
-vs16 accValues[3];
+vs16 accAngles[2];
 
 
 	
@@ -60,7 +60,7 @@ void statemachine(void)
 	
 
 	getGyroValues(gyroValues);
-	
+	getACCAngles(accAngles);
 	
 	
 	// flight states

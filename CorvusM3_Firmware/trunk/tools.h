@@ -29,5 +29,6 @@
 void Delay(vu32 nTime);
 void SysTickHandler(void);
 void Pause(u32 approxms);
+u16 smoothValue(vu16 actual, u16 previous, u16 smooth); 
 
 #endif /* __TOOLS_H */

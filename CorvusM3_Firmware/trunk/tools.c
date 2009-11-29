@@ -53,3 +53,17 @@ void Pause(u32 approxms)
 	volatile unsigned short j;
 	while(i--) for(j=0;j<200;j++);
 }
+
+
+/* Smooth Values with factor ------------------------------------------------*/
+u16 smoothValue(vu16 actual, u16 previous, u16 smooth) 
+{
+  u16 smoothReturn;
+  
+  actual = actual * 1000;
+  previous = previous * 1000;
+  smoothReturn = previous + (actual - previous) / 100 * smooth;
+  smoothReturn = smoothReturn / 1000;
+  
+  return smoothReturn;
+}
