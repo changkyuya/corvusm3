@@ -103,14 +103,7 @@ void getACCAngles (vs16 * accAngles)
 	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
 	
 	
-	u16 x[2];
-	x[0] =  12;
-	//double xx = x;
-	volatile double z;
-	z = 12;
-	
-	//double zz = z;
-	double	y = atan2 (z, x[0]);
+
 
 	
 	//accAngles[X] = y * 57.2957795 + 90;

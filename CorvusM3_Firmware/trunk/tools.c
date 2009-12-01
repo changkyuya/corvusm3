@@ -67,3 +67,45 @@ u16 smoothValue(vu16 actual, u16 previous, u16 smooth)
   
   return smoothReturn;
 }
+
+
+/* math.h atan2 does not work - own atan2 -----------------------------------*/
+/* code from http://www.dspguru.com/dsp/tricks/fixed-point-atan2-with-self-normalization */
+float fastatan2(float y, float x)
+{
+	float angle = 0;
+	float coeff_1 = PI/4;
+	float coeff_2 = 3 * coeff_1;
+	float abs_y = y + 0.0000000001;
+	
+	if (abs_y < 0)
+	{
+		abs_y *= -1;
+	}
+	
+	if (x >= 0)
+	{
+		float r = (x - abs_y) / (x + abs_y);
+		// faster
+		// angle = coeff_1 - coeff_1 * f;
+		// 7x increase in accurancy
+		angle = 0.1963 * r * r * r - 0.9817 * r + coeff_1;
+	}
+	else
+	{
+		float r = (x + abs_y) / (abs_y - x);
+		// faster
+		// angle = coeff_2 - coeff_1 * r;
+		// 7x increase in accurancy
+		angle = 0.1963 * r * r * r - 0.9817 * r + coeff_2;
+	}
+	
+	if (y < 0)
+	{
+		return (-angle);
+	}
+	else 
+	{
+		return (angle);
+	}
+}

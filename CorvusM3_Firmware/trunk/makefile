@@ -44,7 +44,7 @@ ASFLAGS = $(COMPILE_OPTS)
 
 LD = $(CC)
 #LD = $(CXX)
-LDFLAGS = -Wl,--gc-sections,-Map=$(MAIN_MAP),-cref -T lanchon-stm32.ld $(INCLUDE_DIRS) $(LIBRARY_DIRS)
+LDFLAGS = -Wl,--gc-sections,-Map=$(MAIN_MAP),-cref -T lanchon-stm32.ld $(INCLUDE_DIRS) $(LIBRARY_DIRS) 
 
 
 AR = arm-none-eabi-ar
