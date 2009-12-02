@@ -20,18 +20,18 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __SENSOR_H
-#define __SENSOR_H
+#ifndef __FILTERACC_H
+#define __FILTERACC_H
 
 #include "main.h"
+
+/* Struct -------------------------------------------------------------------*/
+
 
 /* Define --------------------------------------------------------------------*/
 
 
 /* Function prototypes -------------------------------------------------------*/
-void zeroGyro(void);
-void getGyroRawValues(vs16 * gyroValues);
-void zeroACC(void);
-void getACCRawValues(vs16 * accValues);
+void getACCAnglesFilterACC(vs16 * accAngle);
 
-#endif /* __SENSOR_H */
+#endif /* __FILTERACC_H */

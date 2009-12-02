@@ -19,19 +19,34 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __SENSOR_H
-#define __SENSOR_H
+#include "sal.h"
+#include "parameter.h"
+#include "filteracc.h"
 
-#include "main.h"
+/* Enums --------------------------------------------------------------------*/
 
-/* Define --------------------------------------------------------------------*/
+/* Variables ----------------------------------------------------------------*/
+
+/* fill ACC Angles in Struc ---------------------------------------------------*/
+void getACCAngles(vs16 * accAngle)
+{
+	/* decide receiver -> lookup parameterset */
+	if (getParameter(PARA_SW) & PARA_SW_ACC) 
+	{
+		getACCAnglesFilterACC(accAngle);
+	}
+	else
+	{
+		// other Filter
+	}
+	
+}
 
 
-/* Function prototypes -------------------------------------------------------*/
-void zeroGyro(void);
-void getGyroRawValues(vs16 * gyroValues);
-void zeroACC(void);
-void getACCRawValues(vs16 * accValues);
 
-#endif /* __SENSOR_H */
+
+
+
+
+
+

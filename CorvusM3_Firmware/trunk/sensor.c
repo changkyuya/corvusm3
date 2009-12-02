@@ -24,7 +24,6 @@
 //for debug
 #include "serial.h"
 #include <stdio.h>
-#include <math.h>
 
 
 /* Enums --------------------------------------------------------------------*/
@@ -75,8 +74,8 @@ void zeroACC()
 }
 
 
-/* get GyroValues - calculate Gyrovalues and Baise --------------------------*/
-void getGyroValues(vs16 * gyroValues)
+/* get GyroRawValues - calculate Gyrovalues and Baise --------------------------*/
+void getGyroRawValues(vs16 * gyroValues)
 {
 	s8 i;
 	
@@ -93,27 +92,19 @@ void getGyroValues(vs16 * gyroValues)
 	}
 }
 
-/* calculate ACC Angles -----------------------------------------------------*/
-void getACCAngles (vs16 * accAngle)
-{
-	u8 i; 
-	// x = (x - corrACC) * factorACC * 180 / PI
-	// z = (z - corrACC) * factorACC * 180 / PI
-	// 180 / PI = 57.2957795
-	// minus 90 grad für level
-	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
-	
-	accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[Y] = atan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_Y_ZERO] , ADCSensorValue[ACC_Y] - parameter[PARA_ACC_Y_ZERO] ) * 57.2957795 * 100.0;
 
+/* get ACCRawValues ---------------------------------------------------------*/
+void getACCRawValues(vs16 * accValues)
+{
+	accValues[X] = ADCSensorValue[ACC_X];
+	accValues[Y] = ADCSensorValue[ACC_Y];
+	accValues[Z] = ADCSensorValue[ACC_Z];
 	
-	//char x [80];
-	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
-	//print_uart1(x);
-	
+	s8 i;
 	// save values for smooth
 	for (i = 3; i < 5; i++)
 	{
 		oldADCSensorValue[i] = ADCSensorValue[i];
 	}
 }
+

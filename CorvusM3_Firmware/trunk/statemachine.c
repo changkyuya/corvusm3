@@ -25,6 +25,7 @@
 #include "serial.h"
 #include <stdio.h>
 #include "hal.h"
+#include "sal.h"
 #include "led.h"
 #include "parameter.h"
 #include "blmc.h"
@@ -59,7 +60,7 @@ void statemachine(void)
 	
 	
 
-	getGyroValues(gyroValues);
+	getGyroRawValues(gyroValues);
 	getACCAngles(accAngles);
 	
 	
