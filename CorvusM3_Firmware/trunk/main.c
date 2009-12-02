@@ -28,6 +28,7 @@
 #include "eeprom.h"
 #include "parameter.h"
 #include "hal.h"
+#include "sal.h"
 #include "blmc.h"
 #include "sensor.h"
 
@@ -38,6 +39,7 @@ extern vu32 msCount; //statemachine
 extern vu16 ADCSensorValue[7];  //initsystem
 extern vu16 receiverChannel[9];  //statemachine
 extern volatile char motor[5]; //blmc
+extern vs16 gyroAngle[3]; //statemachine
 
 
 
@@ -65,6 +67,7 @@ int main(void)
 	// wait 1 secound befor calibrate
 	Delay(1000);
 	zeroGyro();
+	setGyroAngle(gyroAngle);
 	
 	// function open ....
 	setLEDStatus(LED_BLINK);

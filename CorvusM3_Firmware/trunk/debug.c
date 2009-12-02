@@ -31,8 +31,9 @@
 extern vu16 parameter[0xFF];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
 extern vu16 ADCSensorValue[7]; //initsystem
-extern vs16 gyroValues[3];  //statemachine
-extern vs16 accAngles[2];  //statemachine
+extern vs16 gyroValue[3];  //statemachine
+extern vs16 gyroAngle[3];  //statemachine
+extern vs16 accAngle[2];  //statemachine
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
@@ -61,15 +62,15 @@ void doDebug()
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_SENSOR)
 	{
-		sprintf(x,"G-Gyro-ACC:1:%d:",gyroValues[X]);
+		sprintf(x,"G-Gyro-ACC:1:%d:",gyroAngle[X]);
 		print_uart1(x);
-		sprintf(x,"%d:",gyroValues[Y]);
+		sprintf(x,"%d:",gyroAngle[Y]);
 		print_uart1(x);
-		sprintf(x,"%d:",gyroValues[Z]);
+		sprintf(x,"%d:",gyroAngle[Z]);
 		print_uart1(x);
-		sprintf(x,"%d:",accAngles[X]);
+		sprintf(x,"%d:",accAngle[X]);
 		print_uart1(x);
-		sprintf(x,"%d:\r\n",accAngles[Y]);
+		sprintf(x,"%d:\r\n",accAngle[Y]);
 		print_uart1(x);
 	}
 	

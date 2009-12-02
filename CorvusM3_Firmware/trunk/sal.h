@@ -33,5 +33,8 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void getACCAngles(vs16 * accAngle);
+void setGyroAngle(vs16 * gyroAngle);
+void getGyroValues(vs16 * gyroAngle);
+
 
 #endif /* __SAL_H */

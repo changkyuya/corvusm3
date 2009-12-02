@@ -42,7 +42,35 @@ void getACCAngles(vs16 * accAngle)
 	
 }
 
+/* set gyro angle to start value acc-angle ----------------------------------*/
+void setGyroAngle(vs16 * gyroAngle)
+{
+	/* decide receiver -> lookup parameterset */
+	if (getParameter(PARA_SW) & PARA_SW_ACC) 
+	{
+		setGyroAngleFilterACC(gyroAngle);
+	}
+	else
+	{
+		// other Filter
+	}
+}
 
+
+/* get Gyro Angles ----------------------------------------------------------*/
+void getGyroValues(vs16 * gyroAngle)
+{
+	/* decide receiver -> lookup parameterset */
+	if (getParameter(PARA_SW) & PARA_SW_ACC) 
+	{
+		getGyroAnglesFilterACC(gyroAngle);
+	}
+	else
+	{
+		// other Filter
+	}
+	
+}
 
 
 

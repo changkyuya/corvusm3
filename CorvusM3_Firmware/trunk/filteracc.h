@@ -33,5 +33,7 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void getACCAnglesFilterACC(vs16 * accAngle);
+void setGyroAngleFilterACC(vs16 * gyroAngle);
+void getGyroAnglesFilterACC(vs16 * gyroAngle);
 
 #endif /* __FILTERACC_H */

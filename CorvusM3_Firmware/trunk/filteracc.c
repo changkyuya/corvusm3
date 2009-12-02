@@ -23,6 +23,8 @@
 #include "parameter.h"
 #include "sensor.h"
 #include <math.h>
+#include <stdio.h>
+#include "serial.h"
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -54,9 +56,33 @@ void getACCAnglesFilterACC(vs16 * accAngle)
 	
 }
 
+/* set gyro start angle -----------------------------------------------------*/
+void setGyroAngleFilterACC(vs16 * gyroAngle)
+{
+	vs16 accAngle[2];
+	getACCAnglesFilterACC(accAngle);
+	gyroAngle[X] = accAngle[X];
+	gyroAngle[Y] = accAngle[Y];
+	gyroAngle[Z] = 18000;
+	
+	char x [80];
+	sprintf(x,"gyro start value:%d:%d:%d\r\n",gyroAngle[X],gyroAngle[Y],gyroAngle[Z]);
+	print_uart1(x);
+}
 
-
-
+/* calculate Gyro Angles ----------------------------------------------------*/
+void getGyroAnglesFilterACC(vs16 * gyroAngle)
+{
+	vs16 gyroRawValues[3];
+	getGyroRawValues(gyroRawValues);
+	gyroAngle[X] += gyroRawValues[X] * 100;
+	gyroAngle[Y] += gyroRawValues[Y] * 100;
+	gyroAngle[Z] += gyroRawValues[Z] * 100;
+	
+	char x [80];
+	sprintf(x,"gyro raw value:%d:%d:%d\r\n",gyroAngle[X],gyroAngle[Y],gyroAngle[Z]);
+	print_uart1(x);
+}
 
 
 
