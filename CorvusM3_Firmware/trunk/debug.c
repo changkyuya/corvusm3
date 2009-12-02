@@ -69,7 +69,7 @@ void doDebug()
 		print_uart1(x);
 		sprintf(x,"%d:",accAngles[X]);
 		print_uart1(x);
-		sprintf(x,"%d:\r\n",accAngles[Z]);
+		sprintf(x,"%d:\r\n",accAngles[Y]);
 		print_uart1(x);
 	}
 	

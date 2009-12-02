@@ -34,6 +34,7 @@ extern vu16 ADCSensorValue[7];  //initsystem
 vu16 oldADCSensorValue[7];
 vu16 gyroZero[3];
 vu16 accZero[3];
+extern vu16 parameter[0xFF]; //parameter
 
 
 /* initGyros to set Baise ---------------------------------------------------*/
@@ -93,7 +94,7 @@ void getGyroValues(vs16 * gyroValues)
 }
 
 /* calculate ACC Angles -----------------------------------------------------*/
-void getACCAngles (vs16 * accAngles)
+void getACCAngles (vs16 * accAngle)
 {
 	u8 i; 
 	// x = (x - corrACC) * factorACC * 180 / PI
@@ -102,11 +103,13 @@ void getACCAngles (vs16 * accAngles)
 	// minus 90 grad für level
 	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
 	
-	
+	accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
+	accAngle[Y] = atan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_Y_ZERO] , ADCSensorValue[ACC_Y] - parameter[PARA_ACC_Y_ZERO] ) * 57.2957795 * 100.0;
 
-
 	
-	//accAngles[X] = y * 57.2957795 + 90;
+	//char x [80];
+	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
+	//print_uart1(x);
 	
 	// save values for smooth
 	for (i = 3; i < 5; i++)
