@@ -40,6 +40,7 @@ void dorComm(void);
 void dosComm(void);
 void dopComm(void);
 void dofComm(void);
+void docComm(void);
 u16 readInt(u8);
 void send(u8);
 void print_para (u8 para, u16 value);

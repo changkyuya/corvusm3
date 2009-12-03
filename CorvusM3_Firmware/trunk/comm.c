@@ -24,6 +24,7 @@
 #include "eeprom.h"
 #include "parameter.h"
 #include "sensor.h"
+#include "filteracc.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -32,6 +33,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0xFF]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
+extern vs16 gyroAngle[3]; //statemachine
 
 
 char line[80];
@@ -66,6 +68,10 @@ void doComm()
 	// do byte commands first char
 	switch (line[0])
 	{
+		// command
+		case 'c':
+			docComm();
+			break;
 		// switch LED
 		case 'l':
 			dolComm();
@@ -104,6 +110,20 @@ void doComm()
 	//char message [] = "OK\r\n";
 }
 
+/* do Command Command -------------------------------------------------------*/
+void docComm()
+{
+	switch (line[1])
+	{
+		case 'g':
+			zeroGyro();
+			break;
+		case 'a':
+			zeroGyro();
+			setGyroAngleFilterACC(gyroAngle);
+			break;
+	}
+}
 
 /* do LED Command -----------------------------------------------------------*/
 void dolComm()
@@ -253,6 +273,9 @@ void send(u8 infoText)
 		print_uart1("l1 ... LED flash\r\n");
 		print_uart1("l2 ... LED blink\r\n");
 		print_uart1("l3 ... LED on\r\n");
+		Delay(20);
+		print_uart1("ca ... Zero ACC\r\n");
+		print_uart1("cg ... Zero Gyro\r\n");
 		Delay(20);
 		print_uart1("d0 ... Debug off\r\n");
 		print_uart1("dr ... Toggle Receiver on/off\r\n");

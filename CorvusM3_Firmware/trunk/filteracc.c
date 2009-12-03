@@ -29,7 +29,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-
+extern vu16 gyroZero[3]; // sensor
 extern vu16 parameter[0xFF]; //parameter
 
 
@@ -71,17 +71,20 @@ void setGyroAngleFilterACC(vs16 * gyroAngle)
 }
 
 /* calculate Gyro Angles ----------------------------------------------------*/
+// 2mV/°/sec
+// 12bit = 4095, Vref = 3,3V  => 3,3/4095 = 0,00080586085860
+// ADC * 3,3 / 4095 / 2000 * 1000 
 void getGyroAnglesFilterACC(vs16 * gyroAngle)
 {
 	vs16 gyroRawValues[3];
 	getGyroRawValues(gyroRawValues);
-	gyroAngle[X] += gyroRawValues[X] * 100;
-	gyroAngle[Y] += gyroRawValues[Y] * 100;
-	gyroAngle[Z] += gyroRawValues[Z] * 100;
+	gyroAngle[X] += gyroRawValues[X] * (( 3.3 / 4095.0 / 2.0 ) * 100 );
+	gyroAngle[Y] += gyroRawValues[Y] * (( 3.3 / 4095.0 / 2.0 ) * 100 );
+	gyroAngle[Z] += gyroRawValues[Z] * (( 3.3 / 4095.0 / 2.0 ) * 100 );
 	
-	char x [80];
-	sprintf(x,"gyro raw value:%d:%d:%d\r\n",gyroAngle[X],gyroAngle[Y],gyroAngle[Z]);
-	print_uart1(x);
+	//char x [80];
+	//sprintf(x,"gyro raw value:%d:%d:%d\r\n",gyroAngle[X],gyroRawValues[X],gyroAngle[Z]);
+	//print_uart1(x);
 }
 
 
