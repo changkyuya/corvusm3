@@ -33,7 +33,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0xFF]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
-extern vs16 gyroAngle[3]; //statemachine
+extern volatile float gyroAngle[3]; //statemachine
 
 
 char line[80];
@@ -117,10 +117,10 @@ void docComm()
 	{
 		case 'g':
 			zeroGyro();
+			setGyroAngleFilterACC(gyroAngle);
 			break;
 		case 'a':
-			zeroGyro();
-			setGyroAngleFilterACC(gyroAngle);
+			zeroACC();
 			break;
 	}
 }

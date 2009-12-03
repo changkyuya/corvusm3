@@ -39,7 +39,7 @@ extern vu32 msCount; //statemachine
 extern vu16 ADCSensorValue[7];  //initsystem
 extern vu16 receiverChannel[9];  //statemachine
 extern volatile char motor[5]; //blmc
-extern vs16 gyroAngle[3]; //statemachine
+extern volatile float gyroAngle[3]; //statemachine
 
 
 
@@ -105,8 +105,8 @@ int main(void)
 		}
 		
 		
-		/* Debug Output 100Hz ---------------------------------------------------*/
-		if (msCount % 10 == 0)
+		/* Debug Output 10Hz ---------------------------------------------------*/
+		if (msCount % 100 == 0)
 		{
 			doDebug();
 		}

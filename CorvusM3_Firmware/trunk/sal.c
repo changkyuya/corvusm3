@@ -28,7 +28,7 @@
 /* Variables ----------------------------------------------------------------*/
 
 /* fill ACC Angles in Struc ---------------------------------------------------*/
-void getACCAngles(vs16 * accAngle)
+void getACCAngles(volatile float * accAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -43,7 +43,7 @@ void getACCAngles(vs16 * accAngle)
 }
 
 /* set gyro angle to start value acc-angle ----------------------------------*/
-void setGyroAngle(vs16 * gyroAngle)
+void setGyroAngle(volatile float * gyroAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -58,7 +58,7 @@ void setGyroAngle(vs16 * gyroAngle)
 
 
 /* get Gyro Angles ----------------------------------------------------------*/
-void getGyroValues(vs16 * gyroAngle)
+void getGyroValues(volatile float * gyroAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 

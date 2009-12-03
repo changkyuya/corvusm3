@@ -39,9 +39,10 @@ vu16 receiverChannel[9];
 extern vu16 parameter[0xFF]; //parameter
 u8 flightState = FLIGHT_START;
 volatile char motor[5]; //blmc
-vs16 gyroValue[3];
-vs16 gyroAngle[3];
-vs16 accAngle[2];
+volatile float gyroAngle[3];
+//vs16 gyroAngle[3];
+volatile float accAngle[2];
+//vs16 accAngle[2];
 
 
 	

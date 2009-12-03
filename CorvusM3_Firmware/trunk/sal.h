@@ -32,9 +32,9 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-void getACCAngles(vs16 * accAngle);
-void setGyroAngle(vs16 * gyroAngle);
-void getGyroValues(vs16 * gyroAngle);
+void getACCAngles(volatile float * accAngle);
+void setGyroAngle(volatile float * gyroAngle);
+void getGyroValues(volatile float * gyroAngle);
 
 
 #endif /* __SAL_H */
