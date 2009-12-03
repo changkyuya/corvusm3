@@ -10,6 +10,10 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
  * l2 ... LED blink
  * l3 ... LED on
 
+*Commands*
+ * ca ... set ACC Zero
+ * cg ... set Gyro Zero
+
 *Debug*
  * d0 ... Debug off
  * dr ... Toggle Receiver on/off
