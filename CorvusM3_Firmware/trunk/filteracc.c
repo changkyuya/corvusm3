@@ -78,7 +78,7 @@ void getGyroAnglesFilterACC(volatile float * gyroAngle)
 {
 	vs16 gyroRawValues[3];
 	getGyroRawValues(gyroRawValues);
-	gyroAngle[X] += gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90];
+	gyroAngle[X] -= gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90];
 	gyroAngle[Y] += gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90];
 	gyroAngle[Z] += gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90];
 	

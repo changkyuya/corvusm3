@@ -39,11 +39,12 @@ extern vu16 parameter[0xFF]; //parameter
 /* initGyros to set Baise ---------------------------------------------------*/
 void zeroGyro()
 {
-	u8 i;
 	gyroZero[X] = ADCSensorValue[GYRO_X];
 	gyroZero[Y] = ADCSensorValue[GYRO_Y];
 	gyroZero[Z] = ADCSensorValue[GYRO_Z];
+	
 	Pause(100);
+	u8 i;
 	for (i = 0; i < 5; i++)
 	{
 		gyroZero[X] = (gyroZero[X] + ADCSensorValue[GYRO_X]) >> 1;

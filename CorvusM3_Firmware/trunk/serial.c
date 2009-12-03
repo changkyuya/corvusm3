@@ -64,6 +64,9 @@ void print_uart1 (const char * s)
 /* read byte from UART1 Buffer ----------------------------------------------*/
 char read_uart1 ()
 {
+	char x [80];
+	sprintf(x,"readuart1,rxin,rxout:%d:%d:%d\r\n",RxBuffer1[RxOutCounter1],RxInCounter1,RxOutCounter1);
+	print_uart1(x);
 	return RxBuffer1[RxOutCounter1++];
 }
 

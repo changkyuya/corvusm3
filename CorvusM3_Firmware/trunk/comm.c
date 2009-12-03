@@ -288,8 +288,8 @@ void send(u8 infoText)
 		print_uart1("s01:65535 ... Set parameter 01, 0 - 65535\r\n");
 		print_uart1("f01:65535 ... Flash parameter 01, 0 - 65535\r\n");
 		Delay(20);
-		print_uart1("p01:65535 ... Print parameter 01, 0 - 65535\r\n");
-		print_uart1("r01:65535 ... Read parameter from flash 01, 0 - 65535\r\n");
+		print_uart1("p01 ... Print parameter 01, 0 - 65535\r\n");
+		print_uart1("r01 ... Read parameter from flash 01, 0 - 65535\r\n");
 	}
 }
 
