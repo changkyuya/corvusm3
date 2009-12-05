@@ -58,14 +58,13 @@ void Pause(u32 approxms)
 /* Smooth Values with factor ------------------------------------------------*/
 u16 smoothValue(vu16 actual, u16 previous, u16 smooth) 
 {
-  u16 smoothReturn;
+  float smoothReturn;
   
-  actual = actual * 1000;
-  previous = previous * 1000;
-  smoothReturn = previous + (actual - previous) / 100 * smooth;
-  smoothReturn = smoothReturn / 1000;
+  float actual_f = actual;
+  float previous_f = previous;
+  smoothReturn = previous_f + (actual_f - previous_f) / 100.0 * smooth;
   
-  return smoothReturn;
+  return (u16)smoothReturn;
 }
 
 

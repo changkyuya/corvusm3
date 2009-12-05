@@ -21,8 +21,8 @@
 
 #include "receiverspektrum.h"
 
-//#include "serial.h" //test
-//#include <stdio.h> //test 
+#include "serial.h" //test
+#include <stdio.h> //test 
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -39,7 +39,7 @@ extern vu32 oldSpektrumMsCount; //serial, for failsave
 /* read receiverChannels ----------------------------------------------------*/
 void getSpektrumChannels(vu16 * receiverChannel)
 {
-	//char x[100];
+
 	u8 i;
 	
 	// OK Byte - test if uart3 interrupt is running
@@ -65,31 +65,37 @@ void getSpektrumChannels(vu16 * receiverChannel)
 			{
 				// resolution is 10bit ... 0 - 1024 ... add 988 for middle
 				// Nick
-				receiverChannel[3] = smoothValue(constrain(receiverSpektrumChannel[i] + 988, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[3];
+				//receiverChannel[3] = smoothValue(constrain(receiverSpektrumChannel[i] + 988, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				//oldReceiverSpektrumChannel[i] = receiverChannel[3];
+				receiverChannel[3] = constrain(receiverSpektrumChannel[i] + 988, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 2048)
 			{
 				// Pitch
-				receiverChannel[1] = smoothValue(constrain(receiverSpektrumChannel[i] - 36, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[1];
+				//receiverChannel[1] = smoothValue(constrain(receiverSpektrumChannel[i] - 36, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				//oldReceiverSpektrumChannel[i] = receiverChannel[1];
+				receiverChannel[1] = constrain(receiverSpektrumChannel[i] - 36, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 3072)
 			{
 				// Roll
-				receiverChannel[2] = smoothValue(constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[2];
+				//receiverChannel[2] = smoothValue(constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				//oldReceiverSpektrumChannel[i] = receiverChannel[2];
+				receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 4096)
 			{
 				//Yaw
-				receiverChannel[4] = smoothValue(constrain(receiverSpektrumChannel[i] - 2084, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[4];
+				//receiverChannel[4] = smoothValue(constrain(receiverSpektrumChannel[i] - 2084, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				//oldReceiverSpektrumChannel[i] = receiverChannel[4];
+				receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
 			}
 		}
 	}
-		//sprintf(x,"%d:%d-%d-%d-%d\r\n",receiverChannel[0],receiverChannel[1],receiverChannel[2],receiverChannel[3],receiverChannel[4]);
-		//print_uart1(x);
+	
+	//char x[100];
+	//sprintf(x,"%d:%d-%d-%d-%d\r\n",spektrumBytes[0],spektrumBytes[1],spektrumBytes[2],spektrumBytes[3],spektrumBytes[4]);
+	//print_uart1(x);
 
 }
 

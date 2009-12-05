@@ -253,10 +253,10 @@
 	}*/
 
 	/* [0xB8] TIM4 Interrupt */
-	void TIM4_IRQHandler(void)
+	/*void TIM4_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(TIM4_IRQHandler, "TIM4", 46, 0xB8);
-	}
+	}*/
 
 	/* [0xBC] I2C1 Event Interrupt */
 	void I2C1_EV_IRQHandler(void)

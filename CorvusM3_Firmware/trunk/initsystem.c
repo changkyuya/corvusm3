@@ -107,9 +107,10 @@ void RCC_Configuration(void)
 		}
 	}
 
-	/* Enable TIM2 clocks  for LED, 
-	   Enable TIM3 clocks  for Statemachine */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3, ENABLE);  // Timer
+	/* Enable TIM2 clocks for LED, 
+	   Enable TIM3 clocks for Statemachine 
+	   Enable TIM4 clocks for Servo */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 | RCC_APB1Periph_TIM4, ENABLE);  // Timer
 	/* Enable for PPM decode -------------------------------------------*/
 	/* TIM1 clock enable */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
@@ -137,6 +138,7 @@ void TIM_Configuration(void)
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef  TIM_OCInitStructure2;
 	TIM_OCInitTypeDef  TIM_OCInitStructure3;
+	TIM_OCInitTypeDef  TIM_OCInitStructure4;
 
 	/* TIM2 configuration for LED -------------------------------------------*/
 	TIM_TimeBaseStructure.TIM_Period = 0x12B; 				//299
@@ -180,6 +182,27 @@ void TIM_Configuration(void)
 	/* Enable TIM3 Update interrupt */
 	// enable in main after powerup
 	//TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+
+	/* TIM4 configuration for Servo1 and Servo2 -------------------------------*/
+	TIM_TimeBaseStructure.TIM_Period = 1500; 				//alle 1ms
+	TIM_TimeBaseStructure.TIM_Prescaler = 0x48;       	//72
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+	/* Outoput Compare Init */
+	TIM_OCStructInit(&TIM_OCInitStructure4);
+	/* Output Compare Timing Mode configuration: Channel1 */
+	TIM_OCInitStructure4.TIM_OCMode = TIM_OCMode_Timing;
+	TIM_OCInitStructure4.TIM_Pulse = 0x0;  
+	TIM_OCInit(TIM4, &TIM_OCInitStructure4);
+	/* TIM4 enable counter */
+	TIM_Cmd(TIM4, ENABLE);
+	/* Immediate load of TIM4 Precaler value */
+	TIM_PrescalerConfig(TIM4, 0x48, TIM_PSCReloadMode_Immediate);
+	/* Clear TIM4 update pending flag */
+	TIM_ClearFlag(TIM4, TIM_FLAG_Update);
+	/* Enable TIM4 Update interrupt */
+	TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
 	
 	/* Timer for PPM decode ---------------------------------------------------*/
 	TIM1_ICInitTypeDef TIM1_ICInitStructure; 
@@ -246,6 +269,11 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);  
+	// for Servo1 and Servo2 Pin
+	GPIO_InitStructure.GPIO_Pin = GPIO_SERVO1 | GPIO_SERVO2;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);  
 	
 	/* ADC for ACC, Gyro, .. -------------------------------------------------*/
 	// 16 & 17 no need GPIO_Mode_AIN
@@ -285,20 +313,27 @@ void NVIC_Configuration(void)
 	
 	/* Enable the USART1 Interrupt --------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQChannel;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
 	/* Enable the USART3 Interrupt --------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQChannel;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
 	/* Interrupt for Mainloop -----------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	/* Interrupt for Servo1 and Servoo2 ----------------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQChannel;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;

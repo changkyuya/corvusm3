@@ -31,6 +31,7 @@
 #include "sal.h"
 #include "blmc.h"
 #include "sensor.h"
+#include <stdio.h>
 
 /* Variables ----------------------------------------------------------------*/
 extern vu8 RxOutCounter1; //serial
@@ -96,14 +97,18 @@ int main(void)
 			// low accu
 			setLEDStatus(LED_FLASH);
 		}
+		else
+		{
+			// accu OK
+			// must be overritten by flight errors like no receiver!!!!!!!!!!
+			//setLEDStatus(LED_ON);
+		}
 		
 		// if something in RxBuffer
 		if (is_read_uart1())
 		{
 			getComm();
-			
 		}
-		
 		
 		/* Debug Output 10Hz ---------------------------------------------------*/
 		if (msCount % 100 == 0)

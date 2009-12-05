@@ -30,6 +30,7 @@
 #include "parameter.h"
 #include "blmc.h"
 #include "sensor.h"
+#include "servo.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[7];  //initsystem
@@ -49,14 +50,15 @@ volatile float accAngle[2];
 /* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
 void TIM3_IRQHandler(void)
 {
+	/* Clear TIM3 update interrupt */
+	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+	
 	statemachine();
 }
 
 /* Main Control Loop --------------------------------------------------------*/
 void statemachine(void)
 {
-	/* Clear TIM3 update interrupt */
-	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	// Debug to measure time for loop - toggle debug-Pin PA00
 	*DBG = 1;
 	
@@ -87,7 +89,14 @@ void statemachine(void)
 	motor[3] = 0x00;
 	motor[4] = 0x00;
 	sendMotor(motor);
+	
+	//only for test servo !
+	// map channel 1 to servo 1
+	setServoValue(0, receiverChannel[1]);
+	setServoValue(1, receiverChannel[2]);
+	
 
+	
 	
 	/* Count Loops from Statemachine 1ms */
 	msCount++;

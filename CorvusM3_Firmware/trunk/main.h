@@ -58,11 +58,17 @@
 #define LED PERIPHERAL_BIT(GPIOC->ODR, 13)			
 #define GPIO_LEDPIN GPIO_Pin_13
 /* Map Pin for Debug --> PA00 */
-#define DBG PERIPHERAL_BIT(GPIOA->ODR, 00)			
+#define DBG PERIPHERAL_BIT(GPIOA->ODR, 0)			
 #define GPIO_DBG GPIO_Pin_0
 /* Map Pin for Beeper --> PA01 */
-#define BEEPER PERIPHERAL_BIT(GPIOA->ODR, 01)			
+#define BEEPER PERIPHERAL_BIT(GPIOA->ODR, 1)			
 #define GPIO_BEEPER GPIO_Pin_1
+/* Map Pin for Servo1 --> PC08 */
+#define SERVO1 PERIPHERAL_BIT(GPIOC->ODR, 8)			
+#define GPIO_SERVO1 GPIO_Pin_8
+/* Map Pin for Servo2 --> PC09 */
+#define SERVO2 PERIPHERAL_BIT(GPIOC->ODR, 9)			
+#define GPIO_SERVO2 GPIO_Pin_9
 /* Map Pins for ACC */
 #define GPIO_ACC_Z GPIO_Pin_3
 #define GPIO_ACC_Y GPIO_Pin_4
