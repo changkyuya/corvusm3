@@ -27,7 +27,7 @@
 
 /* Variables ----------------------------------------------------------------*/
 vu16 servoCount = 0;
-vu16 servo[8];
+vu16 servo[4];
 
 /* Servo Timer Interrupt 4 --------------------------------------------------*/
 void TIM4_IRQHandler(void)
@@ -52,30 +52,54 @@ void doServo()
 	{
 		servo[1] = 1500;
 	}
+	if (servo[2] == 0)
+	{
+		servo[2] = 1500;
+	}
+	if (servo[3] == 0)
+	{
+		servo[3] = 1500;
+	}
 	
 	switch (servoCount)
 	{
 		case 0:
 			// Signal ON
-			*SERVO1 = 1;
+			*SERVO0 = 1;
 			servoCount++;
 			changeServoInterrupt(servo[0]);
 			//changeServoInterrupt(1125);
 			break;
 		case 1:
 			// Signal OFF
-			*SERVO1 = 0;
-			*SERVO2 = 1;
+			*SERVO0 = 0;
+			*SERVO1 = 1;
 			servoCount++;
 			changeServoInterrupt(servo[1]);
 			//changeServoInterrupt(2254);
 			break;
-		default:
+		case 2:
+			// Signal OFF
+			*SERVO1 = 0;
+			*SERVO2 = 1;
+			servoCount++;
+			changeServoInterrupt(servo[2]);
+			//changeServoInterrupt(2254);
+			break;
+		case 3:
 			// Signal OFF
 			*SERVO2 = 0;
+			*SERVO3 = 1;
+			servoCount++;
+			changeServoInterrupt(servo[3]);
+			//changeServoInterrupt(2254);
+			break;
+		default:
+			// Signal OFF
+			*SERVO3 = 0;
 			// wait for next loop
 			servoCount = 0;
-			changeServoInterrupt(20000 - servo[0] - servo[1]);
+			changeServoInterrupt(20000 - servo[0] - servo[1] - servo[2] - servo[3]);
 			//changeServoInterrupt(16254);
 			break;
 	}

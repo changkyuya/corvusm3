@@ -63,12 +63,18 @@
 /* Map Pin for Beeper --> PA01 */
 #define BEEPER PERIPHERAL_BIT(GPIOA->ODR, 1)			
 #define GPIO_BEEPER GPIO_Pin_1
-/* Map Pin for Servo1 --> PC08 */
-#define SERVO1 PERIPHERAL_BIT(GPIOC->ODR, 8)			
-#define GPIO_SERVO1 GPIO_Pin_8
-/* Map Pin for Servo2 --> PC09 */
-#define SERVO2 PERIPHERAL_BIT(GPIOC->ODR, 9)			
-#define GPIO_SERVO2 GPIO_Pin_9
+/* Map Pin for Servo0 --> PC06 */
+#define SERVO0 PERIPHERAL_BIT(GPIOC->ODR, 6)			
+#define GPIO_SERVO0 GPIO_Pin_6
+/* Map Pin for Servo1 --> PC07 */
+#define SERVO1 PERIPHERAL_BIT(GPIOC->ODR, 7)			
+#define GPIO_SERVO1 GPIO_Pin_7
+/* Map Pin for Servo2 --> PC08 */
+#define SERVO2 PERIPHERAL_BIT(GPIOC->ODR, 8)			
+#define GPIO_SERVO2 GPIO_Pin_8
+/* Map Pin for Servo3 --> PC09 */
+#define SERVO3 PERIPHERAL_BIT(GPIOC->ODR, 9)			
+#define GPIO_SERVO3 GPIO_Pin_9
 /* Map Pins for ACC */
 #define GPIO_ACC_Z GPIO_Pin_3
 #define GPIO_ACC_Y GPIO_Pin_4
