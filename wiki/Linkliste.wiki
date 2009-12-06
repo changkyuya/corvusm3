@@ -25,3 +25,4 @@
  * Achsenkopplung: [http://forum.mikrokopter.de/topic-2319.html]
 
  * Kompass 3-Achs: [http://forum.xufo.net/bb/viewtopic.php?t=6302&highlight=]
+ * MM3: [http://carancho.com/AeroQuad/forum/index.php?topic=91.0]
