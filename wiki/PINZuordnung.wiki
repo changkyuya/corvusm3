@@ -7,10 +7,29 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 
   * *PA00* : Debug PIN
   * *PA01* : Beeper
+  * *PA02* : UART2_TX, ADC - frei
+  * *PA03* : UART2_RX, ADC - frei
+  * *PA04* : SPI1_NSS Baro
+  * *PA05* : SPI1_SCK Baro
+  * *PA06* : SPI1_MISO, ADC - frei
+  * *PA07* : SPI1_MOSI Baro
   * *PA08* : PPM Empfänger (Summensignal)
   * *PA09* : TX-UART1 - PC
   * *PA10* : RX-UART1 - PC
+  * *PA11* : USB DM - frei
+  * *PA12* : USB DP - frei
+  * *PA13* : Schaltausgang Spektrum bind
+  * *PA14* : Schaltausgang - frei
+  * *PA15* : SPI3_NSS - frei
   * *PB00* : ADC Spannungsmessung
+  * *PB01* : ADC - frei
+  * *PB03* : SPI3_SCK - frei
+  * *PB04* : SPI3_MISO - frei
+  * *PB05* : SPI3_MOSI - frei
+  * *PB06* : I2C_SCL Kompass
+  * *PB07* : I2C_SDA Kompass
+  * *PB08* : Schaltausgang - frei
+  * *PB09* : Schaltausgang - frei
   * *PB10* : TX-UART3 UART Regler
   * *PB11* : RX-UART3 Spektrum Empfänger
   * *PC00* : Sensoren ACC / Gyro
@@ -23,24 +42,11 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PC07* : Servo 1
   * *PC08* : Servo 2
   * *PC09* : Servo 3
+  * *PC10* : GPS TX optional
+  * *PC11* : GPS RX
+  * *PC12* : UART5 TX - frei
+  * *PD02* : UART5 RX - frei
   * *PC13* : LED
-
-== Geplant ==
-
-  * *PA02* : frei halten UART2-TX
-  * *PA03* : frei halten für Option Spektrum an UART2-RX wenn Regler I2C
-  * *PA04* : SPI_NSS für 24Bit Baro
-  * *PA05* : SPI_SCK für 24Bit Baro
-  * *PA06* : SPI_MISO für 24Bit Baro (nicht notwendig)
-  * *PA07* : SPI_MOSI für 24Bit Baro
-  * *PB06* : Kompass I2C
-  * *PB07* : Kompass I2C
-  * *PB12* : NSS - SD-Karte (Erweiterungboard)
-  * *PB13* : SCK - SD-Karte (Erweiterungboard)
-  * *PB14* : MISO - SD-Karte (Erweiterungboard)
-  * *PB15* : MOSI - SD-Karte (Erweiterungboard)
-  * *PC11* : UART4-RX für GPS
-  * *PC10* : UART4-TX optional für GPS
 
 == Infos ==
 
