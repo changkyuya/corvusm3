@@ -19,8 +19,10 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PC03* : Sensoren ACC / Gyro
   * *PC04* : Sensoren ACC / Gyro
   * *PC05* : Sensoren ACC / Gyro
-  * *PC08* : Servo 1
-  * *PC09* : Servo 2
+  * *PC06* : Servo 0
+  * *PC07* : Servo 1
+  * *PC08* : Servo 2
+  * *PC09* : Servo 3
   * *PC13* : LED
 
 == Geplant ==
