@@ -3,9 +3,9 @@
 
 Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 
-== Realisiert ==
+== Geplante Pinbelegung - *FETT* = realisiert==
 
-  * *PA00* : Debug PIN
+  * *PA00* : *Debug PIN*
   * *PA01* : Beeper
   * *PA02* : UART2_TX, ADC - frei
   * *PA03* : UART2_RX, ADC - frei
@@ -13,15 +13,15 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PA05* : SPI1_SCK Baro
   * *PA06* : SPI1_MISO, ADC - frei
   * *PA07* : SPI1_MOSI Baro
-  * *PA08* : PPM Empfänger (Summensignal)
-  * *PA09* : TX-UART1 - PC
-  * *PA10* : RX-UART1 - PC
+  * *PA08* : *PPM Empfänger (Summensignal)*
+  * *PA09* : *TX-UART1 - PC*
+  * *PA10* : *RX-UART1 - PC*
   * *PA11* : USB DM - frei
   * *PA12* : USB DP - frei
   * *PA13* : Schaltausgang Spektrum bind
   * *PA14* : Schaltausgang - frei
   * *PA15* : SPI3_NSS - frei
-  * *PB00* : ADC Spannungsmessung
+  * *PB00* : *ADC Spannungsmessung*
   * *PB01* : ADC - frei
   * *PB03* : SPI3_SCK - frei
   * *PB04* : SPI3_MISO - frei
@@ -30,23 +30,23 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PB07* : I2C_SDA Kompass
   * *PB08* : Schaltausgang - frei
   * *PB09* : Schaltausgang - frei
-  * *PB10* : TX-UART3 UART Regler
-  * *PB11* : RX-UART3 Spektrum Empfänger
-  * *PC00* : Sensoren ACC / Gyro
-  * *PC01* : Sensoren ACC / Gyro
-  * *PC02* : Sensoren ACC / Gyro
-  * *PC03* : Sensoren ACC / Gyro
-  * *PC04* : Sensoren ACC / Gyro
-  * *PC05* : Sensoren ACC / Gyro
-  * *PC06* : Servo 0
-  * *PC07* : Servo 1
-  * *PC08* : Servo 2
-  * *PC09* : Servo 3
+  * *PB10* : *TX-UART3 UART Regler*
+  * *PB11* : *RX-UART3 Spektrum Empfänger*
+  * *PC00* : *Sensoren ACC / Gyro*
+  * *PC01* : *Sensoren ACC / Gyro*
+  * *PC02* : *Sensoren ACC / Gyro*
+  * *PC03* : *Sensoren ACC / Gyro*
+  * *PC04* : *Sensoren ACC / Gyro*
+  * *PC05* : *Sensoren ACC / Gyro*
+  * *PC06* : *Servo 0*
+  * *PC07* : *Servo 1*
+  * *PC08* : *Servo 2*
+  * *PC09* : *Servo 3*
   * *PC10* : GPS TX optional
   * *PC11* : GPS RX
   * *PC12* : UART5 TX - frei
   * *PD02* : UART5 RX - frei
-  * *PC13* : LED
+  * *PC13* : *LED*
 
 == Infos ==
 
