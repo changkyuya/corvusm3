@@ -77,6 +77,8 @@ void USART3_IRQHandler(void);
 void EXTI15_10_IRQHandler(void);
 void RTCAlarm_IRQHandler(void);
 void USBWakeUp_IRQHandler(void);
+void UART4_IRQHandler(void);
+void UART5_IRQHandler(void);
 					 
 #endif /* __STM32F10x_IT_H */
 

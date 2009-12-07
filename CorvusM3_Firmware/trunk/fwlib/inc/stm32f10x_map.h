@@ -493,6 +493,8 @@ typedef struct
 #define SPI2_BASE             (APB1PERIPH_BASE + 0x3800)
 #define USART2_BASE           (APB1PERIPH_BASE + 0x4400)
 #define USART3_BASE           (APB1PERIPH_BASE + 0x4800)
+#define UART4_BASE            (APB1PERIPH_BASE + 0x4C00)
+#define UART5_BASE            (APB1PERIPH_BASE + 0x5000)
 #define I2C1_BASE             (APB1PERIPH_BASE + 0x5400)
 #define I2C2_BASE             (APB1PERIPH_BASE + 0x5800)
 #define CAN_BASE              (APB1PERIPH_BASE + 0x6400)
@@ -571,6 +573,14 @@ typedef struct
 #ifdef _USART3
   #define USART3              ((USART_TypeDef *) USART3_BASE)
 #endif /*_USART3 */
+
+#ifdef _UART4
+  #define UART4              ((USART_TypeDef *) UART4_BASE)
+#endif /*_UART4 */
+
+#ifdef _UART5
+  #define UART5              ((USART_TypeDef *) UART5_BASE)
+#endif /*_USART5 */
 
 #ifdef _I2C1
   #define I2C1                ((I2C_TypeDef *) I2C1_BASE)
@@ -727,6 +737,14 @@ typedef struct
 #ifdef _USART3
   EXT USART_TypeDef           *USART3;
 #endif /*_USART3 */
+
+#ifdef _UART4
+  EXT USART_TypeDef           *UART4;
+#endif /*_UART4 */
+
+#ifdef _UART5
+  EXT USART_TypeDef           *UART5;
+#endif /*_UART5 */
 
 #ifdef _I2C1
   EXT I2C_TypeDef             *I2C1;

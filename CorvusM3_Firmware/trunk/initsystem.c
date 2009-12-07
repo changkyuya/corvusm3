@@ -38,7 +38,9 @@ void initSystem()
 	/* UART Interrupt */
 	NVIC_Configuration();
 	initUART1();
+	initUART2();
 	initUART3();
+	initUART4();
 	/* initDMA for Sensors */
 	initDMA();
 	/* initADC for Sensros */
@@ -121,7 +123,7 @@ void RCC_Configuration(void)
 	/* AFIO and USART1 clocks UART1*/
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_USART1, ENABLE);
 	/* UART3 clock (Motor/BLC) */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2 | RCC_APB1Periph_USART3 | RCC_APB1Periph_UART4, ENABLE);
 	
 	/* Enable ADC1 clock */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
@@ -183,7 +185,7 @@ void TIM_Configuration(void)
 	// enable in main after powerup
 	//TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 
-	/* TIM4 configuration for Servo1 and Servo2 -------------------------------*/
+	/* TIM4 configuration for Servo0-3 --------------------------------------*/
 	TIM_TimeBaseStructure.TIM_Period = 1500; 				//alle 1ms
 	TIM_TimeBaseStructure.TIM_Prescaler = 0x48;       	//72
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
@@ -248,6 +250,18 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);   
 	
+	
+	/* UART2 ----------------------------------------------------------------*/
+	/* Configure USART1 RTS and USART1 Tx as alternate function push-pull */
+	GPIO_InitStructure.GPIO_Pin = GPIO_TxPin2;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);   
+	/* Configure USART1 CTS and USART1 Rx as input floating */
+	GPIO_InitStructure.GPIO_Pin = GPIO_RxPin2;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);  
+	
 	/* UART3 for Motor/BLC --------------------------------------------------*/
 	/* Configure USART1 RTS and USART1 Tx as alternate function push-pull */
 	GPIO_InitStructure.GPIO_Pin = GPIO_TxPin3;
@@ -258,6 +272,17 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_RxPin3;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);  
+	
+	/* UART4 for GPS -------------------------------------------------------*/
+	/* Configure USART1 RTS and USART1 Tx as alternate function push-pull */
+	GPIO_InitStructure.GPIO_Pin = GPIO_TxPin4;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);   
+	/* Configure USART1 CTS and USART1 Rx as input floating */
+	GPIO_InitStructure.GPIO_Pin = GPIO_RxPin4;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOC, &GPIO_InitStructure); 
 	
 	/* Status LED -----------------------------------------------------------*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_LEDPIN;
@@ -318,10 +343,24 @@ void NVIC_Configuration(void)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
+	/* Enable the USART2 Interrupt --------------------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
 	/* Enable the USART3 Interrupt --------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQChannel;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	/* Enable the USART4 Interrupt --------------------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = UART4_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 4;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
@@ -380,6 +419,33 @@ void initUART1 (void)
 	//USART_ITConfig(USART1, USART_IT_TXE, ENABLE);	
 }
 
+/* Init UART2 --------------------------------------------------------------------*/
+void initUART2 (void)
+{
+	USART_InitTypeDef USART_InitStructure;
+	/* USART2 configuration */
+	USART_InitStructure.USART_BaudRate = 115200;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+
+	USART_Init(USART2, &USART_InitStructure);
+	/* Enable the USART3 */
+	USART_Cmd(USART2, ENABLE);
+
+	/* if I enable TXE befor RXNE then it does not work - no idea why ??? */
+	/* Enable the EVAL_COM3 Receive interrupt: this interrupt is generated when the 
+    EVAL_COM3 receive data register is not empty */
+	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);	
+ 
+	/* Enable the EVAL_COM3 Transmoit interrupt: this interrupt is generated when the 
+    EVAL_COM3 transmit data register is empty */  
+	// enalble Interrupt if data send in serial.c
+	//USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
+}
+
 /* Init UART3 --------------------------------------------------------------------*/
 void initUART3 (void)
 {
@@ -400,6 +466,33 @@ void initUART3 (void)
 	/* Enable the EVAL_COM3 Receive interrupt: this interrupt is generated when the 
     EVAL_COM3 receive data register is not empty */
 	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);	
+ 
+	/* Enable the EVAL_COM3 Transmoit interrupt: this interrupt is generated when the 
+    EVAL_COM3 transmit data register is empty */  
+	// enalble Interrupt if data send in serial.c
+	//USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
+}
+
+/* Init UART4 --------------------------------------------------------------------*/
+void initUART4 (void)
+{
+	USART_InitTypeDef USART_InitStructure;
+	/* USART4 configuration */
+	USART_InitStructure.USART_BaudRate = 115200;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+
+	USART_Init(UART4, &USART_InitStructure);
+	/* Enable the USART4 */
+	USART_Cmd(UART4, ENABLE);
+
+	/* if I enable TXE befor RXNE then it does not work - no idea why ??? */
+	/* Enable the EVAL_COM3 Receive interrupt: this interrupt is generated when the 
+    EVAL_COM3 receive data register is not empty */
+	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);	
  
 	/* Enable the EVAL_COM3 Transmoit interrupt: this interrupt is generated when the 
     EVAL_COM3 transmit data register is empty */  

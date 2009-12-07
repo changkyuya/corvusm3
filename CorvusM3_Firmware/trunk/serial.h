@@ -38,8 +38,8 @@ void print_uart1 (const char *);
 char read_uart1 (void);
 s8 is_read_uart1(void);
 void print_uart3 (volatile char *);
-char read_uart3 (void);
-s8 is_read_uart3(void);
+char read_uart2 (void);
+s8 is_read_uart2(void);
 void USART1_IRQHandler(void);
 
 

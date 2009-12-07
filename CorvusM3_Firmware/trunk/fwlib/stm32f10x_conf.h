@@ -110,6 +110,8 @@
 #define _USART1
 #define _USART2
 #define _USART3
+#define _UART4
+#define _UART5
 
 /************************************* WWDG ***********************************/
 #define _WWDG

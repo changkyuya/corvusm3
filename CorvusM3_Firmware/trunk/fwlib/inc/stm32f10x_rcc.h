@@ -190,6 +190,8 @@ typedef struct
 #define RCC_APB1Periph_SPI2              ((u32)0x00004000)
 #define RCC_APB1Periph_USART2            ((u32)0x00020000)
 #define RCC_APB1Periph_USART3            ((u32)0x00040000)
+#define RCC_APB1Periph_UART4             ((u32)0x00080000)
+#define RCC_APB1Periph_UART5             ((u32)0x00100000)
 #define RCC_APB1Periph_I2C1              ((u32)0x00200000)
 #define RCC_APB1Periph_I2C2              ((u32)0x00400000)
 #define RCC_APB1Periph_USB               ((u32)0x00800000)

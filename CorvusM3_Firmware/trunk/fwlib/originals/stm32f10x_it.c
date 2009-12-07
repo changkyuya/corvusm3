@@ -589,6 +589,28 @@ void USART3_IRQHandler(void)
 }
 
 /*******************************************************************************
+* Function Name  : UART4_IRQHandler
+* Description    : This function handles UART4 global interrupt request.
+* Input          : None
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void UART4_IRQHandler(void)
+{
+}
+
+/*******************************************************************************
+* Function Name  : UART5_IRQHandler
+* Description    : This function handles UART5 global interrupt request.
+* Input          : None
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void UART5_IRQHandler(void)
+{
+}
+
+/*******************************************************************************
 * Function Name  : EXTI15_10_IRQHandler
 * Description    : This function handles External lines 15 to 10 interrupt request.
 * Input          : None

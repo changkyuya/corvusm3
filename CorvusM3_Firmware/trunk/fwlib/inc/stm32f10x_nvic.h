@@ -76,6 +76,8 @@ typedef struct
 #define EXTI15_10_IRQChannel         ((u8)0x28)  /* External Line[15:10] Interrupts */
 #define RTCAlarm_IRQChannel          ((u8)0x29)  /* RTC Alarm through EXTI Line Interrupt */
 #define USBWakeUp_IRQChannel         ((u8)0x2A)  /* USB WakeUp from suspend through EXTI Line Interrupt */
+#define UART4_IRQChannel             ((u8)0x34)  /* UART4 global Interrupt */
+#define UART5_IRQChannel             ((u8)0x35)  /* UART5 global Interrupt */
 
 #define IS_NVIC_IRQ_CHANNEL(CHANNEL) ((CHANNEL == WWDG_IRQChannel) || \
                                       (CHANNEL == PVD_IRQChannel) || \
@@ -119,6 +121,8 @@ typedef struct
                                       (CHANNEL == USART3_IRQChannel) || \
                                       (CHANNEL == EXTI15_10_IRQChannel) || \
                                       (CHANNEL == RTCAlarm_IRQChannel) || \
+                                      (CHANNEL == UART4_IRQChannel) || \
+                                      (CHANNEL == UART5_IRQChannel) || \
                                       (CHANNEL == USBWakeUp_IRQChannel))
 
 /* System Handlers -----------------------------------------------------------*/

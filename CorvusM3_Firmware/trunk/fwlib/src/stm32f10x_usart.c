@@ -102,6 +102,16 @@ void USART_DeInit(USART_TypeDef* USARTx)
       RCC_APB1PeriphResetCmd(RCC_APB1Periph_USART3, ENABLE);
       RCC_APB1PeriphResetCmd(RCC_APB1Periph_USART3, DISABLE);
       break;
+    
+    case UART4_BASE:
+      RCC_APB1PeriphResetCmd(RCC_APB1Periph_UART4, ENABLE);
+      RCC_APB1PeriphResetCmd(RCC_APB1Periph_UART4, DISABLE);
+      break;
+    
+    case UART5_BASE:
+      RCC_APB1PeriphResetCmd(RCC_APB1Periph_UART5, ENABLE);
+      RCC_APB1PeriphResetCmd(RCC_APB1Periph_UART5, DISABLE);
+      break;  
 
     default:
       break;

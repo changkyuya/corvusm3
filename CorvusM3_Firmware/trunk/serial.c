@@ -38,6 +38,13 @@ vu8 TxOutCounter1 = 0;
 vu8 RxInCounter1 = 0;
 vu8 RxOutCounter1 = 0; 
 
+vu8 TxBuffer2[TxBufferSize]; // = "\n\rUSART Hyperterminal Interrupts Example: USART-Hyperterminal communication using Interrupt\n\r";
+vu8 RxBuffer2[RxBufferSize];
+vu8 TxInCounter2 = 0; 
+vu8 TxOutCounter2 = 0;
+vu8 RxInCounter2 = 0;
+vu8 RxOutCounter2 = 0; 
+
 vu8 TxBuffer3[TxBufferSize]; // = "\n\rUSART Hyperterminal Interrupts Example: USART-Hyperterminal communication using Interrupt\n\r";
 vu8 RxBuffer3[RxBufferSize];
 vu8 TxInCounter3 = 0; 
@@ -103,15 +110,15 @@ void print_uart3 (volatile char * s)
 }
 
 /* read byte from UART1 Buffer ----------------------------------------------*/
-char read_uart3 ()
+char read_uart2 ()
 {
-	return RxBuffer3[RxOutCounter3++];
+	return RxBuffer2[RxOutCounter2++];
 }
 
 /* is byte to read ----------------------------------------------------------*/
-s8 is_read_uart3()
+s8 is_read_uart2()
 {
-	if (RxInCounter3 != RxOutCounter3)
+	if (RxInCounter2 != RxOutCounter2)
 	{
 		return 1;
 	}
@@ -153,14 +160,12 @@ void USART1_IRQHandler(void)
 
 
 
-/* [0xDC] USART3 Interrupt */
-/* Fill RX/TX Buffer --------------------------------------------------------*/
-void USART3_IRQHandler(void)
+/* [0xD8] USART2 Interrupt */
+void USART2_IRQHandler(void)
 {
-	//DEFAULT_EXCEPTION_HANDLER(USART1_IRQHandler, "USART1", 53, 0xD4);
-	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 	{
-		RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
+		RxBuffer2[RxInCounter2++] = (USART_ReceiveData(USART2) & 0x7F);
 		
 		/* 	find gap
 		there is a gap all 16 byte with 11ms
@@ -191,13 +196,42 @@ void USART3_IRQHandler(void)
 			}
 		}
 		
-		spektrumBytes[byteCount++] = RxBuffer3[RxOutCounter3++];
+		spektrumBytes[byteCount++] = RxBuffer2[RxOutCounter2++];
 
 		//test receiver output
 		//TxBuffer1[TxInCounter1++] = spektrumBytes[byteCount-1];
 		//USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		
 		oldSpektrumMsCount = msCount;
+	}
+
+	if(USART_GetITStatus(USART2, USART_IT_TXE) != RESET)
+	{   
+		if (TxInCounter2 != TxOutCounter2)
+		{
+			/* Write one byte to the transmit data register */
+			USART_SendData(USART2, TxBuffer2[TxOutCounter2++]);
+		}
+		else
+		{
+			USART_ITConfig(USART2, USART_IT_TXE, DISABLE);
+		}
+		
+	}
+}
+
+	
+
+/* [0xDC] USART3 Interrupt */
+/* Fill RX/TX Buffer --------------------------------------------------------*/
+void USART3_IRQHandler(void)
+{
+	//DEFAULT_EXCEPTION_HANDLER(USART1_IRQHandler, "USART1", 53, 0xD4);
+	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+	{		
+		/* Read one byte from the receive data register */
+		RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
+	
 	}
 
 	if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET)

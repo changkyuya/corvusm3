@@ -301,16 +301,27 @@
 	}*/
 
 	/* [0xD8] USART2 Interrupt */
-	void USART2_IRQHandler(void)
+	/*void USART2_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(USART2_IRQHandler, "USART2", 54, 0xD8);
-	}
+	}*/
 
 	/* [0xDC] USART3 Interrupt */
 	/*void USART3_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(USART3_IRQHandler, "USART3", 55, 0xDC);
 	}*/
+
+	
+	void UART4_IRQHandler(void) 
+	{ 
+		// 
+	}
+	
+	void UART5_IRQHandler(void) 
+	{ 
+		// 
+	}
 
 	/* [0xE0] EXTI Lines 10-15 Interrupt */
 	void EXTI15_10_IRQHandler(void)

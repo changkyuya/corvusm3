@@ -204,6 +204,14 @@ void debug(void)
   USART3 = (USART_TypeDef *) USART3_BASE;
 #endif /*_USART3 */
 
+#ifdef _UART4
+  UART4 = (USART_TypeDef *) UART4_BASE;
+#endif /*_UART4 */
+
+#ifdef _UART5
+  UART5 = (USART_TypeDef *) UART5_BASE;
+#endif /*_UART5 */
+
 /************************************* WWDG ***********************************/
 #ifdef _WWDG
   WWDG = (WWDG_TypeDef *)  WWDG_BASE;

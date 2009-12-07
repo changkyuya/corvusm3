@@ -50,10 +50,16 @@
 /* Define the hardware depending --------------------------------------------*/ 
 /* Map Pins to Serial 1 */
 #define  GPIO_TxPin1               GPIO_Pin_9
-#define  GPIO_RxPin1               GPIO_Pin_10
+#define  GPIO_RxPin1   			   GPIO_Pin_10       
+/* Map Pins to Serial 2 */
+#define  GPIO_TxPin2               GPIO_Pin_2
+#define  GPIO_RxPin2        	   GPIO_Pin_3
 /* Map Pins to Serial 3 */
 #define  GPIO_TxPin3               GPIO_Pin_10
 #define  GPIO_RxPin3               GPIO_Pin_11
+/* Map Pins to Serial 4 */
+#define  GPIO_TxPin4               GPIO_Pin_10
+#define  GPIO_RxPin4               GPIO_Pin_11
 /* Map Pin for LED 1 --> PC13 */
 #define LED PERIPHERAL_BIT(GPIOC->ODR, 13)			
 #define GPIO_LEDPIN GPIO_Pin_13
