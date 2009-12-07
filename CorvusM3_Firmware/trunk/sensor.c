@@ -43,15 +43,18 @@ void zeroGyro()
 	gyroZero[Y] = ADCSensorValue[GYRO_Y];
 	gyroZero[Z] = ADCSensorValue[GYRO_Z];
 	
-	Pause(100);
 	u8 i;
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 7; i++)
 	{
-		gyroZero[X] = (gyroZero[X] + ADCSensorValue[GYRO_X]) >> 1;
-		gyroZero[Y] = (gyroZero[Y] + ADCSensorValue[GYRO_Y]) >> 1;
-		gyroZero[Z] = (gyroZero[Z] + ADCSensorValue[GYRO_Z]) >> 1;
+		gyroZero[X] += ADCSensorValue[GYRO_X];
+		gyroZero[Y] += ADCSensorValue[GYRO_Y];
+		gyroZero[Z] += ADCSensorValue[GYRO_Z];
 		Pause(100);
 	}
+	
+	gyroZero[X] = gyroZero[X] >> 3; 
+	gyroZero[Y] = gyroZero[Y] >> 3;
+	gyroZero[Z] = gyroZero[Z] >> 3;
 	
 	char x [80];
 	sprintf(x,"Gyro-Zero:%d:%d:%d:\r\n",gyroZero[X],gyroZero[Y],gyroZero[Z]);
