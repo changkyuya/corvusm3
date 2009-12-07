@@ -33,6 +33,7 @@ extern vu16 receiverChannel[9];  //statemachine
 extern vu16 ADCSensorValue[7]; //initsystem
 extern volatile float gyroAngle[3];  //statemachine
 extern volatile float accAngle[2];  //statemachine
+extern volatile float copterAngle[3];  //statemachine
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
@@ -42,7 +43,7 @@ void doDebug()
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_ADC)
 	{
-		sprintf(x,"G-Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
+		sprintf(x,"Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
 		print_uart1(x);
 		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
 		print_uart1(x);
@@ -61,15 +62,21 @@ void doDebug()
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_SENSOR)
 	{
-		sprintf(x,"G-Gyro-ACC:1:%-.4f:",gyroAngle[X]);
+		sprintf(x,"G-A-C:1:%-.2f:",gyroAngle[X]);
 		print_uart1(x);
-		sprintf(x,"%-.4f:",gyroAngle[Y]);
+		sprintf(x,"%-.2f:",gyroAngle[Y]);
 		print_uart1(x);
-		sprintf(x,"%-.4f:",gyroAngle[Z]);
+		sprintf(x,"%-.2f:",gyroAngle[Z]);
 		print_uart1(x);
-		sprintf(x,"%-.4f:",accAngle[X]);
+		sprintf(x,"%-.2f:",accAngle[X]);
 		print_uart1(x);
-		sprintf(x,"%-.4f:\r\n",accAngle[Y]);
+		sprintf(x,"%-.2f:",accAngle[Y]);
+		print_uart1(x);
+		sprintf(x,"%-.2f:",copterAngle[X]);
+		print_uart1(x);
+		sprintf(x,"%-.2f:",copterAngle[Y]);
+		print_uart1(x);
+		sprintf(x,"%-.2f:\r\n",copterAngle[Z]);
 		print_uart1(x);
 	}
 	
@@ -78,7 +85,7 @@ void doDebug()
 	// if parameter value is 1 - 1. bit is set
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_REC)
 	{
-		sprintf(x,"R-conf-%d:%d:",getParameter(getParameter(PARA_HW) & 0x01),receiverChannel[0]);
+		sprintf(x,"RC-%d:%d:",getParameter(getParameter(PARA_HW) & 0x01),receiverChannel[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",receiverChannel[1]);
 		print_uart1(x);

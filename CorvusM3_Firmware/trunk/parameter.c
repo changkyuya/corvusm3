@@ -89,6 +89,7 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_X_90], 0x898); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Y_90], 0x898); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Z_90], 0x898); 
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 0x1F4); 
 	//#########################################################################
 	// info user over uart1
 	send(DEFAULT);

@@ -44,6 +44,7 @@ volatile float gyroAngle[3];
 //vs16 gyroAngle[3];
 volatile float accAngle[2];
 //vs16 accAngle[2];
+volatile float copterAngle[3];
 
 
 	
@@ -64,8 +65,8 @@ void statemachine(void)
 	
 	
 
-	getGyroValues(gyroAngle);
-	getACCAngles(accAngle);
+
+	getCopterAngles(gyroAngle, accAngle, copterAngle);
 	
 	
 	// flight states

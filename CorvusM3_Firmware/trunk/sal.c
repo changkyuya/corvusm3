@@ -43,7 +43,7 @@ void getACCAngles(volatile float * accAngle)
 }
 
 /* set gyro angle to start value acc-angle ----------------------------------*/
-void setGyroAngle(volatile float * gyroAngle)
+void setGyroAngles(volatile float * gyroAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -58,7 +58,7 @@ void setGyroAngle(volatile float * gyroAngle)
 
 
 /* get Gyro Angles ----------------------------------------------------------*/
-void getGyroValues(volatile float * gyroAngle)
+void getGyroAngles(volatile float * gyroAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -73,8 +73,20 @@ void getGyroValues(volatile float * gyroAngle)
 }
 
 
-
-
+/* get Copter Angle ---------------------------------------------------------*/
+void getCopterAngles(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle)
+{
+	/* decide receiver -> lookup parameterset */
+	if (getParameter(PARA_SW) & PARA_SW_ACC) 
+	{
+		getACCAnglesFilterACC(accAngle);
+		getCopterAnglesFilterACC(gyroAngle, accAngle, copterAngle);
+	}
+	else
+	{
+		// other Filter
+	}
+}
 
 
 

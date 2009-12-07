@@ -96,6 +96,7 @@ namespace CorvusM3
                 serial.Close();
                 serial.Dispose();
                 infoToolStripStatusLabel.Text = "connection closed";
+                dataTextBox.Text = "";
             }
         }
 

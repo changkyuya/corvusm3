@@ -33,8 +33,9 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void getACCAngles(volatile float * accAngle);
-void setGyroAngle(volatile float * gyroAngle);
-void getGyroValues(volatile float * gyroAngle);
+void setGyroAngles(volatile float * gyroAngle);
+void getGyroAngles(volatile float * gyroAngle);
+void getCopterAngles(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle);
 
 
 #endif /* __SAL_H */

@@ -30,7 +30,6 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[7];  //initsystem
-vu16 oldADCSensorValue[7];
 vu16 gyroZero[3];
 vu16 accZero[3];
 extern vu16 parameter[0xFF]; //parameter
@@ -81,19 +80,11 @@ void zeroACC()
 /* get GyroRawValues - calculate Gyrovalues and Baise --------------------------*/
 void getGyroRawValues(vs16 * gyroValues)
 {
-	s8 i;
-	
+
 	gyroValues[X] = ADCSensorValue[GYRO_X] - gyroZero[X];
 	gyroValues[Y] = ADCSensorValue[GYRO_Y] - gyroZero[Y];
 	gyroValues[Z] = ADCSensorValue[GYRO_Z] - gyroZero[Z];
 	
-	
-	
-	// save values for smooth
-	for (i = 0; i < 3; i++)
-	{
-		oldADCSensorValue[i] = ADCSensorValue[i];
-	}
 }
 
 
@@ -104,11 +95,5 @@ void getACCRawValues(vs16 * accValues)
 	accValues[Y] = ADCSensorValue[ACC_Y];
 	accValues[Z] = ADCSensorValue[ACC_Z];
 	
-	s8 i;
-	// save values for smooth
-	for (i = 3; i < 5; i++)
-	{
-		oldADCSensorValue[i] = ADCSensorValue[i];
-	}
 }
 

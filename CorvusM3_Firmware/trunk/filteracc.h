@@ -35,5 +35,6 @@
 void getACCAnglesFilterACC(volatile float * accAngle);
 void setGyroAngleFilterACC(volatile float * gyroAngle);
 void getGyroAnglesFilterACC(volatile float * gyroAngle);
+void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle);
 
 #endif /* __FILTERACC_H */

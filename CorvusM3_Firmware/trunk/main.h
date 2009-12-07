@@ -135,7 +135,8 @@
 #define PARA_GYRO_X_90		11
 #define PARA_GYRO_Y_90		12
 #define PARA_GYRO_Z_90		13
-#define USED_PARAMETER 		13
+#define PARA_ACC_FORCE		14
+#define USED_PARAMETER 		14
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02

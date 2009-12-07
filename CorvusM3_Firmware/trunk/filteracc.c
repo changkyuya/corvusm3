@@ -82,11 +82,34 @@ void getGyroAnglesFilterACC(volatile float * gyroAngle)
 	gyroAngle[Y] += gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90];
 	gyroAngle[Z] += gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90];
 	
+		
+	if (gyroAngle[Z] >= 360) 
+	{
+		gyroAngle[Z] -= 360.0;
+	}
+	if (gyroAngle[Z] < 0) 
+	{
+		gyroAngle[Z] = 360.0 - gyroAngle[Z];
+	}
+	
 	//char x [80];
 	//sprintf(x,"gyro raw value:%d:%d:%d\r\n",gyroAngle[X],gyroRawValues[X],gyroAngle[Z]);
 	//print_uart1(x);
 }
 
 
-
+/* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
+void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle)
+{
+	getGyroAnglesFilterACC(gyroAngle);
+	getACCAnglesFilterACC(accAngle);
+	
+	copterAngle[X] = ( accAngle[X] * (parameter[PARA_ACC_FORCE] / 10000.0 )) + ( gyroAngle[X] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 ));
+	copterAngle[Y] = ( accAngle[Y] * (parameter[PARA_ACC_FORCE] / 10000.0 )) + ( gyroAngle[Y] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 ));
+	copterAngle[Z] = gyroAngle[Z];
+	
+	// trimm gyro to new Angle
+	gyroAngle[X] = ( gyroAngle[X] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 )) + ( copterAngle[X] * (parameter[PARA_ACC_FORCE] / 10000.0 ));
+	gyroAngle[Y] = ( gyroAngle[Y] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 )) + ( copterAngle[Y] * (parameter[PARA_ACC_FORCE] / 10000.0 ));
+}
 

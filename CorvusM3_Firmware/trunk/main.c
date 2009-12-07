@@ -68,7 +68,7 @@ int main(void)
 	// wait 1 secound befor calibrate
 	Delay(1000);
 	zeroGyro();
-	setGyroAngle(gyroAngle);
+	setGyroAngles(gyroAngle);
 	
 	// function open ....
 	setLEDStatus(LED_BLINK);
