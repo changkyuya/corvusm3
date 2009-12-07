@@ -19,4 +19,4 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 11 || GYRO_X_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
 || 12 || GYRO_Y_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
 || 13 || GYRO_Z_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
-|| 14 || ACC_FORCE || 50 || 0-100 || Wirkung vom ACC auf den Gyro (0 ist nur Gyro) ||
+|| 14 || ACC_FORCE || 500 || 0-10000 || Wirkung vom ACC auf den Gyro (0 ist nur Gyro) ||
