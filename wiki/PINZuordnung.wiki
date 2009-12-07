@@ -8,7 +8,7 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PA00* : *Debug PIN*
   * *PA01* : Beeper
   * *PA02* : UART2_TX, ADC - frei
-  * *PA03* : UART2_RX, ADC - frei
+  * *PA03* : *RX-UART2 Spektrum Empfänger*
   * *PA04* : SPI1_NSS Baro
   * *PA05* : SPI1_SCK Baro
   * *PA06* : SPI1_MISO, ADC - frei
@@ -30,8 +30,8 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PB07* : I2C_SDA Kompass
   * *PB08* : Schaltausgang - frei
   * *PB09* : Schaltausgang - frei
-  * *PB10* : *TX-UART3 UART Regler*
-  * *PB11* : *RX-UART3 Spektrum Empfänger*
+  * *PB10* : *TX-UART3 UART Regler*  (optional I2C)
+  * *PB11* : RX-UART3 frei (optional I2C)
   * *PC00* : *Sensoren ACC / Gyro*
   * *PC01* : *Sensoren ACC / Gyro*
   * *PC02* : *Sensoren ACC / Gyro*
@@ -48,11 +48,5 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PD02* : UART5 RX - frei
   * *PC13* : *LED*
 
-== Infos ==
 
-*Optionale Zuordnung Regler (I2C) und Empfänger Spektrum*
-
-  * *PA03* : Spektrum Empfänger UART2-RX (optional wenn Regler I2C)
-  * *PB10* : TX an UART Regler (UART3 oder I2C)
-  * *PB11* : RX optional für Regler (UART3 oder I2C)
  
