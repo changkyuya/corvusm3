@@ -19,6 +19,7 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
  * dr ... Toggle Receiver on/off
  * da ... Toggle Sensor RAW on/off 
  * ds ... Toggle Sensor Data on/off
+ * dm ... Target Angles - Motors on/off
 
 *Parameter SET*<br />
  * sa ... Speichern der ACC-Ebenenwerte (auch im Flash)
