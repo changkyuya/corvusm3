@@ -30,6 +30,7 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[7];  //initsystem
+vu16 oldADCSensorValue[7]; // for smooth
 vu16 gyroZero[3];
 vu16 accZero[3];
 extern vu16 parameter[0xFF]; //parameter
@@ -55,10 +56,24 @@ void zeroGyro()
 	gyroZero[Y] = gyroZero[Y] >> 3;
 	gyroZero[Z] = gyroZero[Z] >> 3;
 	
+	setOldADC();
+
 	char x [80];
 	sprintf(x,"Gyro-Zero:%d:%d:%d:\r\n",gyroZero[X],gyroZero[Y],gyroZero[Z]);
 	print_uart1(x);
 }
+
+
+/* set old ADV Values to actual Values --------------------------------------*/
+void setOldADC()
+{
+	u8 i;
+	for (i = 0; i < 7; i++)
+	{
+		oldADCSensorValue[i] = ADCSensorValue[i];
+	}
+}
+
 
 /* Set ACC Values to Zero ---------------------------------------------------*/
 void zeroACC()
@@ -81,19 +96,29 @@ void zeroACC()
 void getGyroRawValues(vs16 * gyroValues)
 {
 
-	gyroValues[X] = ADCSensorValue[GYRO_X] - gyroZero[X];
-	gyroValues[Y] = ADCSensorValue[GYRO_Y] - gyroZero[Y];
-	gyroValues[Z] = ADCSensorValue[GYRO_Z] - gyroZero[Z];
+	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X], oldADCSensorValue[GYRO_X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
+	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y], oldADCSensorValue[GYRO_Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
+	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z], oldADCSensorValue[GYRO_Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
 	
+	u8 i;
+	for (i = 0; i < 3; i++)
+	{
+		oldADCSensorValue[i] = ADCSensorValue[i];
+	}
 }
 
 
 /* get ACCRawValues ---------------------------------------------------------*/
 void getACCRawValues(vs16 * accValues)
 {
-	accValues[X] = ADCSensorValue[ACC_X];
-	accValues[Y] = ADCSensorValue[ACC_Y];
-	accValues[Z] = ADCSensorValue[ACC_Z];
+	accValues[X] = smoothValue(ADCSensorValue[ACC_X], oldADCSensorValue[ACC_X], parameter[PARA_SMOOTH_ACC]);
+	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y], oldADCSensorValue[ACC_Y], parameter[PARA_SMOOTH_ACC]);
+	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z], oldADCSensorValue[ACC_Z], parameter[PARA_SMOOTH_ACC]);
 	
+	u8 i;
+	for (i = 3; i < 6; i++)
+	{
+		oldADCSensorValue[i] = ADCSensorValue[i];
+	}
 }
 
