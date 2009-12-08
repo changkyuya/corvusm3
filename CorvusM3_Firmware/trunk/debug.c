@@ -34,6 +34,8 @@ extern vu16 ADCSensorValue[7]; //initsystem
 extern volatile float gyroAngle[3];  //statemachine
 extern volatile float accAngle[2];  //statemachine
 extern volatile float copterAngle[3];  //statemachine
+extern volatile float targetAngle[3]; //statemachine
+extern volatile char motor[5]; //statemachine
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
@@ -103,6 +105,27 @@ void doDebug()
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",receiverChannel[8]);
 		print_uart1(x);	
+	}
+	
+
+	/* Debug output for receiver channels */
+	// if parameter value is 1 - 1. bit is set
+	if (getParameter(PARA_DEBUG) & PARA_DEBUG_MOT)
+	{
+		sprintf(x,"G-TarAngle-Mot-1:%-.2f:",targetAngle[0]);
+		print_uart1(x);
+		sprintf(x,"%-.2f:",targetAngle[1]);
+		print_uart1(x);
+		sprintf(x,"%-.2f:",targetAngle[2]);
+		print_uart1(x);
+		sprintf(x,"%d:",motor[1]);
+		print_uart1(x);
+		sprintf(x,"%d:",motor[2]);
+		print_uart1(x);
+		sprintf(x,"%d:",motor[3]);
+		print_uart1(x);
+		sprintf(x,"%d:\r\n",motor[4]);
+		print_uart1(x);
 	}
 	
 }

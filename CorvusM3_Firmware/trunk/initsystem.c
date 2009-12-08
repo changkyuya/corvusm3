@@ -40,7 +40,7 @@ void initSystem()
 	initUART1();
 	initUART2();
 	initUART3();
-	initUART4();
+	//initUART4();
 	/* initDMA for Sensors */
 	initDMA();
 	/* initADC for Sensros */
@@ -358,11 +358,13 @@ void NVIC_Configuration(void)
 	NVIC_Init(&NVIC_InitStructure);
 	
 	/* Enable the USART4 Interrupt --------------------------------------------*/
+	/*
 	NVIC_InitStructure.NVIC_IRQChannel = UART4_IRQChannel;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 4;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
+	*/
 	
 	/* Interrupt for Mainloop -----------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQChannel;

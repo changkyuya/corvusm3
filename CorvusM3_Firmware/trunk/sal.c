@@ -88,5 +88,15 @@ void getCopterAngles(volatile float * gyroAngle, volatile float * accAngle, vola
 	}
 }
 
-
-
+void mapReceiverValues(vu16 * receiverChannel, volatile float * targetAngle)
+{
+	/* decide receiver -> lookup parameterset */
+	if (getParameter(PARA_SW) & PARA_SW_ACC) 
+	{
+		mapReceiverValuesFilterACC(receiverChannel, targetAngle);
+	}
+	else
+	{
+		// other Filter
+	}
+}

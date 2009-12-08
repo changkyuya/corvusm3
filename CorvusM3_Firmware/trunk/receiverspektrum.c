@@ -46,12 +46,12 @@ void getSpektrumChannels(vu16 * receiverChannel)
 	// each 11ms one frame comes - 
 	if ((oldSpektrumMsCount + 12) > msCount)
 	{
-		receiverChannel[0] = spektrumBytes[0];
+		receiverChannel[RC_OK] = spektrumBytes[0];
 	}
 	// interrupt for uart3 is delay - no signal
 	else
 	{
-		receiverChannel[0] = SPEKTRUM_NO;
+		receiverChannel[RC_OK] = SPEKTRUM_NO;
 	}
 	// first 2 bytes are not used
 	for (i = 2; i < 17; i++)
@@ -64,31 +64,31 @@ void getSpektrumChannels(vu16 * receiverChannel)
 			if (receiverSpektrumChannel[i] < 1024)
 			{
 				// resolution is 10bit ... 0 - 1024 ... add 988 for middle
-				// Nick
+				// Nick 3
 				receiverChannel[3] = smoothValue(constrain(receiverSpektrumChannel[i] + 988, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
 				oldReceiverSpektrumChannel[i] = receiverChannel[3];
-				//receiverChannel[3] = constrain(receiverSpektrumChannel[i] + 988, 1000, 2000);
+				//receiverChannel[NICK] = constrain(receiverSpektrumChannel[i] + 988, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 2048)
 			{
-				// Pitch
+				// Pitch 1
 				receiverChannel[1] = smoothValue(constrain(receiverSpektrumChannel[i] - 36, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
 				oldReceiverSpektrumChannel[i] = receiverChannel[1];
-				//receiverChannel[1] = constrain(receiverSpektrumChannel[i] - 36, 1000, 2000);
+				//receiverChannel[PITCH] = constrain(receiverSpektrumChannel[i] - 36, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 3072)
 			{
-				// Roll
+				// Roll 2
 				receiverChannel[2] = smoothValue(constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
 				oldReceiverSpektrumChannel[i] = receiverChannel[2];
-				//receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
+				//receiverChannel[ROLL] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
 			}
 			else if (receiverSpektrumChannel[i] < 4096)
 			{
-				//Yaw
+				//Yaw 4
 				receiverChannel[4] = smoothValue(constrain(receiverSpektrumChannel[i] - 2084, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
 				oldReceiverSpektrumChannel[i] = receiverChannel[4];
-				//receiverChannel[2] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
+				//receiverChannel[YAW] = constrain(receiverSpektrumChannel[i] - 2060, 1000, 2000);
 			}
 		}
 	}

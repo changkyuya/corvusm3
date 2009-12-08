@@ -71,7 +71,14 @@ namespace CorvusM3
             //serial.RtsEnable = true;
             serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
             serial.ReadTimeout = 100;
-            serial.Open();
+            try
+            {
+                serial.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             infoToolStripStatusLabel.Text = "connection open";
         }
 

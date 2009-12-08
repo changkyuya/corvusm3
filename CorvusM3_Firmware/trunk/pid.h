@@ -20,22 +20,15 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __FILTERACC_H
-#define __FILTERACC_H
+#ifndef __PID_H
+#define __PID_H
 
 #include "main.h"
-
-/* Struct -------------------------------------------------------------------*/
-
 
 /* Define --------------------------------------------------------------------*/
 
 
 /* Function prototypes -------------------------------------------------------*/
-void getACCAnglesFilterACC(volatile float * accAngle);
-void setGyroAngleFilterACC(volatile float * gyroAngle);
-void getGyroAnglesFilterACC(volatile float * gyroAngle);
-void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle);
-void mapReceiverValuesFilterACC(vu16 * receiverChannel, volatile float * targetAngle);
 
-#endif /* __FILTERACC_H */
+
+#endif /* __PID_H */

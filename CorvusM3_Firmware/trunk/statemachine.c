@@ -37,9 +37,10 @@ extern vu16 ADCSensorValue[7];  //initsystem
 vu32 msCount = 0;
 vu32 msOldCount = 0;
 vu16 receiverChannel[9]; 
+volatile float targetAngle[3];
 extern vu16 parameter[0xFF]; //parameter
 u8 flightState = FLIGHT_START;
-volatile char motor[5]; //blmc
+volatile char motor[5]; 
 volatile float gyroAngle[3];
 //vs16 gyroAngle[3];
 volatile float accAngle[2];
@@ -80,12 +81,12 @@ void statemachine(void)
 	{
 		getChannels(receiverChannel);
 		// test if valid signal
-
+		mapReceiverValues(receiverChannel, targetAngle);
 	}
 
 	// only for test brushless controller !
 	// map receiverChannel 1 to BLMC Motor 1
-	motor[1] = map(receiverChannel[1],1000,2000,0,200);
+	motor[1] = map(receiverChannel[PITCH],1000,2000,0,200);
 	motor[2] = 0x00;
 	motor[3] = 0x00;
 	motor[4] = 0x00;
@@ -93,8 +94,8 @@ void statemachine(void)
 	
 	//only for test servo !
 	// map channel 1 to servo 1
-	setServoValue(0, receiverChannel[1]);
-	setServoValue(1, receiverChannel[2]);
+	setServoValue(0, receiverChannel[PITCH]);
+	setServoValue(1, receiverChannel[ROLL]);
 	
 
 	

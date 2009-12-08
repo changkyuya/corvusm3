@@ -119,6 +119,12 @@
 #define PPM_OK 		1
 #define SPEKTRUM_NO		0
 #define SPEKTRUM_OK 	1
+/* Receiver Channels */
+#define RC_OK		0
+#define PITCH		1
+#define ROLL		2
+#define NICK		3
+#define YAW			4
 
 /* define Parameter Array */
 #define PARA_SET			0
@@ -142,6 +148,7 @@
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02
 #define PARA_DEBUG_SENSOR 	0x04
+#define PARA_DEBUG_MOT 		0x08
 /* define Para HW values */
 #define PARA_HW_PPM			0x00
 #define PARA_HW_SPEKTRUM	0x01

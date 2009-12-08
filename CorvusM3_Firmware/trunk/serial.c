@@ -165,7 +165,7 @@ void USART2_IRQHandler(void)
 {
 	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 	{
-		RxBuffer2[RxInCounter2++] = (USART_ReceiveData(USART2) & 0x7F);
+		u8 data = (USART_ReceiveData(USART2)); // & 0x7F);
 		
 		/* 	find gap
 		there is a gap all 16 byte with 11ms
@@ -185,6 +185,9 @@ void USART2_IRQHandler(void)
 			else if (byteCount == 33)
 			{
 				spektrumBytes[0] = SPEKTRUM_OK;
+				// for debug
+				//TxBuffer1[TxInCounter1++] = '\r';
+				//TxBuffer1[TxInCounter1++] = '\n';
 				// start new frame
 				byteCount = 1;
 			}
@@ -196,10 +199,10 @@ void USART2_IRQHandler(void)
 			}
 		}
 		
-		spektrumBytes[byteCount++] = RxBuffer2[RxOutCounter2++];
+		spektrumBytes[byteCount++] = data;
 
 		//test receiver output
-		//TxBuffer1[TxInCounter1++] = spektrumBytes[byteCount-1];
+		//TxBuffer1[TxInCounter1++] = data;
 		//USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		
 		oldSpektrumMsCount = msCount;
