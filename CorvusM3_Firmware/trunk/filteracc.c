@@ -104,12 +104,12 @@ void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAn
 	getGyroAnglesFilterACC(gyroAngle);
 	getACCAnglesFilterACC(accAngle);
 	
-	copterAngle[X] = ( accAngle[X] * (parameter[PARA_ACC_FORCE] / 10000.0 )) + ( gyroAngle[X] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 ));
-	copterAngle[Y] = ( accAngle[Y] * (parameter[PARA_ACC_FORCE] / 10000.0 )) + ( gyroAngle[Y] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 ));
+	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
+	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
 	copterAngle[Z] = gyroAngle[Z];
 	
 	// trimm gyro to new Angle
-	gyroAngle[X] = ( gyroAngle[X] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 )) + ( copterAngle[X] * (parameter[PARA_ACC_FORCE] / 10000.0 ));
-	gyroAngle[Y] = ( gyroAngle[Y] * (1 - parameter[PARA_ACC_FORCE] / 10000.0 )) + ( copterAngle[Y] * (parameter[PARA_ACC_FORCE] / 10000.0 ));
+	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
+	gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], parameter[PARA_GYRO_CORR]); 
 }
 

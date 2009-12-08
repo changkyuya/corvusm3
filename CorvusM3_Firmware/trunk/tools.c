@@ -69,6 +69,13 @@ u16 smoothValue(u16 actual, u16 previous, u16 smooth)
 }
 
 
+/* weighting values ---------------------------------------------------------*/
+float weightingValues(float first, float secound, u16 weightingFirst) 
+{
+	return (first * (weightingFirst / 10000.0 )) + ( secound * (1 - weightingFirst / 10000.0 ));
+}
+
+
 /* math.h atan2 does not work - own atan2 -----------------------------------*/
 /* code from http://www.dspguru.com/dsp/tricks/fixed-point-atan2-with-self-normalization */
 float fastatan2(float y, float x)
