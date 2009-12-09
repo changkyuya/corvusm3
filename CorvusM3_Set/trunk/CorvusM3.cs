@@ -572,7 +572,7 @@ namespace CorvusM3
                     channelValues[1] = 1500;
                     channelValues[2] = 1500;
                     channelValues[3] = 1500;
-                    steeringTimer.Enabled = true;
+                    steeringTimer.Start();
                 }
                 else
                 {
@@ -582,7 +582,7 @@ namespace CorvusM3
                     nickRollRadioButton.Checked = false;
                     yawTrackBar.Value = 1500;
                     pitchTrackBar.Value = 1000;
-                    steeringTimer.Enabled = false;
+                    steeringTimer.Stop();
                 }
             } 
             if (on == true)

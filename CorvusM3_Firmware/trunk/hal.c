@@ -28,6 +28,9 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 receiverPCChannel[9]; //comm
+extern vu8 errorCode; //statemachine
+extern vu32 msCount; //statemachine
+extern vu32 msLastPCRC; //comm
 
 /* fill channels in Struc ---------------------------------------------------*/
 void getChannels(vu16 *receiverChannel)
@@ -36,23 +39,28 @@ void getChannels(vu16 *receiverChannel)
 	if (isSpektrumOnline() != 0)
 	{
 		getSpektrumChannels(receiverChannel);
+		errorCode &= ~ERROR_RC;
 	} 
 	// PPM is online - Spektrum not
 	else if (isPPMonline() != 0)
 	{
 		getPPMChannels(receiverChannel);
+		errorCode &= ~ERROR_RC;
 	} 
-	else if (getParameter(PARA_HW) & PARA_HW_PC) 
+	else if ((getParameter(PARA_HW) & PARA_HW_PC) && (msLastPCRC + 500) > msCount) //if signal is all 500ms
 	{
 		receiverChannel[0] = receiverPCChannel[0];
 		receiverChannel[1] = receiverPCChannel[1];
 		receiverChannel[2] = receiverPCChannel[2];
 		receiverChannel[3] = receiverPCChannel[3];
 		receiverChannel[4] = receiverPCChannel[4];
+		errorCode &= ~ERROR_RC;
 	}
 	else
 	{
 		// no signal - panic!
+		receiverChannel[0] = 0;
+		errorCode |= ERROR_RC;
 	}
 
 	

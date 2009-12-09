@@ -46,6 +46,7 @@ volatile float gyroAngle[3];
 volatile float accAngle[2];
 //vs16 accAngle[2];
 volatile float copterAngle[3];
+vu8 errorCode;
 
 
 	
@@ -65,24 +66,36 @@ void statemachine(void)
 	*DBG = 1;
 	
 	
+	/* statemachine
+	power on
+	init system
+	calibrate gyro
+	check rc
+	start motors
+	flight
+	stop motors -> check rc
+	*/
+	switch (flightState)
+	{
+		case FLIGHT_START:
+			// do something - beep?
+			flightState = FLIGHT_RC;
+			break;
+		
+		case FLIGHT_RC:
+			getChannels(receiverChannel);
+			// test if valid signal
+			mapReceiverValues(receiverChannel, targetAngle);
+			break;
+			
+		default:
+			break;
+	}
+	
 
+	
 
 	getCopterAngles(gyroAngle, accAngle, copterAngle);
-	
-	
-	// flight states
-	if (flightState == FLIGHT_START)
-	{
-		// do something - beep?
-		flightState = FLIGHT_RC;
-	}
-	// first step is to activate RC
-	if (flightState > FLIGHT_START)
-	{
-		getChannels(receiverChannel);
-		// test if valid signal
-		mapReceiverValues(receiverChannel, targetAngle);
-	}
 
 	// only for test brushless controller !
 	// map receiverChannel 1 to BLMC Motor 1
@@ -94,8 +107,8 @@ void statemachine(void)
 	
 	//only for test servo !
 	// map channel 1 to servo 1
-	setServoValue(0, receiverChannel[PITCH]);
-	setServoValue(1, receiverChannel[ROLL]);
+	setServoValue(4, receiverChannel[PITCH]);
+	setServoValue(3, receiverChannel[ROLL]);
 	
 
 	

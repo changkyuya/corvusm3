@@ -35,6 +35,8 @@ extern vu16 parameter[0xFF]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
 extern volatile float gyroAngle[3]; //statemachine
 vu16 receiverPCChannel[9];
+extern vu32 msCount; //statemachine
+vu32 msLastPCRC;
 
 
 char line[80];
@@ -249,11 +251,14 @@ void dofComm()
 /* we get channels from PC tool ---------------------------------------------*/
 void doRCComm()
 {
+
 	receiverPCChannel[0] = 1;
 	receiverPCChannel[1] = readInt(1);
 	receiverPCChannel[2] = readInt(6);
 	receiverPCChannel[3] = readInt(11);
 	receiverPCChannel[4] = readInt(16);
+	
+	msLastPCRC = msCount;
 }
 
 

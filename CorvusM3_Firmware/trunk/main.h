@@ -125,8 +125,10 @@
 #define ROLL		2
 #define NICK		3
 #define YAW			4
-
-/* define Parameter Array */
+/* define error codes -------------------------------------------------------*/
+#define ERROR_AKKU			1
+#define ERROR_RC			2
+/* define Parameter Array ---------------------------------------------------*/
 #define PARA_SET			0
 #define PARA_DEBUG 			1
 #define PARA_HW				2

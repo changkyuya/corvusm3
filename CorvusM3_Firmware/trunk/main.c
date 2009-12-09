@@ -41,7 +41,7 @@ extern vu16 ADCSensorValue[7];  //initsystem
 extern vu16 receiverChannel[9];  //statemachine
 extern volatile char motor[5]; //blmc
 extern volatile float gyroAngle[3]; //statemachine
-
+extern vu8 errorCode; //statemachine
 
 
 	
@@ -72,13 +72,7 @@ int main(void)
 	
 	// function open ....
 	setLEDStatus(LED_BLINK);
-
-	// test channels not used for test
-	getChannels(receiverChannel);
-	if (receiverChannel[0])
-	{
-		setLEDStatus(LED_ON);
-	}
+	
 	
 	// Controlloop --> statemachine() --> Timer 3
 	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
@@ -86,22 +80,16 @@ int main(void)
 	while (1)
 	{
 
-
-
-
-	
-		
 		// test accu
 		if (getParameter(PARA_VOLT) > ADCSensorValue[VOLT])
 		{
 			// low accu
-			setLEDStatus(LED_FLASH);
+			errorCode |= ERROR_AKKU; // set bit
 		}
 		else
 		{
 			// accu OK
-			// must be overritten by flight errors like no receiver!!!!!!!!!!
-			//setLEDStatus(LED_ON);
+			errorCode &= ~ERROR_AKKU; // delete bit
 		}
 		
 		// if something in RxBuffer
@@ -114,6 +102,20 @@ int main(void)
 		if (msCount % 50 == 0)
 		{
 			doDebug();
+		}
+		
+		/* do LED -----------------------------------------------------------*/
+		if (errorCode == 0)
+		{
+			setLEDStatus(LED_ON);
+		}
+		else if (errorCode < 2) // akku
+		{
+			setLEDStatus(LED_BLINK);
+		}
+		else if (errorCode < 4) // rc
+		{
+			setLEDStatus(LED_FLASH);
 		}
 		
 	}
