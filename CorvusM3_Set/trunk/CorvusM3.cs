@@ -589,14 +589,14 @@ namespace CorvusM3
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    yawTrackBar.Value -= 50;
-                    if (yawTrackBar.Value < 1300) yawTrackBar.Value = 1300;
+                    yawTrackBar.Value += 50;
+                    if (yawTrackBar.Value > 1700) yawTrackBar.Value = 1700;
                     
                 }
                 if (e.Button == MouseButtons.Right)
                 {
-                    yawTrackBar.Value += 50;
-                    if (yawTrackBar.Value > 1700) yawTrackBar.Value = 1700;
+                    yawTrackBar.Value -= 50;
+                    if (yawTrackBar.Value < 1300) yawTrackBar.Value = 1300;
                 }
                 channelValues[3] = yawTrackBar.Value;
             }
@@ -618,8 +618,8 @@ namespace CorvusM3
             if (on == true)
             {
                 nickRollRadioButton.Location = new Point(e.X-5, e.Y-5);
-                channelValues[1] = Math.Round(e.X * 2.8 + 10) + 1000;
-                channelValues[2] = Math.Round(e.X * 2.8 + 10) + 1000;
+                channelValues[1] = 2000 - Math.Round(e.X * 2.8 + 10);
+                channelValues[2] = 2000 - Math.Round(e.Y * 2.8 + 10);
                 
             }
         }

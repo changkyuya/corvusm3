@@ -433,6 +433,7 @@
             this.yawTrackBar.Maximum = 2000;
             this.yawTrackBar.Minimum = 1000;
             this.yawTrackBar.Name = "yawTrackBar";
+            this.yawTrackBar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.yawTrackBar.Size = new System.Drawing.Size(338, 45);
             this.yawTrackBar.SmallChange = 50;
             this.yawTrackBar.TabIndex = 1;
