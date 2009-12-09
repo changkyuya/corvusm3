@@ -35,6 +35,18 @@ vu16 oldReceiverSpektrumChannel[17];
 extern vu32 oldSpektrumMsCount; //serial, for failsave
 
 
+/* return if spektrum is valid ----------------------------------------------*/
+u8 isSpektrumOnline()
+{
+	// OK Byte - test if uart3 interrupt is running
+	// each 11ms one frame comes - 
+	if ((oldSpektrumMsCount + 12) > msCount)
+	{
+		return 1;
+	}
+	return 0;
+}
+
 
 /* read receiverChannels ----------------------------------------------------*/
 void getSpektrumChannels(vu16 * receiverChannel)

@@ -34,5 +34,6 @@
 /* Function prototypes -------------------------------------------------------*/
 void TIM1_CC_IRQHandler(void);
 void getPPMChannels(vu16 *receiverChannel);
+u8 isPPMonline(void);
 
 #endif /* __RECEIVERPPM_H */

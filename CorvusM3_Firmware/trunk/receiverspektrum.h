@@ -30,5 +30,6 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void getSpektrumChannels(vu16 *receiverChannel);
+u8 isSpektrumOnline(void);
 
 #endif /* __RECEIVERSPEKTRUM_H */

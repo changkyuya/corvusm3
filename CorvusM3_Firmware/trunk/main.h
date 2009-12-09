@@ -150,8 +150,8 @@
 #define PARA_DEBUG_SENSOR 	0x04
 #define PARA_DEBUG_MOT 		0x08
 /* define Para HW values */
-#define PARA_HW_PPM			0x00
-#define PARA_HW_SPEKTRUM	0x01
+#define PARA_HW_RC			0x00
+#define PARA_HW_PC			0x01
 /* define Para SW values */
 #define PARA_SW_HH			0x00
 #define PARA_SW_ACC			0x01

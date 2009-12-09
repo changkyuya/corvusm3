@@ -42,12 +42,14 @@ namespace CorvusM3
         string dataLine = "";
         double counter = 0;
         bool on = false;
+        double[] channelValues = new double[8];
         
         
 
         public CorvusM3()
         {
             InitializeComponent();
+            
             CorvusM3.CheckForIllegalCrossThreadCalls = false;
             setupGraph();
             setupGraphReceiver();
@@ -566,6 +568,11 @@ namespace CorvusM3
                     nickRollRadioButton.Checked = true;
                     yawTrackBar.Value = 1500;
                     pitchTrackBar.Value = 1000;
+                    channelValues[0] = 1000;
+                    channelValues[1] = 1500;
+                    channelValues[2] = 1500;
+                    channelValues[3] = 1500;
+                    steeringTimer.Enabled = true;
                 }
                 else
                 {
@@ -575,21 +582,23 @@ namespace CorvusM3
                     nickRollRadioButton.Checked = false;
                     yawTrackBar.Value = 1500;
                     pitchTrackBar.Value = 1000;
+                    steeringTimer.Enabled = false;
                 }
             } 
             if (on == true)
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    yawTrackBar.Value -= 100;
-                    if (yawTrackBar.Value < 1400) yawTrackBar.Value = 1400;
+                    yawTrackBar.Value -= 50;
+                    if (yawTrackBar.Value < 1300) yawTrackBar.Value = 1300;
+                    
                 }
                 if (e.Button == MouseButtons.Right)
                 {
-                    yawTrackBar.Value += 100;
-                    if (yawTrackBar.Value > 1600) yawTrackBar.Value = 1600;
+                    yawTrackBar.Value += 50;
+                    if (yawTrackBar.Value > 1700) yawTrackBar.Value = 1700;
                 }
-                
+                channelValues[3] = yawTrackBar.Value;
             }
         }
 
@@ -609,7 +618,9 @@ namespace CorvusM3
             if (on == true)
             {
                 nickRollRadioButton.Location = new Point(e.X-5, e.Y-5);
-                commandTextBox.Text = e.X.ToString() + " - " + e.Y.ToString();
+                channelValues[1] = Math.Round(e.X * 2.8 + 10) + 1000;
+                channelValues[2] = Math.Round(e.X * 2.8 + 10) + 1000;
+                
             }
         }
 
@@ -617,13 +628,27 @@ namespace CorvusM3
 
             if (on == true)
             {
-                int newPitch = pitchTrackBar.Value + e.Delta/3;
+                int newPitch = pitchTrackBar.Value + e.Delta/2-10;
                 if (newPitch < 1000) newPitch = 1000;
                 if (newPitch > 2000) newPitch = 2000;
                 pitchTrackBar.Value = newPitch;
-
+                channelValues[0] = newPitch;
             }
 
+        }
+
+        private void steeringTimer_Tick(object sender, EventArgs e)
+        {
+            commandTextBox.Text = "~" + channelValues[0].ToString() + ":" + channelValues[1].ToString() + ":" + channelValues[2].ToString() + ":" + channelValues[3].ToString();
+            try
+            {
+                if (serial.IsOpen)
+                {
+                    serial.WriteLine("~" + channelValues[0].ToString() + ":" + channelValues[1].ToString() + ":" + channelValues[2].ToString() + ":" + channelValues[3].ToString());
+                }
+            }
+            catch
+            {}
         }
 
 

@@ -34,6 +34,7 @@
 extern vu16 parameter[0xFF]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
 extern volatile float gyroAngle[3]; //statemachine
+vu16 receiverPCChannel[9];
 
 
 char line[80];
@@ -99,6 +100,10 @@ void doComm()
 		// laod default parameter
 		case '#':
 			loadDefault();
+			break;
+		// RC signal from Tool
+		case '~':
+			doRCComm();
 			break;
 		default:
 			send(HELP);
@@ -238,6 +243,17 @@ void dofComm()
 	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
 	writeFlashParameter(set, readInt(4));
 	send(OK);
+}
+
+
+/* we get channels from PC tool ---------------------------------------------*/
+void doRCComm()
+{
+	receiverPCChannel[0] = 1;
+	receiverPCChannel[1] = readInt(1);
+	receiverPCChannel[2] = readInt(6);
+	receiverPCChannel[3] = readInt(11);
+	receiverPCChannel[4] = readInt(16);
 }
 
 

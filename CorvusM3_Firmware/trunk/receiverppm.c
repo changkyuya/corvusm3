@@ -31,9 +31,15 @@ vu16 	IC2Value;
 vu16 	lastIC2Value;
 vu8		channelCount;
 extern vu16 parameter[0xFF]; //parameter
-
 vu16 receiverPPMChannel[9];
 vu16 oldReceiverPPMChannel[9];
+
+
+/* return if ppm is valid ---------------------------------------------------*/
+u8 isPPMonline()
+{
+	return (u8)receiverPPMChannel[0];
+}
 
 
 /* read and trimm receiverChannels --------------------------------------------------*/

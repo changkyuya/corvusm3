@@ -27,21 +27,35 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-
+extern vu16 receiverPCChannel[9]; //comm
 
 /* fill channels in Struc ---------------------------------------------------*/
 void getChannels(vu16 *receiverChannel)
 {
-	/* decide receiver -> lookup parameterset */
-	if (getParameter(PARA_HW) & PARA_HW_SPEKTRUM) 
+	// spektrum is online - PPM not
+	if (isSpektrumOnline() != 0)
 	{
 		getSpektrumChannels(receiverChannel);
+	} 
+	// PPM is online - Spektrum not
+	else if (isPPMonline() != 0)
+	{
+		getPPMChannels(receiverChannel);
+	} 
+	else if (getParameter(PARA_HW) & PARA_HW_PC) 
+	{
+		receiverChannel[0] = receiverPCChannel[0];
+		receiverChannel[1] = receiverPCChannel[1];
+		receiverChannel[2] = receiverPCChannel[2];
+		receiverChannel[3] = receiverPCChannel[3];
+		receiverChannel[4] = receiverPCChannel[4];
 	}
 	else
 	{
-		getPPMChannels(receiverChannel);
+		// no signal - panic!
 	}
-	 // no valid channels -> Set CopterState
+
+	
 }
 
 

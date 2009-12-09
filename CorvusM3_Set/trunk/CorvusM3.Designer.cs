@@ -66,6 +66,7 @@
             this.yawTrackBar = new System.Windows.Forms.TrackBar();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
+            this.steeringTimer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -412,28 +413,30 @@
             // pitchTrackBar
             // 
             this.pitchTrackBar.BackColor = System.Drawing.Color.White;
+            this.pitchTrackBar.LargeChange = 50;
             this.pitchTrackBar.Location = new System.Drawing.Point(361, 12);
             this.pitchTrackBar.Maximum = 2000;
             this.pitchTrackBar.Minimum = 1000;
             this.pitchTrackBar.Name = "pitchTrackBar";
             this.pitchTrackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.pitchTrackBar.Size = new System.Drawing.Size(45, 339);
-            this.pitchTrackBar.SmallChange = 100;
+            this.pitchTrackBar.SmallChange = 50;
             this.pitchTrackBar.TabIndex = 2;
-            this.pitchTrackBar.TickFrequency = 100;
+            this.pitchTrackBar.TickFrequency = 50;
             this.pitchTrackBar.Value = 1000;
             // 
             // yawTrackBar
             // 
             this.yawTrackBar.BackColor = System.Drawing.Color.White;
+            this.yawTrackBar.LargeChange = 50;
             this.yawTrackBar.Location = new System.Drawing.Point(8, 359);
             this.yawTrackBar.Maximum = 2000;
             this.yawTrackBar.Minimum = 1000;
             this.yawTrackBar.Name = "yawTrackBar";
             this.yawTrackBar.Size = new System.Drawing.Size(338, 45);
-            this.yawTrackBar.SmallChange = 100;
+            this.yawTrackBar.SmallChange = 50;
             this.yawTrackBar.TabIndex = 1;
-            this.yawTrackBar.TickFrequency = 100;
+            this.yawTrackBar.TickFrequency = 50;
             this.yawTrackBar.Value = 1500;
             // 
             // tabPage5
@@ -453,6 +456,11 @@
             this.propertyGrid.Size = new System.Drawing.Size(634, 401);
             this.propertyGrid.TabIndex = 0;
             // 
+            // steeringTimer
+            // 
+            this.steeringTimer.Interval = 10;
+            this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
+            // 
             // CorvusM3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -464,6 +472,8 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "CorvusM3";
             this.Text = "CorvusM3";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseMove);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -524,6 +534,7 @@
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.Timer steeringTimer;
 
 
 
