@@ -28,6 +28,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.IO;
 using ZedGraph;
 using System.Globalization;
 using System.Configuration;
@@ -43,6 +44,7 @@ namespace CorvusM3
         double counter = 0;
         bool on = false;
         double[] channelValues = new double[8];
+        Parameter parm = new Parameter();
         
         
 
@@ -53,7 +55,6 @@ namespace CorvusM3
             CorvusM3.CheckForIllegalCrossThreadCalls = false;
             setupGraph();
             setupGraphReceiver();
-            Parameter parm = new Parameter();
             propertyGrid.SelectedObject = parm;
             
             foreach ( string port in Einstellungen.getPorts) {
@@ -649,6 +650,35 @@ namespace CorvusM3
             }
             catch
             {}
+        }
+
+        private void saveFileButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.ShowDialog();
+            string file = fd.FileName;
+            StreamWriter sw = new StreamWriter(file);
+            for (int i = 0; i <= parm.maxParameter; i++ )
+            {
+                sw.WriteLine("Para[" + i.ToString("000") + "]:" + parm.parameter[i]);
+            }
+            sw.Close();
+        }
+
+        private void loadFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.Multiselect = false;
+            of.ShowDialog();
+            string file = of.FileName;
+            StreamReader sr = new StreamReader(file);
+            string line;
+            int count = 0;
+            while ((line = sr.ReadLine()) != null)
+            {
+                parm.parameter[count++] = Convert.ToInt32(line.Substring(10));
+            }
+            propertyGrid.Refresh();
         }
 
 

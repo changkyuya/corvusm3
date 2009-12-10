@@ -65,13 +65,13 @@
             this.pitchTrackBar = new System.Windows.Forms.TrackBar();
             this.yawTrackBar = new System.Windows.Forms.TrackBar();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.saveFileButton = new System.Windows.Forms.Button();
+            this.loadFileButton = new System.Windows.Forms.Button();
+            this.flashButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.loadButton = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
-            this.loadButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.flashButton = new System.Windows.Forms.Button();
-            this.loadFileButton = new System.Windows.Forms.Button();
-            this.saveFileButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -460,6 +460,53 @@
             this.tabPage5.Text = "Parameter";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // saveFileButton
+            // 
+            this.saveFileButton.Location = new System.Drawing.Point(656, 365);
+            this.saveFileButton.Name = "saveFileButton";
+            this.saveFileButton.Size = new System.Drawing.Size(105, 28);
+            this.saveFileButton.TabIndex = 5;
+            this.saveFileButton.Text = "save File ...";
+            this.saveFileButton.UseVisualStyleBackColor = true;
+            this.saveFileButton.Click += new System.EventHandler(this.saveFileButton_Click);
+            // 
+            // loadFileButton
+            // 
+            this.loadFileButton.Location = new System.Drawing.Point(656, 331);
+            this.loadFileButton.Name = "loadFileButton";
+            this.loadFileButton.Size = new System.Drawing.Size(105, 28);
+            this.loadFileButton.TabIndex = 4;
+            this.loadFileButton.Text = "load File ...";
+            this.loadFileButton.UseVisualStyleBackColor = true;
+            this.loadFileButton.Click += new System.EventHandler(this.loadFileButton_Click);
+            // 
+            // flashButton
+            // 
+            this.flashButton.Location = new System.Drawing.Point(656, 98);
+            this.flashButton.Name = "flashButton";
+            this.flashButton.Size = new System.Drawing.Size(105, 28);
+            this.flashButton.TabIndex = 3;
+            this.flashButton.Text = "flash";
+            this.flashButton.UseVisualStyleBackColor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(656, 64);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(105, 28);
+            this.saveButton.TabIndex = 2;
+            this.saveButton.Text = "save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            // 
+            // loadButton
+            // 
+            this.loadButton.Location = new System.Drawing.Point(656, 30);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(105, 28);
+            this.loadButton.TabIndex = 1;
+            this.loadButton.Text = "load";
+            this.loadButton.UseVisualStyleBackColor = true;
+            // 
             // propertyGrid
             // 
             this.propertyGrid.Location = new System.Drawing.Point(8, 3);
@@ -471,51 +518,6 @@
             // 
             this.steeringTimer.Interval = 10;
             this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
-            // 
-            // loadButton
-            // 
-            this.loadButton.Location = new System.Drawing.Point(656, 30);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(105, 28);
-            this.loadButton.TabIndex = 1;
-            this.loadButton.Text = "load";
-            this.loadButton.UseVisualStyleBackColor = true;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(656, 64);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(105, 28);
-            this.saveButton.TabIndex = 2;
-            this.saveButton.Text = "save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            // 
-            // flashButton
-            // 
-            this.flashButton.Location = new System.Drawing.Point(656, 98);
-            this.flashButton.Name = "flashButton";
-            this.flashButton.Size = new System.Drawing.Size(105, 28);
-            this.flashButton.TabIndex = 3;
-            this.flashButton.Text = "flash";
-            this.flashButton.UseVisualStyleBackColor = true;
-            // 
-            // loadFileButton
-            // 
-            this.loadFileButton.Location = new System.Drawing.Point(656, 331);
-            this.loadFileButton.Name = "loadFileButton";
-            this.loadFileButton.Size = new System.Drawing.Size(105, 28);
-            this.loadFileButton.TabIndex = 4;
-            this.loadFileButton.Text = "load File ...";
-            this.loadFileButton.UseVisualStyleBackColor = true;
-            // 
-            // saveFileButton
-            // 
-            this.saveFileButton.Location = new System.Drawing.Point(656, 365);
-            this.saveFileButton.Name = "saveFileButton";
-            this.saveFileButton.Size = new System.Drawing.Size(105, 28);
-            this.saveFileButton.TabIndex = 5;
-            this.saveFileButton.Text = "save File ...";
-            this.saveFileButton.UseVisualStyleBackColor = true;
             // 
             // CorvusM3
             // 

@@ -29,7 +29,8 @@ namespace CorvusM3
 {
     public class Parameter
     {
-        int [] parameter = new int[255];
+        public int [] parameter = new int[255];
+        public int maxParameter = 15;
 
         [CategoryAttribute("Basis"), DisplayName("Parameter Set"), DescriptionAttribute("Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2)")]
         public int ParaSet
