@@ -128,6 +128,10 @@
 /* define error codes -------------------------------------------------------*/
 #define ERROR_AKKU			1
 #define ERROR_RC			2
+/* flight states ------------------------------------------------------------*/
+#define FLIGHT_START		0
+#define FLIGHT_RC			1
+#define FLIGHT_RC_ON 		2
 /* define Parameter Array ---------------------------------------------------*/
 #define PARA_SET			0
 #define PARA_DEBUG 			1

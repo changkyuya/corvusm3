@@ -27,10 +27,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* flight states */
-#define FLIGHT_START		0
-#define FLIGHT_RC			1
-#define FLIGHT_RC_ON 		2
 
 /* Private macro -------------------------------------------------------------*/
 
