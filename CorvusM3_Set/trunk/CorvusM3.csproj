@@ -76,6 +76,7 @@
     <Compile Include="CorvusM3.Designer.cs">
       <DependentUpon>CorvusM3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Parameter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CorvusM3.resx">

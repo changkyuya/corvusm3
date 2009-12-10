@@ -680,10 +680,5 @@ namespace CorvusM3
 
     }
 
-    public class Parameter { 
-        public string Color {
-            set { }
-            get { return " "; }
-        }
-    }
+
 }
