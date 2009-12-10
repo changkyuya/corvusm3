@@ -43,5 +43,89 @@ namespace CorvusM3
             set { parameter[1] = value; }
             get { return parameter[1]; }
         }
+        [CategoryAttribute("Basis"), DisplayName("HAL"), DescriptionAttribute("0...RC Empfänger, \r\n1...PC Steuerung")]
+        public int HAL
+        {
+            set { parameter[2] = value; }
+            get { return parameter[2]; }
+        }
+        [CategoryAttribute("Basis"), DisplayName("Akku"), DescriptionAttribute("Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = Spannung/5,55). 1 Volt entspricht 223,64 Punte. Default = 2236 = 10 Volt.")]
+        public int Akku
+        {
+            set { parameter[3] = value; }
+            get { return parameter[3]; }
+        }
+        [CategoryAttribute("Basis"), DisplayName("SAL"), DescriptionAttribute("0...HH Regelung, \r\n1...ACC Regelung")]
+        public int SAL
+        {
+            set { parameter[4] = value; }
+            get { return parameter[4]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("ACC-X-ZERO"), DescriptionAttribute("Horizontalwert X-Achse für ACC")]
+        public int ACCXZERO
+        {
+            set { parameter[5] = value; }
+            get { return parameter[5]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("ACC-Y-ZERO"), DescriptionAttribute("Horizontalwert Y-Achse für ACC")]
+        public int ACCYZERO
+        {
+            set { parameter[6] = value; }
+            get { return parameter[6]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("ACC-Z-ZERO"), DescriptionAttribute("Horizontalwert Z-Achse für ACC")]
+        public int ACCZZERO
+        {
+            set { parameter[7] = value; }
+            get { return parameter[7]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("SMOOTH_ACC (0-100)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
+        public int SMOOTHACC
+        {
+            set { parameter[8] = value; }
+            get { return parameter[8]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("SMOOTH_GYRO (0-100)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
+        public int SMOOTHGYRO
+        {
+            set { parameter[9] = value; }
+            get { return parameter[9]; }
+        }
+        [CategoryAttribute("Basis"), DisplayName("SMOOTH_RC (0-100)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
+        public int SMOOTHRC
+        {
+            set { parameter[10] = value; }
+            get { return parameter[10]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("GYRO_X_90"), DescriptionAttribute("Gyro Anpassung für 90 Grad Drehung")]
+        public int GYROX90
+        {
+            set { parameter[11] = value; }
+            get { return parameter[11]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("GYRO_Y_90"), DescriptionAttribute("Gyro Anpassung für 90 Grad Drehung")]
+        public int GYROY90
+        {
+            set { parameter[12] = value; }
+            get { return parameter[12]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("GYRO_Z_90"), DescriptionAttribute("Gyro Anpassung für 90 Grad Drehung")]
+        public int GYROZ90
+        {
+            set { parameter[13] = value; }
+            get { return parameter[13]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("ACC_FORCE (0-10000)"), DescriptionAttribute("Wirkung vom ACC auf den Gyro (0 ist nur Gyro)")]
+        public int ACCFORCE
+        {
+            set { parameter[14] = value; }
+            get { return parameter[14]; }
+        }
+        [CategoryAttribute("Sensoren"), DisplayName("GYRO_CORR (0-10000)"), DescriptionAttribute("Berichtigung Gyro-Zero über ACC")]
+        public int GYROCORR
+        {
+            set { parameter[15] = value; }
+            get { return parameter[15]; }
+        }
     }
 }
