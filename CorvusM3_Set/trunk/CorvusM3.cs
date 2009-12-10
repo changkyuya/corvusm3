@@ -130,7 +130,7 @@ namespace CorvusM3
             }
             if (e.KeyCode == Keys.Enter)
             {
-                serial.WriteLine(commandTextBox.Text);
+                serial.Write(commandTextBox.Text + "\r\n");
                 dataTextBox.AppendText(">" + commandTextBox.Text + "\r\n");
                 commandTextBox.Text = "";
             }
@@ -655,7 +655,7 @@ namespace CorvusM3
             {
                 if (serial.IsOpen)
                 {
-                    serial.WriteLine("~" + channelValues[0].ToString() + ":" + channelValues[1].ToString() + ":" + channelValues[2].ToString() + ":" + channelValues[3].ToString());
+                    serial.Write("~" + channelValues[0].ToString() + ":" + channelValues[1].ToString() + ":" + channelValues[2].ToString() + ":" + channelValues[3].ToString() + "\r\n");
                 }
             }
             catch
@@ -665,37 +665,50 @@ namespace CorvusM3
         private void saveFileButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "CorvusM3 (.cm3)|*.cm3|All Files (*.*)|*.*";
+            fd.FilterIndex = 1;
             fd.ShowDialog();
             string file = fd.FileName;
-            StreamWriter sw = new StreamWriter(file);
-            for (int i = 0; i <= parm.maxParameter; i++ )
+            if (file != "")
             {
-                sw.WriteLine("Para[" + i.ToString("000") + "]:" + parm.parameter[i]);
+                StreamWriter sw = new StreamWriter(file);
+                for (int i = 0; i <= parm.maxParameter; i++)
+                {
+                    sw.Write("Para[" + i.ToString("000") + "]:" + parm.parameter[i] + "\r\n");
+                }
+                sw.Close();
             }
-            sw.Close();
         }
 
         private void loadFileButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
+            // Set filter options and filter index.
+            of.Filter = "CorvusM3 (.cm3)|*.cm3|All Files (*.*)|*.*";
+            of.FilterIndex = 1; 
             of.Multiselect = false;
             of.ShowDialog();
             string file = of.FileName;
-            StreamReader sr = new StreamReader(file);
-            string line;
-            int count = 0;
-            while ((line = sr.ReadLine()) != null)
+            try
             {
-                parm.parameter[count++] = Convert.ToInt32(line.Substring(10));
+                StreamReader sr = new StreamReader(file);
+                string line;
+                int count = 0;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    parm.parameter[count++] = Convert.ToInt32(line.Substring(10));
+                }
+                propertyGrid.Refresh();
             }
-            propertyGrid.Refresh();
+            catch
+            {}
         }
 
         private void loadButton_Click(object sender, EventArgs e)
         {
             if (serial.IsOpen)
             {
-                serial.WriteLine("pa");
+                serial.Write("pa\r\n");
 
             }
         }

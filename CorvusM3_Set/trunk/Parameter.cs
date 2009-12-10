@@ -45,20 +45,26 @@ namespace CorvusM3
         {
             int counter = Convert.ToInt32(para.Substring(5, 2));
             parameter[counter] = Convert.ToInt32(para.Substring(9));
+
         }
         public void saveParameter()
         {
+            Cursor.Current = Cursors.WaitCursor;
             for (int i = 0; i <= maxParameter; i++)
             {
-                port.WriteLine("s" + i.ToString("00") + ":" + parameter[i].ToString());
-                MessageBox.Show("s" + i.ToString("00") + ":" + parameter[i].ToString());
+                port.Write("s" + i.ToString("00") + ":" + parameter[i].ToString() + "\r\n");
+
+                    Application.DoEvents();
+                    //System.Threading.Thread.Sleep(100);   
+
             }
+            Cursor.Current = Cursors.Default;
         }
         public void flashParameter()
         {
             for (int i = 0; i <= maxParameter; i++)
             {
-                port.WriteLine("f" + i.ToString("00") + ":" + parameter[i].ToString());
+                port.Write("f" + i.ToString("00") + ":" + parameter[i].ToString() + "\r\n");
             }
         }
 
@@ -68,7 +74,7 @@ namespace CorvusM3
             set 
             { 
                 parameter[0] = value;
-                port.WriteLine("s00:" + value.ToString());
+                port.Write("s00:" + value.ToString() + "\r\n");
             }
             get { return parameter[0]; }
         }
@@ -78,7 +84,7 @@ namespace CorvusM3
             set
             {
                 parameter[1] = value;
-                port.WriteLine("s01:" + value.ToString());
+                port.Write("s01:" + value.ToString() + "\r\n");
             }
             get { return parameter[1]; }
         }
@@ -88,7 +94,7 @@ namespace CorvusM3
             set
             {
                 parameter[2] = value;
-                port.WriteLine("s02:" + value.ToString());
+                port.Write("s02:" + value.ToString() + "\r\n");
             }
             get { return parameter[2]; }
         }
@@ -98,7 +104,7 @@ namespace CorvusM3
             set
             {
                 parameter[3] = value;
-                port.WriteLine("s03:" + value.ToString());
+                port.Write("s03:" + value.ToString() + "\r\n");
             }
             get { return parameter[3]; }
         }
@@ -108,7 +114,7 @@ namespace CorvusM3
             set
             {
                 parameter[4] = value;
-                port.WriteLine("s04:" + value.ToString());
+                port.Write("s04:" + value.ToString() + "\r\n");
             }
             get { return parameter[4]; }
         }
@@ -118,7 +124,7 @@ namespace CorvusM3
             set
             {
                 parameter[5] = value;
-                port.WriteLine("s05:" + value.ToString());
+                port.Write("s05:" + value.ToString() + "\r\n");
             }
             get { return parameter[5]; }
         }
@@ -128,7 +134,7 @@ namespace CorvusM3
             set
             {
                 parameter[6] = value;
-                port.WriteLine("s06:" + value.ToString());
+                port.Write("s06:" + value.ToString() + "\r\n");
             }
             get { return parameter[6]; }
         }
@@ -138,7 +144,7 @@ namespace CorvusM3
             set
             {
                 parameter[7] = value;
-                port.WriteLine("s07:" + value.ToString());
+                port.Write("s07:" + value.ToString() + "\r\n");
             }
             get { return parameter[7]; }
         }
@@ -148,7 +154,7 @@ namespace CorvusM3
             set
             {
                 parameter[8] = value;
-                port.WriteLine("s08:" + value.ToString());
+                port.Write("s08:" + value.ToString() + "\r\n");
             }
             get { return parameter[8]; }
         }
@@ -158,7 +164,7 @@ namespace CorvusM3
             set
             {
                 parameter[9] = value;
-                port.WriteLine("s09:" + value.ToString());
+                port.Write("s09:" + value.ToString() + "\r\n");
             }
             get { return parameter[9]; }
         }
@@ -168,7 +174,7 @@ namespace CorvusM3
             set
             {
                 parameter[10] = value;
-                port.WriteLine("s10:" + value.ToString());
+                port.Write("s10:" + value.ToString() + "\r\n");
             }
             get { return parameter[10]; }
         }
@@ -178,7 +184,7 @@ namespace CorvusM3
             set
             {
                 parameter[11] = value;
-                port.WriteLine("s11:" + value.ToString());
+                port.Write("s11:" + value.ToString() + "\r\n");
             }
             get { return parameter[11]; }
         }
@@ -188,7 +194,7 @@ namespace CorvusM3
             set
             {
                 parameter[12] = value;
-                port.WriteLine("s12:" + value.ToString());
+                port.Write("s12:" + value.ToString() + "\r\n");
             }
             get { return parameter[12]; }
         }
@@ -198,7 +204,7 @@ namespace CorvusM3
             set
             {
                 parameter[13] = value;
-                port.WriteLine("s13:" + value.ToString());
+                port.Write("s13:" + value.ToString() + "\r\n");
             }
             get { return parameter[13]; }
         }
@@ -208,7 +214,7 @@ namespace CorvusM3
             set
             {
                 parameter[14] = value;
-                port.WriteLine("s14:" + value.ToString());
+                port.Write("s14:" + value.ToString() + "\r\n");
             }
             get { return parameter[14]; }
         }
@@ -218,7 +224,7 @@ namespace CorvusM3
             set
             {
                 parameter[15] = value;
-                port.WriteLine("s15:" + value.ToString());
+                port.Write("s15:" + value.ToString() + "\r\n");
             }
             get { return parameter[15]; }
         }
