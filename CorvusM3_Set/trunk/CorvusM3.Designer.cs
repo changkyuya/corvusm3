@@ -67,6 +67,11 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
+            this.loadButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.flashButton = new System.Windows.Forms.Button();
+            this.loadFileButton = new System.Windows.Forms.Button();
+            this.saveFileButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -442,6 +447,11 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.saveFileButton);
+            this.tabPage5.Controls.Add(this.loadFileButton);
+            this.tabPage5.Controls.Add(this.flashButton);
+            this.tabPage5.Controls.Add(this.saveButton);
+            this.tabPage5.Controls.Add(this.loadButton);
             this.tabPage5.Controls.Add(this.propertyGrid);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -461,6 +471,51 @@
             // 
             this.steeringTimer.Interval = 10;
             this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
+            // 
+            // loadButton
+            // 
+            this.loadButton.Location = new System.Drawing.Point(656, 30);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(105, 28);
+            this.loadButton.TabIndex = 1;
+            this.loadButton.Text = "load";
+            this.loadButton.UseVisualStyleBackColor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(656, 64);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(105, 28);
+            this.saveButton.TabIndex = 2;
+            this.saveButton.Text = "save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            // 
+            // flashButton
+            // 
+            this.flashButton.Location = new System.Drawing.Point(656, 98);
+            this.flashButton.Name = "flashButton";
+            this.flashButton.Size = new System.Drawing.Size(105, 28);
+            this.flashButton.TabIndex = 3;
+            this.flashButton.Text = "flash";
+            this.flashButton.UseVisualStyleBackColor = true;
+            // 
+            // loadFileButton
+            // 
+            this.loadFileButton.Location = new System.Drawing.Point(656, 331);
+            this.loadFileButton.Name = "loadFileButton";
+            this.loadFileButton.Size = new System.Drawing.Size(105, 28);
+            this.loadFileButton.TabIndex = 4;
+            this.loadFileButton.Text = "load File ...";
+            this.loadFileButton.UseVisualStyleBackColor = true;
+            // 
+            // saveFileButton
+            // 
+            this.saveFileButton.Location = new System.Drawing.Point(656, 365);
+            this.saveFileButton.Name = "saveFileButton";
+            this.saveFileButton.Size = new System.Drawing.Size(105, 28);
+            this.saveFileButton.TabIndex = 5;
+            this.saveFileButton.Text = "save File ...";
+            this.saveFileButton.UseVisualStyleBackColor = true;
             // 
             // CorvusM3
             // 
@@ -536,6 +591,11 @@
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Timer steeringTimer;
+        private System.Windows.Forms.Button saveFileButton;
+        private System.Windows.Forms.Button loadFileButton;
+        private System.Windows.Forms.Button flashButton;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button loadButton;
 
 
 
