@@ -107,7 +107,7 @@ void statemachine(void)
 	
 	//only for test servo !
 	// map channel 1 to servo 1
-	setServoValue(4, receiverChannel[PITCH]);
+	setServoValue(2, receiverChannel[PITCH]);
 	setServoValue(3, receiverChannel[ROLL]);
 	
 

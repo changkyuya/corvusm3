@@ -29,32 +29,19 @@ namespace CorvusM3
 {
     public class Parameter
     {
-        string color;
-        string color1;
+        int [] parameter = new int[255];
 
-        [CategoryAttribute("Test"), DescriptionAttribute("das ist die Hilfe")]
-        public string Color
+        [CategoryAttribute("Basis"), DisplayName("Parameter Set"), DescriptionAttribute("Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2)")]
+        public int ParaSet
         {
-            set 
-            {
-                color = value;
-            }
-            get 
-            { 
-                return color; 
-            }
+            set { parameter[0] = value; }
+            get { return parameter[0]; }
         }
-        [CategoryAttribute("Test"), DescriptionAttribute("das ist die Hilfe")]
-        public string Color1
+        [CategoryAttribute("Basis"), DisplayName("Debugoutput"), DescriptionAttribute("0...Debug aus, \r\n1...Empfängersignale, \r\n2...ADC Werte (6x Sensoren, Spannungsmessung), \r\n4...Sensoren (Gyro,ACC), \r\n8...RC und Motoren")]
+        public int Debugoutput
         {
-            set
-            {
-                color1 = value;
-            }
-            get
-            {
-                return color1;
-            }
+            set { parameter[1] = value; }
+            get { return parameter[1]; }
         }
     }
 }
