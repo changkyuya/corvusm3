@@ -75,10 +75,6 @@ void doComm()
 		case 'c':
 			docComm();
 			break;
-		// switch LED
-		case 'l':
-			dolComm();
-			break;
 		// debug level
 		case 'd':
 			dodComm();
@@ -132,32 +128,6 @@ void docComm()
 	}
 }
 
-/* do LED Command -----------------------------------------------------------*/
-void dolComm()
-{
-	switch (line[1])
-	{
-		case '0':
-			setLEDStatus(LED_OFF);
-			send(OK);
-			break;
-		case '1':
-			setLEDStatus(LED_FLASH);
-			send(OK);
-			break;
-		case '2':
-			setLEDStatus(LED_BLINK);
-			send(OK);
-			break;
-		case '3':
-			setLEDStatus(LED_ON);
-			send(OK);
-			break;
-		default:
-			send(ERROR);
-	}
-}
-
 
 /* do LED Command -----------------------------------------------------------*/
 void dodComm()
@@ -166,7 +136,7 @@ void dodComm()
 	{
 		// all debug OFF
 		case '0':
-			parameter[PARA_DEBUG] = 0x00;
+			setParameter(PARA_DEBUG, 0x00);
 			send(OK);
 			break;
 		case 'r':
@@ -204,10 +174,21 @@ void dodComm()
 /* do print Parameter -------------------------------------------------------------*/
 void dopComm()
 {
-	// add 2 chars to int from 0..99
-	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
-	print_para(set, getParameter(set));
-	send(OK);
+	if (line[1] == 'a')
+	{
+		u8 i;
+		for (i = 0;i <= USED_PARAMETER; i++)
+		{
+			print_para(i);
+		}
+	}
+	else
+		{
+		// add 2 chars to int from 0..99
+		u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
+		print_para(set);
+		send(OK);
+	}
 }
 
 
@@ -216,7 +197,7 @@ void dorComm()
 {
 	// add 2 chars to int from 0..99
 	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
-	print_para(set, readFlashParameter(set));
+	print_para(set);
 	send(OK);
 }
 
@@ -233,7 +214,7 @@ void dosComm()
 		// add 2 chars to int from 0..99
 		u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
 		setParameter(set, readInt(4));
-		send(OK);
+		print_para(set);
 	}
 }
 
@@ -244,7 +225,7 @@ void dofComm()
 	// add 2 chars to int from 0..99
 	u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
 	writeFlashParameter(set, readInt(4));
-	send(OK);
+	print_para(set);
 }
 
 
@@ -295,10 +276,6 @@ void send(u8 infoText)
 	else if (infoText == HELP)
 	{
 		print_uart1("Serial Commands:\r\n");
-		print_uart1("l0 ... LED off\r\n");
-		print_uart1("l1 ... LED flash\r\n");
-		print_uart1("l2 ... LED blink\r\n");
-		print_uart1("l3 ... LED on\r\n");
 		Delay(20);
 		print_uart1("ca ... Zero ACC\r\n");
 		print_uart1("cg ... Zero Gyro\r\n");
@@ -316,6 +293,7 @@ void send(u8 infoText)
 		print_uart1("s01:65535 ... Set parameter 01, 0 - 65535\r\n");
 		print_uart1("f01:65535 ... Flash parameter 01, 0 - 65535\r\n");
 		Delay(20);
+		print_uart1("pa ... Print all Parameter\r\n");
 		print_uart1("p01 ... Print parameter 01, 0 - 65535\r\n");
 		print_uart1("r01 ... Read parameter from flash 01, 0 - 65535\r\n");
 	}
@@ -323,10 +301,17 @@ void send(u8 infoText)
 
 
 /* send byte array over TxBuffer and Interrupt ------------------------------*/
-void print_para (u8 para, u16 value)
+void print_para (u8 para)
 {
 	char x [80];
-	sprintf(x,"Para[%d]:%d\r\n",para, value);
+	if (para == PARA_SET)
+	{
+		sprintf(x,"Para[%02d]:%d\r\n",para, parameter[PARA_SET]);
+	}
+	else
+	{
+		sprintf(x,"Para[%02d]:%d\r\n",para, parameter[para + parameter[PARA_SET]]);
+	}
 	print_uart1(x);	
 }
 

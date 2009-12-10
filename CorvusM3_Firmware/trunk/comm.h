@@ -44,7 +44,7 @@ void docComm(void);
 void doRCComm(void);
 u16 readInt(u8);
 void send(u8);
-void print_para (u8 para, u16 value);
+void print_para (u8 para);
 
 
 #endif /* __COMM_H */

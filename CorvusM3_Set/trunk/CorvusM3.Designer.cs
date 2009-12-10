@@ -488,6 +488,7 @@
             this.flashButton.TabIndex = 3;
             this.flashButton.Text = "flash";
             this.flashButton.UseVisualStyleBackColor = true;
+            this.flashButton.Click += new System.EventHandler(this.flashButton_Click);
             // 
             // saveButton
             // 
@@ -497,6 +498,7 @@
             this.saveButton.TabIndex = 2;
             this.saveButton.Text = "save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // loadButton
             // 
@@ -506,6 +508,7 @@
             this.loadButton.TabIndex = 1;
             this.loadButton.Text = "load";
             this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
             // propertyGrid
             // 

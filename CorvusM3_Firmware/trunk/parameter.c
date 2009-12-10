@@ -65,7 +65,7 @@ void loadParameter()
 		EE_ReadVariable(VirtAddVarTab[i], &val);
 		parameter[i] = val;
 		// for test
-		print_para(i, parameter[i]);
+		print_para(i);
 	}
 }
 
@@ -92,6 +92,15 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 0x1F4); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 0x1F4); 
 	//#########################################################################
+	u16 val;
+	u8 i;
+	for (i = 0;i <= USED_PARAMETER; i++)
+	{
+		EE_ReadVariable(VirtAddVarTab[i], &val);
+		parameter[i] = val;
+		// for test
+		print_para(i);
+	}
 	// info user over uart1
 	send(DEFAULT);
 }

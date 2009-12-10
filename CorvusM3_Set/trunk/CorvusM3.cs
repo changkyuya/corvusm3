@@ -44,14 +44,15 @@ namespace CorvusM3
         double counter = 0;
         bool on = false;
         double[] channelValues = new double[8];
-        Parameter parm = new Parameter();
+        Parameter parm;
         
         
 
         public CorvusM3()
         {
             InitializeComponent();
-            
+            serial = new SerialPort();
+            parm = new Parameter(serial);
             CorvusM3.CheckForIllegalCrossThreadCalls = false;
             setupGraph();
             setupGraphReceiver();
@@ -69,7 +70,8 @@ namespace CorvusM3
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            serial = new SerialPort(comPortToolStripComboBox.SelectedItem.ToString(), 115200);
+            serial.PortName = comPortToolStripComboBox.SelectedItem.ToString();
+            serial.BaudRate = 115200;
             serial.DtrEnable = true;
             //serial.RtsEnable = true;
             serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
@@ -93,7 +95,15 @@ namespace CorvusM3
                 {
                     dataLine = serial.ReadLine();
                     dataTextBox.AppendText(dataLine + "\r\n");
-                    addGraph();
+                    if (dataLine.Substring(0, 1) == "P")
+                    {
+                        parm.fillParameter(dataLine);
+                        propertyGrid.Refresh();
+                    }
+                    else 
+                    {
+                        addGraph();
+                    }
                 }
             }
             catch { }
@@ -680,6 +690,27 @@ namespace CorvusM3
             }
             propertyGrid.Refresh();
         }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            if (serial.IsOpen)
+            {
+                serial.WriteLine("pa");
+
+            }
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            parm.saveParameter();
+        }
+
+        private void flashButton_Click(object sender, EventArgs e)
+        {
+            parm.flashParameter();
+        }
+
+
 
 
     }
