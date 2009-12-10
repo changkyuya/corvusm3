@@ -4,12 +4,6 @@
 == Input ==
 Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
 
-*LED*
- * l0 ... LED off
- * l1 ... LED flash
- * l2 ... LED blink
- * l3 ... LED on
-
 *Commands*
  * ca ... set ACC Zero
  * cg ... set Gyro Zero
