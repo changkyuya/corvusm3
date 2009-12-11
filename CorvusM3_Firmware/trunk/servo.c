@@ -113,6 +113,15 @@ void changeServoInterrupt(vu16 nextTime)
 	
 }
 
+/* set all Servos to next 4 Channels ----------------------------------------*/
+void setAllServos(vu16 * receiverChannel)
+{
+	setServoValue(0, receiverChannel[4]);
+	setServoValue(1, receiverChannel[5]);
+	setServoValue(2, receiverChannel[6]);
+	setServoValue(3, receiverChannel[7]);
+}
+
 
 /* set server value ---------------------------------------------------------*/
 void setServoValue(u8 servoNr, u16 value)
