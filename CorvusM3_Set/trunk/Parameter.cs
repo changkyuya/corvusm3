@@ -47,25 +47,10 @@ namespace CorvusM3
             parameter[counter] = Convert.ToInt32(para.Substring(9));
 
         }
-        public void saveParameter()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            for (int i = 0; i <= maxParameter; i++)
-            {
-                port.Write("s" + i.ToString("00") + ":" + parameter[i].ToString() + "\r\n");
 
-                    Application.DoEvents();
-                    //System.Threading.Thread.Sleep(100);   
-
-            }
-            Cursor.Current = Cursors.Default;
-        }
         public void flashParameter()
         {
-            for (int i = 0; i <= maxParameter; i++)
-            {
-                port.Write("f" + i.ToString("00") + ":" + parameter[i].ToString() + "\r\n");
-            }
+            port.Write("*\r\n");
         }
 
         [CategoryAttribute("Basis"), DisplayName("Parameter Set 00"), DescriptionAttribute("Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2)")]

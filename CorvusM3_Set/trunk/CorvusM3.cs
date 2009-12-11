@@ -713,10 +713,6 @@ namespace CorvusM3
             }
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            parm.saveParameter();
-        }
 
         private void flashButton_Click(object sender, EventArgs e)
         {

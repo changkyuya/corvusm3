@@ -68,7 +68,6 @@
             this.saveFileButton = new System.Windows.Forms.Button();
             this.loadFileButton = new System.Windows.Forms.Button();
             this.flashButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
@@ -450,7 +449,6 @@
             this.tabPage5.Controls.Add(this.saveFileButton);
             this.tabPage5.Controls.Add(this.loadFileButton);
             this.tabPage5.Controls.Add(this.flashButton);
-            this.tabPage5.Controls.Add(this.saveButton);
             this.tabPage5.Controls.Add(this.loadButton);
             this.tabPage5.Controls.Add(this.propertyGrid);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -482,23 +480,13 @@
             // 
             // flashButton
             // 
-            this.flashButton.Location = new System.Drawing.Point(656, 98);
+            this.flashButton.Location = new System.Drawing.Point(656, 64);
             this.flashButton.Name = "flashButton";
             this.flashButton.Size = new System.Drawing.Size(105, 28);
             this.flashButton.TabIndex = 3;
             this.flashButton.Text = "flash";
             this.flashButton.UseVisualStyleBackColor = true;
             this.flashButton.Click += new System.EventHandler(this.flashButton_Click);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(656, 64);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(105, 28);
-            this.saveButton.TabIndex = 2;
-            this.saveButton.Text = "save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // loadButton
             // 
@@ -599,7 +587,6 @@
         private System.Windows.Forms.Button saveFileButton;
         private System.Windows.Forms.Button loadFileButton;
         private System.Windows.Forms.Button flashButton;
-        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button loadButton;
 
 

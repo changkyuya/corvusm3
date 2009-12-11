@@ -51,14 +51,8 @@ void initEEPROM()
 void loadParameter()
 {
 	u16 val;
-	u8 i;
-	// test if flash is OK
-	EE_ReadVariable(VirtAddVarTab[0], &val);
-	if (val > USED_PARAMETER)
-	{
-		// store default set if flash
-		loadDefault();
-	}
+	u16 i;
+
 	
 	for (i = 0;i <= USED_PARAMETER; i++)
 	{
@@ -97,7 +91,7 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO3_CH], 0x8);  
 	//#########################################################################
 	u16 val;
-	u8 i;
+	u16 i;
 	for (i = 0;i <= USED_PARAMETER; i++)
 	{
 		EE_ReadVariable(VirtAddVarTab[i], &val);
@@ -111,7 +105,7 @@ void loadDefault()
 
 
 /* read parameter -----------------------------------------------------------*/
-u16 getParameter(u8 para)
+u16 getParameter(u16 para)
 {
 	if (para == PARA_SET)
 	{
@@ -124,7 +118,7 @@ u16 getParameter(u8 para)
 }
 
 /* set parameter ------------------------------------------------------------*/
-void setParameter(u8 para, u16 value)
+void setParameter(u16 para, u16 value)
 {
 	if (para == PARA_SET)
 	{
@@ -137,7 +131,7 @@ void setParameter(u8 para, u16 value)
 }
 
 /* read from flash and set --------------------------------------------------*/
-u16 readFlashParameter(u8 para)
+u16 readFlashParameter(u16 para)
 {
 	u16 val;
 	if (para == PARA_SET)
@@ -155,7 +149,7 @@ u16 readFlashParameter(u8 para)
 
 
 /* write parameter to flash -------------------------------------------------*/
-void writeFlashParameter(u8 para, u16 value)
+void writeFlashParameter(u16 para, u16 value)
 {
 	if (para == PARA_SET)
 	{
@@ -169,5 +163,18 @@ void writeFlashParameter(u8 para, u16 value)
 	}
 }
 
+
+/* flash parameter ---------------------------------------------------------*/
+void flashAllParameter()
+{	
+	u16 i;
+	for (i = 0;i <= USED_PARAMETER; i++)
+	{
+		writeFlashParameter(i, getParameter(i));
+		print_para(i);
+	}
+	// info user over uart1
+	send(OK);
+}
 
 

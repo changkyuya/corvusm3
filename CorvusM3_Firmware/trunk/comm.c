@@ -99,6 +99,10 @@ void doComm()
 		case '#':
 			loadDefault();
 			break;
+		// flash all parameter
+		case '*':
+			flashAllParameter();
+			break;
 		// RC signal from Tool
 		case '~':
 			doRCComm();
@@ -287,6 +291,8 @@ void send(u8 infoText)
 		Delay(20);
 		print_uart1("dm ... Toggle TargetAngle/Motors Data on/off\r\n");
 		print_uart1("# ... Load default parameter to flash\r\n");
+		print_uart1("* ... save all Parameter to flash\r\n");
+		
 		Delay(20);
 		print_uart1("sa ... save ACC Zero\r\n");
 		print_uart1("s00:0 ... Set parameterset 0 or 100(Set2)\r\n");
