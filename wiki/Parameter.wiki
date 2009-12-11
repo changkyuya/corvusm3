@@ -22,6 +22,6 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 14 || ACC_FORCE || 500 || 0-10000 || Wirkung vom ACC auf den Gyro (0 ist nur Gyro) ||
 || 15 || GYRO_CORR || 500 || 0-10000 || Berichtigung Gyro-Zero über ACC ||
 || 16 || SERVO0_CH || 5 || || Kanalmapping für Servo 0 ||
-|| 17 || SERVO0_CH || 6 || || Kanalmapping für Servo 1 ||
-|| 18 || SERVO0_CH || 7 || || Kanalmapping für Servo 2 ||
-|| 19 || SERVO0_CH || 8 || || Kanalmapping für Servo 3 ||
+|| 17 || SERVO1_CH || 6 || || Kanalmapping für Servo 1 ||
+|| 18 || SERVO2_CH || 7 || || Kanalmapping für Servo 2 ||
+|| 19 || SERVO3_CH || 8 || || Kanalmapping für Servo 3 ||
