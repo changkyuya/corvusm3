@@ -36,7 +36,7 @@
 extern vu16 ADCSensorValue[7];  //initsystem
 vu32 msCount = 0;
 vu32 msOldCount = 0;
-vu16 receiverChannel[9]; 
+vu16 receiverChannel[0xFF]; 
 volatile float targetAngle[3];
 extern vu16 parameter[0x190]; //parameter
 u8 flightState = FLIGHT_START;
