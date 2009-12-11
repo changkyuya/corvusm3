@@ -28,6 +28,7 @@
 /* Variables ----------------------------------------------------------------*/
 vu16 servoCount = 0;
 vu16 servo[4];
+extern vu16 parameter[0x190];  //parameter
 
 /* Servo Timer Interrupt 4 --------------------------------------------------*/
 void TIM4_IRQHandler(void)
@@ -116,10 +117,10 @@ void changeServoInterrupt(vu16 nextTime)
 /* set all Servos to next 4 Channels ----------------------------------------*/
 void setAllServos(vu16 * receiverChannel)
 {
-	setServoValue(0, receiverChannel[4]);
-	setServoValue(1, receiverChannel[5]);
-	setServoValue(2, receiverChannel[6]);
-	setServoValue(3, receiverChannel[7]);
+	setServoValue(0, receiverChannel[parameter[PARA_SERVO0_CH]]);
+	setServoValue(1, receiverChannel[parameter[PARA_SERVO1_CH]]);
+	setServoValue(2, receiverChannel[parameter[PARA_SERVO2_CH]]);
+	setServoValue(3, receiverChannel[parameter[PARA_SERVO3_CH]]);
 }
 
 

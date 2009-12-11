@@ -149,7 +149,11 @@
 #define PARA_GYRO_Z_90		13
 #define PARA_ACC_FORCE		14
 #define PARA_GYRO_CORR		15
-#define USED_PARAMETER 		15
+#define PARA_SERVO0_CH		16
+#define PARA_SERVO1_CH		17
+#define PARA_SERVO2_CH		18
+#define PARA_SERVO3_CH		19
+#define USED_PARAMETER 		19
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02

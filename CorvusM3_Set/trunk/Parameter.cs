@@ -38,8 +38,8 @@ namespace CorvusM3
             port = obj;
             
         }
-        public int [] parameter = new int[255];
-        public int maxParameter = 15;
+        public int [] parameter = new int[400];
+        public int maxParameter = 19;
 
         public void fillParameter(string para)
         {
@@ -227,6 +227,46 @@ namespace CorvusM3
                 port.Write("s15:" + value.ToString() + "\r\n");
             }
             get { return parameter[15]; }
+        }
+        [CategoryAttribute("RC Channels"), DisplayName("Servo 0 CH"), DescriptionAttribute("Kanla für Servo 0 Ausgang")]
+        public int SERVO0
+        {
+            set
+            {
+                parameter[16] = value;
+                port.Write("s16:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[16]; }
+        }
+        [CategoryAttribute("RC Channels"), DisplayName("Servo 1 CH"), DescriptionAttribute("Kanla für Servo 1 Ausgang")]
+        public int SERVO1
+        {
+            set
+            {
+                parameter[17] = value;
+                port.Write("s17:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[17]; }
+        }
+        [CategoryAttribute("RC Channels"), DisplayName("Servo 2 CH"), DescriptionAttribute("Kanla für Servo 2 Ausgang")]
+        public int SERVO2
+        {
+            set
+            {
+                parameter[18] = value;
+                port.Write("s18:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[18]; }
+        }
+        [CategoryAttribute("RC Channels"), DisplayName("Servo 3 CH"), DescriptionAttribute("Kanla für Servo 3 Ausgang")]
+        public int SERVO3
+        {
+            set
+            {
+                parameter[19] = value;
+                port.Write("s19:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[19]; }
         }
     }
 }

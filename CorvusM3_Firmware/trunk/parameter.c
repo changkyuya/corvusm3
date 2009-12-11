@@ -91,6 +91,10 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Z_90], 0x898); 
 	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 0x1F4); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 0x1F4); 
+	EE_WriteVariable(VirtAddVarTab[PARA_SERVO0_CH], 0x5);
+	EE_WriteVariable(VirtAddVarTab[PARA_SERVO1_CH], 0x6); 
+	EE_WriteVariable(VirtAddVarTab[PARA_SERVO2_CH], 0x7); 
+	EE_WriteVariable(VirtAddVarTab[PARA_SERVO3_CH], 0x8);  
 	//#########################################################################
 	u16 val;
 	u8 i;
