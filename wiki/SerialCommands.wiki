@@ -28,14 +28,15 @@ Format: f 00(-99, 2-stelliger Parameter) : 12345 (0 bis 65535) \r\n
 Format: p 00(-99, 2-stelliger Parameter)
  * p00 ... Parameterset 0 oder 100 (Set 2)
  * p01 ... Debug (1.Receiver,) 
- * pa ... Print all Parameter   
 *Parameter READ from FLASH*<br />
 Format: r 00(-99, 2-stelliger Parameter)
  * r00 ... Parameterset 0 oder 100 (Set 2)
  * r01 ... Debug (1.Receiver,) 
 
 *Spezial Commands*
+ * pa ... Print all Parameter   
  * # ... lade Standard Parameter und schreibe in Flash
+ * `*` ... speichert alle Parameter ins Flash
  * ~1234:1234:1234:1234 ... RC Werte über PC
  * ? ... Help
 
