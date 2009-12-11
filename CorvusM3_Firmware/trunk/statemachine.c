@@ -38,7 +38,7 @@ vu32 msCount = 0;
 vu32 msOldCount = 0;
 vu16 receiverChannel[9]; 
 volatile float targetAngle[3];
-extern vu16 parameter[0xFF]; //parameter
+extern vu16 parameter[0x190]; //parameter
 u8 flightState = FLIGHT_START;
 volatile char motor[5]; 
 volatile float gyroAngle[3];

@@ -33,7 +33,7 @@ extern vu16 ADCSensorValue[7];  //initsystem
 vu16 oldADCSensorValue[7]; // for smooth
 vu16 gyroZero[3];
 vu16 accZero[3];
-extern vu16 parameter[0xFF]; //parameter
+extern vu16 parameter[0x190]; //parameter
 
 
 /* initGyros to set Baise ---------------------------------------------------*/

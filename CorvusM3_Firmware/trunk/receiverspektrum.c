@@ -28,7 +28,7 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu32 msCount;  //statemachine
-extern vu16 parameter[0xFF]; //parameter
+extern vu16 parameter[0x190]; //parameter
 extern vu8 spektrumBytes[33];  //serial, 0 ... status 1-32 ... bytes from receiver
 vu16 receiverSpektrumChannel[17];
 vu16 oldReceiverSpektrumChannel[17];

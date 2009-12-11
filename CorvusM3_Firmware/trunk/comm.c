@@ -31,7 +31,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 parameter[0xFF]; //parameter
+extern vu16 parameter[0x190]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
 extern volatile float gyroAngle[3]; //statemachine
 vu16 receiverPCChannel[9];

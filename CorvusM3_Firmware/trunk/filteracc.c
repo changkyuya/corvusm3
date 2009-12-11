@@ -30,7 +30,7 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 gyroZero[3]; // sensor
-extern vu16 parameter[0xFF]; //parameter
+extern vu16 parameter[0x190]; //parameter
 
 
 /* calculate ACC Angles -----------------------------------------------------*/

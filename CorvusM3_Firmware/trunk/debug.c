@@ -28,7 +28,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 parameter[0xFF];  //statemachine
+extern vu16 parameter[0x190];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
 extern vu16 ADCSensorValue[7]; //initsystem
 extern volatile float gyroAngle[3];  //statemachine

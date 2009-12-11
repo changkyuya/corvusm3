@@ -26,7 +26,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-vu16 parameter[0xFF]; 
+vu16 parameter[0x190]; 
 /* Virtual address defined by the user: 0xFFFF value is prohibited */
 // we use 0 - 199
 u16 VirtAddVarTab[NumbOfVar];
