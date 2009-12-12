@@ -128,10 +128,17 @@
 /* define error codes -------------------------------------------------------*/
 #define ERROR_AKKU			1
 #define ERROR_RC			2
+#define ERROR_SENSOR		4
 /* flight states ------------------------------------------------------------*/
 #define FLIGHT_START		0
 #define FLIGHT_RC			1
-#define FLIGHT_RC_ON 		2
+#define FLIGHT_MOTOR 		2
+#define FLIGHT_FLYING		3
+/* define remote commands ---------------------------------------------------*/
+#define RC_NO				0
+#define RC_MOTORS			1
+#define RC_CALIBRATE		2
+#define RC_NEUTRAL			99
 /* define Parameter Array ---------------------------------------------------*/
 #define PARA_SET			0
 #define PARA_DEBUG 			1
@@ -155,7 +162,8 @@
 #define PARA_SERVO3_CH		19
 #define PARA_CAM_X			20
 #define PARA_CAM_Y			21
-#define USED_PARAMETER 		21
+#define PARA_MIN_GAS		22
+#define USED_PARAMETER 		22
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02

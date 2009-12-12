@@ -113,7 +113,7 @@ int main(void)
 		{
 			setLEDStatus(LED_BLINK);
 		}
-		else if (errorCode < 4) // rc
+		else if (errorCode < 8) // rc and sensor
 		{
 			setLEDStatus(LED_FLASH);
 		}

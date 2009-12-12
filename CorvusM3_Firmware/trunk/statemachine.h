@@ -34,6 +34,7 @@
 /* Exported functions ------------------------------------------------------- */
 void TIM3_IRQHandler(void);
 void statemachine(void);
+u8 remoteCommands(void);
 
 #endif /* __STATEMACHINE_H */
 

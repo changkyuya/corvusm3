@@ -30,5 +30,6 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void sendMotor(volatile char * motor);
+void stopAllMotors(volatile char * motor);
 
 #endif /* __BLMC_H */

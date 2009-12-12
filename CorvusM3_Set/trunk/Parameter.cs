@@ -39,7 +39,7 @@ namespace CorvusM3
             
         }
         public int [] parameter = new int[400];
-        public int maxParameter = 21;
+        public int maxParameter = 22;
 
         public void fillParameter(string para)
         {
@@ -153,7 +153,7 @@ namespace CorvusM3
             }
             get { return parameter[9]; }
         }
-        [CategoryAttribute("Basis"), DisplayName("SMOOTH_RC [10] (0-100)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
+        [CategoryAttribute("RC Channels"), DisplayName("SMOOTH_RC [10] (0-100)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
         public int SMOOTHRC
         {
             set
@@ -272,6 +272,16 @@ namespace CorvusM3
                 port.Write("s21:" + value.ToString() + "\r\n");
             }
             get { return parameter[21]; }
+        }
+        [CategoryAttribute("Motor"), DisplayName("Min Gas [22]"), DescriptionAttribute("Mindestgas für Regler")]
+        public int MINGAS
+        {
+            set
+            {
+                parameter[22] = value;
+                port.Write("s22:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[22]; }
         }
     }
 }
