@@ -46,9 +46,9 @@ void getACCAnglesFilterACC(volatile float * accAngle)
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[X] = atan2(accRawValues[Z] - parameter[PARA_ACC_X_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795;
+	accAngle[X] = atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795;
 	//change direction
-	accAngle[Y] = atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Y_ZERO]) * 57.2957795 + 90;
+	accAngle[Y] = atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO]) * 57.2957795 + 90;
 
 	
 	//char x [80];

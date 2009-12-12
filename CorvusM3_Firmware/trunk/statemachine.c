@@ -65,6 +65,10 @@ void statemachine(void)
 	// Debug to measure time for loop - toggle debug-Pin PA00
 	*DBG = 1;
 	
+	// start with new values from sensors
+	getCopterAngles(gyroAngle, accAngle, copterAngle);
+
+	
 	
 	/* statemachine
 	power on
@@ -95,8 +99,6 @@ void statemachine(void)
 
 	
 
-	getCopterAngles(gyroAngle, accAngle, copterAngle);
-
 	// only for test brushless controller !
 	// map receiverChannel 1 to BLMC Motor 1
 	motor[1] = map(receiverChannel[PITCH],1000,2000,0,200);
@@ -105,10 +107,8 @@ void statemachine(void)
 	motor[4] = 0x00;
 	sendMotor(motor);
 	
-	//only for test servo !
-	// map channel 1 to servo 1
-	//setServoValue(2, receiverChannel[PITCH]);
-	//setServoValue(3, receiverChannel[ROLL]);
+	
+	// send new values to servo
 	setAllServos(receiverChannel, copterAngle);
 
 	

@@ -80,7 +80,7 @@ void zeroACC()
 {
 	accZero[X] = ADCSensorValue[ACC_X];
 	accZero[Y] = ADCSensorValue[ACC_Y];
-	accZero[Z] = ADCSensorValue[ACC_Z];
+	accZero[Z] = ADCSensorValue[ACC_X];
 	
 	setParameter(PARA_ACC_X_ZERO, accZero[X]);
 	setParameter(PARA_ACC_Y_ZERO, accZero[Y]);

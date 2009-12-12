@@ -123,7 +123,7 @@ namespace CorvusM3
             }
             get { return parameter[6]; }
         }
-        [CategoryAttribute("Sensoren"), DisplayName("ACC-Z-ZERO [07]"), DescriptionAttribute("Horizontalwert Z-Achse für ACC")]
+        [CategoryAttribute("Sensoren"), DisplayName("ACC-Z-ZERO [07]"), DescriptionAttribute("Horizontalwert Z-Achse für ACC, \r\nper default X-Wert, \r\nbesser (max-min)/2")]
         public int ACCZZERO
         {
             set

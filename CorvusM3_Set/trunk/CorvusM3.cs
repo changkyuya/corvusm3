@@ -70,14 +70,15 @@ namespace CorvusM3
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            serial.PortName = comPortToolStripComboBox.SelectedItem.ToString();
-            serial.BaudRate = 115200;
-            serial.DtrEnable = true;
-            //serial.RtsEnable = true;
-            serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
-            serial.ReadTimeout = 100;
+            
             try
             {
+                serial.PortName = comPortToolStripComboBox.SelectedItem.ToString();
+                serial.BaudRate = 115200;
+                serial.DtrEnable = true;
+                //serial.RtsEnable = true;
+                serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
+                serial.ReadTimeout = 100; 
                 serial.Open();
             }
             catch (Exception ex)
