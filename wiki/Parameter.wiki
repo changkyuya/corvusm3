@@ -25,3 +25,6 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 17 || SERVO1_CH || 6 || || Kanalmapping für Servo 1 ||
 || 18 || SERVO2_CH || 7 || || Kanalmapping für Servo 2 ||
 || 19 || SERVO3_CH || 8 || || Kanalmapping für Servo 3 ||
+|| 20 || CAM_ROLL || 20500 || || Rollausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
+|| 21 || CAM_NICK || 30500 || || Nickausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
+|| 22 || MIN_GAS || 32 || || Minimalgas für Regler/Motoren ||
