@@ -184,6 +184,7 @@ void dopComm()
 		for (i = 0;i <= USED_PARAMETER; i++)
 		{
 			print_para(i);
+			Delay(5); // prevent txbuffer overvlow
 		}
 	}
 	else

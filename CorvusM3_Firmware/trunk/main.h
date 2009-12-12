@@ -153,7 +153,9 @@
 #define PARA_SERVO1_CH		17
 #define PARA_SERVO2_CH		18
 #define PARA_SERVO3_CH		19
-#define USED_PARAMETER 		19
+#define PARA_CAM_X			20
+#define PARA_CAM_Y			21
+#define USED_PARAMETER 		21
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02

@@ -36,6 +36,6 @@ void TIM4_IRQHandler(void);
 void doServo(void);
 void changeServoInterrupt(vu16 nextTime);
 void setServoValue(u8 servo, u16 value);
-void setAllServos(vu16 * receiverChannel);
+void setAllServos(vu16 * receiverChannel, volatile float * copterAngle);
 
 #endif /* __SERVO_H */

@@ -109,7 +109,7 @@ void statemachine(void)
 	// map channel 1 to servo 1
 	//setServoValue(2, receiverChannel[PITCH]);
 	//setServoValue(3, receiverChannel[ROLL]);
-	setAllServos(receiverChannel);
+	setAllServos(receiverChannel, copterAngle);
 
 	
 	

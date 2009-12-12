@@ -89,6 +89,8 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO1_CH], 0x6); 
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO2_CH], 0x7); 
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO3_CH], 0x8);  
+	EE_WriteVariable(VirtAddVarTab[PARA_CAM_X], 0x5014);   //servo 2 , 0, wert 500
+	EE_WriteVariable(VirtAddVarTab[PARA_CAM_Y], 0x7724);   //servo 3 , 0, wert 500
 	//#########################################################################
 	u16 val;
 	u16 i;

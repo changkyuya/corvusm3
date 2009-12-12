@@ -32,7 +32,7 @@ vu8 byteCount = 1;
 
 
 vu8 TxBuffer1[TxBufferSize]; // = "\n\rUSART Hyperterminal Interrupts Example: USART-Hyperterminal communication using Interrupt\n\r";
-vu8 RxBuffer1[RxBufferSize];
+vu8 RxBuffer1[TxBufferSize];
 vu8 TxInCounter1 = 0; 
 vu8 TxOutCounter1 = 0;
 vu8 RxInCounter1 = 0;
@@ -56,13 +56,13 @@ vu8 RxOutCounter3 = 0;
 /* send byte array over TxBuffer and Interrupt ------------------------------*/
 void print_uart1 (const char * s)
 {
-
 	while(*s)   // Check for end of string
 	{
 		// this 2 lines are for direct output without interrupt
 		//USART_SendData(USART1, *s++);
-		//while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+		//while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);		
 		TxBuffer1[TxInCounter1++] = *s++;
+		
    	}
 	USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 	

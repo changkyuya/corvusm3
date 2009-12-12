@@ -39,7 +39,7 @@ namespace CorvusM3
             
         }
         public int [] parameter = new int[400];
-        public int maxParameter = 19;
+        public int maxParameter = 21;
 
         public void fillParameter(string para)
         {
@@ -252,6 +252,26 @@ namespace CorvusM3
                 port.Write("s19:" + value.ToString() + "\r\n");
             }
             get { return parameter[19]; }
+        }
+        [CategoryAttribute("RC Channels"), DisplayName("Cam Roll Servo [20]"), DescriptionAttribute("Rollausgleich für Servo 2, \r\n1. Stelle Servo0-3, \r\n2. Stelle invertiert (0,1), \r\n 3.-5. Faktor (500)")]
+        public int CAMROLL
+        {
+            set
+            {
+                parameter[20] = value;
+                port.Write("s20:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[20]; }
+        }
+        [CategoryAttribute("RC Channels"), DisplayName("Cam Nick Servo [21]"), DescriptionAttribute("Nickausgleich für Servo 2, \r\n1. Stelle Servo0-3, \r\n2. Stelle invertiert (0,1), \r\n 3.-5. Faktor (500)")]
+        public int CAMNICK
+        {
+            set
+            {
+                parameter[21] = value;
+                port.Write("s21:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[21]; }
         }
     }
 }

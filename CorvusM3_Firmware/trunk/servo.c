@@ -115,19 +115,131 @@ void changeServoInterrupt(vu16 nextTime)
 }
 
 /* set all Servos to next 4 Channels ----------------------------------------*/
-void setAllServos(vu16 * receiverChannel)
+void setAllServos(vu16 * receiverChannel, volatile float * copterAngle)
 {
-	setServoValue(0, receiverChannel[parameter[PARA_SERVO0_CH]]);
-	setServoValue(1, receiverChannel[parameter[PARA_SERVO1_CH]]);
-	setServoValue(2, receiverChannel[parameter[PARA_SERVO2_CH]]);
-	setServoValue(3, receiverChannel[parameter[PARA_SERVO3_CH]]);
+	s16 servoVals[4];
+	
+	
+	servoVals[0] = (receiverChannel[parameter[PARA_SERVO0_CH]] == 0) ? 1500 : receiverChannel[parameter[PARA_SERVO0_CH]];
+	servoVals[1] = (receiverChannel[parameter[PARA_SERVO1_CH]] == 0) ? 1500 : receiverChannel[parameter[PARA_SERVO1_CH]];
+	servoVals[2] = (receiverChannel[parameter[PARA_SERVO2_CH]] == 0) ? 1500 : receiverChannel[parameter[PARA_SERVO2_CH]];
+	servoVals[3] = (receiverChannel[parameter[PARA_SERVO3_CH]] == 0) ? 1500 : receiverChannel[parameter[PARA_SERVO3_CH]];
+
+		
+	if (parameter[PARA_CAM_X] != 0)
+	{
+		if (parameter[PARA_CAM_X] < 10000) // servo 0
+		{
+			if (parameter[PARA_CAM_X] < 1000) //no invert
+			{
+				servoVals[0] += (s16) ((copterAngle[X] - 90.0) * (parameter[PARA_CAM_X] / 90.0));
+			}
+			else // invert
+			{
+				servoVals[0] = (s16) 3000 - (((copterAngle[X] - 90.0) * ((parameter[PARA_CAM_X] - 1000) / 90.0)) + servoVals[0]);
+			}
+		}
+		else if (parameter[PARA_CAM_X] < 20000) // servo 1
+		{
+			if ((parameter[PARA_CAM_X] - 10000) < 1000) //no invert
+			{
+				servoVals[1] += (s16) ((copterAngle[X] - 90.0) * ((parameter[PARA_CAM_X] - 10000) / 90.0));
+			}
+			else // invert
+			{
+				servoVals[1] = (s16) 3000 - (((copterAngle[X] - 90.0) * ((parameter[PARA_CAM_X] - 11000) / 90.0)) + servoVals[1]);
+			}
+		
+		}
+		else if (parameter[PARA_CAM_X] < 30000) // servo 2
+		{
+			if ((parameter[PARA_CAM_X] - 20000) < 1000) //no invert
+			{
+				servoVals[2] += (s16) ((copterAngle[X] - 90.0) * ((parameter[PARA_CAM_X] - 20000) / 90.0));
+			}
+			else // invert
+			{
+				servoVals[2] = (s16) 3000 - (((copterAngle[X] - 90.0) * ((parameter[PARA_CAM_X] - 21000) / 90.0)) + servoVals[2]);
+			}
+		
+		}
+		else if (parameter[PARA_CAM_X] < 40000) // servo 3
+		{
+			if ((parameter[PARA_CAM_X] - 30000) < 1000) //no invert
+			{
+				servoVals[3] += (s16) ((copterAngle[X] - 90.0) * ((parameter[PARA_CAM_X] - 30000) / 90.0));
+			}
+			else // invert
+			{
+				servoVals[3] = (s16) 3000 - (((copterAngle[X] - 90.0) * ((parameter[PARA_CAM_X] - 31000) / 90.0)) + servoVals[3]);
+			}
+		
+		}
+	}
+	
+		
+	if (parameter[PARA_CAM_Y] != 0)
+	{
+		if (parameter[PARA_CAM_Y] < 10000) // servo 0
+		{
+			if (parameter[PARA_CAM_Y] < 1000) //no invert
+			{
+				servoVals[0] += (s16) ((copterAngle[Y] - 90.0) * (parameter[PARA_CAM_Y] / 90.0));
+			}
+			else // invert
+			{
+				servoVals[0] = (s16) 3000 - (((copterAngle[Y] - 90.0) * ((parameter[PARA_CAM_Y] - 1000) / 90.0)) + servoVals[0]);
+			}
+		}
+		else if (parameter[PARA_CAM_Y] < 20000) // servo 1
+		{
+			if ((parameter[PARA_CAM_Y] - 10000) < 1000) //no invert
+			{
+				servoVals[1] += (s16) ((copterAngle[Y] - 90.0) * ((parameter[PARA_CAM_Y] - 10000) / 90.0));
+			}
+			else // invert
+			{
+				servoVals[1] = (s16) 3000 - (((copterAngle[Y] - 90.0) * ((parameter[PARA_CAM_Y] - 11000) / 90.0)) + servoVals[1]);
+			}
+		
+		}
+		else if (parameter[PARA_CAM_Y] < 30000) // servo 2
+		{
+			if ((parameter[PARA_CAM_Y] - 20000) < 1000) //no invert
+			{
+				servoVals[2] += (s16) ((copterAngle[Y] - 90.0) * ((parameter[PARA_CAM_Y] - 20000) / 90.0));
+			}
+			else // invert
+			{
+				servoVals[2] = (s16) 3000 - (((copterAngle[Y] - 90.0) * ((parameter[PARA_CAM_Y] - 21000) / 90.0)) + servoVals[2]);
+			}
+		
+		}
+		else if (parameter[PARA_CAM_Y] < 40000) // servo 3
+		{
+			if ((parameter[PARA_CAM_Y] - 30000) < 1000) //no invert
+			{
+				servoVals[3] += (s16) ((copterAngle[Y] - 90.0) * ((parameter[PARA_CAM_Y] - 30000) / 90.0));
+			}
+			else // invert
+			{
+				servoVals[3] = (s16) 3000 - (((copterAngle[Y] - 90.0) * ((parameter[PARA_CAM_Y] - 31000) / 90.0)) + servoVals[3]);
+			}
+		
+		}
+	}
+	
+	setServoValue(0, servoVals[0]);
+	setServoValue(1, servoVals[1]);
+	setServoValue(2, servoVals[2]);
+	setServoValue(3, servoVals[3]);
 }
 
 
 /* set server value ---------------------------------------------------------*/
 void setServoValue(u8 servoNr, u16 value)
 {
-	servo[servoNr] = value;
+	servo[servoNr] = constrain(value, 1000, 2000);
 }
 
 
