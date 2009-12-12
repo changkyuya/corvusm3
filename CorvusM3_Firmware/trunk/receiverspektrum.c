@@ -102,11 +102,35 @@ void getSpektrumChannels(vu16 * receiverChannel)
 				oldReceiverSpektrumChannel[i] = receiverChannel[4];
 				//receiverChannel[YAW] = constrain(receiverSpektrumChannel[i] - 2060, 1000, 2000);
 			}
+			else if (receiverSpektrumChannel[i] < 5120)
+			{
+				//ch 5
+				receiverChannel[5] = smoothValue(constrain(receiverSpektrumChannel[i] - 3100, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[5];
+			}
+			else if (receiverSpektrumChannel[i] < 6144)
+			{
+				//ch 6
+				receiverChannel[6] = smoothValue(constrain(receiverSpektrumChannel[i] - 4131, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[6];
+			}
+			else if (receiverSpektrumChannel[i] < 7168)
+			{
+				//ch 7
+				receiverChannel[7] = smoothValue(constrain(receiverSpektrumChannel[i] - 5155, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[7];
+			}
+			else if (receiverSpektrumChannel[i] > 39936 && receiverSpektrumChannel[i] < 40960)
+			{
+				//ch 8
+				receiverChannel[8] = smoothValue(constrain(receiverSpektrumChannel[i] - 38988, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
+				oldReceiverSpektrumChannel[i] = receiverChannel[8];
+			}
 		}
 	}
 	
 	//char x[100];
-	//sprintf(x,"%d:%d-%d-%d-%d\r\n",spektrumBytes[0],spektrumBytes[1],spektrumBytes[2],spektrumBytes[3],spektrumBytes[4]);
+	//sprintf(x,"%d:%d-%d-%d-%d\r\n",receiverSpektrumChannel[12],receiverSpektrumChannel[13],receiverSpektrumChannel[14],receiverSpektrumChannel[15],receiverSpektrumChannel[16]);
 	//print_uart1(x);
 
 }

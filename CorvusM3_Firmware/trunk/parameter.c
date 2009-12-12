@@ -60,6 +60,7 @@ void loadParameter()
 		parameter[i] = val;
 		// for test
 		print_para(i);
+		Delay(2); // prevent txbuffer overvlow
 	}
 }
 
@@ -100,6 +101,7 @@ void loadDefault()
 		parameter[i] = val;
 		// for test
 		print_para(i);
+		Delay(2); // prevent txbuffer overvlow
 	}
 	// info user over uart1
 	send(DEFAULT);
@@ -174,6 +176,7 @@ void flashAllParameter()
 	{
 		writeFlashParameter(i, getParameter(i));
 		print_para(i);
+		Delay(2); // prevent txbuffer overvlow
 	}
 	// info user over uart1
 	send(OK);
