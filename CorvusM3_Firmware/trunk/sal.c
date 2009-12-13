@@ -79,6 +79,7 @@ void getCopterAngles(volatile float * gyroAngle, volatile float * accAngle, vola
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
 	{
+		getGyroAnglesFilterACC(gyroAngle);
 		getACCAnglesFilterACC(accAngle);
 		getCopterAnglesFilterACC(gyroAngle, accAngle, copterAngle);
 	}

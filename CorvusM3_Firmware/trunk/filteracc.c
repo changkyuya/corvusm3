@@ -46,6 +46,7 @@ void getACCAnglesFilterACC(volatile float * accAngle)
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
+	// fastatan2 = ca. 50us faster
 	accAngle[X] = atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795;
 	//change direction
 	accAngle[Y] = atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO]) * 57.2957795 + 90;
@@ -102,9 +103,6 @@ void getGyroAnglesFilterACC(volatile float * gyroAngle)
 /* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
 void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle)
 {
-	getGyroAnglesFilterACC(gyroAngle);
-	getACCAnglesFilterACC(accAngle);
-	
 	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
 	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
 	copterAngle[Z] = gyroAngle[Z];
