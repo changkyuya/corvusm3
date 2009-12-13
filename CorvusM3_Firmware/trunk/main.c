@@ -56,6 +56,11 @@ int main(void)
   
 	print_uart1("CorvusM3 - Version 0.0a\r\n");
 	
+	// for test
+	//char x [80];
+	//sprintf(x,"%d:%d:%d\r\n",smoothValue(100,150,0),smoothValue(100,150,100),smoothValue(100,150,40));
+	//print_uart1(x);
+	
 	
 	// read sensors for calibration
 	setLEDStatus(LED_FLASH);

@@ -58,21 +58,14 @@ void Pause(u32 approxms)
 /* Smooth Values with factor ------------------------------------------------*/
 u16 smoothValue(u16 actual, u16 previous, u16 smooth) 
 {
-	if (smooth == 0)
-	{
-		return actual;
-	}
-	else
-	{
-		return actual + (((previous - actual) * 100) / (10000 / smooth));
-	}
+	return (actual + ((previous - actual) * smooth / 100.0));
 }
 
 
 /* weighting values ---------------------------------------------------------*/
 float weightingValues(float first, float secound, u16 weightingFirst) 
 {
-	return (first * (weightingFirst / 10000.0 )) + ( secound * (1 - weightingFirst / 10000.0 ));
+	return (secound + ((first - secound) * weightingFirst / 10000.0));
 }
 
 
