@@ -1,0 +1,48 @@
+/*	This file is part of the Corvus M3 project
+
+	http://corvusm3.blogspot.com/
+	http://code.google.com/p/corvusm3/	
+
+	2009, Thorsten Raab - thorsten.raab@gmx.at
+
+    Corvus M3 is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Corvus M3 is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __SERIAL_H
+#define __SERIAL_H
+
+#include "main.h"
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+#define TxBufferSize   	0xFF  //(countof(TxBuffer) - 1)
+#define RxBufferSize   	0xFF
+
+/* Private macro -------------------------------------------------------------*/
+#define countof(a)   (sizeof(a) / sizeof(*(a)))
+
+/* Exported functions ------------------------------------------------------- */
+void print_uart1 (const char *);
+char read_uart1 (void);
+s8 is_read_uart1(void);
+void print_uart3 (volatile char *);
+char read_uart2 (void);
+s8 is_read_uart2(void);
+void USART1_IRQHandler(void);
+
+
+
+#endif /* __SERIAL_H */
+
