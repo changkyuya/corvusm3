@@ -26,93 +26,9 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-vu16 servoCount = 0;
 vu16 servo[4];
-extern vu16 parameter[0x190];  //parameter
+extern vu16 parameter[0x190]; //parameter
 
-/* Servo Timer Interrupt 4 --------------------------------------------------*/
-void TIM4_IRQHandler(void)
-{	
-	/* Clear TIM4 update interrupt */
-	TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
-	doServo();
-}
-
-/* Output to Servo Pins -----------------------------------------------------*/
-void doServo()
-{
-	// for test
-	// we use 1.5 ms = 1500us and a gap 20ms-1.5ms = 18500us
-	
-	// if servo not set use 1500
-	if (servo[0] == 0)
-	{
-		servo[0] = 1500;
-	}
-	if (servo[1] == 0)
-	{
-		servo[1] = 1500;
-	}
-	if (servo[2] == 0)
-	{
-		servo[2] = 1500;
-	}
-	if (servo[3] == 0)
-	{
-		servo[3] = 1500;
-	}
-	
-	switch (servoCount)
-	{
-		case 0:
-			// Signal ON
-			*SERVO0 = 1;
-			servoCount++;
-			changeServoInterrupt(servo[0]);
-			//changeServoInterrupt(1125);
-			break;
-		case 1:
-			// Signal OFF
-			*SERVO0 = 0;
-			*SERVO1 = 1;
-			servoCount++;
-			changeServoInterrupt(servo[1]);
-			//changeServoInterrupt(2254);
-			break;
-		case 2:
-			// Signal OFF
-			*SERVO1 = 0;
-			*SERVO2 = 1;
-			servoCount++;
-			changeServoInterrupt(servo[2]);
-			//changeServoInterrupt(2254);
-			break;
-		case 3:
-			// Signal OFF
-			*SERVO2 = 0;
-			*SERVO3 = 1;
-			servoCount++;
-			changeServoInterrupt(servo[3]);
-			//changeServoInterrupt(2254);
-			break;
-		default:
-			// Signal OFF
-			*SERVO3 = 0;
-			// wait for next loop
-			servoCount = 0;
-			changeServoInterrupt(20000 - servo[0] - servo[1] - servo[2] - servo[3]);
-			//changeServoInterrupt(16254);
-			break;
-	}
-}
-
-
-/* change Interrupt to next Timeslot ----------------------------------------*/
-void changeServoInterrupt(vu16 nextTime)
-{
-	TIM4->ARR = nextTime; 				//alle 1ms
-	
-}
 
 /* set all Servos to next 4 Channels ----------------------------------------*/
 void setAllServos(vu16 * receiverChannel, volatile float * copterAngle)

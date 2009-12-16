@@ -191,6 +191,10 @@ void debug(void)
   TIM4 = (TIM_TypeDef *)  TIM4_BASE;
 #endif /*_TIM4 */
 
+#ifdef _TIM8
+  TIM8 = (TIM_TypeDef *)  TIM8_BASE;
+#endif /*_TIM8 */
+
 /************************************* USART **********************************/
 #ifdef _USART1
   USART1 = (USART_TypeDef *) USART1_BASE;

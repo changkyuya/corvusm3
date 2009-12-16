@@ -176,6 +176,7 @@ typedef struct
 #define RCC_APB2Periph_ADC1              ((u32)0x00000200)
 #define RCC_APB2Periph_ADC2              ((u32)0x00000400)
 #define RCC_APB2Periph_TIM1              ((u32)0x00000800)
+#define RCC_APB2Periph_TIM8              ((u32)0x00002000)
 #define RCC_APB2Periph_SPI1              ((u32)0x00001000)
 #define RCC_APB2Periph_USART1            ((u32)0x00004000)
 #define RCC_APB2Periph_ALL               ((u32)0x00005E7D)

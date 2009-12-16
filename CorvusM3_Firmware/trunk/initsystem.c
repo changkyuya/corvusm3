@@ -110,12 +110,12 @@ void RCC_Configuration(void)
 	}
 
 	/* Enable TIM2 clocks for LED, 
-	   Enable TIM3 clocks for Statemachine 
-	   Enable TIM4 clocks for Servo */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 | RCC_APB1Periph_TIM4, ENABLE);  // Timer
+	   Enable TIM3 clocks for Statemachine  */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3, ENABLE);  // Timer
 	/* Enable for PPM decode -------------------------------------------*/
-	/* TIM1 clock enable */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+	/* TIM1 clock enable 
+	Enable TIM8 clocks for Servo */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1 | RCC_APB2Periph_TIM8, ENABLE);
 	
 	/* Enable GPIO clocks A(UART1),B(UART3),C(LED, Sensors), ...*/
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC, ENABLE);
@@ -140,7 +140,7 @@ void TIM_Configuration(void)
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef  TIM_OCInitStructure2;
 	TIM_OCInitTypeDef  TIM_OCInitStructure3;
-	TIM_OCInitTypeDef  TIM_OCInitStructure4;
+	TIM_OCInitTypeDef  TIM_OCInitStructure8;
 
 	/* TIM2 configuration for LED -------------------------------------------*/
 	TIM_TimeBaseStructure.TIM_Period = 0x12B; 				//299
@@ -185,26 +185,6 @@ void TIM_Configuration(void)
 	// enable in main after powerup
 	//TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 
-	/* TIM4 configuration for Servo0-3 --------------------------------------*/
-	TIM_TimeBaseStructure.TIM_Period = 1500; 				//alle 1ms
-	TIM_TimeBaseStructure.TIM_Prescaler = 0x48;       	//72
-	TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
-	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-	/* Outoput Compare Init */
-	TIM_OCStructInit(&TIM_OCInitStructure4);
-	/* Output Compare Timing Mode configuration: Channel1 */
-	TIM_OCInitStructure4.TIM_OCMode = TIM_OCMode_Timing;
-	TIM_OCInitStructure4.TIM_Pulse = 0x0;  
-	TIM_OCInit(TIM4, &TIM_OCInitStructure4);
-	/* TIM4 enable counter */
-	TIM_Cmd(TIM4, ENABLE);
-	/* Immediate load of TIM4 Precaler value */
-	TIM_PrescalerConfig(TIM4, 0x48, TIM_PSCReloadMode_Immediate);
-	/* Clear TIM4 update pending flag */
-	TIM_ClearFlag(TIM4, TIM_FLAG_Update);
-	/* Enable TIM4 Update interrupt */
-	TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
 	
 	/* Timer for PPM decode ---------------------------------------------------*/
 	TIM1_ICInitTypeDef TIM1_ICInitStructure; 
@@ -230,6 +210,55 @@ void TIM_Configuration(void)
 	TIM1_Cmd(ENABLE); 
 	/* Enable the CC1 Interrupt Request */ 
 	TIM1_ITConfig(TIM_IT_CC1, ENABLE); 
+	
+	
+	/* Timer for Servo 0-3 --------------------------------------------------*/
+	/* Time base configuration */
+	TIM_TimeBaseStructure.TIM_Period = 2999;
+	TIM_TimeBaseStructure.TIM_Prescaler = 72;
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+
+	TIM_TimeBaseInit(TIM8, &TIM_TimeBaseStructure);
+
+	/* PWM1 Mode configuration: Channel1 */
+	TIM_OCInitStructure8.TIM_OCMode = TIM_OCMode_PWM1;
+	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Pulse = 1500;
+	TIM_OCInitStructure8.TIM_OCPolarity = TIM_OCPolarity_High;
+
+	TIM_OCInit(TIM8, &TIM_OCInitStructure8);
+
+	TIM_OCPreloadConfig(TIM8, TIM_OCPreload_Enable);
+
+	/* PWM1 Mode configuration: Channel2 */
+	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Pulse = 1500;
+
+	TIM_OC2Init(TIM8, &TIM_OCInitStructure8);
+
+	TIM_OC2PreloadConfig(TIM8, TIM_OCPreload_Enable);
+
+	/* PWM1 Mode configuration: Channel3 */
+	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Pulse = 1500;
+
+	TIM_OC3Init(TIM8, &TIM_OCInitStructure8);
+
+	TIM_OC3PreloadConfig(TIM8, TIM_OCPreload_Enable);
+
+	/* PWM1 Mode configuration: Channel4 */
+	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Pulse = 1500;
+
+	TIM_OC4Init(TIM8, &TIM_OCInitStructure8);
+
+	TIM_OC4PreloadConfig(TIM8, TIM_OCPreload_Enable);
+
+	TIM_ARRPreloadConfig(TIM8, ENABLE);
+
+	/* TIM8 enable counter */
+	TIM_Cmd(TIM8, ENABLE);
 }
 
 /* Configures the different GPIO ports.  ------------------------------------*/
@@ -373,13 +402,7 @@ void NVIC_Configuration(void)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
-	/* Interrupt for Servo1 and Servoo2 ----------------------------------------*/
-	NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQChannel;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-  
+ 
   	/* Interrupt for Status LED ---------------------------------------------*/
 	/* Configure two bits for preemption priority - LED*/
 	//NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);

@@ -512,6 +512,7 @@ typedef struct
 #define ADC2_BASE             (APB2PERIPH_BASE + 0x2800)
 #define TIM1_BASE             (APB2PERIPH_BASE + 0x2C00)
 #define SPI1_BASE             (APB2PERIPH_BASE + 0x3000)
+#define TIM8_BASE             (APB2PERIPH_BASE + 0x3400)
 #define USART1_BASE           (APB2PERIPH_BASE + 0x3800)
 
 #define DMA_BASE              (AHBPERIPH_BASE + 0x0000)
@@ -549,6 +550,11 @@ typedef struct
 #ifdef _TIM4
   #define TIM4                ((TIM_TypeDef *) TIM4_BASE)
 #endif /*_TIM4 */
+
+#ifdef _TIM8
+  #define TIM8                ((TIM_TypeDef *) TIM8_BASE)
+#endif /*_TIM8 */
+
 
 #ifdef _RTC
   #define RTC                 ((RTC_TypeDef *) RTC_BASE)
