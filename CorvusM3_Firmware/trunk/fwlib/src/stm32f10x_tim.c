@@ -187,6 +187,7 @@ void TIM_OCInit(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
   /* Check the parameters */
   assert_param(IS_TIM_OC_MODE(TIM_OCInitStruct->TIM_OCMode));
   assert_param(IS_TIM_CHANNEL(TIM_OCInitStruct->TIM_Channel));
+  assert_param(IS_TIM_OUTPUT_STATE(TIM_OCInitStruct->TIM_OutputState));
   assert_param(IS_TIM_OC_POLARITY(TIM_OCInitStruct->TIM_OCPolarity));
 
   tmpccer = TIMx->CCER;
@@ -218,6 +219,9 @@ void TIM_OCInit(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 
       /* Set the Capture Compare Polarity */
       tmpccer |= TIM_OCInitStruct->TIM_OCPolarity;
+	  
+	  /* Set the Output State */
+	  tmpccer |= TIM_OCInitStruct->TIM_OutputState;
     }
     else /* TIM_Channel_2 */
     {
@@ -235,6 +239,9 @@ void TIM_OCInit(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 
       /* Set the Capture Compare Polarity */
       tmpccer |= (u32)TIM_OCInitStruct->TIM_OCPolarity << 4;
+	  
+	  /* Set the Output State */
+	  tmpccer |= TIM_OCInitStruct->TIM_OutputState;
     }
 
     TIMx->CCMR1 = (u16)tmpccmrx;
@@ -268,6 +275,9 @@ void TIM_OCInit(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 
         /* Set the Capture Compare Polarity */
         tmpccer |= (u32)TIM_OCInitStruct->TIM_OCPolarity << 8;
+	  
+		/* Set the Output State */
+		tmpccer |= TIM_OCInitStruct->TIM_OutputState;
       }
       else  /* TIM_Channel_4 */
       {
@@ -285,6 +295,9 @@ void TIM_OCInit(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct)
 
         /* Set the Capture Compare Polarity */
         tmpccer |= (u32)TIM_OCInitStruct->TIM_OCPolarity << 12;
+	  
+		/* Set the Output State */
+		tmpccer |= TIM_OCInitStruct->TIM_OutputState;
       }
 
       TIMx->CCMR2 = (u16)tmpccmrx;

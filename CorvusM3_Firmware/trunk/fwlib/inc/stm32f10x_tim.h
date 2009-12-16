@@ -39,6 +39,7 @@ typedef struct
   u16 TIM_Channel;          /* Timer Channel */
   u16 TIM_Pulse;           /* PWM or OC Channel pulse length */
   u16 TIM_OCPolarity;       /* PWM, OCM or OPM Channel polarity */
+  u16 TIM_OutputState; 
 } TIM_OCInitTypeDef;
 
 /* TIM Input Capture Init structure definition */
@@ -121,6 +122,14 @@ typedef struct
 
 #define IS_TIM_OC_POLARITY(POLARITY) ((POLARITY == TIM_OCPolarity_High) || \
                                      (POLARITY == TIM_OCPolarity_Low))
+
+/** @defgroup TIM_Output_Compare_state 
+  * @{
+  */
+
+#define TIM_OutputState_Disable            ((u16)0x0000)
+#define TIM_OutputState_Enable             ((u16)0x0001)
+
 
 /* TIM Input Capture Polarity -----------------------------------------------*/
 #define  TIM_ICPolarity_Rising            ((u16)0x0000)

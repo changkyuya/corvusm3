@@ -220,38 +220,42 @@ void TIM_Configuration(void)
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 
 	TIM_TimeBaseInit(TIM8, &TIM_TimeBaseStructure);
-
+	
 	/* PWM1 Mode configuration: Channel1 */
 	TIM_OCInitStructure8.TIM_OCMode = TIM_OCMode_PWM1;
 	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Channel = TIM_Channel_1;   
 	TIM_OCInitStructure8.TIM_Pulse = 1500;
 	TIM_OCInitStructure8.TIM_OCPolarity = TIM_OCPolarity_High;
 
 	TIM_OCInit(TIM8, &TIM_OCInitStructure8);
 
-	TIM_OCPreloadConfig(TIM8, TIM_OCPreload_Enable);
+	TIM_OC1PreloadConfig(TIM8, TIM_OCPreload_Enable);
 
 	/* PWM1 Mode configuration: Channel2 */
 	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Channel = TIM_Channel_2;   
 	TIM_OCInitStructure8.TIM_Pulse = 1500;
 
-	TIM_OC2Init(TIM8, &TIM_OCInitStructure8);
+	TIM_OCInit(TIM8, &TIM_OCInitStructure8);
 
 	TIM_OC2PreloadConfig(TIM8, TIM_OCPreload_Enable);
 
 	/* PWM1 Mode configuration: Channel3 */
 	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Channel = TIM_Channel_3;   
 	TIM_OCInitStructure8.TIM_Pulse = 1500;
 
-	TIM_OC3Init(TIM8, &TIM_OCInitStructure8);
+	TIM_OCInit(TIM8, &TIM_OCInitStructure8);
 
 	TIM_OC3PreloadConfig(TIM8, TIM_OCPreload_Enable);
 
 	/* PWM1 Mode configuration: Channel4 */
 	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure8.TIM_Channel = TIM_Channel_4;   
 	TIM_OCInitStructure8.TIM_Pulse = 1500;
 
-	TIM_OC4Init(TIM8, &TIM_OCInitStructure8);
+	TIM_OCInit(TIM8, &TIM_OCInitStructure8);
 
 	TIM_OC4PreloadConfig(TIM8, TIM_OCPreload_Enable);
 
@@ -259,6 +263,10 @@ void TIM_Configuration(void)
 
 	/* TIM8 enable counter */
 	TIM_Cmd(TIM8, ENABLE);
+	/* Immediate load of TIM8 Precaler value */
+	TIM_PrescalerConfig(TIM8, 72, TIM_PSCReloadMode_Immediate);
+	/* Clear TIM8 update pending flag */
+	TIM_ClearFlag(TIM8, TIM_FLAG_Update);
 }
 
 /* Configures the different GPIO ports.  ------------------------------------*/
@@ -325,8 +333,8 @@ void GPIO_Configuration(void)
 	GPIO_Init(GPIOA, &GPIO_InitStructure);  
 	// for Servo0-3 Pin
 	GPIO_InitStructure.GPIO_Pin = GPIO_SERVO0 | GPIO_SERVO1 | GPIO_SERVO2 | GPIO_SERVO3;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);  
 	
 	/* ADC for ACC, Gyro, .. -------------------------------------------------*/
