@@ -31,16 +31,16 @@
 extern vu16 parameter[0x190];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
 extern vu16 ADCSensorValue[7]; //initsystem
-extern volatile float gyroAngle[3];  //statemachine
-extern volatile float accAngle[2];  //statemachine
-extern volatile float copterAngle[3];  //statemachine
-extern volatile float targetAngle[3]; //statemachine
+extern vs32 gyroAngle[3];  //statemachine
+extern vs32 accAngle[2];  //statemachine
+extern vs32 copterAngle[3];  //statemachine
+extern vs32 targetAngle[3]; //statemachine
 extern volatile char motor[5]; //statemachine
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
 {
-	char x [80];			
+	char x [200];			
 	
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_ADC)
@@ -64,21 +64,21 @@ void doDebug()
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_SENSOR)
 	{
-		sprintf(x,"G-A-C:1:%-.2f:",gyroAngle[X]);
+		//printf(x,"G-A-C:1:%d:",gyroAngle[X]/1000);
+		//print_uart1(x);
+		sprintf(x,"%d:",gyroAngle[Y]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",gyroAngle[Y]);
+		sprintf(x,"%d:",gyroAngle[Z]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",gyroAngle[Z]);
+		sprintf(x,"%d:",accAngle[X]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",accAngle[X]);
+		sprintf(x,"%d:",accAngle[Y]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",accAngle[Y]);
+		sprintf(x,"%d:",copterAngle[X]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",copterAngle[X]);
+		sprintf(x,"%d:",copterAngle[Y]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",copterAngle[Y]);
-		print_uart1(x);
-		sprintf(x,"%-.2f:\r\n",copterAngle[Z]);
+		sprintf(x,"%d:\r\n",copterAngle[Z]/1000);
 		print_uart1(x);
 	}
 	
@@ -112,11 +112,11 @@ void doDebug()
 	// if parameter value is 1 - 1. bit is set
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_MOT)
 	{
-		sprintf(x,"G-TarAngle-Mot-1:%-.2f:",targetAngle[0]);
+		sprintf(x,"G-TarAngle-Mot-1:%d:",targetAngle[0]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",targetAngle[1]);
+		sprintf(x,"%d:",targetAngle[1]/1000);
 		print_uart1(x);
-		sprintf(x,"%-.2f:",targetAngle[2]);
+		sprintf(x,"%d:",targetAngle[2]/1000);
 		print_uart1(x);
 		sprintf(x,"%d:",motor[1]);
 		print_uart1(x);

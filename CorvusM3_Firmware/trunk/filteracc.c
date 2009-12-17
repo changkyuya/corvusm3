@@ -34,7 +34,7 @@ extern vu16 parameter[0x190]; //parameter
 
 
 /* calculate ACC Angles -----------------------------------------------------*/
-void getACCAnglesFilterACC(volatile float * accAngle)
+void getACCAnglesFilterACC(vs32 * accAngle)
 {
 	vs16 accRawValues[3];
 	getACCRawValues(accRawValues);
@@ -46,9 +46,9 @@ void getACCAnglesFilterACC(volatile float * accAngle)
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[X] = atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795;
+	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 5729577.95);
 	//change direction
-	accAngle[Y] = atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO]) * 57.2957795 + 90;
+	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO]) * 5729577.95 + 9000000);
 
 	
 	//char x [80];
@@ -58,16 +58,16 @@ void getACCAnglesFilterACC(volatile float * accAngle)
 }
 
 /* set gyro start angle -----------------------------------------------------*/
-void setGyroAngleFilterACC(volatile float * gyroAngle)
+void setGyroAngleFilterACC(vs32 * gyroAngle)
 {
-	volatile float accAngle[2];
+	vs32 accAngle[2];
 	getACCAnglesFilterACC(accAngle);
 	gyroAngle[X] = accAngle[X];
 	gyroAngle[Y] = accAngle[Y];
-	gyroAngle[Z] = 180;
+	gyroAngle[Z] = 18000000;
 	
 	char x [80];
-	sprintf(x,"gyro start value:%d:%d:%d\r\n",(int)gyroAngle[X],(int)gyroAngle[Y],(int)gyroAngle[Z]);
+	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);
 	print_uart1(x);
 }
 
@@ -75,22 +75,22 @@ void setGyroAngleFilterACC(volatile float * gyroAngle)
 // 2mV/°/sec
 // 12bit = 4095, Vref = 3,3V  => 3,3/4095 = 0,00080586085860
 // ADC * 3,3 / 4095 / 2000 * 1000 
-void getGyroAnglesFilterACC(volatile float * gyroAngle)
+void getGyroAnglesFilterACC(vs32 * gyroAngle)
 {
 	vs16 gyroRawValues[3];
 	getGyroRawValues(gyroRawValues);
-	gyroAngle[X] -= gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90];
-	gyroAngle[Y] -= gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90];
-	gyroAngle[Z] -= gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90];
+	gyroAngle[X] -= gyroRawValues[X] * 40 * parameter[PARA_GYRO_X_90];
+	gyroAngle[Y] -= gyroRawValues[Y] * 40 * parameter[PARA_GYRO_Y_90];
+	gyroAngle[Z] -= gyroRawValues[Z] * 40 * parameter[PARA_GYRO_Z_90];
 	
 		
-	if (gyroAngle[Z] >= 360) 
+	if (gyroAngle[Z] >= 36000000) 
 	{
-		gyroAngle[Z] -= 360.0;
+		gyroAngle[Z] -= 36000000;
 	}
 	if (gyroAngle[Z] < 0) 
 	{
-		gyroAngle[Z] = 360.0 - gyroAngle[Z];
+		gyroAngle[Z] = 36000000 - gyroAngle[Z];
 	}
 	
 	//char x [80];
@@ -100,7 +100,7 @@ void getGyroAnglesFilterACC(volatile float * gyroAngle)
 
 
 /* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
-void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle)
+void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 {
 	//needs about 50us (all 5)
 	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
@@ -114,10 +114,10 @@ void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAn
 
 
 /* map receiver to angles for roll nick -------------------------------------*/
-void mapReceiverValuesFilterACC(vu16 * receiverChannel, volatile float * targetAngle)
+void mapReceiverValuesFilterACC(vu16 * receiverChannel, vs32 * targetAngle)
 {
 	// 90 = neutral
 	// max is 20 to 160° - this are 70° for 500 points
-	targetAngle[X] = 20.0 + ((70.0 / 500.0) * (receiverChannel[ROLL] - 1000.0));
-	targetAngle[Y] = 20.0 + ((70.0 / 500.0) * (receiverChannel[NICK] - 1000.0));
+	targetAngle[X] = 2000000 + ((14000) * (receiverChannel[ROLL] - 1000));
+	targetAngle[Y] = 2000000 + ((14000) * (receiverChannel[NICK] - 1000));
 }

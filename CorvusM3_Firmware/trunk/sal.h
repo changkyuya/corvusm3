@@ -32,11 +32,11 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-void getACCAngles(volatile float * accAngle);
-void setGyroAngles(volatile float * gyroAngle);
-void getGyroAngles(volatile float * gyroAngle);
-void getCopterAngles(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle);
-void mapReceiverValues(vu16 * receiverChannel, volatile float * targetAngle);
+void getACCAngles(vs32 * accAngle);
+void setGyroAngles(vs32 * gyroAngle);
+void getGyroAngles(vs32 * gyroAngle);
+void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle);
+void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle);
 
 
 #endif /* __SAL_H */

@@ -28,7 +28,7 @@
 /* Variables ----------------------------------------------------------------*/
 
 /* fill ACC Angles in Struc ---------------------------------------------------*/
-void getACCAngles(volatile float * accAngle)
+void getACCAngles(vs32 * accAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -43,7 +43,7 @@ void getACCAngles(volatile float * accAngle)
 }
 
 /* set gyro angle to start value acc-angle ----------------------------------*/
-void setGyroAngles(volatile float * gyroAngle)
+void setGyroAngles(vs32 * gyroAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -58,7 +58,7 @@ void setGyroAngles(volatile float * gyroAngle)
 
 
 /* get Gyro Angles ----------------------------------------------------------*/
-void getGyroAngles(volatile float * gyroAngle)
+void getGyroAngles(vs32 * gyroAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -74,7 +74,7 @@ void getGyroAngles(volatile float * gyroAngle)
 
 
 /* get Copter Angle ---------------------------------------------------------*/
-void getCopterAngles(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle)
+void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
@@ -89,7 +89,7 @@ void getCopterAngles(volatile float * gyroAngle, volatile float * accAngle, vola
 	}
 }
 
-void mapReceiverValues(vu16 * receiverChannel, volatile float * targetAngle)
+void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 

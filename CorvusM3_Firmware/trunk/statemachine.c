@@ -37,15 +37,15 @@ extern vu16 ADCSensorValue[7];  //initsystem
 vu32 msCount = 0;
 vu32 msOldCount = 0;
 vu16 receiverChannel[9]; 
-volatile float targetAngle[3];
+vs32 targetAngle[3];
 extern vu16 parameter[0x190]; //parameter
 u8 flightState = FLIGHT_START;
 volatile char motor[5]; 
-volatile float gyroAngle[3];
+vs32 gyroAngle[3];
 //vs16 gyroAngle[3];
-volatile float accAngle[2];
+vs32 accAngle[2];
 //vs16 accAngle[2];
-volatile float copterAngle[3];
+vs32 copterAngle[3];
 vu8 errorCode;
 vu8 neutralRC;
 

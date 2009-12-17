@@ -32,10 +32,10 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-void getACCAnglesFilterACC(volatile float * accAngle);
-void setGyroAngleFilterACC(volatile float * gyroAngle);
-void getGyroAnglesFilterACC(volatile float * gyroAngle);
-void getCopterAnglesFilterACC(volatile float * gyroAngle, volatile float * accAngle, volatile float * copterAngle);
-void mapReceiverValuesFilterACC(vu16 * receiverChannel, volatile float * targetAngle);
+void getACCAnglesFilterACC(vs32 * accAngle);
+void setGyroAngleFilterACC(vs32 * gyroAngle);
+void getGyroAnglesFilterACC(vs32 * gyroAngle);
+void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle);
+void mapReceiverValuesFilterACC(vu16 * receiverChannel, vs32 * targetAngle);
 
 #endif /* __FILTERACC_H */
