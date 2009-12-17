@@ -214,7 +214,7 @@ void TIM_Configuration(void)
 	
 	/* Timer for Servo 0-3 --------------------------------------------------*/
 	/* Time base configuration */
-	TIM_TimeBaseStructure.TIM_Period = 2999;
+	TIM_TimeBaseStructure.TIM_Period = 5999;
 	TIM_TimeBaseStructure.TIM_Prescaler = 72;
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;

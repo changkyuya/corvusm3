@@ -155,7 +155,29 @@ void setAllServos(vu16 * receiverChannel, volatile float * copterAngle)
 /* set server value ---------------------------------------------------------*/
 void setServoValue(u8 servoNr, u16 value)
 {
-	servo[servoNr] = constrain(value, 1000, 2000);
+	switch (servoNr)
+	{
+		case 0:
+			/* Set the Capture Compare Register value */
+			TIM8->CCR1 = value;
+			break;
+		case 1:
+			/* Set the Capture Compare Register value */
+			TIM8->CCR2 = value;
+			break;
+		case 2:
+			/* Set the Capture Compare Register value */
+			TIM8->CCR3 = value;
+			break;
+		case 3:
+			/* Set the Capture Compare Register value */
+			TIM8->CCR4 = value;
+			break;
+		default:
+			break;
+	}
+	
+	//servo[servoNr] = constrain(value, 1000, 2000);
 }
 
 
