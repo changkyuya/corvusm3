@@ -86,6 +86,9 @@
 
 #define DCR_DMA_Mask                ((u16)0x0000)
 
+#define BDTR_MOE_Set                ((u16)0x8000)
+#define BDTR_MOE_Reset              ((u16)0x7FFF)
+
 /* TIM private Masks */
 #define TIM_Period_Reset_Mask       ((u16)0x0000)
 #define TIM_Prescaler_Reset_Mask    ((u16)0x0000)

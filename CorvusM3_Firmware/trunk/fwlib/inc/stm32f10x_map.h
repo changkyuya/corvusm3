@@ -429,11 +429,13 @@ typedef struct
   vu16 CCR3;
   u16 RESERVED14;
   vu16 CCR4;
-  u16 RESERVED15[3];
-  vu16 DCR;
+  u16 RESERVED15;
+  vu16 BDTR;
   u16 RESERVED16;
-  vu16 DMAR;
+  vu16 DCR;
   u16 RESERVED17;
+  vu16 DMAR;
+  u16 RESERVED18;
 } TIM_TypeDef;
 
 /*----------------- Universal Synchronous Asynchronous Receiver Transmitter --*/

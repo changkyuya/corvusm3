@@ -226,7 +226,7 @@ void TIM_Configuration(void)
 	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure8.TIM_Channel = TIM_Channel_1;   
 	TIM_OCInitStructure8.TIM_Pulse = 1500;
-	TIM_OCInitStructure8.TIM_OCPolarity = TIM_OCPolarity_High;
+	TIM_OCInitStructure8.TIM_OCPolarity = TIM_OCPolarity_High; // maybee it works with TIM_OCPolarity_LOW???
 
 	TIM_OCInit(TIM8, &TIM_OCInitStructure8);
 
@@ -261,12 +261,15 @@ void TIM_Configuration(void)
 
 	TIM_ARRPreloadConfig(TIM8, ENABLE);
 
+	/* Enable the TIM Main Output only needed for timer 1 and 8*/
+    TIM8->BDTR |= ((u16)0x8000); //BDTR_MOE_Set;
+	
 	/* TIM8 enable counter */
 	TIM_Cmd(TIM8, ENABLE);
 	/* Immediate load of TIM8 Precaler value */
-	TIM_PrescalerConfig(TIM8, 72, TIM_PSCReloadMode_Immediate);
+	//TIM_PrescalerConfig(TIM8, 72, TIM_PSCReloadMode_Immediate);
 	/* Clear TIM8 update pending flag */
-	TIM_ClearFlag(TIM8, TIM_FLAG_Update);
+	//TIM_ClearFlag(TIM8, TIM_FLAG_Update);
 }
 
 /* Configures the different GPIO ports.  ------------------------------------*/
