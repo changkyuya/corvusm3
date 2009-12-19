@@ -56,6 +56,18 @@ void zeroGyro()
 	gyroZero[Y] = gyroZero[Y] >> 3;
 	gyroZero[Z] = gyroZero[Z] >> 3;
 	
+	for (i = 0; i < 7; i++)
+	{
+		gyroZero[X] += ADCSensorValue[GYRO_X];
+		gyroZero[Y] += ADCSensorValue[GYRO_Y];
+		gyroZero[Z] += ADCSensorValue[GYRO_Z];
+		Pause(100);
+	}
+	
+	gyroZero[X] = gyroZero[X] >> 3; 
+	gyroZero[Y] = gyroZero[Y] >> 3;
+	gyroZero[Z] = gyroZero[Z] >> 3;
+	
 	setOldADC();
 
 	char x [80];

@@ -31,7 +31,7 @@ extern vu16 parameter[0x190]; //parameter
 
 
 /* set all Servos to next 4 Channels ----------------------------------------*/
-void setAllServos(vu16 * receiverChannel, volatile float * copterAngle)
+void setAllServos(vu16 * receiverChannel, vs32 * copterAngle)
 {
 	s16 servoVals[4];
 	

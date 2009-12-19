@@ -48,7 +48,7 @@ void getACCAnglesFilterACC(vs32 * accAngle)
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
 	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 5729577.95);
 	//change direction
-	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO]) * 5729577.95 + 9000000);
+	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] ) * 5729577.95 + 9000000);
 
 	
 	//char x [80];
@@ -79,9 +79,12 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle)
 {
 	vs16 gyroRawValues[3];
 	getGyroRawValues(gyroRawValues);
-	gyroAngle[X] -= gyroRawValues[X] * 40 * parameter[PARA_GYRO_X_90];
-	gyroAngle[Y] -= gyroRawValues[Y] * 40 * parameter[PARA_GYRO_Y_90];
-	gyroAngle[Z] -= gyroRawValues[Z] * 40 * parameter[PARA_GYRO_Z_90];
+	//gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
+    //gyroAngle[Y] -=y (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
+    //gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
+    gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
+    gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
+    gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
 	
 		
 	if (gyroAngle[Z] >= 36000000) 

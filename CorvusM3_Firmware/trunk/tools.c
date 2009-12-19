@@ -63,7 +63,7 @@ u16 smoothValue(u16 actual, u16 previous, u16 smooth)
 
 
 /* weighting values ---------------------------------------------------------*/
-float weightingValues(float first, float secound, u16 weightingFirst) 
+s32 weightingValues(s32 first, s32 secound, u16 weightingFirst) 
 {
 	return (secound + ((first - secound) * weightingFirst / 10000.0));
 }

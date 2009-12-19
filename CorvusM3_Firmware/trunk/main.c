@@ -70,8 +70,8 @@ int main(void)
 	loadParameter();
 	
 	// calibrate sensor
-	// wait 1 secound befor calibrate
-	Delay(1000);
+	// wait befor calibrate
+	Delay(100);
 	zeroGyro();
 	setGyroAngles(gyroAngle);
 	

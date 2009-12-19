@@ -33,6 +33,6 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void setServoValue(u8 servo, u16 value);
-void setAllServos(vu16 * receiverChannel, volatile float * copterAngle);
+void setAllServos(vu16 * receiverChannel, vs32 * copterAngle);
 
 #endif /* __SERVO_H */

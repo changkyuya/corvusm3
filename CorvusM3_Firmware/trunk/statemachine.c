@@ -132,6 +132,7 @@ void statemachine(void)
 			}
 			// flightcontroll
 			
+			
 			// command motors
 			sendMotor(motor);
 			

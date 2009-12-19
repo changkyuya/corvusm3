@@ -64,8 +64,8 @@ void doDebug()
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_SENSOR)
 	{
-		//printf(x,"G-A-C:1:%d:",gyroAngle[X]/1000);
-		//print_uart1(x);
+		sprintf(x,"G-A-C:1:%d:",gyroAngle[X]/1000);
+		print_uart1(x);
 		sprintf(x,"%d:",gyroAngle[Y]/1000);
 		print_uart1(x);
 		sprintf(x,"%d:",gyroAngle[Z]/1000);

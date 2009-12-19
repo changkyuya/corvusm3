@@ -35,6 +35,6 @@ void SysTickHandler(void);
 void Pause(u32 approxms);
 u16 smoothValue(u16 actual, u16 previous, u16 smooth); 
 float fastatan2(float y, float x);
-float weightingValues(float first, float secound, u16 weightingFirst); 
+s32 weightingValues(s32 first, s32 secound, u16 weightingFirst); 
 
 #endif /* __TOOLS_H */
