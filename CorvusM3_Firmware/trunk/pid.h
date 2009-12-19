@@ -29,6 +29,6 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-
+void calcPIDCorr(vs32 * PIDCorr, vs32 * copterAngle, vs32 * targetAngle);
 
 #endif /* __PID_H */

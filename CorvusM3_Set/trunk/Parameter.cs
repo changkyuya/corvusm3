@@ -293,7 +293,7 @@ namespace CorvusM3
             }
             get { return parameter[23]; }
         }
-        [CategoryAttribute("Flugregelung"), DisplayName("P Y Nick [24]"), DescriptionAttribute("")]
+        [CategoryAttribute("Flugregelung"), DisplayName("I X Nick [24]"), DescriptionAttribute("")]
         public int PY
         {
             set
@@ -303,7 +303,7 @@ namespace CorvusM3
             }
             get { return parameter[24]; }
         }
-        [CategoryAttribute("Flugregelung"), DisplayName("I X Roll [25]"), DescriptionAttribute("")]
+        [CategoryAttribute("Flugregelung"), DisplayName("D X Roll [25]"), DescriptionAttribute("")]
         public int IX
         {
             set
@@ -313,7 +313,7 @@ namespace CorvusM3
             }
             get { return parameter[25]; }
         }
-        [CategoryAttribute("Flugregelung"), DisplayName("I Y Nick [26]"), DescriptionAttribute("")]
+        [CategoryAttribute("Flugregelung"), DisplayName("P Y Nick [26]"), DescriptionAttribute("")]
         public int IY
         {
             set
@@ -323,7 +323,7 @@ namespace CorvusM3
             }
             get { return parameter[26]; }
         }
-        [CategoryAttribute("Flugregelung"), DisplayName("D X Roll [27]"), DescriptionAttribute("")]
+        [CategoryAttribute("Flugregelung"), DisplayName("I Y Roll [27]"), DescriptionAttribute("")]
         public int DX
         {
             set

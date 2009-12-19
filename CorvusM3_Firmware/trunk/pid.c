@@ -24,9 +24,43 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+vs32 summI[3];
+vs32 diffOld[3];
+extern vu16 parameter[0x190]; //parameter
 
+/* calculate the correktion faktor ------------------------------------------*/
+void calcPIDCorr(vs32 * PIDCorr, vs32 * copterAngle, vs32 * targetAngle)
+{
+	/*
+	aus http://forum.mikrokopter.de/topic-post76057.html
+	Abweichung = Soll - Ist;
+	Summe_Abweichungen = Summe_Abweichungen + Abweichung;
+	Differenz_zur_letzten_Abweichung = Abweichung - Abweichung_alt;
 
+	Gegensteuern = Verstärkungsfaktor_Prop * Abweichung 
+	+ Verstärkungsfaktor_Inte * Zeit * Summe_Abweichungen
+	+ (Verstärkungsfaktor_Diff * Differenz_zur_letzten_Abweichung) / Zeit;
 
+	Abweichung_alt = Abweichung;
+	*/
+	
+	vs32 diff;
+	vs32 diffLast;
+	u8 i;
+	
+	for (i = 0; i < 3; i++)
+	{
+		diff = targetAngle[i] - copterAngle[i];
+		summI[i] += diff;
+		diffLast = diff - diffOld[i];
+		
+		PIDCorr[i] = parameter[23 + (i * 3)] * diff / 100000
+		PIDCorr[i] +=  parameter[24 + (i * 3)] * summI[i] / 100000
+		PIDCorr[i] +=  parameter[25 + (i * 3)] * diffLast / 100000;
+		
+		diffOld[i] = diff;
+	}
+}
 
 
 

@@ -31,6 +31,7 @@
 #include "blmc.h"
 #include "sensor.h"
 #include "servo.h"
+#include "pid.h"
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[7];  //initsystem
@@ -48,6 +49,7 @@ vs32 accAngle[2];
 vs32 copterAngle[3];
 vu8 errorCode;
 vu8 neutralRC;
+vs32 PIDCorr[3];
 
 
 	
@@ -131,7 +133,8 @@ void statemachine(void)
 				neutralRC = 1;
 			}
 			// flightcontroll
-			
+			calcPIDCorr(PIDCorr, copterAngle, targetAngle);
+			// map PIDCorr to 4 Motors
 			
 			// command motors
 			sendMotor(motor);
