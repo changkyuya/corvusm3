@@ -39,7 +39,7 @@ namespace CorvusM3
             
         }
         public int [] parameter = new int[400];
-        public int maxParameter = 22;
+        public int maxParameter = 31;
 
         public void fillParameter(string para)
         {
@@ -282,6 +282,96 @@ namespace CorvusM3
                 port.Write("s22:" + value.ToString() + "\r\n");
             }
             get { return parameter[22]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("P X Roll [23]"), DescriptionAttribute("")]
+        public int PX
+        {
+            set
+            {
+                parameter[23] = value;
+                port.Write("s23:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[23]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("P Y Nick [24]"), DescriptionAttribute("")]
+        public int PY
+        {
+            set
+            {
+                parameter[24] = value;
+                port.Write("s24:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[24]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("I X Roll [25]"), DescriptionAttribute("")]
+        public int IX
+        {
+            set
+            {
+                parameter[25] = value;
+                port.Write("s25:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[25]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("I Y Nick [26]"), DescriptionAttribute("")]
+        public int IY
+        {
+            set
+            {
+                parameter[26] = value;
+                port.Write("s26:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[26]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("D X Roll [27]"), DescriptionAttribute("")]
+        public int DX
+        {
+            set
+            {
+                parameter[27] = value;
+                port.Write("s27:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[27]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("D Y Nick [28]"), DescriptionAttribute("")]
+        public int DY
+        {
+            set
+            {
+                parameter[28] = value;
+                port.Write("s28:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[28]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("P Z Gier [29]"), DescriptionAttribute("")]
+        public int PZ
+        {
+            set
+            {
+                parameter[29] = value;
+                port.Write("s29:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[29]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("I Z Gier [30]"), DescriptionAttribute("")]
+        public int IZ
+        {
+            set
+            {
+                parameter[30] = value;
+                port.Write("s30:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[30]; }
+        }
+        [CategoryAttribute("Flugregelung"), DisplayName("D Z Gier [31]"), DescriptionAttribute("")]
+        public int DZ
+        {
+            set
+            {
+                parameter[31] = value;
+                port.Write("s31:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[31]; }
         }
     }
 }

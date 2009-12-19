@@ -164,7 +164,16 @@
 #define PARA_CAM_X			20
 #define PARA_CAM_Y			21
 #define PARA_MIN_GAS		22
-#define USED_PARAMETER 		22
+#define PARA_P_X			23
+#define PARA_P_Y			24
+#define PARA_I_X			25
+#define PARA_I_Y			26
+#define PARA_D_X			27
+#define PARA_D_Y			28
+#define PARA_P_Z			29
+#define PARA_I_Z			30
+#define PARA_D_Z			31
+#define USED_PARAMETER 		31
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02
