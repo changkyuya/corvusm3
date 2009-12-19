@@ -28,3 +28,12 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 20 || CAM_ROLL || 20500 || || Rollausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
 || 21 || CAM_NICK || 30500 || || Nickausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
 || 22 || MIN_GAS || 32 || || Minimalgas für Regler/Motoren ||
+|| 23 || P_X || || || Proportionalanteil Roll ||
+|| 24 || P_Y || || || Proportionalanteil Nick ||
+|| 25 || I_X || || || Integralanteil Roll ||
+|| 26 || I_Y || || || Integralanteil Nick ||
+|| 27 || D_X || || || Differenzialanteil Roll ||
+|| 28 || D_Y || || || Differenzialanteil Nick ||
+|| 29 || P_Z || || || Proportionalanteil Gier ||
+|| 30 || I_Z || || || Integralanteil Gier ||
+|| 31 || D_Z || || || Differenzialanteil Gier ||
