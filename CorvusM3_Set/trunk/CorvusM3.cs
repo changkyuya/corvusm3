@@ -33,6 +33,7 @@ using ZedGraph;
 using System.Globalization;
 using System.Configuration;
 using System.Xml;
+using System.Collections;
 
 
 namespace CorvusM3
@@ -45,7 +46,8 @@ namespace CorvusM3
         bool on = false;
         double[] channelValues = new double[8];
         Parameter parm;
-        
+        ArrayList stringBuffer = new ArrayList();
+        int bufferCount = 0;
         
 
         public CorvusM3()
@@ -133,8 +135,23 @@ namespace CorvusM3
             {
                 serial.Write(commandTextBox.Text + "\r\n");
                 dataTextBox.AppendText(">" + commandTextBox.Text + "\r\n");
+                stringBuffer.Add(commandTextBox.Text);
                 commandTextBox.Text = "";
+                bufferCount = stringBuffer.Count;
             }
+            try 
+            {
+                if (e.KeyCode == Keys.Up && bufferCount > 0)
+                {
+                    commandTextBox.Text = stringBuffer[--bufferCount].ToString();
+                }
+                if (e.KeyCode == Keys.Down && bufferCount < stringBuffer.Count)
+                {
+                    commandTextBox.Text = stringBuffer[++bufferCount].ToString();
+                }
+            }
+            catch
+            {}
         }
 
 
