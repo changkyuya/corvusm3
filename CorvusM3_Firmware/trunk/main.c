@@ -29,7 +29,7 @@
 #include "parameter.h"
 #include "hal.h"
 #include "sal.h"
-#include "blmc.h"
+#include "motorhal.h"
 #include "sensor.h"
 #include <stdio.h>
 

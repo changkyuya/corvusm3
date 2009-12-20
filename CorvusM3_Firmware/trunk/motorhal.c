@@ -53,3 +53,12 @@ void stopAllMotors(volatile char * motor)
 }
 
 
+/* map pid to motors --------------------------------------------------------*/
+void mapPIDMotors(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
+{
+	// no hal used at the moment
+	motor[1] = 	receiverChannel[PITCH] - PIDCorr[Y] - PIDCorr[Z];
+	motor[2] = 	receiverChannel[PITCH] + PIDCorr[Y] - PIDCorr[Z];
+	motor[3] = 	receiverChannel[PITCH] - PIDCorr[X] + PIDCorr[Z];
+	motor[4] = 	receiverChannel[PITCH] + PIDCorr[X] + PIDCorr[Z];
+}

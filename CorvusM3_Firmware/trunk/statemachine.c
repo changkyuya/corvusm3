@@ -73,7 +73,7 @@ void statemachine(void)
 	// try to get channels
 	getChannels(receiverChannel);
 	// map channelvalues to targetAngle
-	mapReceiverValues(receiverChannel, targetAngle);
+	mapReceiverValues(receiverChannel, targetAngle, copterAngle);
 
 	
 	
@@ -135,7 +135,7 @@ void statemachine(void)
 			// flightcontroll
 			calcPIDCorr(PIDCorr, copterAngle, targetAngle);
 			// map PIDCorr to 4 Motors
-			
+			mapPIDMotors(PIDCorr, receiverChannel, motor);
 			// command motors
 			sendMotor(motor);
 			

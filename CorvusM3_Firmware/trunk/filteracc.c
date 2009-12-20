@@ -117,10 +117,11 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 
 
 /* map receiver to angles for roll nick -------------------------------------*/
-void mapReceiverValuesFilterACC(vu16 * receiverChannel, vs32 * targetAngle)
+void mapReceiverValuesFilterACC(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copterAngle)
 {
 	// 90 = neutral
 	// max is 20 to 160° - this are 70° for 500 points
 	targetAngle[X] = 2000000 + ((14000) * (receiverChannel[ROLL] - 1000));
 	targetAngle[Y] = 2000000 + ((14000) * (receiverChannel[NICK] - 1000));
+	targetAngle[Z] = copterAngle[Z] + (receiverChannel[YAW] - 1000) / 100;
 }

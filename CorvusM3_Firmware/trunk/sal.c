@@ -89,12 +89,12 @@ void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 	}
 }
 
-void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle)
+void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copterAngle)
 {
 	/* decide receiver -> lookup parameterset */
 	if (getParameter(PARA_SW) & PARA_SW_ACC) 
 	{
-		mapReceiverValuesFilterACC(receiverChannel, targetAngle);
+		mapReceiverValuesFilterACC(receiverChannel, targetAngle, copterAngle);
 	}
 	else
 	{
