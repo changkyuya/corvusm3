@@ -57,8 +57,28 @@ void stopAllMotors(volatile char * motor)
 void mapPIDMotors(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 {
 	// no hal used at the moment
-	motor[1] = 	receiverChannel[PITCH] - PIDCorr[Y] - PIDCorr[Z];
-	motor[2] = 	receiverChannel[PITCH] + PIDCorr[Y] - PIDCorr[Z];
-	motor[3] = 	receiverChannel[PITCH] - PIDCorr[X] + PIDCorr[Z];
-	motor[4] = 	receiverChannel[PITCH] + PIDCorr[X] + PIDCorr[Z];
+	s16 motorTemp[5];
+	motorTemp[1] = 	receiverChannel[PITCH] - PIDCorr[Y] - PIDCorr[Z];
+	motorTemp[2] = 	receiverChannel[PITCH] + PIDCorr[Y] - PIDCorr[Z];
+	motorTemp[3] = 	receiverChannel[PITCH] - PIDCorr[X] + PIDCorr[Z];
+	motorTemp[4] = 	receiverChannel[PITCH] + PIDCorr[X] + PIDCorr[Z];
+	
+	// calc min gas
+	s16 min = parameter[PARA_MIN_GAS];
+	s16 max = 200;
+	u8 i;
+	for (i = 1; i < 5; i++)
+	{
+		min = (motorTemp[i] < min) ? motorTemp[i] : min;
+		max = (motorTemp[i] > max) ? motorTemp[i] : max;
+	}
+	
+	//correkt all motors
+	min = parameter[PARA_MIN_GAS] - min;
+	max = 200 - max;
+	
+	for (i = 1; i < 5; i++)
+	{
+		motor[i] = motorTemp[i] + min - max;
+	}
 }
