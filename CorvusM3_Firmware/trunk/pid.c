@@ -54,8 +54,8 @@ void calcPIDCorr(vs32 * PIDCorr, vs32 * copterAngle, vs32 * targetAngle)
 		summI[i] += diff;
 		diffLast = diff - diffOld[i];
 		
-		PIDCorr[i] = parameter[23 + (i * 3)] * diff / 100000
-		PIDCorr[i] +=  parameter[24 + (i * 3)] * summI[i] / 100000
+		PIDCorr[i] = parameter[23 + (i * 3)] * diff / 100000;
+		PIDCorr[i] +=  parameter[24 + (i * 3)] * summI[i] / 100000;
 		PIDCorr[i] +=  parameter[25 + (i * 3)] * diffLast / 100000;
 		
 		diffOld[i] = diff;

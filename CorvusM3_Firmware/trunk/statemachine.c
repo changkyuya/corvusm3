@@ -28,7 +28,7 @@
 #include "sal.h"
 #include "led.h"
 #include "parameter.h"
-#include "blmc.h"
+#include "motorhal.h"
 #include "sensor.h"
 #include "servo.h"
 #include "pid.h"

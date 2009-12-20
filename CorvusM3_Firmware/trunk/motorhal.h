@@ -19,35 +19,17 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "led.h"
-#include "serial.h"
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __MOTORHAL_H
+#define __MOTORHAL_H
 
-/* Enums --------------------------------------------------------------------*/
+#include "main.h"
 
-/* Variables ----------------------------------------------------------------*/
-extern vu16 parameter[0x190]; //parameter
-
-
-/* send Motorcommands to BLMC over UART3 ------------------------------------*/
-void sendMotor(volatile char * motor)
-{
-	motor[0] = 0xF5;
-	u8 i;
-	for (i = 1; i < 5; i++)
-	{
-		motor[i] = (motor[i] < parameter[PARA_MIN_GAS]) ? parameter[PARA_MIN_GAS] : motor[i];
-	}
-	print_uart3(motor);
-}
+/* Define --------------------------------------------------------------------*/
 
 
-/* stop all motors ----------------------------------------------------------*/
-void stopAllMotors(volatile char * motor)
-{
-	motor[0] = 0xF5;
-	motor[1] = 0x00;
-	motor[2] = 0x00;
-	motor[3] = 0x00;
-	motor[4] = 0x00;
-	print_uart3(motor);
-}
+/* Function prototypes -------------------------------------------------------*/
+void sendMotor(volatile char * motor);
+void stopAllMotors(volatile char * motor);
+
+#endif /* __MOTORHAL_H */
