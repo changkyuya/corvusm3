@@ -186,8 +186,10 @@
 #define PARA_HW_4X			0x02
 
 /* define Para SW values */
-#define PARA_SW_HH			0x00
-#define PARA_SW_ACC			0x01
+#define PARA_SW_REGLER		0xF  //bitmask 1111
+#define PARA_SW_HH			0x00 // to bitmask 1111
+#define PARA_SW_ACC			0x01 // to bitmask 1111
+#define PARA_SW_COMP2		0x02 // to bitmask 1111
 
 
 /* Struct --------------------------------------------------------------------*/
