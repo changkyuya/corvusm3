@@ -65,7 +65,9 @@ void getSpektrumChannels(vu16 * receiverChannel)
 	{
 		receiverChannel[RC_OK] = SPEKTRUM_NO;
 	}
+	
 	// first 2 bytes are not used
+	
 	for (i = 2; i < 17; i++)
 	{
 		// first 2 byte from 2. frame also not used
@@ -73,61 +75,45 @@ void getSpektrumChannels(vu16 * receiverChannel)
 		{
 			// shift first byte 8 steps to high and add low byte
 			receiverSpektrumChannel[i] = (spektrumBytes[(i << 1) - 1] << 8) + spektrumBytes[i << 1]; 
-			if (receiverSpektrumChannel[i] < 1024)
+			
+			u8 channel = (receiverSpektrumChannel[i] & 0x3C00) >> 10; //bitmask 00111100 00000000 = channel number
+			u16 value = (receiverSpektrumChannel[i] & 0x3FF); //bitmask 00000011 11111111 = channel value
+			value = constrain(value + 989, 1000, 2000); // limit  + 1011 to center to ms
+			value = smoothValue(value, oldReceiverSpektrumChannel[i], parameter[PARA_SMOOTH_RC]);
+			oldReceiverSpektrumChannel[i] = value;
+			
+			// map channels
+			switch (channel)
 			{
-				// resolution is 10bit ... 0 - 1024 ... add 988 for middle
-				// Nick 3
-				receiverChannel[3] = smoothValue(constrain(receiverSpektrumChannel[i] + 988, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[3];
-				//receiverChannel[NICK] = constrain(receiverSpektrumChannel[i] + 988, 1000, 2000);
-			}
-			else if (receiverSpektrumChannel[i] < 2048)
-			{
-				// Pitch 1
-				receiverChannel[1] = smoothValue(constrain(receiverSpektrumChannel[i] - 36, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[1];
-				//receiverChannel[PITCH] = constrain(receiverSpektrumChannel[i] - 36, 1000, 2000);
-			}
-			else if (receiverSpektrumChannel[i] < 3072)
-			{
-				// Roll 2
-				receiverChannel[2] = smoothValue(constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[2];
-				//receiverChannel[ROLL] = constrain(receiverSpektrumChannel[i] - 1060, 1000, 2000);
-			}
-			else if (receiverSpektrumChannel[i] < 4096)
-			{
-				//Yaw 4
-				receiverChannel[4] = smoothValue(constrain(receiverSpektrumChannel[i] - 2084, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[4];
-				//receiverChannel[YAW] = constrain(receiverSpektrumChannel[i] - 2060, 1000, 2000);
-			}
-			else if (receiverSpektrumChannel[i] < 5120)
-			{
-				//ch 5
-				receiverChannel[5] = smoothValue(constrain(receiverSpektrumChannel[i] - 3100, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[5];
-			}
-			else if (receiverSpektrumChannel[i] < 6144)
-			{
-				//ch 6
-				receiverChannel[6] = smoothValue(constrain(receiverSpektrumChannel[i] - 4131, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[6];
-			}
-			else if (receiverSpektrumChannel[i] < 7168)
-			{
-				//ch 7
-				receiverChannel[7] = smoothValue(constrain(receiverSpektrumChannel[i] - 5155, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[7];
-			}
-			else if (receiverSpektrumChannel[i] > 39936 && receiverSpektrumChannel[i] < 40960)
-			{
-				//ch 8
-				receiverChannel[8] = smoothValue(constrain(receiverSpektrumChannel[i] - 38988, 1000, 2000),oldReceiverSpektrumChannel[i],parameter[PARA_SMOOTH_RC]);
-				oldReceiverSpektrumChannel[i] = receiverChannel[8];
+				// Nick
+				case 0:
+					receiverChannel[3] = value;
+					break;
+				// Pitch
+				case 1:
+					receiverChannel[1] = value;
+					break;
+				// Roll
+				case 2:
+					receiverChannel[2] = value;
+					break;
+				// YAW
+				case 3:
+					receiverChannel[4] = value;
+					break;
+				// ch 5-8
+				case 4:
+				case 5:
+				case 6:
+				case 7:				
+					receiverChannel[channel+1] = value;
+					break;
+				default:
+					break;
 			}
 		}
 	}
+	
 	
 	//char x[100];
 	//sprintf(x,"%d:%d-%d-%d-%d\r\n",receiverSpektrumChannel[12],receiverSpektrumChannel[13],receiverSpektrumChannel[14],receiverSpektrumChannel[15],receiverSpektrumChannel[16]);
