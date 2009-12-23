@@ -22,6 +22,7 @@
 #include "sal.h"
 #include "parameter.h"
 #include "filteracc.h"
+#include "filtercomp2.h"
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -43,7 +44,7 @@ void getACCAngles(vs32 * accAngle)
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			// not impemented
+			getACCAnglesFilterComp2(accAngle);
 			break;
 		default:
 			break;
@@ -66,7 +67,7 @@ void setGyroAngles(vs32 * gyroAngle)
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			// not impemented
+			setGyroAngleFilterComp2(gyroAngle);
 			break;
 		default:
 			break;
@@ -90,7 +91,7 @@ void getGyroAngles(vs32 * gyroAngle)
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			// not impemented
+			getGyroAnglesFilterComp2(gyroAngle);
 			break;
 		default:
 			break;
@@ -116,7 +117,9 @@ void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			// not impemented
+			getGyroAnglesFilterComp2(gyroAngle);
+			getACCAnglesFilterComp2(accAngle);
+			getCopterAnglesFilterComp2(gyroAngle, accAngle, copterAngle);
 			break;
 		default:
 			break;
@@ -138,7 +141,7 @@ void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copter
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			// not impemented
+			mapReceiverValuesFilterComp2(receiverChannel, targetAngle, copterAngle);
 			break;
 		default:
 			break;
