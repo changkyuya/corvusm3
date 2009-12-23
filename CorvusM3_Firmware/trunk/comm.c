@@ -34,6 +34,7 @@
 extern vu16 parameter[0x190]; //parameter
 extern u16 VirtAddVarTab[NumbOfVar]; //main
 extern vs32 gyroAngle[3]; //statemachine
+extern vs32 copterAngle[3]; //statemachine
 vu16 receiverPCChannel[9];
 extern vu32 msCount; //statemachine
 vu32 msLastPCRC;
@@ -124,7 +125,7 @@ void docComm()
 	{
 		case 'g':
 			zeroGyro();
-			setGyroAngleFilterACC(gyroAngle);
+			setAngleFilterACC(gyroAngle, copterAngle);
 			break;
 		case 'a':
 			zeroACC();

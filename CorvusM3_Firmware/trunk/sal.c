@@ -52,7 +52,7 @@ void getACCAngles(vs32 * accAngle)
 }
 
 /* set gyro angle to start value acc-angle ----------------------------------*/
-void setGyroAngles(vs32 * gyroAngle)
+void setAngles(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	/* decide flightmode controller > lookup parameterset */
 	switch (getParameter(PARA_SW) & PARA_SW_REGLER)
@@ -63,11 +63,11 @@ void setGyroAngles(vs32 * gyroAngle)
 			break;
 		// ACC-Mode
 		case PARA_SW_ACC:
-			setGyroAngleFilterACC(gyroAngle);
+			setAngleFilterACC(gyroAngle, copterAngle);
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			setGyroAngleFilterComp2(gyroAngle);
+			setAngleFilterComp2(gyroAngle, copterAngle);
 			break;
 		default:
 			break;

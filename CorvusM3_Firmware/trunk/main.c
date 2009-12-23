@@ -42,6 +42,7 @@ extern vu16 receiverChannel[9];  //statemachine
 extern volatile char motor[5]; //blmc
 extern vs32 gyroAngle[3]; //statemachine
 extern vu8 errorCode; //statemachine
+extern vs32 copterAngle[3]; //statemachine
 
 
 	
@@ -73,7 +74,7 @@ int main(void)
 	// wait befor calibrate
 	Delay(100);
 	zeroGyro();
-	setGyroAngles(gyroAngle);
+	setAngles(gyroAngle, copterAngle);
 	
 	// function open ....
 	setLEDStatus(LED_BLINK);

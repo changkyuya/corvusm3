@@ -58,13 +58,13 @@ void getACCAnglesFilterACC(vs32 * accAngle)
 }
 
 /* set gyro start angle -----------------------------------------------------*/
-void setGyroAngleFilterACC(vs32 * gyroAngle)
+void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	vs32 accAngle[2];
 	getACCAnglesFilterACC(accAngle);
-	gyroAngle[X] = accAngle[X];
-	gyroAngle[Y] = accAngle[Y];
-	gyroAngle[Z] = 18000000;
+	copterAngle[X] = gyroAngle[X] = accAngle[X];
+	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
+	copterAngle[Z] = gyroAngle[Z] = 18000000;
 	
 	char x [80];
 	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);

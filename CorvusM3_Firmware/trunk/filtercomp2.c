@@ -58,13 +58,13 @@ void getACCAnglesFilterComp2(vs32 * accAngle)
 }
 
 /* set gyro start angle -----------------------------------------------------*/
-void setGyroAngleFilterComp2(vs32 * gyroAngle)
+void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	vs32 accAngle[2];
 	getACCAnglesFilterComp2(accAngle);
-	gyroAngle[X] = accAngle[X];
-	gyroAngle[Y] = accAngle[Y];
-	gyroAngle[Z] = 18000000;
+	copterAngle[X] = gyroAngle[X] = accAngle[X];
+	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
+	copterAngle[Z] = gyroAngle[Z] = 18000000;
 	
 	char x [80];
 	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);
@@ -79,11 +79,10 @@ void getGyroAnglesFilterComp2(vs32 * gyroAngle)
 {
 	vs16 gyroRawValues[3];
 	getGyroRawValues(gyroRawValues);
-	//gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
-    //gyroAngle[Y] -=y (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
-    //gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
-    gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
-    gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
+	
+	// calculate the angles for X and Y in getCopterAngelsFilterComp2
+	gyroAngle[X] = gyroRawValues[X] * 100000;
+    gyroAngle[Y] = gyroRawValues[Y] * 100000;
     gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
 	
 		
