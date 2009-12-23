@@ -23,6 +23,7 @@
 #include "receiverppm.h"
 #include "receiverspektrum.h"
 #include "parameter.h"
+#include "motorhal.h"
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -68,6 +69,20 @@ void getChannels(vu16 *receiverChannel)
 
 
 
+/* map pid to motors -------------------------------------------------------*/
+void mapPIDMotors(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
+{
+	if (getParameter(PARA_HW) & PARA_HW_4X)
+	{
+		// X mode
+		mapPIDMotors4X(PIDCorr, receiverChannel, motor);
+	}
+	else
+	{
+		// normal + mode
+		mapPIDMotors4Plus(PIDCorr, receiverChannel, motor);
+	}
+}
 
 
 

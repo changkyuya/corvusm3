@@ -33,5 +33,6 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void getChannels(vu16 *receiverChannel);
+void mapPIDMotors(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor);
 
 #endif /* __HAL_H */

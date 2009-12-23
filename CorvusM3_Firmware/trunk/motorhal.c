@@ -53,8 +53,8 @@ void stopAllMotors(volatile char * motor)
 }
 
 
-/* map pid to motors --------------------------------------------------------*/
-void mapPIDMotors(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
+/* map pid to motors 4 + ----------------------------------------------------*/
+void mapPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 {
 	// no hal used at the moment
 	s16 motorTemp[5];
@@ -65,6 +65,40 @@ void mapPIDMotors(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 	
 	// calc min gas
 	s16 min = parameter[PARA_MIN_GAS];
+	// this is for quax uart blmc !!!
+	s16 max = 200;
+	u8 i;
+	for (i = 1; i < 5; i++)
+	{
+		min = (motorTemp[i] < min) ? motorTemp[i] : min;
+		max = (motorTemp[i] > max) ? motorTemp[i] : max;
+	}
+	
+	//correkt all motors
+	min = parameter[PARA_MIN_GAS] - min;
+	max = 200 - max;
+	
+	for (i = 1; i < 5; i++)
+	{
+		motor[i] = motorTemp[i] + min - max;
+	}
+}
+
+
+
+/* map pid to motors 4 X ----------------------------------------------------*/
+void mapPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
+{
+	// no hal used at the moment
+	s16 motorTemp[5];
+	motorTemp[1] = 	receiverChannel[PITCH] - PIDCorr[Y]  + PIDCorr[X] - PIDCorr[Z];
+	motorTemp[2] = 	receiverChannel[PITCH] - PIDCorr[Y]  - PIDCorr[X] + PIDCorr[Z];
+	motorTemp[3] = 	receiverChannel[PITCH] + PIDCorr[Y]  + PIDCorr[X] + PIDCorr[Z];
+	motorTemp[4] = 	receiverChannel[PITCH] + PIDCorr[Y]  - PIDCorr[X] - PIDCorr[Z];
+	
+	// calc min gas
+	s16 min = parameter[PARA_MIN_GAS];
+	// this is for quax uart blmc !!!
 	s16 max = 200;
 	u8 i;
 	for (i = 1; i < 5; i++)

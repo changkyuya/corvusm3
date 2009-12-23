@@ -123,5 +123,14 @@ void mapReceiverValuesFilterACC(vu16 * receiverChannel, vs32 * targetAngle, vs32
 	// max is 20 to 160° - this are 70° for 500 points
 	targetAngle[X] = 2000000 + ((14000) * (receiverChannel[ROLL] - 1000));
 	targetAngle[Y] = 2000000 + ((14000) * (receiverChannel[NICK] - 1000));
-	targetAngle[Z] = copterAngle[Z] + (receiverChannel[YAW] - 1000) / 100;
+	targetAngle[Z] = copterAngle[Z] + (receiverChannel[YAW] - 1500) * 100000;
+	
+	if (targetAngle[Z] >= 36000000) 
+	{
+		targetAngle[Z] -= 36000000;
+	}
+	if (targetAngle[Z] < 0) 
+	{
+		targetAngle[Z] = 36000000 - targetAngle[Z];
+	}
 }

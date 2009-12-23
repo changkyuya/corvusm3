@@ -182,6 +182,9 @@
 /* define Para HW values */
 #define PARA_HW_RC			0x00
 #define PARA_HW_PC			0x01
+#define PARA_HW_4PLUS		0x00
+#define PARA_HW_4X			0x02
+
 /* define Para SW values */
 #define PARA_SW_HH			0x00
 #define PARA_SW_ACC			0x01
