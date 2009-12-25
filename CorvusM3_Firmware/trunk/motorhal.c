@@ -62,10 +62,8 @@ void mapPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * m
 	// no hal used at the moment
 	s16 motorTemp[5];
 	
-	// map pitch to quax blmc values from 0-180 - 20 points for stability
-	// does not work
-	//u8 pitch = map(receiverChannel[PITCH],1000,2000,0,180);
-	u8 pitch = (receiverChannel[PITCH] - 1000) * 10 / 55;
+	// map pitch to quax blmc values from 0-200
+	u8 pitch = (receiverChannel[PITCH] - 1000) / 5;
 	
 	motorTemp[1] = 	pitch - PIDCorr[Y] - PIDCorr[Z];
 	motorTemp[2] = 	pitch + PIDCorr[Y] - PIDCorr[Z];
