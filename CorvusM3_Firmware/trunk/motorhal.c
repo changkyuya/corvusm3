@@ -21,6 +21,7 @@
 
 #include "motorhal.h"
 #include "serial.h"
+#include <stdio.h>
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -32,11 +33,13 @@ extern vu16 parameter[0x190]; //parameter
 void sendMotor(volatile char * motor)
 {
 	motor[0] = 0xF5;
+	/*
 	u8 i;
 	for (i = 1; i < 5; i++)
 	{
 		motor[i] = (motor[i] < parameter[PARA_MIN_GAS]) ? parameter[PARA_MIN_GAS] : motor[i];
 	}
+	*/
 	print_uart3(motor);
 }
 
@@ -58,30 +61,22 @@ void mapPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * m
 {
 	// no hal used at the moment
 	s16 motorTemp[5];
-	motorTemp[1] = 	receiverChannel[PITCH] - PIDCorr[Y] - PIDCorr[Z];
-	motorTemp[2] = 	receiverChannel[PITCH] + PIDCorr[Y] - PIDCorr[Z];
-	motorTemp[3] = 	receiverChannel[PITCH] - PIDCorr[X] + PIDCorr[Z];
-	motorTemp[4] = 	receiverChannel[PITCH] + PIDCorr[X] + PIDCorr[Z];
 	
-	// calc min gas
-	s16 min = parameter[PARA_MIN_GAS];
-	// this is for quax uart blmc !!!
-	s16 max = 200;
-	u8 i;
-	for (i = 1; i < 5; i++)
-	{
-		min = (motorTemp[i] < min) ? motorTemp[i] : min;
-		max = (motorTemp[i] > max) ? motorTemp[i] : max;
-	}
+	// map pitch to quax blmc values from 0-180 - 20 points for stability
+	// does not work
+	//u8 pitch = map(receiverChannel[PITCH],1000,2000,0,180);
+	u8 pitch = (receiverChannel[PITCH] - 1000) * 10 / 55;
 	
-	//correkt all motors
-	min = parameter[PARA_MIN_GAS] - min;
-	max = 200 - max;
+	motorTemp[1] = 	pitch - PIDCorr[Y] - PIDCorr[Z];
+	motorTemp[2] = 	pitch + PIDCorr[Y] - PIDCorr[Z];
+	motorTemp[3] = 	pitch - PIDCorr[X] + PIDCorr[Z];
+	motorTemp[4] = 	pitch + PIDCorr[X] + PIDCorr[Z];
 	
-	for (i = 1; i < 5; i++)
-	{
-		motor[i] = motorTemp[i] + min - max;
-	}
+	limitMotors(motorTemp, motor);
+	
+	//char x [80];
+	//sprintf(x,"mot:%d:%d:%d:%d\r\n",min,max,receiverChannel[PITCH],pitch);
+	//print_uart1(x);
 }
 
 
@@ -91,15 +86,33 @@ void mapPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * moto
 {
 	// no hal used at the moment
 	s16 motorTemp[5];
-	motorTemp[1] = 	receiverChannel[PITCH] - PIDCorr[Y]  + PIDCorr[X] - PIDCorr[Z];
-	motorTemp[2] = 	receiverChannel[PITCH] - PIDCorr[Y]  - PIDCorr[X] + PIDCorr[Z];
-	motorTemp[3] = 	receiverChannel[PITCH] + PIDCorr[Y]  + PIDCorr[X] + PIDCorr[Z];
-	motorTemp[4] = 	receiverChannel[PITCH] + PIDCorr[Y]  - PIDCorr[X] - PIDCorr[Z];
 	
-	// calc min gas
-	s16 min = parameter[PARA_MIN_GAS];
+	// map pitch to quax blmc values from 0-180 - 20 points for stability
+	// does not work
+	//u8 pitch = map(receiverChannel[PITCH],1000,2000,0,180);
+	u8 pitch = (receiverChannel[PITCH] - 1000) * 10 / 55;
+	
+	motorTemp[1] = 	pitch - PIDCorr[Y]  + PIDCorr[X] - PIDCorr[Z];
+	motorTemp[2] = 	pitch - PIDCorr[Y]  - PIDCorr[X] + PIDCorr[Z];
+	motorTemp[3] = 	pitch + PIDCorr[Y]  + PIDCorr[X] + PIDCorr[Z];
+	motorTemp[4] = 	pitch + PIDCorr[Y]  - PIDCorr[X] - PIDCorr[Z];
+	
+	limitMotors(motorTemp, motor);
+	
+	//char x [80];
+	//sprintf(x,"mot:%d:%d:%d:%d\r\n",min,max,receiverChannel[PITCH],pitch);
+	//print_uart1(x);
+}
+
+
+/* limit motors to quax from 0-200 ------------------------------------------*/
+void limitMotors(s16 * motorTemp, volatile char * motor)
+{
+	
 	// this is for quax uart blmc !!!
+	s16 min = parameter[PARA_MIN_GAS];
 	s16 max = 200;
+	
 	u8 i;
 	for (i = 1; i < 5; i++)
 	{

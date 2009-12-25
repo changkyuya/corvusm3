@@ -36,7 +36,7 @@ void getACCAngles(vs32 * accAngle);
 void setAngles(vs32 * gyroAngle, vs32 * copterAngle);
 void getGyroAngles(vs32 * gyroAngle);
 void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle);
-void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copterAngle);
+void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle);
 
 
 #endif /* __SAL_H */

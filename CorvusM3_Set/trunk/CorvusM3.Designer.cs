@@ -71,6 +71,7 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -219,6 +220,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox10);
             this.tabPage2.Controls.Add(this.checkBox9);
             this.tabPage2.Controls.Add(this.checkBox7);
             this.tabPage2.Controls.Add(this.checkBox8);
@@ -269,7 +271,7 @@
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(748, 211);
+            this.clearButton.Location = new System.Drawing.Point(748, 236);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(20, 23);
             this.clearButton.TabIndex = 7;
@@ -510,6 +512,16 @@
             this.steeringTimer.Interval = 10;
             this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
             // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(748, 211);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(32, 17);
+            this.checkBox10.TabIndex = 11;
+            this.checkBox10.Text = "0";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            // 
             // CorvusM3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -588,6 +600,7 @@
         private System.Windows.Forms.Button loadFileButton;
         private System.Windows.Forms.Button flashButton;
         private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.CheckBox checkBox10;
 
 
 

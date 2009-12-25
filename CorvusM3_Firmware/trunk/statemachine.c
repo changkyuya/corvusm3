@@ -50,7 +50,7 @@ vs32 copterAngle[3];
 vu8 errorCode;
 vu8 neutralRC;
 vs32 PIDCorr[3];
-
+ 
 
 	
 /* [0xB4] TIM3 Interrupt ----------------------------------------------------*/
@@ -73,7 +73,7 @@ void statemachine(void)
 	// try to get channels
 	getChannels(receiverChannel);
 	// map channelvalues to targetAngle
-	mapReceiverValues(receiverChannel, targetAngle, copterAngle);
+	mapReceiverValues(receiverChannel, targetAngle);
 
 	
 	

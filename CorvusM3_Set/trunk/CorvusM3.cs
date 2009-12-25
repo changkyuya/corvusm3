@@ -219,6 +219,11 @@ namespace CorvusM3
                 RollingPointPairList list = new RollingPointPairList(500);
                 LineItem curve = myPane.AddCurve("DBG 9", list, Color.DarkGreen, SymbolType.None);
             }
+            if (checkBox10.Checked)
+            {
+                RollingPointPairList list = new RollingPointPairList(500);
+                LineItem curve = myPane.AddCurve("DBG 10", list, Color.Chocolate, SymbolType.None);
+            }
 
 
             myPane.XAxis.Scale.Min = 0;
@@ -279,6 +284,7 @@ namespace CorvusM3
             double y6 = 0;
             double y7 = 0;
             double y8 = 0;
+            double y9 = 0;
 
             // if debug data are not for graph
             try
@@ -509,6 +515,50 @@ namespace CorvusM3
                         LineItem curve = zedGraphControl1.GraphPane.CurveList[index] as LineItem;
                         IPointListEdit list = curve.Points as IPointListEdit;
                         list.Add(counter, y8);
+                    }
+                    if (checkBox10.Checked)
+                    {
+                        int index = 9;
+                        if (checkBox1.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox2.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox3.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox4.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox5.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox6.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox7.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox8.Checked == false)
+                        {
+                            index--;
+                        }
+                        if (checkBox9.Checked == false)
+                        {
+                            index--;
+                        }
+                        y9 = Convert.ToDouble(data[11], nfi);
+                        LineItem curve = zedGraphControl1.GraphPane.CurveList[index] as LineItem;
+                        IPointListEdit list = curve.Points as IPointListEdit;
+                        list.Add(counter, y9);
                     }
                 }
                 if (data[0].Substring(0, 1) == "R") {

@@ -43,6 +43,7 @@ extern volatile char motor[5]; //blmc
 extern vs32 gyroAngle[3]; //statemachine
 extern vu8 errorCode; //statemachine
 extern vs32 copterAngle[3]; //statemachine
+extern vs32 targetAngle[3]; //statemachine
 
 
 	
@@ -75,7 +76,7 @@ int main(void)
 	Delay(100);
 	zeroGyro();
 	setAngles(gyroAngle, copterAngle);
-	
+	targetAngle[Z] = 18000000;  // init Target-Angel
 	// function open ....
 	setLEDStatus(LED_BLINK);
 	

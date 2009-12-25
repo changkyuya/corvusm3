@@ -126,7 +126,7 @@ void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 	}	
 }
 
-void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copterAngle)
+void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle)
 {
 	/* decide flightmode controller > lookup parameterset */
 	switch (getParameter(PARA_SW) & PARA_SW_REGLER)
@@ -137,11 +137,11 @@ void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copter
 			break;
 		// ACC-Mode
 		case PARA_SW_ACC:
-			mapReceiverValuesFilterACC(receiverChannel, targetAngle, copterAngle);
+			mapReceiverValuesFilterACC(receiverChannel, targetAngle);
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			mapReceiverValuesFilterComp2(receiverChannel, targetAngle, copterAngle);
+			mapReceiverValuesFilterComp2(receiverChannel, targetAngle);
 			break;
 		default:
 			break;

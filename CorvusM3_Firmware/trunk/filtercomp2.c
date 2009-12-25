@@ -31,6 +31,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
+vu32 y[2]; // for comp2 filter
 
 
 /* calculate ACC Angles -----------------------------------------------------*/
@@ -65,6 +66,9 @@ void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 	copterAngle[X] = gyroAngle[X] = accAngle[X];
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
 	copterAngle[Z] = gyroAngle[Z] = 18000000;
+	//init y1 for filter
+	y[X] = -gyroZero[X];
+	y[Y] = -gyroZero[Y];
 	
 	char x [80];
 	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);
@@ -104,25 +108,43 @@ void getGyroAnglesFilterComp2(vs32 * gyroAngle)
 /* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
 void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 {
-	//needs about 50us (all 5)
-	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
-	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
-	copterAngle[Z] = gyroAngle[Z];
+	// Written by RoyLB at:
+	// http://www.rcgroups.com/forums/showpost.php?p=12082524&postcount=1286
+  
+	u32 x1;
+	u32 x2;
+	
+	x1 = ((accAngle[X] - copterAngle[X]) * parameter[PARA_ACC_FORCE] * parameter[PARA_ACC_FORCE]) / 10000;
+	y[X] += x1;
+	x2 = y[X] + ((accAngle[X] - copterAngle[X]) * 2 * parameter[PARA_ACC_FORCE]) / 100 + gyroAngle[X];
+	copterAngle[X] = x2 + copterAngle[X];
+	
+	x1 = ((accAngle[Y] - copterAngle[Y]) * parameter[PARA_ACC_FORCE] * parameter[PARA_ACC_FORCE]) / 10000;
+	y[Y] += x1;
+	x2 = y[Y] + ((accAngle[Y] - copterAngle[Y]) * 2 * parameter[PARA_ACC_FORCE]) / 100 + gyroAngle[Y];
+	copterAngle[Y] = x2 + copterAngle[Y];
 	
 	// trimm gyro to new Angle
-	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
-	gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], parameter[PARA_GYRO_CORR]); 
+	//gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
+	//gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], parameter[PARA_GYRO_CORR]); 
 }
 
 
 /* map receiver to angles for roll nick -------------------------------------*/
-void mapReceiverValuesFilterComp2(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copterAngle)
+void mapReceiverValuesFilterComp2(vu16 * receiverChannel, vs32 * targetAngle)
 {
 	// 90 = neutral
 	// max is 20 to 160° - this are 70° for 500 points
 	targetAngle[X] = 2000000 + ((14000) * (receiverChannel[ROLL] - 1000));
 	targetAngle[Y] = 2000000 + ((14000) * (receiverChannel[NICK] - 1000));
-	targetAngle[Z] = copterAngle[Z] + (receiverChannel[YAW] - 1500) * 100000;
+	// only use yaw if stick is more than 5 points out of center and pitch not min
+	if (receiverChannel[YAW] < 1495 || receiverChannel[YAW] > 1505)
+	{
+		if(receiverChannel[PITCH] > 1005)
+		{
+			targetAngle[Z] += (receiverChannel[YAW] - 1500) * 50;
+		}
+	}
 	
 	if (targetAngle[Z] >= 36000000) 
 	{

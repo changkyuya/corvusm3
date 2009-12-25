@@ -117,13 +117,20 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 
 
 /* map receiver to angles for roll nick -------------------------------------*/
-void mapReceiverValuesFilterACC(vu16 * receiverChannel, vs32 * targetAngle, vs32 * copterAngle)
+void mapReceiverValuesFilterACC(vu16 * receiverChannel, vs32 * targetAngle)
 {
 	// 90 = neutral
 	// max is 20 to 160° - this are 70° for 500 points
 	targetAngle[X] = 2000000 + ((14000) * (receiverChannel[ROLL] - 1000));
 	targetAngle[Y] = 2000000 + ((14000) * (receiverChannel[NICK] - 1000));
-	targetAngle[Z] = copterAngle[Z] + (receiverChannel[YAW] - 1500) * 100000;
+	// only use yaw if stick is more than 5 points out of center and pitch not min
+	if (receiverChannel[YAW] < 1495 || receiverChannel[YAW] > 1505)
+	{
+		if(receiverChannel[PITCH] > 1005)
+		{
+			targetAngle[Z] += (receiverChannel[YAW] - 1500) * 50;
+		}
+	}
 	
 	if (targetAngle[Z] >= 36000000) 
 	{
