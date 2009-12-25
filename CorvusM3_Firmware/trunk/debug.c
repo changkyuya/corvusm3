@@ -30,7 +30,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0x190];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
-extern vu16 ADCSensorValue[7]; //initsystem
+extern vu32 ADCSensorValue[7]; //initsystem
 extern vs32 gyroAngle[3];  //statemachine
 extern vs32 accAngle[2];  //statemachine
 extern vs32 copterAngle[3];  //statemachine

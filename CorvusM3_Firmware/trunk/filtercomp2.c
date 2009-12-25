@@ -29,7 +29,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 gyroZero[3]; // sensor
+extern vu32 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
 vu32 y[2]; // for comp2 filter
 
