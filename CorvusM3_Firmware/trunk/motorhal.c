@@ -88,7 +88,7 @@ void mapPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * moto
 	// map pitch to quax blmc values from 0-180 - 20 points for stability
 	// does not work
 	//u8 pitch = map(receiverChannel[PITCH],1000,2000,0,180);
-	u8 pitch = (receiverChannel[PITCH] - 1000) * 10 / 55;
+	u8 pitch = (receiverChannel[PITCH] - 1000) / 5;
 	
 	motorTemp[1] = 	pitch - PIDCorr[Y]  + PIDCorr[X] - PIDCorr[Z];
 	motorTemp[2] = 	pitch - PIDCorr[Y]  - PIDCorr[X] + PIDCorr[Z];
