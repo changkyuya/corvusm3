@@ -32,6 +32,7 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
+void initFilterACC(vs32 * gyroAngle, vs32 * copterAngle);
 void getACCAnglesFilterACC(vs32 * accAngle);
 void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle);
 void getGyroAnglesFilterACC(vs32 * gyroAngle);

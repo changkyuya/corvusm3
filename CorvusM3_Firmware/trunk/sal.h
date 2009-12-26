@@ -32,9 +32,8 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-void getACCAngles(vs32 * accAngle);
+void initFilter(vs32 * gyroAngle, vs32 * copterAngle);
 void setAngles(vs32 * gyroAngle, vs32 * copterAngle);
-void getGyroAngles(vs32 * gyroAngle);
 void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle);
 void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle);
 

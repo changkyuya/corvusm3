@@ -20,8 +20,8 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __FILTERACC_H
-#define __FILTERACC_H
+#ifndef __FILTERCOMP2_H
+#define __FILTERCOMP2_H
 
 #include "main.h"
 
@@ -32,10 +32,11 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
+void initFilterComp2(vs32 * gyroAngle, vs32 * copterAngle);
 void getACCAnglesFilterComp2(vs32 * accAngle);
 void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle);
 void getGyroAnglesFilterComp2(vs32 * gyroAngle);
 void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle);
 void mapReceiverValuesFilterComp2(vu16 * receiverChannel, vs32 * targetAngle);
 
-#endif /* __FILTERACC_H */
+#endif /* __FILTERCOMP2_H */

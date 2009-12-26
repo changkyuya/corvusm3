@@ -24,7 +24,7 @@
 #include "initsystem.h"
 
 /* Variables ----------------------------------------------------------------*/
-vu16 ADCDMASensorValue[56];
+vu16 ADCSensorValue[7];
 
 /* Main Initfunction --------------------------------------------------------*/
 void initSystem()
@@ -544,9 +544,9 @@ void initDMA (void)
 
 	DMA_DeInit(DMA_Channel1);
 	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
-	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)&ADCDMASensorValue[0];
+	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)&ADCSensorValue[0];
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	DMA_InitStructure.DMA_BufferSize = 56;
+	DMA_InitStructure.DMA_BufferSize = 7;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;

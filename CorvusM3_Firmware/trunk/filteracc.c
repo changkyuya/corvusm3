@@ -29,9 +29,16 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu32 gyroZero[3]; // sensor
+extern vu16 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
 
+
+/* init filter --------------------------------------------------------------*/
+void initFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
+{
+	zeroGyro();
+	setAngleFilterACC(gyroAngle, copterAngle);
+}
 
 /* calculate ACC Angles -----------------------------------------------------*/
 void getACCAnglesFilterACC(vs32 * accAngle)
@@ -64,7 +71,7 @@ void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 	getACCAnglesFilterACC(accAngle);
 	copterAngle[X] = gyroAngle[X] = accAngle[X];
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
-	copterAngle[Z] = gyroAngle[Z] = 18000000;
+	copterAngle[Z] = gyroAngle[Z] = 0;
 	
 	char x [80];
 	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);

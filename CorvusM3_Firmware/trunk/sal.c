@@ -28,8 +28,8 @@
 
 /* Variables ----------------------------------------------------------------*/
 
-/* fill ACC Angles in Struc ---------------------------------------------------*/
-void getACCAngles(vs32 * accAngle)
+/* init the filter ----------------------------------------------------------*/
+void initFilter(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	/* decide flightmode controller > lookup parameterset */
 	switch (getParameter(PARA_SW) & PARA_SW_REGLER)
@@ -40,16 +40,18 @@ void getACCAngles(vs32 * accAngle)
 			break;
 		// ACC-Mode
 		case PARA_SW_ACC:
-			getACCAnglesFilterACC(accAngle);
+			initFilterACC(gyroAngle, copterAngle);
 			break;
 		// HH-Mode
 		case PARA_SW_COMP2:
-			getACCAnglesFilterComp2(accAngle);
+			initFilterComp2(gyroAngle, copterAngle);
 			break;
 		default:
 			break;
 	}	
 }
+
+
 
 /* set gyro angle to start value acc-angle ----------------------------------*/
 void setAngles(vs32 * gyroAngle, vs32 * copterAngle)
@@ -75,28 +77,6 @@ void setAngles(vs32 * gyroAngle, vs32 * copterAngle)
 }
 
 
-/* get Gyro Angles ----------------------------------------------------------*/
-void getGyroAngles(vs32 * gyroAngle)
-{
-	/* decide flightmode controller > lookup parameterset */
-	switch (getParameter(PARA_SW) & PARA_SW_REGLER)
-	{
-		// HH-Mode
-		case PARA_SW_HH:
-			// not impemented
-			break;
-		// ACC-Mode
-		case PARA_SW_ACC:
-			getGyroAnglesFilterACC(gyroAngle);
-			break;
-		// HH-Mode
-		case PARA_SW_COMP2:
-			getGyroAnglesFilterComp2(gyroAngle);
-			break;
-		default:
-			break;
-	}	
-}
 
 
 /* get Copter Angle ---------------------------------------------------------*/

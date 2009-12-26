@@ -29,9 +29,19 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu32 gyroZero[3]; // sensor
+extern vu16 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
 vu32 y[2]; // for comp2 filter
+
+
+
+/* init filter --------------------------------------------------------------*/
+void initFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
+{
+	zeroGyro();
+	setAngleFilterComp2(gyroAngle, copterAngle);
+}
+
 
 
 /* calculate ACC Angles -----------------------------------------------------*/
@@ -65,7 +75,7 @@ void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 	getACCAnglesFilterComp2(accAngle);
 	copterAngle[X] = gyroAngle[X] = accAngle[X];
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
-	copterAngle[Z] = gyroAngle[Z] = 18000000;
+	copterAngle[Z] = gyroAngle[Z] = 0;
 	//init y1 for filter
 	y[X] = -gyroZero[X];
 	y[Y] = -gyroZero[Y];

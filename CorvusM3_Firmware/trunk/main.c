@@ -37,7 +37,7 @@
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
-extern vu32 ADCSensorValue[7];  //initsystem
+extern vu16 ADCSensorValue[7];  //initsystem
 extern vu16 receiverChannel[9];  //statemachine
 extern volatile char motor[5]; //blmc
 extern vs32 gyroAngle[3]; //statemachine
@@ -74,9 +74,8 @@ int main(void)
 	// calibrate sensor
 	// wait befor calibrate
 	Delay(100);
-	zeroGyro();
-	setAngles(gyroAngle, copterAngle);
-	targetAngle[Z] = 18000000;  // init Target-Angel
+	initFilter(gyroAngle, copterAngle);
+	
 	// function open ....
 	setLEDStatus(LED_BLINK);
 	

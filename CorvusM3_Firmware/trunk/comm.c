@@ -277,7 +277,7 @@ void send(u8 infoText)
 	}
 	else if (infoText == DEFAULT)
 	{
-		print_uart1("Load default settings to flash\r\n");
+		print_uart1("Load default settings from flash\r\n");
 	}
 	else if (infoText == HELP)
 	{

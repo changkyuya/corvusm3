@@ -53,6 +53,13 @@ void loadParameter()
 	u16 val;
 	u16 i;
 
+	// test if flash is clear
+	EE_ReadVariable(401, &val);
+	if (val != 99)
+	{
+		loadDefault();
+	}
+	EE_WriteVariable(401, 99);
 	
 	for (i = 0;i <= USED_PARAMETER; i++)
 	{

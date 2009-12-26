@@ -29,11 +29,10 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-vu32 ADCSensorValue[7];
-extern vu16 ADCDMASensorValue[56];   //initsystem
-vu32 oldADCSensorValue[7]; // for smooth
-vu32 gyroZero[3];
-vu32 accZero[3];
+extern vu16 ADCSensorValue[7];  //initsystem
+vu16 oldADCSensorValue[7]; // for smooth
+vu16 gyroZero[3];
+vu16 accZero[3];
 extern vu16 parameter[0x190]; //parameter
 
 
@@ -134,7 +133,4 @@ void getACCRawValues(vs16 * accValues)
 		oldADCSensorValue[i] = ADCSensorValue[i];
 	}
 }
-
-
-/* oversampling adc values --------------------------------------------------*/
 
