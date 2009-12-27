@@ -57,7 +57,7 @@ void stopAllMotors(volatile char * motor)
 
 
 /* map pid to motors 4 + ----------------------------------------------------*/
-void mapPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
+void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 {
 	// no hal used at the moment
 	s16 motorTemp[5];
@@ -71,6 +71,9 @@ void mapPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * m
 	motorTemp[4] = 	pitch + PIDCorr[X] + PIDCorr[Z];
 	
 	limitMotors(motorTemp, motor);
+			
+	// command motors
+	sendMotor(motor);
 	
 	//char x [80];
 	//sprintf(x,"mot:%d:%d:%d:%d\r\n",min,max,receiverChannel[PITCH],pitch);
@@ -80,7 +83,7 @@ void mapPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * m
 
 
 /* map pid to motors 4 X ----------------------------------------------------*/
-void mapPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
+void sendPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 {
 	// no hal used at the moment
 	s16 motorTemp[5];
@@ -96,6 +99,9 @@ void mapPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * moto
 	motorTemp[4] = 	pitch + PIDCorr[Y]  - PIDCorr[X] - PIDCorr[Z];
 	
 	limitMotors(motorTemp, motor);
+			
+	// command motors
+	sendMotor(motor);
 	
 	//char x [80];
 	//sprintf(x,"mot:%d:%d:%d:%d\r\n",min,max,receiverChannel[PITCH],pitch);

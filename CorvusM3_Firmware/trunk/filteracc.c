@@ -40,29 +40,6 @@ void initFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 	setAngleFilterACC(gyroAngle, copterAngle);
 }
 
-/* calculate ACC Angles -----------------------------------------------------*/
-void getACCAnglesFilterACC(vs32 * accAngle)
-{
-	vs16 accRawValues[3];
-	getACCRawValues(accRawValues);
-	// x = (x - corrACC) * factorACC * 180 / PI
-	// z = (z - corrACC) * factorACC * 180 / PI
-	// 180 / PI = 57.2957795
-	// minus 90 grad für level
-	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
-	
-	// atan2 works - if it is to slow we can use fastatan2
-	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 5729577.95);
-	//change direction
-	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] ) * 5729577.95 + 9000000);
-
-	
-	//char x [80];
-	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
-	//print_uart1(x);
-	
-}
 
 /* set gyro start angle -----------------------------------------------------*/
 void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
@@ -77,6 +54,27 @@ void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);
 	print_uart1(x);
 }
+
+
+
+
+/* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
+void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
+{
+	// get basis angles from sensors
+	getGyroAnglesFilterACC(gyroAngle);
+	getACCAnglesFilterACC(accAngle);
+		
+	//needs about 50us (all 5)
+	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
+	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
+	copterAngle[Z] = gyroAngle[Z];
+	
+	// trimm gyro to new Angle
+	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
+	gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], parameter[PARA_GYRO_CORR]); 
+}
+
 
 /* calculate Gyro Angles ----------------------------------------------------*/
 // 2mV/°/sec
@@ -109,17 +107,28 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle)
 }
 
 
-/* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
-void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
+/* calculate ACC Angles -----------------------------------------------------*/
+void getACCAnglesFilterACC(vs32 * accAngle)
 {
-	//needs about 50us (all 5)
-	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
-	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
-	copterAngle[Z] = gyroAngle[Z];
+	vs16 accRawValues[3];
+	getACCRawValues(accRawValues);
+	// x = (x - corrACC) * factorACC * 180 / PI
+	// z = (z - corrACC) * factorACC * 180 / PI
+	// 180 / PI = 57.2957795
+	// minus 90 grad für level
+	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
 	
-	// trimm gyro to new Angle
-	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
-	gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], parameter[PARA_GYRO_CORR]); 
+	// atan2 works - if it is to slow we can use fastatan2
+	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
+	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 5729577.95);
+	//change direction
+	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] ) * 5729577.95 + 9000000);
+
+	
+	//char x [80];
+	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
+	//print_uart1(x);
+	
 }
 
 

@@ -135,9 +135,7 @@ void statemachine(void)
 			// flightcontroll
 			calcPIDCorr(PIDCorr, copterAngle, targetAngle);
 			// map PIDCorr to 4 Motors
-			mapPIDMotors(PIDCorr, receiverChannel, motor);
-			// command motors
-			sendMotor(motor);
+			sendPIDMotors(PIDCorr, receiverChannel, motor);
 			
 			// we like to stop!
 			// no other remotecommands allowed
