@@ -69,6 +69,10 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 	vs32 gyroRawValues[3];
 	getRawValues(gyroRawValues, accRawValues);
 	
+	//char x [80];
+	//sprintf(x,"raw value:%d:%d\r\n",gyroRawValues[X],accRawValues[X]);
+	//print_uart1(x);
+	
 	// get basis angles from sensors
 	getGyroAnglesFilterACC(gyroAngle, gyroRawValues);
 	getACCAnglesFilterACC(accAngle, accRawValues);
@@ -93,9 +97,9 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle, vs32 * gyroRawValues)
 	//gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
     //gyroAngle[Y] -=y (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
     //gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
-    gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
-    gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
-    gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
+    gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100);
+    gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100);
+    gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
 	
 		
 	if (gyroAngle[Z] >= 36000000) 
@@ -124,9 +128,9 @@ void getACCAnglesFilterACC(vs32 * accAngle, vs32 * accRawValues)
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 5729577.95);
+	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 1000 , accRawValues[X] - parameter[PARA_ACC_X_ZERO] * 1000 ) * 5729577.95);
 	//change direction
-	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] ) * 5729577.95 + 9000000);
+	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] * 1000 , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 1000 ) * 5729577.95 + 9000000);
 
 	
 	//char x [80];

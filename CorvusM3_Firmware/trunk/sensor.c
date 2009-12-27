@@ -94,13 +94,13 @@ void zeroACC()
 void getRawValues(vs32 * gyroValues, vs32 * accValues)
 {
 
-	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X], oldGyroValues[X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
-	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y], oldGyroValues[Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
-	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z], oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
+	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X] * 1000, oldGyroValues[X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
+	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y] * 1000, oldGyroValues[Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
+	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z] * 1000, oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
 	
-	accValues[X] = smoothValue(ADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
-	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
-	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
+	accValues[X] = smoothValue(ADCSensorValue[ACC_X] * 1000, oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
+	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y] * 1000, oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
+	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z] * 1000, oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
 	
 	u8 i;
 	for (i = 0; i < 3; i++)
