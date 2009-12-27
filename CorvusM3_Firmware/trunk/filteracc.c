@@ -44,8 +44,12 @@ void initFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 /* set gyro start angle -----------------------------------------------------*/
 void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 {
+	vs32 accRawValues[3];
+	vs32 gyroRawValues[3];
+	getRawValues(gyroRawValues, accRawValues);
+	
 	vs32 accAngle[2];
-	getACCAnglesFilterACC(accAngle);
+	getACCAnglesFilterACC(accAngle, accRawValues);
 	copterAngle[X] = gyroAngle[X] = accAngle[X];
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
 	copterAngle[Z] = gyroAngle[Z] = 0;
@@ -61,9 +65,13 @@ void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 /* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
 void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 {
+	vs32 accRawValues[3];
+	vs32 gyroRawValues[3];
+	getRawValues(gyroRawValues, accRawValues);
+	
 	// get basis angles from sensors
-	getGyroAnglesFilterACC(gyroAngle);
-	getACCAnglesFilterACC(accAngle);
+	getGyroAnglesFilterACC(gyroAngle, gyroRawValues);
+	getACCAnglesFilterACC(accAngle, accRawValues);
 		
 	//needs about 50us (all 5)
 	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
@@ -80,10 +88,8 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 // 2mV/°/sec
 // 12bit = 4095, Vref = 3,3V  => 3,3/4095 = 0,00080586085860
 // ADC * 3,3 / 4095 / 2000 * 1000 
-void getGyroAnglesFilterACC(vs32 * gyroAngle)
+void getGyroAnglesFilterACC(vs32 * gyroAngle, vs32 * gyroRawValues)
 {
-	vs32 gyroRawValues[3];
-	getGyroRawValues(gyroRawValues);
 	//gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
     //gyroAngle[Y] -=y (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
     //gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
@@ -108,10 +114,8 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle)
 
 
 /* calculate ACC Angles -----------------------------------------------------*/
-void getACCAnglesFilterACC(vs32 * accAngle)
+void getACCAnglesFilterACC(vs32 * accAngle, vs32 * accRawValues)
 {
-	vs32 accRawValues[3];
-	getACCRawValues(accRawValues);
 	// x = (x - corrACC) * factorACC * 180 / PI
 	// z = (z - corrACC) * factorACC * 180 / PI
 	// 180 / PI = 57.2957795

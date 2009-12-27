@@ -34,7 +34,6 @@
 #include "pid.h"
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 ADCSensorValue[56];  //initsystem
 vu32 msCount = 0;
 vu32 msOldCount = 0;
 vu16 receiverChannel[9]; 

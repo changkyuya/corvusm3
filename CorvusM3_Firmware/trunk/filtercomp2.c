@@ -47,8 +47,12 @@ void initFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 /* set gyro start angle -----------------------------------------------------*/
 void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 {
+	vs32 accRawValues[3];
+	vs32 gyroRawValues[3];
+	getRawValues(gyroRawValues, accRawValues);
+	
 	vs32 accAngle[2];
-	getACCAnglesFilterComp2(accAngle);
+	getACCAnglesFilterComp2(accAngle, accRawValues);
 	copterAngle[X] = gyroAngle[X] = accAngle[X];
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
 	copterAngle[Z] = gyroAngle[Z] = 0;
@@ -65,9 +69,12 @@ void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 /* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
 void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 {
+	vs32 accRawValues[3];
+	vs32 gyroRawValues[3];
+	getRawValues(gyroRawValues, accRawValues);
 	
-	getGyroAnglesFilterComp2(gyroAngle);
-	getACCAnglesFilterComp2(accAngle);
+	getGyroAnglesFilterComp2(gyroAngle, gyroRawValues);
+	getACCAnglesFilterComp2(accAngle, accRawValues);
 	
 	// Written by RoyLB at:
 	// http://www.rcgroups.com/forums/showpost.php?p=12082524&postcount=1286
@@ -95,10 +102,8 @@ void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copter
 // 2mV/°/sec
 // 12bit = 4095, Vref = 3,3V  => 3,3/4095 = 0,00080586085860
 // ADC * 3,3 / 4095 / 2000 * 1000 
-void getGyroAnglesFilterComp2(vs32 * gyroAngle)
+void getGyroAnglesFilterComp2(vs32 * gyroAngle, vs32 * gyroRawValues)
 {
-	vs16 gyroRawValues[3];
-	getGyroRawValues(gyroRawValues);
 	
 	// calculate the angles for X and Y in getCopterAngelsFilterComp2
 	gyroAngle[X] = gyroRawValues[X] * 100000;
@@ -122,10 +127,8 @@ void getGyroAnglesFilterComp2(vs32 * gyroAngle)
 
 
 /* calculate ACC Angles -----------------------------------------------------*/
-void getACCAnglesFilterComp2(vs32 * accAngle)
+void getACCAnglesFilterComp2(vs32 * accAngle, vs32 * accRawValues)
 {
-	vs16 accRawValues[3];
-	getACCRawValues(accRawValues);
 	// x = (x - corrACC) * factorACC * 180 / PI
 	// z = (z - corrACC) * factorACC * 180 / PI
 	// 180 / PI = 57.2957795

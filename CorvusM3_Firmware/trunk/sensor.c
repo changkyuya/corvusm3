@@ -30,7 +30,8 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[56];  //initsystem
-vu32 oldADCSensorValue[7]; // for smooth
+vu32 oldGyroValues[3]; // for smooth
+vu32 oldAccValues[3]; // for smooth
 vu32 gyroZero[3];
 vu32 accZero[3];
 extern vu16 parameter[0x190]; //parameter
@@ -39,36 +40,26 @@ extern vu16 parameter[0x190]; //parameter
 /* initGyros to set Baise ---------------------------------------------------*/
 void zeroGyro()
 {
-	gyroZero[X] = ADCSensorValue[GYRO_X];
-	gyroZero[Y] = ADCSensorValue[GYRO_Y];
-	gyroZero[Z] = ADCSensorValue[GYRO_Z];
+	vs32 gyroValues[3];
+	vs32 accValues[3];
+	getRawValues(gyroValues, accValues);
+	
+	gyroZero[X] = gyroValues[X];
+	gyroZero[Y] = gyroValues[Y];
+	gyroZero[Z] = gyroValues[Z];
 	
 	u8 i;
 	for (i = 0; i < 7; i++)
 	{
-		gyroZero[X] += ADCSensorValue[GYRO_X];
-		gyroZero[Y] += ADCSensorValue[GYRO_Y];
-		gyroZero[Z] += ADCSensorValue[GYRO_Z];
+		gyroZero[X] += gyroValues[X];
+		gyroZero[Y] += gyroValues[Y];
+		gyroZero[Z] += gyroValues[Z];
 		Pause(100);
 	}
 	
 	gyroZero[X] = gyroZero[X] >> 3; 
 	gyroZero[Y] = gyroZero[Y] >> 3;
 	gyroZero[Z] = gyroZero[Z] >> 3;
-	
-	for (i = 0; i < 7; i++)
-	{
-		gyroZero[X] += ADCSensorValue[GYRO_X];
-		gyroZero[Y] += ADCSensorValue[GYRO_Y];
-		gyroZero[Z] += ADCSensorValue[GYRO_Z];
-		Pause(100);
-	}
-	
-	gyroZero[X] = gyroZero[X] >> 3; 
-	gyroZero[Y] = gyroZero[Y] >> 3;
-	gyroZero[Z] = gyroZero[Z] >> 3;
-	
-	setOldADC();
 
 	char x [80];
 	sprintf(x,"Gyro-Zero:%d:%d:%d:\r\n",gyroZero[X],gyroZero[Y],gyroZero[Z]);
@@ -76,23 +67,18 @@ void zeroGyro()
 }
 
 
-/* set old ADV Values to actual Values --------------------------------------*/
-void setOldADC()
-{
-	u8 i;
-	for (i = 0; i < 7; i++)
-	{
-		oldADCSensorValue[i] = ADCSensorValue[i];
-	}
-}
 
 
 /* Set ACC Values to Zero ---------------------------------------------------*/
 void zeroACC()
 {
-	accZero[X] = ADCSensorValue[ACC_X];
-	accZero[Y] = ADCSensorValue[ACC_Y];
-	accZero[Z] = (ADCSensorValue[ACC_X] + ADCSensorValue[ACC_Y]) >> 1;
+	vs32 gyroValues[3];
+	vs32 accValues[3];
+	getRawValues(gyroValues, accValues);
+	
+	accZero[X] = accValues[X];
+	accZero[Y] = accValues[Y];
+	accZero[Z] = (accValues[X] + accValues[Y]) >> 1;
 	
 	setParameter(PARA_ACC_X_ZERO, accZero[X]);
 	setParameter(PARA_ACC_Y_ZERO, accZero[Y]);
@@ -104,33 +90,24 @@ void zeroACC()
 }
 
 
-/* get GyroRawValues - calculate Gyrovalues and Baise --------------------------*/
-void getGyroRawValues(vs32 * gyroValues)
+/* get RawValues - calculate Gyrovalues and Baise --------------------------*/
+void getRawValues(vs32 * gyroValues, vs32 * accValues)
 {
 
-	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X], oldADCSensorValue[GYRO_X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
-	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y], oldADCSensorValue[GYRO_Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
-	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z], oldADCSensorValue[GYRO_Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
+	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X], oldGyroValues[X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
+	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y], oldGyroValues[Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
+	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z], oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
+	
+	accValues[X] = smoothValue(ADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
+	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
+	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
 	
 	u8 i;
 	for (i = 0; i < 3; i++)
 	{
-		oldADCSensorValue[i] = ADCSensorValue[i];
+		oldGyroValues[i] = gyroValues[i];
+		oldAccValues[i] = accValues[i];
 	}
 }
 
-
-/* get ACCRawValues ---------------------------------------------------------*/
-void getACCRawValues(vs32 * accValues)
-{
-	accValues[X] = smoothValue(ADCSensorValue[ACC_X], oldADCSensorValue[ACC_X], parameter[PARA_SMOOTH_ACC]);
-	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y], oldADCSensorValue[ACC_Y], parameter[PARA_SMOOTH_ACC]);
-	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z], oldADCSensorValue[ACC_Z], parameter[PARA_SMOOTH_ACC]);
-	
-	u8 i;
-	for (i = 3; i < 6; i++)
-	{
-		oldADCSensorValue[i] = ADCSensorValue[i];
-	}
-}
 

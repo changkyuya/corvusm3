@@ -33,9 +33,9 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void initFilterComp2(vs32 * gyroAngle, vs32 * copterAngle);
-void getACCAnglesFilterComp2(vs32 * accAngle);
+void getACCAnglesFilterComp2(vs32 * accAngle, vs32 * accRawValues);
 void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle);
-void getGyroAnglesFilterComp2(vs32 * gyroAngle);
+void getGyroAnglesFilterComp2(vs32 * gyroAngle, vs32 * gyroRawValues);
 void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle);
 void mapReceiverValuesFilterComp2(vu16 * receiverChannel, vs32 * targetAngle);
 
