@@ -82,9 +82,9 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_HW], 0x01);
 	EE_WriteVariable(VirtAddVarTab[PARA_VOLT], 0x8BC); //2236 = 10 Volt
 	EE_WriteVariable(VirtAddVarTab[PARA_SW], 0x01); 
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_X_ZERO], 0x7FF); 
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Y_ZERO], 0x7F1); 
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Z_ZERO], 0x7F8); 
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_X_ZERO], 0x4FF6); 
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Y_ZERO], 0x4F6A); 
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Z_ZERO], 0x4FB0); 
 	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_ACC], 0x00); 
 	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_GYRO], 0x00); 
 	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_RC], 0x00); 

@@ -76,9 +76,9 @@ void zeroACC()
 	vs32 accValues[3];
 	getRawValues(gyroValues, accValues);
 	
-	accZero[X] = accValues[X];
-	accZero[Y] = accValues[Y];
-	accZero[Z] = (accValues[X] + accValues[Y]) >> 1;
+	accZero[X] = accValues[X] / 100;
+	accZero[Y] = accValues[Y] / 100;
+	accZero[Z] = ((accValues[X] / 100) + (accValues[Y] / 100)) >> 1;
 	
 	setParameter(PARA_ACC_X_ZERO, accZero[X]);
 	setParameter(PARA_ACC_Y_ZERO, accZero[Y]);
