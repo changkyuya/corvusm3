@@ -33,7 +33,7 @@
 void Delay(vu32 nTime);
 void SysTickHandler(void);
 void Pause(u32 approxms);
-u16 smoothValue(u16 actual, u16 previous, u16 smooth); 
+s32 smoothValue(s32 actual, s32 previous, u16 smooth); 
 float fastatan2(float y, float x);
 s32 weightingValues(s32 first, s32 secound, u16 weightingFirst); 
 

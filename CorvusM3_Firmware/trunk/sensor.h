@@ -30,9 +30,9 @@
 
 /* Function prototypes -------------------------------------------------------*/
 void zeroGyro(void);
-void getGyroRawValues(vs16 * gyroValues);
+void getGyroRawValues(vs32 * gyroValues);
 void zeroACC(void);
-void getACCRawValues(vs16 * accValues);
+void getACCRawValues(vs32 * accValues);
 void setOldADC(void);
 
 #endif /* __SENSOR_H */

@@ -29,10 +29,10 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 ADCSensorValue[7];  //initsystem
-vu16 oldADCSensorValue[7]; // for smooth
-vu16 gyroZero[3];
-vu16 accZero[3];
+extern vu16 ADCSensorValue[56];  //initsystem
+vu32 oldADCSensorValue[7]; // for smooth
+vu32 gyroZero[3];
+vu32 accZero[3];
 extern vu16 parameter[0x190]; //parameter
 
 
@@ -105,7 +105,7 @@ void zeroACC()
 
 
 /* get GyroRawValues - calculate Gyrovalues and Baise --------------------------*/
-void getGyroRawValues(vs16 * gyroValues)
+void getGyroRawValues(vs32 * gyroValues)
 {
 
 	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X], oldADCSensorValue[GYRO_X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
@@ -121,7 +121,7 @@ void getGyroRawValues(vs16 * gyroValues)
 
 
 /* get ACCRawValues ---------------------------------------------------------*/
-void getACCRawValues(vs16 * accValues)
+void getACCRawValues(vs32 * accValues)
 {
 	accValues[X] = smoothValue(ADCSensorValue[ACC_X], oldADCSensorValue[ACC_X], parameter[PARA_SMOOTH_ACC]);
 	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y], oldADCSensorValue[ACC_Y], parameter[PARA_SMOOTH_ACC]);

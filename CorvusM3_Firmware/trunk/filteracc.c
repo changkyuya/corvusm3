@@ -29,7 +29,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 gyroZero[3]; // sensor
+extern vu32 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
 
 
@@ -82,7 +82,7 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 // ADC * 3,3 / 4095 / 2000 * 1000 
 void getGyroAnglesFilterACC(vs32 * gyroAngle)
 {
-	vs16 gyroRawValues[3];
+	vs32 gyroRawValues[3];
 	getGyroRawValues(gyroRawValues);
 	//gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
     //gyroAngle[Y] -=y (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
@@ -110,7 +110,7 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle)
 /* calculate ACC Angles -----------------------------------------------------*/
 void getACCAnglesFilterACC(vs32 * accAngle)
 {
-	vs16 accRawValues[3];
+	vs32 accRawValues[3];
 	getACCRawValues(accRawValues);
 	// x = (x - corrACC) * factorACC * 180 / PI
 	// z = (z - corrACC) * factorACC * 180 / PI
