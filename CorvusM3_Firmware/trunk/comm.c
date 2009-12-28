@@ -124,8 +124,7 @@ void docComm()
 	switch (line[1])
 	{
 		case 'g':
-			zeroGyro();
-			setAngleFilterACC(gyroAngle, copterAngle);
+			initFilterACC(gyroAngle, copterAngle);
 			break;
 		case 'a':
 			zeroACC();
