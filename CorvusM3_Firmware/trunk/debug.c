@@ -60,6 +60,8 @@ void doDebug()
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",ADCSensorValue[VOLT]);
 		print_uart1(x);
+		sprintf(x,"%d:%d:%d:%d:%d:%d:%d:%d\r\n",ADCSensorValue[0],ADCSensorValue[7],ADCSensorValue[14],ADCSensorValue[21],ADCSensorValue[28],ADCSensorValue[35],ADCSensorValue[42],ADCSensorValue[49]);
+		print_uart1(x);
 	}
 	
 	/* Graphoutput must start with 'G' and first value is timer (not used) */

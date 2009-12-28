@@ -94,9 +94,9 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 {
 	// 8 time oversampling
 	u8 i;
-	u8 j = 1;
+	u8 j = 0;
 	
-	for (i = 0; i < 6; i++)
+	for (i = 0; i < 7; i++)
 	{
 		overADCSensorValue[i] = ADCSensorValue[i];
 	}
@@ -108,7 +108,7 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 			j = 0;
 		}
 	}
-	for (i = 0; i < 6; i++)
+	for (i = 0; i < 7; i++)
 	{
 		overADCSensorValue[i] = (overADCSensorValue[i] * 1000 ) >> 3;
 	}
