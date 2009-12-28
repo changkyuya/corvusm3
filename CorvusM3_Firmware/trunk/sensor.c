@@ -46,6 +46,17 @@ void zeroGyro()
 	gyroZero[X] = overADCSensorValue[GYRO_X];
 	gyroZero[Y] = overADCSensorValue[GYRO_Y];
 	gyroZero[Z] = overADCSensorValue[GYRO_Z];
+	
+	Pause(50);
+	oversamplingADC();
+	
+	gyroZero[X] += overADCSensorValue[GYRO_X];
+	gyroZero[Y] += overADCSensorValue[GYRO_Y];
+	gyroZero[Z] += overADCSensorValue[GYRO_Z];
+	
+	gyroZero[X] = gyroZero[X] >> 1;
+	gyroZero[Y] = gyroZero[Y] >> 1;
+	gyroZero[Z] = gyroZero[Z] >> 1;
 
 	char x [80];
 	sprintf(x,"Gyro-Zero:%d:%d:%d:\r\n",gyroZero[X],gyroZero[Y],gyroZero[Z]);
