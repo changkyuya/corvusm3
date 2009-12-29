@@ -63,7 +63,7 @@ void setAngleFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 
 
 /* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
-void getCopterAnglesFilterHH(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
+void getCopterAnglesFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	vs32 accRawValues[3];
 	vs32 gyroRawValues[3];
@@ -75,16 +75,12 @@ void getCopterAnglesFilterHH(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAng
 	
 	// get basis angles from sensors
 	getGyroAnglesFilterHH(gyroAngle, gyroRawValues);
-	getACCAnglesFilterHH(accAngle, accRawValues);
+	//getACCAnglesFilterHH(accAngle, accRawValues);
 		
 	//needs about 50us (all 5)
-	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
-	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
+	copterAngle[X] = gyroAngle[X];
+	copterAngle[Y] = gyroAngle[Y];
 	copterAngle[Z] = gyroAngle[Z];
-	
-	// trimm gyro to new Angle
-	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
-	gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], parameter[PARA_GYRO_CORR]); 
 }
 
 

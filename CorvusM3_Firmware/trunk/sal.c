@@ -88,7 +88,7 @@ void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 	{
 		// HH-Mode
 		case PARA_SW_HH:
-			getCopterAnglesFilterHH(gyroAngle, accAngle, copterAngle);
+			getCopterAnglesFilterHH(gyroAngle, copterAngle);
 			break;
 		// ACC-Mode
 		case PARA_SW_ACC:

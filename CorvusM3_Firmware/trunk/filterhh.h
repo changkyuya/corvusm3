@@ -36,7 +36,7 @@ void initFilterHH(vs32 * gyroAngle, vs32 * copterAngle);
 void getACCAnglesFilterHH(vs32 * accAngle, vs32 * accRawValues);
 void setAngleFilterHH(vs32 * gyroAngle, vs32 * copterAngle);
 void getGyroAnglesFilterHH(vs32 * gyroAngle, vs32 * gyroRawValues);
-void getCopterAnglesFilterHH(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle);
+void getCopterAnglesFilterHH(vs32 * gyroAngle, vs32 * copterAngle);
 void mapReceiverValuesFilterHH(vu16 * receiverChannel, vs32 * targetAngle);
 
 #endif /* __FILTERHH_H */
