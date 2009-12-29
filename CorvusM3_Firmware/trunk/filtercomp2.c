@@ -57,8 +57,8 @@ void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
 	copterAngle[Z] = gyroAngle[Z] = 0;
 	//init y1 for filter
-	y[X] = -gyroZero[X];
-	y[Y] = -gyroZero[Y];
+	y[X] = 0;
+	y[Y] = 0;
 	
 	char x [80];
 	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);
@@ -79,18 +79,24 @@ void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copter
 	// Written by RoyLB at:
 	// http://www.rcgroups.com/forums/showpost.php?p=12082524&postcount=1286
   
-	u32 x1;
-	u32 x2;
+	s32 x1;
+	s32 x2;
+	// mapped to 1kHz loop
+	x1 = ((accAngle[X] - copterAngle[X]) * parameter[PARA_ACC_FORCE] * parameter[PARA_ACC_FORCE] / 1000000) ;
+	y[X] += x1 / 1000;
+	x2 = y[X] + ((accAngle[X] - copterAngle[X]) * 2 * parameter[PARA_ACC_FORCE]) / 1000 + gyroAngle[X];
+	copterAngle[X] += x2 / 1000;
 	
-	x1 = ((accAngle[X] - copterAngle[X]) * parameter[PARA_ACC_FORCE] * parameter[PARA_ACC_FORCE]) / 10000;
-	y[X] += x1;
-	x2 = y[X] + ((accAngle[X] - copterAngle[X]) * 2 * parameter[PARA_ACC_FORCE]) / 100 + gyroAngle[X];
-	copterAngle[X] = x2 + copterAngle[X];
+	//char x [80];
+	//sprintf(x,"dbg:%d:%d:%d\r\n", x1, y[X], x2);
+	//print_uart1(x);
 	
-	x1 = ((accAngle[Y] - copterAngle[Y]) * parameter[PARA_ACC_FORCE] * parameter[PARA_ACC_FORCE]) / 10000;
-	y[Y] += x1;
-	x2 = y[Y] + ((accAngle[Y] - copterAngle[Y]) * 2 * parameter[PARA_ACC_FORCE]) / 100 + gyroAngle[Y];
-	copterAngle[Y] = x2 + copterAngle[Y];
+	x1 = ((accAngle[Y] - copterAngle[Y]) * parameter[PARA_ACC_FORCE] * parameter[PARA_ACC_FORCE] / 1000000) ;
+	y[Y] += x1 / 1000;
+	x2 = y[Y] + ((accAngle[Y] - copterAngle[Y]) * 2 * parameter[PARA_ACC_FORCE]) / 1000 + gyroAngle[Y];
+	copterAngle[Y] += x2 / 1000;
+	
+	copterAngle[Z] = gyroAngle[Z];
 	
 	// trimm gyro to new Angle
 	//gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
@@ -106,9 +112,9 @@ void getGyroAnglesFilterComp2(vs32 * gyroAngle, vs32 * gyroRawValues)
 {
 	
 	// calculate the angles for X and Y in getCopterAngelsFilterComp2
-	gyroAngle[X] = gyroRawValues[X] * 100000;
-    gyroAngle[Y] = gyroRawValues[Y] * 100000;
-    gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
+	gyroAngle[X] = (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
+    gyroAngle[Y] = (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
+    gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
 	
 		
 	if (gyroAngle[Z] >= 36000000) 
@@ -137,10 +143,10 @@ void getACCAnglesFilterComp2(vs32 * accAngle, vs32 * accRawValues)
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] , accRawValues[X] - parameter[PARA_ACC_X_ZERO] ) * 5729577.95);
+	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 , accRawValues[X] - parameter[PARA_ACC_X_ZERO] * 100 ) * 5729577.95);
 	//change direction
-	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] ) * 5729577.95 + 9000000);
-
+	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] * 100 , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 ) * 5729577.95 + 9000000);
+	
 	
 	//char x [80];
 	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
