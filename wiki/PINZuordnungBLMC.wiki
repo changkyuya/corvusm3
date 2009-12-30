@@ -1,0 +1,55 @@
+= Hardware =
+
+Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
+
+== Geplante Pinbelegung - *FETT* = realisiert==
+
+  * *PA00* : 1_ADC_A
+  * *PA01* : 1_ADC_A
+  * *PA02* : 1_ADC_A
+  * *PA03* : 1_ADC_A
+  * *PA04* : 1_ADC_A
+  * *PA05* : 1_ADC_A
+  * *PA06* : 1_ADC_A
+  * *PA07* : 1_ADC_A
+  * *PA08* : 1_PWM_A
+  * *PA09* : TX-UART1 - PC - FC
+  * *PA10* : RX-UART1 - PC - FC
+  * *PA11* : 1_PWM_A
+  * *PA12* : 1_Schalt_A
+  * *PA13* : 1_Schalt_A
+  * *PA14* : 1_Schalt_A
+  * *PA15* : 1_Schalt_A
+  * *PB00* : 1_ADC_A
+  * *PB01* : 1_ADC_A
+  * *PB03* : 1_PWM_A (re-mapping)
+  * *PB04* : 1_PWM_A (re-mapping)
+  * *PB05* : 1_PWM_A (re-mapping)
+  * *PB06* : 1_PWM_A
+  * *PB07* : PPM IN
+  * *PB08* : 1_PWM_A
+  * *PB09* : 1_PWM_A
+  * *PB10* : I2C-SCL
+  * *PB11* : I2C-SDA
+  * *PB12* : 1_Schalt_A
+  * *PB13* : 1_Schalt_A
+  * *PB14* : 1_Schalt_A
+  * *PB15* : 1_Schalt_A
+  * *PC00* : 1_ADC_A
+  * *PC01* : 1_ADC_A
+  * *PC02* : 1_ADC_A
+  * *PC03* : 1_ADC_A
+  * *PC04* : 1_ADC_A
+  * *PC05* : 1_ADC_A
+  * *PC06* : 1_PWM_A
+  * *PC07* : 1_PWM_A
+  * *PC08* : 1_PWM_A
+  * *PC09* : 1_PWM_A
+  * *PC10* : 1_Schalt_A
+  * *PC11* : 1_Schalt_A
+  * *PC12* : 1_Schalt_A
+  * *PD02* : 1_Schalt_A
+  * *PC13* : LED
+
+
+ 
