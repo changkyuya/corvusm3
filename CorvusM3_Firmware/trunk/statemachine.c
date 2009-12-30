@@ -112,8 +112,7 @@ void statemachine(void)
 			{
 				neutralRC = 0;
 				errorCode |= ERROR_SENSOR; // set bit - led flashing
-				zeroGyro();
-				setAngles(gyroAngle, copterAngle);
+				initFilter(gyroAngle, copterAngle);
 			}
 			
 			// start motors

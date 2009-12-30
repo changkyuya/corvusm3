@@ -25,6 +25,7 @@
 #include "parameter.h"
 #include "sensor.h"
 #include "filteracc.h"
+#include "sal.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -124,7 +125,7 @@ void docComm()
 	switch (line[1])
 	{
 		case 'g':
-			initFilterACC(gyroAngle, copterAngle);
+			initFilter(gyroAngle, copterAngle);
 			break;
 		case 'a':
 			zeroACC();

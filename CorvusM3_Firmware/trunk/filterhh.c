@@ -44,14 +44,8 @@ void initFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 /* set gyro start angle -----------------------------------------------------*/
 void setAngleFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 {
-	vs32 accRawValues[3];
-	vs32 gyroRawValues[3];
-	getRawValues(gyroRawValues, accRawValues);
-	
-	vs32 accAngle[2];
-	getACCAnglesFilterHH(accAngle, accRawValues);
-	copterAngle[X] = gyroAngle[X] = accAngle[X];
-	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
+	copterAngle[X] = gyroAngle[X] = 0;
+	copterAngle[Y] = gyroAngle[Y] = 0;
 	copterAngle[Z] = gyroAngle[Z] = 0;
 	
 	char x [80];
@@ -77,10 +71,11 @@ void getCopterAnglesFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 	getGyroAnglesFilterHH(gyroAngle, gyroRawValues);
 	//getACCAnglesFilterHH(accAngle, accRawValues);
 		
-	//needs about 50us (all 5)
+
 	copterAngle[X] = gyroAngle[X];
 	copterAngle[Y] = gyroAngle[Y];
 	copterAngle[Z] = gyroAngle[Z];
+	
 }
 
 
@@ -97,43 +92,25 @@ void getGyroAnglesFilterHH(vs32 * gyroAngle, vs32 * gyroRawValues)
     gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100);
     gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
 	
-		
-	if (gyroAngle[Z] >= 36000000) 
-	{
-		gyroAngle[Z] -= 36000000;
-	}
-	if (gyroAngle[Z] < 0) 
-	{
-		gyroAngle[Z] = 36000000 - gyroAngle[Z];
-	}
-	
 	//char x [80];
 	//sprintf(x,"gyro raw value:%d:%d:%d\r\n",gyroAngle[X],gyroRawValues[X],gyroAngle[Z]);
 	//print_uart1(x);
+	// overrun
+	u8 i;
+	for (i = 0; i < 3; i++)
+	{
+		
+		if (gyroAngle[i] >= 36000000) 
+		{
+			gyroAngle[i] -= 36000000;
+		}
+		if (gyroAngle[i] < 0) 
+		{
+			gyroAngle[i] = 36000000 - gyroAngle[Z];
+		}
+	}
 }
 
-
-/* calculate ACC Angles -----------------------------------------------------*/
-void getACCAnglesFilterHH(vs32 * accAngle, vs32 * accRawValues)
-{
-	// x = (x - corrACC) * factorACC * 180 / PI
-	// z = (z - corrACC) * factorACC * 180 / PI
-	// 180 / PI = 57.2957795
-	// minus 90 grad für level
-	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
-	
-	// atan2 works - if it is to slow we can use fastatan2
-	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 , accRawValues[X] - parameter[PARA_ACC_X_ZERO] * 100 ) * 5729577.95);
-	//change direction
-	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] * 100 , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 ) * 5729577.95 + 9000000);
-
-	
-	//char x [80];
-	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
-	//print_uart1(x);
-	
-}
 
 
 /* map receiver to angles for roll nick -------------------------------------*/
@@ -143,7 +120,7 @@ void mapReceiverValuesFilterHH(vu16 * receiverChannel, vs32 * targetAngle)
 	
 	if (receiverChannel[ROLL] < 1495 || receiverChannel[ROLL] > 1505)
 	{
-		targetAngle[X] += (receiverChannel[NICK] - 1500) * 50;
+		targetAngle[X] += (receiverChannel[ROLL] - 1500) * 50;
 	}
 	
 	if (receiverChannel[NICK] < 1495 || receiverChannel[NICK] > 1505)

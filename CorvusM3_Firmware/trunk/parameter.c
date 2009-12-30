@@ -22,10 +22,14 @@
 #include "parameter.h"
 #include "eeprom.h"
 #include "comm.h"
+#include "sal.h"
 
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+extern vs32 gyroAngle[3]; //statemachine
+extern vs32 copterAngle[3]; //statemachine
+
 vu16 parameter[0x190]; 
 /* Virtual address defined by the user: 0xFFFF value is prohibited */
 // we use 0 - 199
@@ -81,7 +85,7 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0x00);
 	EE_WriteVariable(VirtAddVarTab[PARA_HW], 0x01);
 	EE_WriteVariable(VirtAddVarTab[PARA_VOLT], 0x8BC); //2236 = 10 Volt
-	EE_WriteVariable(VirtAddVarTab[PARA_SW], 0x02); 
+	EE_WriteVariable(VirtAddVarTab[PARA_SW], 0x00); 
 	EE_WriteVariable(VirtAddVarTab[PARA_ACC_X_ZERO], 0x4FF6); 
 	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Y_ZERO], 0x4F6A); 
 	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Z_ZERO], 0x4FB0); 
@@ -148,6 +152,11 @@ void setParameter(u16 para, u16 value)
 	else
 	{
 		parameter[para+parameter[PARA_SET]] = value;
+		// if we change the SW Parameter we have to init the filter
+		if (para == PARA_SW) // = 4
+		{
+			initFilter(gyroAngle, copterAngle);
+		}
 	}
 }
 
@@ -164,6 +173,11 @@ u16 readFlashParameter(u16 para)
 	{		
 		EE_ReadVariable(VirtAddVarTab[para+parameter[PARA_SET]], &val);
 		parameter[para+parameter[PARA_SET]] = val;
+		// if we change the SW Parameter we have to init the filter
+		if (para == PARA_SW) // = 4
+		{
+			initFilter(gyroAngle, copterAngle);
+		}
 	}
 	return val;
 }
@@ -181,6 +195,11 @@ void writeFlashParameter(u16 para, u16 value)
 	{
 		EE_WriteVariable(VirtAddVarTab[para+parameter[PARA_SET]], value);
 		parameter[para+parameter[PARA_SET]] = value;
+		// if we change the SW Parameter we have to init the filter
+		if (para == PARA_SW) // = 4
+		{
+			initFilter(gyroAngle, copterAngle);
+		}
 	}
 }
 

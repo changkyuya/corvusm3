@@ -101,7 +101,6 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle, vs32 * gyroRawValues)
     gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100);
     gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
 	
-		
 	if (gyroAngle[Z] >= 36000000) 
 	{
 		gyroAngle[Z] -= 36000000;
