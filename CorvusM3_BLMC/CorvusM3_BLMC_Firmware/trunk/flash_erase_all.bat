@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\XDUINO\Uploader\STM32\STMFlashLoader.exe" -c --pn 2 --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_BLMC\CorvusM3_BLMC_Firmware\trunk\main.bin -p --dwp

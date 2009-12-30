@@ -25,25 +25,13 @@
 #include "serial.h"
 #include "eeprom.h" 
 #include "debug.h"
-#include "eeprom.h"
 #include "parameter.h"
-#include "hal.h"
-#include "sal.h"
-#include "motorhal.h"
-#include "sensor.h"
 #include <stdio.h>
 
 /* Variables ----------------------------------------------------------------*/
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
-extern vu16 ADCSensorValue[56];  //initsystem
-extern vu16 receiverChannel[9];  //statemachine
-extern volatile char motor[5]; //blmc
-extern vs32 gyroAngle[3]; //statemachine
-extern vu8 errorCode; //statemachine
-extern vs32 copterAngle[3]; //statemachine
-extern vs32 targetAngle[3]; //statemachine
 
 
 	
@@ -56,7 +44,7 @@ int main(void)
 	initEEPROM();
 	
   
-	print_uart1("CorvusM3 FC - Version 0.0a\r\n");
+	print_uart1("CorvusM3 BLMC - Version 0.0a\r\n");
 	
 	// for test
 	//char x [80];
@@ -64,24 +52,15 @@ int main(void)
 	//print_uart1(x);
 	
 	
-	// read sensors for calibration
 	setLEDStatus(LED_FLASH);
-	// function open ....
 	
 	// read parameters from flash
 	loadParameter();
 	
-	// calibrate sensor
-	// wait befor calibrate
-	Delay(100);
-	initFilter(gyroAngle, copterAngle);
 	
 	// function open ....
 	setLEDStatus(LED_BLINK);
 	
-	
-	// Controlloop --> statemachine() --> Timer 3
-	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
   
 	while (1)
 	{
