@@ -4,50 +4,50 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 
 == Geplante Pinbelegung - *FETT* = realisiert==
 
-  * *PA00* : 1_ADC_A
-  * *PA01* : 1_ADC_A
-  * *PA02* : 1_ADC_A
-  * *PA03* : 1_ADC_A
-  * *PA04* : 1_ADC_A
-  * *PA05* : 1_ADC_A
-  * *PA06* : 1_ADC_A
-  * *PA07* : 1_ADC_A
-  * *PA08* : 1_PWM_A
+  * *PA00* : 2_ADC_A
+  * *PA01* : 2_ADC_B
+  * *PA02* : 2_ADC_C
+  * *PA03* : 2_ADC_S
+  * *PA04* : 3_ADC_A
+  * *PA05* : 3_ADC_B
+  * *PA06* : 3_ADC_C
+  * *PA07* : 3_ADC_S
+  * *PA08* : 3_PWM_B
   * *PA09* : TX-UART1 - PC - FC
   * *PA10* : RX-UART1 - PC - FC
-  * *PA11* : 1_PWM_A
-  * *PA12* : 1_Schalt_A
-  * *PA13* : 1_Schalt_A
-  * *PA14* : 1_Schalt_A
-  * *PA15* : 1_Schalt_A
-  * *PB00* : 1_ADC_A
-  * *PB01* : 1_ADC_A
-  * *PB03* : 1_PWM_A (re-mapping)
-  * *PB04* : 1_PWM_A (re-mapping)
-  * *PB05* : 1_PWM_A (re-mapping)
-  * *PB06* : 1_PWM_A
+  * *PA11* : 3_PWM_A
+  * *PA12* : 3_Schalt_B
+  * *PA13* : 3_Schalt_A
+  * *PA14* : 2_Schalt_C
+  * *PA15* : 2_Schalt_B
+  * *PB00* : 4_ADC_C
+  * *PB01* : 4_ADC_S
+  * *PB03* : 2_PWM_C (re-mapping)
+  * *PB04* : 2_PWM_B (re-mapping)
+  * *PB05* : 2_PWM_A (re-mapping)
+  * *PB06* : 1_PWM_C
   * *PB07* : PPM IN
-  * *PB08* : 1_PWM_A
+  * *PB08* : 1_PWM_B
   * *PB09* : 1_PWM_A
   * *PB10* : I2C-SCL
   * *PB11* : I2C-SDA
-  * *PB12* : 1_Schalt_A
-  * *PB13* : 1_Schalt_A
-  * *PB14* : 1_Schalt_A
-  * *PB15* : 1_Schalt_A
+  * *PB12* : 4_Schalt_C
+  * *PB13* : 4_Schalt_B
+  * *PB14* : 4_Schalt_A
+  * *PB15* : 3_Schalt_C
   * *PC00* : 1_ADC_A
-  * *PC01* : 1_ADC_A
-  * *PC02* : 1_ADC_A
-  * *PC03* : 1_ADC_A
-  * *PC04* : 1_ADC_A
-  * *PC05* : 1_ADC_A
-  * *PC06* : 1_PWM_A
-  * *PC07* : 1_PWM_A
-  * *PC08* : 1_PWM_A
-  * *PC09* : 1_PWM_A
-  * *PC10* : 1_Schalt_A
-  * *PC11* : 1_Schalt_A
-  * *PC12* : 1_Schalt_A
+  * *PC01* : 1_ADC_B
+  * *PC02* : 1_ADC_C
+  * *PC03* : 1_ADC_S
+  * *PC04* : 4_ADC_A
+  * *PC05* : 4_ADC_B
+  * *PC06* : 4_PWM_C
+  * *PC07* : 4_PWM_B
+  * *PC08* : 4_PWM_A
+  * *PC09* : 3_PWM_C
+  * *PC10* : 2_Schalt_A
+  * *PC11* : 1_Schalt_C
+  * *PC12* : 1_Schalt_B
   * *PD02* : 1_Schalt_A
   * *PC13* : LED
 
