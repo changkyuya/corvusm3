@@ -22,11 +22,11 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PA15* : 2_Schalt_B
   * *PB00* : 4_ADC_C
   * *PB01* : 4_ADC_S
-  * *PB03* : 2_PWM_C (re-mapping)
-  * *PB04* : 2_PWM_B (re-mapping)
-  * *PB05* : 2_PWM_A (re-mapping)
-  * *PB06* : 1_PWM_C
-  * *PB07* : PPM IN
+  * *PB03* : DEBUG
+  * *PB04* : 2_PWM_C (re-mapping)
+  * *PB05* : 2_PWM_B (re-mapping)
+  * *PB06* : 2_PWM_A
+  * *PB07* : 1_PWM_C
   * *PB08* : 1_PWM_B
   * *PB09* : 1_PWM_A
   * *PB10* : I2C-SCL
