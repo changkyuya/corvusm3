@@ -6,7 +6,7 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 == Geplante Pinbelegung - *FETT* = realisiert==
 
   * *PA00* : *Debug PIN*
-  * *PA01* : Beeper
+  * *PA01* : *Beeper*
   * *PA02* : UART2_TX, ADC - frei
   * *PA03* : *RX-UART2 Spektrum Empfänger*
   * *PA04* : SPI1_NSS Baro
