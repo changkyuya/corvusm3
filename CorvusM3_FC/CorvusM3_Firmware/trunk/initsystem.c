@@ -65,7 +65,8 @@ void RCC_Configuration(void)
 	
 	/* Enable HSE */
 	RCC_HSEConfig(RCC_HSE_ON);
-    
+    // internal clock - RCC_PLLSource_HSE_Div2 = 36MHz
+	//RCC_HSICmd(ENABLE);
 	/* Wait till HSE is ready */
 	HSEStartUpStatus = RCC_WaitForHSEStartUp();
 	
