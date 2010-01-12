@@ -1,0 +1,8 @@
+= Software für Entwicklung und Test =
+
+ * GNU Toolchain von CodeSourcery [http://www.codesourcery.com/sgpp/lite/arm/portal/release1033]
+ * Editor Programmers Notepad [http://www.pnotepad.org/]
+ * Flash Tool von ST [http://www.st.com/stonline/products/support/micro/files/um0462.zip]
+ * Microsoft Visual C# Express [http://www.microsoft.com/germany/Express/download/default.aspx]
+ * Terminalprogramm [http://www.der-hammer.info/terminal/]
+ * Soundkarten Oszilloskop [http://www.zeitnitz.de/Christian/scope_de]
