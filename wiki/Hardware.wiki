@@ -1,0 +1,6 @@
+= Hardware für das Protoboard =
+
+ * ET-STM32 Stamp [http://www.futurlec.com/ET-STM32_Stamp.shtml]
+ * IMU 5 Degrees of Freedom [http://www.sparkfun.com/commerce/product_info.php?products_id=9268]
+ * Gyro Breakout Board - IDG500 [http://www.sparkfun.com/commerce/product_info.php?products_id=9094]
+ * Triple Axis Magnetometer Breakout - HMC5843 [http://www.sparkfun.com/commerce/product_info.php?products_id=9371]
