@@ -55,6 +55,9 @@
 /* Map Pin for LED 1 --> PC13 */
 #define LED 						PERIPHERAL_BIT(GPIOC->ODR, 13)			
 #define GPIO_LEDPIN 				GPIO_Pin_13
+/* Map Pin for DEBUG --> PB3 */
+#define DBG 						PERIPHERAL_BIT(GPIOB->ODR, 3)			
+#define GPIO_DBGPIN 				GPIO_Pin_3
 
 /* 1. BLMC ------------------------------------------------------------------*/
 /* ADC */
@@ -65,14 +68,14 @@
 /* PWM */
 #define GPIO_1_PWM_A				GPIO_Pin_9
 #define GPIO_1_PWM_B				GPIO_Pin_8
-#define GPIO_1_PWM_C				GPIO_Pin_6
+#define GPIO_1_PWM_C				GPIO_Pin_7
 /* SWITCH */
 #define GPIO_1_SWITCH_A				GPIO_Pin_2
 #define GPIO_1_SWITCH_B				GPIO_Pin_12
 #define GPIO_1_SWITCH_C				GPIO_Pin_11
-#define 1_SWITCH_A					PERIPHERAL_BIT(GPIOD->ODR, 2)
-#define 1_SWITCH_B					PERIPHERAL_BIT(GPIOC->ODR, 12)
-#define 1_SWITCH_C					PERIPHERAL_BIT(GPIOC->ODR, 11)
+#define SWITCH_1_A					PERIPHERAL_BIT(GPIOD->ODR, 2)
+#define SWITCH_1_B					PERIPHERAL_BIT(GPIOC->ODR, 12)
+#define SWITCH_1_C					PERIPHERAL_BIT(GPIOC->ODR, 11)
 
 /* 2. BLMC ------------------------------------------------------------------*/
 /* ADC */
@@ -81,16 +84,16 @@
 #define GPIO_2_ADC_C				GPIO_Pin_2
 #define GPIO_2_ADC_S				GPIO_Pin_3
 /* PWM */
-#define GPIO_2_PWM_A				GPIO_Pin_5
-#define GPIO_2_PWM_B				GPIO_Pin_4
-#define GPIO_2_PWM_C				GPIO_Pin_3
+#define GPIO_2_PWM_A				GPIO_Pin_6
+#define GPIO_2_PWM_B				GPIO_Pin_5
+#define GPIO_2_PWM_C				GPIO_Pin_4
 /* SWITCH */
 #define GPIO_2_SWITCH_A				GPIO_Pin_10
 #define GPIO_2_SWITCH_B				GPIO_Pin_15
 #define GPIO_2_SWITCH_C				GPIO_Pin_14
-#define 2_SWITCH_A					PERIPHERAL_BIT(GPIOC->ODR, 10)
-#define 2_SWITCH_B					PERIPHERAL_BIT(GPIOA->ODR, 15)
-#define 2_SWITCH_C					PERIPHERAL_BIT(GPIOA->ODR, 14)
+#define SWITCH_2_A					PERIPHERAL_BIT(GPIOC->ODR, 10)
+#define SWITCH_2_B					PERIPHERAL_BIT(GPIOA->ODR, 15)
+#define SWITCH_2_C					PERIPHERAL_BIT(GPIOA->ODR, 14)
 
 /* 3. BLMC ------------------------------------------------------------------*/
 /* ADC */
@@ -106,9 +109,9 @@
 #define GPIO_3_SWITCH_A				GPIO_Pin_11
 #define GPIO_3_SWITCH_B				GPIO_Pin_8
 #define GPIO_3_SWITCH_C				GPIO_Pin_9
-#define 3_SWITCH_A						PERIPHERAL_BIT(GPIOA->ODR, 13)
-#define 3_SWITCH_B						PERIPHERAL_BIT(GPIOA->ODR, 12)
-#define 3_SWITCH_C						PERIPHERAL_BIT(GPIOB->ODR, 15)
+#define SWITCH_3_A					PERIPHERAL_BIT(GPIOA->ODR, 13)
+#define SWITCH_3_B					PERIPHERAL_BIT(GPIOA->ODR, 12)
+#define SWITCH_3_C					PERIPHERAL_BIT(GPIOB->ODR, 15)
 
 /* 4. BLMC ------------------------------------------------------------------*/
 /* ADC */
@@ -124,9 +127,9 @@
 #define GPIO_4_SWITCH_A				GPIO_Pin_14
 #define GPIO_4_SWITCH_B				GPIO_Pin_13
 #define GPIO_4_SWITCH_C				GPIO_Pin_12
-#define 4_SWITCH_A						PERIPHERAL_BIT(GPIOB->ODR, 14)
-#define 4_SWITCH_B						PERIPHERAL_BIT(GPIOB->ODR, 13)
-#define 4_SWITCH_C						PERIPHERAL_BIT(GPIOB->ODR, 12)
+#define SWITCH_4_A					PERIPHERAL_BIT(GPIOB->ODR, 14)
+#define SWITCH_4_B					PERIPHERAL_BIT(GPIOB->ODR, 13)
+#define SWITCH_4_C					PERIPHERAL_BIT(GPIOB->ODR, 12)
 
 
 /* Struct --------------------------------------------------------------------*/

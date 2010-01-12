@@ -146,7 +146,7 @@ void TIM_Configuration(void)
 	TIM1_OCInitStructure8.TIM1_OutputState = TIM1_OutputState_Enable;
 	TIM1_OCInitStructure8.TIM1_Channel = TIM1_Channel_1;   
 	TIM1_OCInitStructure8.TIM1_Pulse = 2047;
-	TIM1_OCInitStructure8.TIM1_OCPolarity = TIM1_OCPolarity_High; // maybee it works with TIM_OCPolarity_LOW???
+	TIM1_OCInitStructure8.TIM1_OCPolarity = TIM1_OCPolarity_High; 
 	TIM1_OCInit(TIM1, &TIM1_OCInitStructure);
 	TIM1_OC1PreloadConfig(TIM1, TIM1_OCPreload_Enable);
 
@@ -170,37 +170,6 @@ void TIM_Configuration(void)
 	
 	
 	
-	/* Timer 2---------------------------------------------------------------------------*/
-	/* Time base configuration */
-	/* TIM1CLK = 72 MHz, Prescaler = 0, TIM1 counter clock = 72 MHz
-       TIM1 frequency = TIM1CLK/(TIM1_Period + 1) = 17.57 KHz */
-	TIM_TimeBaseStructure.TIM_Period = 4095;
-	TIM_TimeBaseStructure.TIM_Prescaler = 0;
-	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-	
-	// 2_PWM_C
-	/* PWM1 Mode configuration: Channel1 */
-	TIM_OCInitStructure2.TIM_OCMode = TIM_OCMode_PWM1;
-	TIM_OCInitStructure2.TIM_OutputState = TIM_OutputState_Enable;
-	TIM_OCInitStructure2.TIM_Channel = TIM_Channel_2;   
-	TIM_OCInitStructure2.TIM_Pulse = 2047;
-	TIM_OCInitStructure2.TIM_OCPolarity = TIM_OCPolarity_High; // maybee it works with TIM_OCPolarity_LOW???
-	TIM_OCInit(TIM2, &TIM_OCInitStructure2);
-	TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);
-
-	TIM_ARRPreloadConfig(TIM8, ENABLE);
-	/* TIM8 enable counter */
-	TIM_Cmd(TIM2, ENABLE);
-	/* Immediate load of TIM8 Precaler value */
-	//TIM_PrescalerConfig(TIM8, 72, TIM_PSCReloadMode_Immediate);
-	/* Clear TIM8 update pending flag */
-	//TIM_ClearFlag(TIM8, TIM_FLAG_Update);
-	
-	
-	
 	/* Timer 3---------------------------------------------------------------------------*/
 	/* Time base configuration */
 	/* TIM1CLK = 72 MHz, Prescaler = 0, TIM1 counter clock = 72 MHz
@@ -212,17 +181,17 @@ void TIM_Configuration(void)
 
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
 	
-	// 2_PWM_B
+	// 2_PWM_C
 	/* PWM1 Mode configuration: Channel1 */
 	TIM_OCInitStructure3.TIM_OCMode = TIM_OCMode_PWM1;
 	TIM_OCInitStructure3.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure3.TIM_Channel = TIM_Channel_1;   
 	TIM_OCInitStructure3.TIM_Pulse = 2047;
-	TIM_OCInitStructure3.TIM_OCPolarity = TIM_OCPolarity_High; // maybee it works with TIM_OCPolarity_LOW???
+	TIM_OCInitStructure3.TIM_OCPolarity = TIM_OCPolarity_High; 
 	TIM_OCInit(TIM3, &TIM_OCInitStructure3);
 	TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
 
-	// 2_PWM_A
+	// 2_PWM_B
 	/* PWM1 Mode configuration: Channel2 */
 	TIM_OCInitStructure3.TIM_Channel = TIM_Channel_2;   
 	TIM_OCInitStructure3.TIM_Pulse = 2047;
@@ -250,15 +219,22 @@ void TIM_Configuration(void)
 
 	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
 	
-	// 1_PWM_C
+	// 2_PWM_A
 	/* PWM1 Mode configuration: Channel1 */
 	TIM_OCInitStructure4.TIM_OCMode = TIM_OCMode_PWM1;
 	TIM_OCInitStructure4.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure4.TIM_Channel = TIM_Channel_1;   
 	TIM_OCInitStructure4.TIM_Pulse = 2047;
-	TIM_OCInitStructure4.TIM_OCPolarity = TIM_OCPolarity_High; // maybee it works with TIM_OCPolarity_LOW???
+	TIM_OCInitStructure4.TIM_OCPolarity = TIM_OCPolarity_High; 
 	TIM_OCInit(TIM4, &TIM_OCInitStructure4);
 	TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
+
+	// 1_PWM_C
+	/* PWM1 Mode configuration: Channel2 */
+	TIM_OCInitStructure4.TIM_Channel = TIM_Channel_2;   
+	TIM_OCInitStructure4.TIM_Pulse = 2047;
+	TIM_OCInit(TIM4, &TIM_OCInitStructure4);
+	TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);
 
 	// 1_PWM_B
 	/* PWM1 Mode configuration: Channel3 */
@@ -301,7 +277,7 @@ void TIM_Configuration(void)
 	TIM_OCInitStructure8.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure8.TIM_Channel = TIM_Channel_1;   
 	TIM_OCInitStructure8.TIM_Pulse = 2047;
-	TIM_OCInitStructure8.TIM_OCPolarity = TIM_OCPolarity_High; // maybee it works with TIM_OCPolarity_LOW???
+	TIM_OCInitStructure8.TIM_OCPolarity = TIM_OCPolarity_High; 
 	TIM_OCInit(TIM8, &TIM_OCInitStructure8);
 	TIM_OC1PreloadConfig(TIM8, TIM_OCPreload_Enable);
 
@@ -340,7 +316,6 @@ void TIM_Configuration(void)
 /* Configures the different GPIO ports.  ------------------------------------*/
 void GPIO_Configuration(void)
 {
-	GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
 	GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);
 	
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -364,6 +339,9 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOC, &GPIO_InitStructure); 
+	/* DBG */
+	GPIO_InitStructure.GPIO_Pin = GPIO_DBGPIN;
+	GPIO_Init(GPIOB, &GPIO_InitStructure); 
 	/* 1. Switch */
 	GPIO_InitStructure.GPIO_Pin = GPIO_1_SWITCH_A;
 	GPIO_Init(GPIOD, &GPIO_InitStructure); 
