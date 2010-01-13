@@ -41,3 +41,4 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 33 || COMP_CORR_Y || || || Korrekturwert Kompass Y Achse ||
 || 34 || COMP_CORR_Z || || || Korrekturwert Kompass Z Achse ||
 || 35 || COMP_DECL || || || Declination (Abweichung zu magnetisch Nord) ||
+|| 36 || COMP_FORCE || 500 || || 0-10000 || Wirkung vom Kompass auf den Gier Gyro (0 ist nur Gyro) ||
