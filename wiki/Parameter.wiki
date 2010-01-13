@@ -37,3 +37,7 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 29 || P_Z || || || Proportionalanteil Gier ||
 || 30 || I_Z || || || Integralanteil Gier ||
 || 31 || D_Z || || || Differenzialanteil Gier ||
+|| 32 || COMP_CORR_X || || || Korrekturwert Kompass X Achse ||
+|| 33 || COMP_CORR_Y || || || Korrekturwert Kompass Y Achse ||
+|| 34 || COMP_CORR_Z || || || Korrekturwert Kompass Z Achse ||
+|| 35 || COMP_DECL || || || Declination (Abweichung zu magnetisch Nord) ||
