@@ -373,5 +373,55 @@ namespace CorvusM3
             }
             get { return parameter[31]; }
         }
+        [CategoryAttribute("Kompass"), DisplayName("PARA_COMP_CORR_X [32]"), DescriptionAttribute("Korrektruwert X-Achse")]
+        public int COMP_CORR_X
+        {
+            set
+            {
+                parameter[32] = value;
+                port.Write("s32:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[32]; }
+        }
+        [CategoryAttribute("Kompass"), DisplayName("PARA_COMP_CORR_Y [33]"), DescriptionAttribute("Korrektruwert Y-Achse")]
+        public int COMP_CORR_Y
+        {
+            set
+            {
+                parameter[33] = value;
+                port.Write("s33:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[33]; }
+        }
+        [CategoryAttribute("Kompass"), DisplayName("PARA_COMP_CORR_Z [34]"), DescriptionAttribute("Korrektruwert Z-Achse")]
+        public int COMP_CORR_Z
+        {
+            set
+            {
+                parameter[34] = value;
+                port.Write("s34:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[34]; }
+        }
+        [CategoryAttribute("Kompass"), DisplayName("PARA_COMP_DECL [35]"), DescriptionAttribute("Korrektruwert Declination")]
+        public int COMP_DECL
+        {
+            set
+            {
+                parameter[35] = value;
+                port.Write("s35:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[35]; }
+        }
+        [CategoryAttribute("Kompass"), DisplayName("PARA_COMP_FORCE [36]"), DescriptionAttribute("Wirkung Kompass auf Gier Gyro (0-10000, 0 ist nur Gyro)")]
+        public int COMP_FORCE
+        {
+            set
+            {
+                parameter[36] = value;
+                port.Write("s36:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[36]; }
+        }
     }
 }

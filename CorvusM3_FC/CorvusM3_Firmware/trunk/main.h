@@ -173,7 +173,12 @@
 #define PARA_P_Z			29
 #define PARA_I_Z			30
 #define PARA_D_Z			31
-#define USED_PARAMETER 		31
+#define PARA_COMP_CORR_X	32
+#define PARA_COMP_CORR_Y	33
+#define PARA_COMP_CORR_Z	34
+#define PARA_COMP_DECL		35
+#define PARA_COMP_FORCE		36
+#define USED_PARAMETER 		36
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02

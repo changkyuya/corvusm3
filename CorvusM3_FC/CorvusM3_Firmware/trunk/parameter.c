@@ -113,6 +113,11 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_P_X], 0x0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_I_Y], 0x0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_D_Z], 0x0);  
+	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_X], 0x0);  
+	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_Y], 0x0);  
+	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_Z], 0x0);  
+	EE_WriteVariable(VirtAddVarTab[PARA_COMP_DECL], 0x0);  
+	EE_WriteVariable(VirtAddVarTab[PARA_COMP_FORCE], 0x1F4);  
 	//#########################################################################
 	u16 val;
 	u16 i;
