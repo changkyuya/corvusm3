@@ -31,11 +31,17 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu32 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
+extern vs32 compassAngle; //statemachine
+
 
 
 /* init filter --------------------------------------------------------------*/
 void initFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 {
+	
+	// setup compass
+	initCompass();
+	
 	zeroGyro();
 	setAngleFilterACC(gyroAngle, copterAngle);
 }
@@ -65,10 +71,11 @@ void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 /* mix Gyro and ACC for Copter-Angel ----------------------------------------*/
 void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 {
+
 	vs32 accRawValues[3];
 	vs32 gyroRawValues[3];
 	getRawValues(gyroRawValues, accRawValues);
-	
+	getCompassAngle();
 	//char x [80];
 	//sprintf(x,"raw value:%d:%d\r\n",gyroRawValues[X],accRawValues[X]);
 	//print_uart1(x);

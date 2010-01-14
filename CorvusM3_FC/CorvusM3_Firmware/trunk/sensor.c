@@ -24,6 +24,7 @@
 //for debug
 #include "serial.h"
 #include <stdio.h>
+#include <math.h>
 
 
 /* Enums --------------------------------------------------------------------*/
@@ -36,7 +37,10 @@ vu32 oldAccValues[3]; // for smooth
 vu32 gyroZero[3];
 vu32 accZero[3];
 extern vu16 parameter[0x190]; //parameter
-
+extern vs32 compassAngle; //statemachine
+extern vu32 msCount; //statemachine -> for compass all 20ms
+s16 compassout [3];
+extern vs32 copterAngle[3]; //statemachine
 
 /* initGyros to set Baise ---------------------------------------------------*/
 void zeroGyro()
@@ -140,3 +144,183 @@ void oversamplingADC()
 	}
 }
 
+
+/* setup compass hmc5843 ----------------------------------------------------*/
+void initCompass()
+{
+	/* setup compass for countinuos mode and 50 Hz*/
+	
+	// note that you need to wait at least 5ms after power on to initialize
+	Pause(10);
+	
+	/* Send STRAT condition */ 
+	I2C_GenerateSTART(I2C1, ENABLE); 
+
+	/* Test on EV5 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT)); 
+
+	/* Send address for write */ 
+	I2C_Send7bitAddress(I2C1, HMC5843_ADDRESS, I2C_Direction_Transmitter); 
+
+	/* Test on EV6 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED)); 
+
+	// Put the HMC5843 into continuous mode
+	/* Send the internal register address to write to */ 
+	I2C_SendData(I2C1, 0x02); 
+
+	/* Test on EV8 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED)); 
+
+	/* Send the byte to be written */ 
+	I2C_SendData(I2C1, 0x00); 
+
+	/* Test on EV8 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED)); 
+
+	/* Send STOP condition */ 
+	I2C_GenerateSTOP(I2C1, ENABLE); 
+	
+	
+	/* Send STRAT condition */ 
+	I2C_GenerateSTART(I2C1, ENABLE); 
+
+	/* Test on EV5 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT)); 
+
+	/* Send address for write */ 
+	I2C_Send7bitAddress(I2C1, HMC5843_ADDRESS, I2C_Direction_Transmitter); 
+
+	/* Test on EV6 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED)); 
+
+	// Put the HMC5843 into continuous mode
+	/* Send the internal register address to write to */ 
+	I2C_SendData(I2C1, 0x00); 
+
+	/* Test on EV8 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED)); 
+
+	/* Send the byte to be written */ 
+	I2C_SendData(I2C1, 0x18); 
+
+	/* Test on EV8 and clear it */ 
+	while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED)); 
+
+	/* Send STOP condition */ 
+	I2C_GenerateSTOP(I2C1, ENABLE); 
+			
+	
+	// note that you need to wait 100ms after this before first calling recieve
+	Pause(200);
+	getCompassAngle();
+}
+
+/* return the compass angel -------------------------------------------------*/
+void getCompassAngle()
+{
+
+	// we only get new values all 20ms
+	if (msCount % 20 == 0)
+	{
+		u8 comp1 [6];
+		u8 pBuffer = 0;
+		u8 NumByteToRead = 6;
+		
+		/* While the bus is busy */
+		while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY));
+
+		/* Send STRAT condition */ 
+		I2C_GenerateSTART(I2C1, ENABLE); 
+
+		/* Test on EV5 and clear it */ 
+		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT)); 
+
+		/* Send address for read */ 
+		I2C_Send7bitAddress(I2C1, HMC5843_ADDRESS, I2C_Direction_Transmitter); 
+
+		/* Test on EV6 and clear it */ 
+		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED)); 
+
+		/* Clear EV6 by setting again the PE bit */
+		I2C_Cmd(I2C1, ENABLE);
+
+		/* Send the HMC5843's internal address to read to */
+		I2C_SendData(I2C1, 0x03);  
+
+		/* Test on EV8 and clear it */
+		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+
+		/* Send STRAT condition a second time */  
+		I2C_GenerateSTART(I2C1, ENABLE);
+
+		/* Test on EV5 and clear it */
+		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+
+		/* Send HMC5843 address for read */
+		I2C_Send7bitAddress(I2C1, HMC5843_ADDRESS, I2C_Direction_Receiver);
+
+		/* Test on EV6 and clear it */
+		while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
+
+		/* While there is data to be read */
+		while(NumByteToRead)  
+		{
+			if(NumByteToRead == 1)
+			{
+			  /* Disable Acknowledgement */
+			  I2C_AcknowledgeConfig(I2C1, DISABLE);
+			  
+			  /* Send STOP Condition */
+			  I2C_GenerateSTOP(I2C1, ENABLE);
+			}
+			/* Test on EV7 and clear it */
+			if(I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED))  
+			{      
+				/* Read a byte from the HMC5843 */
+				comp1[pBuffer] = I2C_ReceiveData(I2C1);
+
+				/* Point to the next location where the byte read will be saved */
+				pBuffer++; 
+
+				/* Decrement the read bytes counter */
+				NumByteToRead--;        
+			}   
+		}
+
+		/* Enable Acknowledgement to be ready for another reception */
+		I2C_AcknowledgeConfig(I2C1, ENABLE);
+
+		for(int i=0; i<3; i++)
+		{
+			compassout[i]=((s16)((u16)comp1[2*i] << 8) + comp1[2*i+1]);
+			// correct calibration
+			compassout[i] += parameter[PARA_COMP_CORR_X + i];
+		}
+	  
+		// angle compensation
+		/*
+		X’ = X cos nick + Y sin roll sin nick – Z cos roll sin nick
+		Y’ = Y cos roll + Z sin roll
+		*/
+		// X and Y from compass are different to copterAngle X/Y !!!
+		//compassout[0] = compassout[0] * cos(copterAngle[X]/100000.0-90) + compassout[1] * sin(copterAngle[Y]/100000.0-90) * sin(copterAngle[X]/100000.0-90) - compassout[2] * cos(copterAngle[Y]/100000.0-90) * sin(copterAngle[X]/100000.0-90);
+		//compassout[1] = compassout[1] * cos(copterAngle[Y]/100000.0-90) + compassout[2] * sin(copterAngle[Y]/100000.0-90);
+		
+		s32 compval = (s32) (atan2(compassout[1], compassout[0]) * 5729577.95);  
+	  
+		if(compval < 0)
+		{
+			compval += 36000000;
+		}
+		// correct declination
+		compassAngle = compval + (parameter[PARA_COMP_DECL] * 1000);
+	  
+		// for test
+		//char x [80];
+		//sprintf(x,"Kompass Test:%d:%d:%d:%d:%d:%d\r\n",comp1[0],comp1[1],comp1[2],comp1[3],comp1[4],comp1[5]);
+		//print_uart1(x);
+		//sprintf(x,"Kompass Test - :%d:%d:%d = %d\r\n",out[0],out[1],out[2],compval);
+		//print_uart1(x);
+	}
+}

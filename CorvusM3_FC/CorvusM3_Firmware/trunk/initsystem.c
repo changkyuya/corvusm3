@@ -22,6 +22,8 @@
 /* Include ------------------------------------------------------------------*/
 #include "main.h"
 #include "initsystem.h"
+#include <stdio.h>
+#include "serial.h"
 
 /* Variables ----------------------------------------------------------------*/
 vu16 ADCSensorValue[56];
@@ -49,6 +51,8 @@ void initSystem()
 	/* does not work in Interrupt */
 	/* Pause(ms) function */
 	initSysTick();
+	/* init I2C1 for Compas */
+	initI2C();
 }
 
 /* Configures the different system clocks  ----------------------------------*/
@@ -131,6 +135,9 @@ void RCC_Configuration(void)
 	
 	/* Enable DMA1 clock */
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA, ENABLE);
+	
+	/* I2C1 Periph clock enable */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
 	
 
 }
@@ -361,6 +368,11 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
+	/* Configure I2C1 pins: SCL and SDA ----------------------------------------*/
+	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_6 | GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
 }
 
 /* Configures the nested vectored interrupt controller. ---------------------*/
@@ -618,3 +630,21 @@ void initSysTick()
 	SysTick_CounterCmd(SysTick_Counter_Enable);
 }
 
+
+/* I2C Init -----------------------------------------------------------------*/
+void initI2C()
+{	
+	I2C_InitTypeDef  I2C_InitStructure;
+	/* I2C1 configuration ------------------------------------------------------*/
+	I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
+	I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
+	I2C_InitStructure.I2C_OwnAddress1 = HMC5843_ADDRESS;
+	I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
+	I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+	I2C_InitStructure.I2C_ClockSpeed = MAG_I2C_Speed;
+	I2C_Init(I2C1, &I2C_InitStructure);
+
+	/* Enable I2C1 */
+	I2C_Cmd(I2C1, ENABLE);
+
+}

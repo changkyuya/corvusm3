@@ -24,6 +24,7 @@
 #include "statemachine.h"
 #include "serial.h"
 #include <stdio.h>
+#include <math.h>
 #include "hal.h"
 #include "sal.h"
 #include "led.h"
@@ -44,6 +45,7 @@ volatile char motor[5];
 vs32 gyroAngle[3];
 //vs16 gyroAngle[3];
 vs32 accAngle[2];
+vs32 compassAngle;
 //vs16 accAngle[2];
 vs32 copterAngle[3];
 vu8 errorCode;
@@ -167,6 +169,9 @@ void statemachine(void)
 	msCount++;
 	// Debug to measure time for loop - toggle debug-Pin PA00
 	*DBG = 0;
+	
+	
+
 }
 
 

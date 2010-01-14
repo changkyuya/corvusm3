@@ -170,6 +170,11 @@ void dodComm()
 			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_MOT);
 			send(OK);
 			break;
+		case 'c':
+			//toggle
+			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_COMP);
+			send(OK);
+			break;
 		default:
 			send(HELP);
 	}
@@ -292,6 +297,7 @@ void send(u8 infoText)
 		print_uart1("ds ... Toggle Sensor Data on/off\r\n");
 		Delay(20);
 		print_uart1("dm ... Toggle TargetAngle/Motors Data on/off\r\n");
+		print_uart1("dc ... Toggle Compass Values on/off\r\n");
 		print_uart1("# ... Load default parameter to flash\r\n");
 		print_uart1("* ... save all Parameter to flash\r\n");
 		

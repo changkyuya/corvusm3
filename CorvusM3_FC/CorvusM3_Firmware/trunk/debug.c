@@ -37,6 +37,8 @@ extern vs32 accAngle[2];  //statemachine
 extern vs32 copterAngle[3];  //statemachine
 extern vs32 targetAngle[3]; //statemachine
 extern volatile char motor[5]; //statemachine
+extern s16 compassout[3]; //sensor
+extern vs32 compassAngle; //statemachine
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
@@ -128,6 +130,21 @@ void doDebug()
 		sprintf(x,"%d:",motor[3]);
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",motor[4]);
+		print_uart1(x);
+	}
+	
+
+	/* Debug output for receiver channels */
+	// if parameter value is 1 - 1. bit is set
+	if (getParameter(PARA_DEBUG) & PARA_DEBUG_COMP)
+	{
+		sprintf(x,"G-Compass X:Y:Z-Deg:%d:",compassout[0]);
+		print_uart1(x);
+		sprintf(x,"%d:",compassout[1]);
+		print_uart1(x);
+		sprintf(x,"%d-",compassout[2]);
+		print_uart1(x);
+		sprintf(x,"%d:\r\n",compassAngle/1000);
 		print_uart1(x);
 	}
 	

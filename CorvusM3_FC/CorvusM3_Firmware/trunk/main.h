@@ -41,6 +41,7 @@
 #define _FLASH
 #define _FLASH_PROG
 #define _SysTick
+#define _I2C
 
 /* Include STM fwlib --------------------------------------------------------*/
 #include "stm32fwlib.h"
@@ -92,6 +93,9 @@
 #define GPIO_GYRO_Y GPIO_Pin_2
 /* Map Pin for V */
 #define GPIO_V GPIO_Pin_0
+/* define adress from Compass */
+#define HMC5843_ADDRESS         0x3C
+#define MAG_I2C_Speed           100000
 
 /* Define -------------------------------------------------------------------*/
 #define FALSE	0
@@ -184,6 +188,7 @@
 #define PARA_DEBUG_ADC		0x02
 #define PARA_DEBUG_SENSOR 	0x04
 #define PARA_DEBUG_MOT 		0x08
+#define PARA_DEBUG_COMP		0x10
 /* define Para HW values */
 #define PARA_HW_RC			0x00
 #define PARA_HW_PC			0x01

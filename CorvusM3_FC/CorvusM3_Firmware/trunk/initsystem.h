@@ -47,5 +47,6 @@ void initUART4 (void);
 void initDMA (void);
 void initADC (void) ;
 void initSysTick(void);
+void initI2C(void);
 
 #endif /* __INITSYSTEM_H */
