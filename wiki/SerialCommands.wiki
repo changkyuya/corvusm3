@@ -14,6 +14,7 @@ Nach jeder Eingabe CR LF (\r\n) - Befehle maximal 80 Zeichen!
  * da ... Toggle Sensor RAW on/off 
  * ds ... Toggle Sensor Data on/off
  * dm ... Target Angles - Motors on/off
+ * dc ... Toggle Compass Raw Values and Degree on/off
 
 *Parameter SET*<br />
  * sa ... Speichern der ACC-Ebenenwerte (auch im Flash)
