@@ -35,5 +35,7 @@ void zeroACC(void);
 void oversamplingADC(void);
 void initCompass(void);
 void getCompassAngle(void);
+void getI2C(u8* pBuffer, u8 ReadAddr, u8 NumByteToRead);
+void writeI2C(u8 WriteAddr, u8 pBuffer);
 
 #endif /* __SENSOR_H */

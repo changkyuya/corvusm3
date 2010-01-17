@@ -75,7 +75,6 @@ int main(void)
 	// wait befor calibrate
 	Delay(100);
 	initFilter(gyroAngle, copterAngle);
-	
 	// function open ....
 	setLEDStatus(LED_BLINK);
 	
@@ -105,14 +104,12 @@ int main(void)
 		}
 		
 		/* Debug Output 20Hz ---------------------------------------------------*/
-		if (msCount % 150 == 0)
+		if (msCount % 50 == 0)
 		{
 			doDebug();
-			
-
-			
-			
 		}
+		
+
 		
 		/* do LED -----------------------------------------------------------*/
 		if (errorCode == 0)
