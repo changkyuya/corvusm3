@@ -74,6 +74,7 @@ int main(void)
 	// calibrate sensor
 	// wait befor calibrate
 	Delay(100);
+	initCompass();
 	initFilter(gyroAngle, copterAngle);
 	// function open ....
 	setLEDStatus(LED_BLINK);

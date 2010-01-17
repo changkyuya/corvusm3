@@ -40,7 +40,7 @@ void initFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	
 	// setup compass
-	initCompass();
+	//initCompass();
 	
 	zeroGyro();
 	setAngleFilterACC(gyroAngle, copterAngle);
@@ -76,7 +76,7 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 	vs32 gyroRawValues[3];
 	getRawValues(gyroRawValues, accRawValues);
 	
-	getCompassAngle();
+	//getCompassAngle();
 	//char x [80];
 	//sprintf(x,"raw value:%d:%d\r\n",gyroRawValues[X],accRawValues[X]);
 	//print_uart1(x);

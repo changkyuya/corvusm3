@@ -20,8 +20,8 @@
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __SENSOR_H
-#define __SENSOR_H
+#ifndef __I2C_H
+#define __I2C_H
 
 #include "main.h"
 
@@ -29,12 +29,9 @@
 
 
 /* Function prototypes -------------------------------------------------------*/
-void zeroGyro(void);
-void getRawValues(vs32 * gyroValues, vs32 * accValues);
-void zeroACC(void);
-void oversamplingADC(void);
-void initCompass(void);
-void getCompassAngle(void);
+void getI2C(u8* pBuffer, u8 ReadAddr, u8 NumByteToRead);
+void writeI2C(u8 WriteAddr, u8 pBuffer);
+void I2C1_EV_IRQHandler(void);
+void I2C1_ER_IRQHandler(void);
 
-
-#endif /* __SENSOR_H */
+#endif /* __I2C_H */

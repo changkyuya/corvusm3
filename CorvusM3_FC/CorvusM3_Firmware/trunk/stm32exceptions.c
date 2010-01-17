@@ -259,16 +259,16 @@
 	}*/
 
 	/* [0xBC] I2C1 Event Interrupt */
-	void I2C1_EV_IRQHandler(void)
+	/*void I2C1_EV_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(I2C1_EV_IRQHandler, "I2C1 Event", 47, 0xBC);
-	}
+	}*/
 
 	/* [0xC0] I2C1 Error Interrupt */
-	void I2C1_ER_IRQHandler(void)
+	/*void I2C1_ER_IRQHandler(void)
 	{
 		DEFAULT_EXCEPTION_HANDLER(I2C1_ER_IRQHandler, "I2C1 Error", 48, 0xC0);
-	}
+	}*/
 
 	/* [0xC4] I2C2 Event Interrupt */
 	void I2C2_EV_IRQHandler(void)

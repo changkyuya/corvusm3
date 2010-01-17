@@ -93,6 +93,9 @@
 #define GPIO_GYRO_Y GPIO_Pin_2
 /* Map Pin for V */
 #define GPIO_V GPIO_Pin_0
+/* mode for I2C */
+#define I2C_TRANSMITTER			1
+#define I2C_RECEIVER			0
 /* define adress from Compass */
 #define HMC5843_ADDRESS         0x3C
 #define MAG_I2C_Speed           100000

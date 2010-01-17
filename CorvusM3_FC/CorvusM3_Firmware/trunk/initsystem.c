@@ -419,6 +419,21 @@ void NVIC_Configuration(void)
 	NVIC_Init(&NVIC_InitStructure);
 	*/
 	
+	
+	/* Configure and enable I2C1 error interrupt -------------------------------*/  
+	NVIC_InitStructure.NVIC_IRQChannel = I2C1_ER_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	/* Configure and enable I2C1 event interrupt -------------------------------*/
+	NVIC_InitStructure.NVIC_IRQChannel = I2C1_EV_IRQChannel;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+  
+	
 	/* Interrupt for Mainloop -----------------------------------------------*/
 	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQChannel;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
@@ -646,5 +661,10 @@ void initI2C()
 
 	/* Enable I2C1 */
 	I2C_Cmd(I2C1, ENABLE);
-
+	
+	/* I2C Error calculation */
+	I2C_CalculatePEC(I2C1, ENABLE);  
+	  
+	/* Enable I2C1 event and buffer interrupts */
+	//I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
 }
