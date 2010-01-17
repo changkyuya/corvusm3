@@ -182,7 +182,7 @@ void initCompass()
 /* return the compass angel -------------------------------------------------*/
 void getCompassAngle()
 {
-	/*
+	
 	// we only get new values all 20ms
 	// we try to split in parts
 	if (msCount % 20 == 0)
@@ -199,7 +199,7 @@ void getCompassAngle()
 		case 4:
 		case 5:
 		case 6:
-			getI2C(&comp1[compCount-1], 0x03, 0x01);
+			getI2C(&comp1[compCount-1], (compCount + 2), 0x01);
 			compCount++;
 			break;
 		case 7:
@@ -237,8 +237,8 @@ void getCompassAngle()
 			break;
 		
 		
-	}*/
-	
+	}
+	/*
 	if (msCount % 20 == 0)
 	{
 		
@@ -276,7 +276,8 @@ void getCompassAngle()
 		//print_uart1(x);
 		//sprintf(x,"Kompass Test - :%d:%d:%d = %d\r\n",out[0],out[1],out[2],compval);
 		//print_uart1(x);
-	}
+		
+	}*/
 }
 
 /* read I2C buffer from HMC5843 ---------------------------------------------*/
