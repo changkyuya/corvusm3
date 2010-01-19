@@ -77,6 +77,7 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 	getRawValues(gyroRawValues, accRawValues);
 	
 	//getCompassAngle();
+	
 	//char x [80];
 	//sprintf(x,"raw value:%d:%d\r\n",gyroRawValues[X],accRawValues[X]);
 	//print_uart1(x);

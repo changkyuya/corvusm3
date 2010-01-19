@@ -43,15 +43,15 @@ extern vu32 msCount; //statemachine -> for compass all 20ms
 s16 compassout [3];
 extern vs32 copterAngle[3]; //statemachine
 
-extern u8 i2cDirection; //i2c
-extern u8 i2cReadBuffer[6]; //i2c
-extern u8 i2cReadIdx; //i2c
-extern u8 i2cToRead; //i2c
+extern vu8 i2cDirection; //i2c
 
-extern u8 i2cWriteBuffer[6]; //i2c
-extern u8 i2cWriteIdx; //i2c
-extern u8 i2cToWrite; //i2c
+extern vu8 i2cReadBuffer[6]; //i2c
+extern vu8 i2cReadIdx; //i2c
+extern vu8 i2cToRead; //i2c
 
+extern vu8 i2cWriteBuffer[6]; //i2c
+extern vu8 i2cWriteIdx; //i2c
+extern vu8 i2cToWrite; //i2c
 
 
 /* initGyros to set Baise ---------------------------------------------------*/
@@ -174,38 +174,168 @@ void initCompass()
 	i2cToWrite = 2;
 	/* Enable I2C1 event and buffer interrupts */
 	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
 	
-	// for test
-	//u8 test[1];
-	//char x [80];
-	//getI2C(test, 0x02, 0x01);
-	//sprintf(x,"Compass Register Mode set:%d\r\n",test[0]);
-	//print_uart1(x);
+	Pause(100);
+	print_uart1("-");
 	
 	// Put the HMC5843 into 50HZ mode	address:0x00, value:0x18  (0x10 = 10HZ)
+	i2cDirection = I2C_TRANSMITTER;
+	i2cWriteBuffer[0] = 0x00;
+	i2cWriteBuffer[1] = 0x18;
+	i2cWriteIdx = 0;
+	i2cToWrite = 2;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(100);
+	print_uart1("-");
 	
 	// note that you need to wait 100ms after this before first calling recieve
 	Pause(200);
+		
+	//we start at address 0x03 and read 6 values
 	i2cDirection = I2C_TRANSMITTER;
 	i2cWriteBuffer[0] = 0x03;
 	i2cWriteIdx = 0;
-	i2cToWrite = 1;
+	i2cToWrite = 0;
 	/* Enable I2C1 event and buffer interrupts */
 	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
-	Pause(100);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
 	
-	// test to read
+	Pause(100);
+	print_uart1("-");
+	
+	// values to read
 	i2cDirection = I2C_RECEIVER;
 	i2cReadIdx = 0;
 	i2cToRead = 6;
 	/* Enable I2C1 event and buffer interrupts */
 	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
-	Pause(200);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
 	
-	// for test
-	char x [80];
-	sprintf(x,"Compass:%d\r\n",i2cReadBuffer[0]);
+	Pause(10);
+	char x[80];
+	sprintf(x,"comp:%d:%d:%d:%d:%d:%d\r\n",i2cReadBuffer[0],i2cReadBuffer[1],i2cReadBuffer[2],i2cReadBuffer[3],i2cReadBuffer[4],i2cReadBuffer[5]);
 	print_uart1(x);
+	
+	Pause(100);	
+	//we start at address 0x03 and read 6 values
+	i2cDirection = I2C_TRANSMITTER;
+	i2cWriteBuffer[0] = 0x03;
+	i2cWriteIdx = 0;
+	i2cToWrite = 0;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(100);
+	print_uart1("-");
+	
+	// values to read
+	i2cDirection = I2C_RECEIVER;
+	i2cReadIdx = 0;
+	i2cToRead = 6;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(1);
+	//char x[80];
+	sprintf(x,"comp:%d:%d:%d:%d:%d:%d\r\n",i2cReadBuffer[0],i2cReadBuffer[1],i2cReadBuffer[2],i2cReadBuffer[3],i2cReadBuffer[4],i2cReadBuffer[5]);
+	print_uart1(x);
+	
+	Pause(100);	
+	//we start at address 0x03 and read 6 values
+	i2cDirection = I2C_TRANSMITTER;
+	i2cWriteBuffer[0] = 0x03;
+	i2cWriteIdx = 0;
+	i2cToWrite = 0;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(100);
+	print_uart1("-");
+	
+	// values to read
+	i2cDirection = I2C_RECEIVER;
+	i2cReadIdx = 0;
+	i2cToRead = 6;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(1);
+	//char x[80];
+	sprintf(x,"comp:%d:%d:%d:%d:%d:%d\r\n",i2cReadBuffer[0],i2cReadBuffer[1],i2cReadBuffer[2],i2cReadBuffer[3],i2cReadBuffer[4],i2cReadBuffer[5]);
+	print_uart1(x);
+	
+	Pause(100);	
+	//we start at address 0x03 and read 6 values
+	i2cDirection = I2C_TRANSMITTER;
+	i2cWriteBuffer[0] = 0x03;
+	i2cWriteIdx = 0;
+	i2cToWrite = 0;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(100);
+	print_uart1("-");
+	
+	// values to read
+	i2cDirection = I2C_RECEIVER;
+	i2cReadIdx = 0;
+	i2cToRead = 6;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(1);
+	//char x[80];
+	sprintf(x,"comp:%d:%d:%d:%d:%d:%d\r\n",i2cReadBuffer[0],i2cReadBuffer[1],i2cReadBuffer[2],i2cReadBuffer[3],i2cReadBuffer[4],i2cReadBuffer[5]);
+	print_uart1(x);
+	
+	Pause(100);	
+	//we start at address 0x03 and read 6 values
+	i2cDirection = I2C_TRANSMITTER;
+	i2cWriteBuffer[0] = 0x03;
+	i2cWriteIdx = 0;
+	i2cToWrite = 0;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(100);
+	print_uart1("-");
+	
+	// values to read
+	i2cDirection = I2C_RECEIVER;
+	i2cReadIdx = 0;
+	i2cToRead = 6;
+	/* Enable I2C1 event and buffer interrupts */
+	I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+	/* Send I2C1 START condition */
+	I2C_GenerateSTART(I2C1, ENABLE);
+	
+	Pause(1);
+	//char x[80];
+	sprintf(x,"comp:%d:%d:%d:%d:%d:%d\r\n",i2cReadBuffer[0],i2cReadBuffer[1],i2cReadBuffer[2],i2cReadBuffer[3],i2cReadBuffer[4],i2cReadBuffer[5]);
+	print_uart1(x);
+		
 	
 	//getCompassAngle();
 }
@@ -219,7 +349,23 @@ void getCompassAngle()
 	if (msCount % 20 == 0)
 	{
 		//we start at address 0x03 and read 6 values
-		//compCount = 1;
+		i2cDirection = I2C_TRANSMITTER;
+		i2cWriteBuffer[0] = 0x03;
+		i2cWriteIdx = 0;
+		i2cToWrite = 1;
+		/* Enable I2C1 event and buffer interrupts */
+		I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+		/* Send I2C1 START condition */
+		I2C_GenerateSTART(I2C1, ENABLE);
+		
+		// values to read
+		i2cDirection = I2C_RECEIVER;
+		i2cReadIdx = 0;
+		i2cToRead = 6;
+		/* Enable I2C1 event and buffer interrupts */
+		I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
+		/* Send I2C1 START condition */
+		I2C_GenerateSTART(I2C1, ENABLE);
 	}
 	
 	// at offset we calculate degree from compass

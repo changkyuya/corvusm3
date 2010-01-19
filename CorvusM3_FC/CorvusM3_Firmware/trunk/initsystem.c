@@ -663,7 +663,7 @@ void initI2C()
 	I2C_Cmd(I2C1, ENABLE);
 	
 	/* I2C Error calculation */
-	I2C_CalculatePEC(I2C1, ENABLE);  
+	//I2C_CalculatePEC(I2C1, ENABLE);  
 	  
 	/* Enable I2C1 event and buffer interrupts */
 	//I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);

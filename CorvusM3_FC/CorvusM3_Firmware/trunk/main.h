@@ -98,6 +98,7 @@
 #define I2C_RECEIVER			0
 /* define adress from Compass */
 #define HMC5843_ADDRESS         0x3C
+#define HMC5843_READ_ADDRESS    0x3D
 #define MAG_I2C_Speed           100000
 
 /* Define -------------------------------------------------------------------*/
