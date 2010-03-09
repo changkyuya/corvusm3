@@ -154,14 +154,14 @@ void I2C1_EV_IRQHandler(void)
 		case I2C_EVENT_MASTER_MODE_SELECT:                 /* EV5 */
 			if(i2cDirection == I2C_TRANSMITTER)
 			{
-				print_uart1("a");
+				//print_uart1("a");
 				/* Master Transmitter ----------------------------------------------*/
 				/* Send slave Address for write */
 				I2C_Send7bitAddress(I2C1, HMC5843_ADDRESS, I2C_Direction_Transmitter);
 			}
 			else
 			{
-				print_uart1("b");
+				//print_uart1("b");
 				/* Master Receiver -------------------------------------------------*/
 				/* Send slave Address for read */
 				I2C_Send7bitAddress(I2C1, HMC5843_READ_ADDRESS, I2C_Direction_Receiver);
@@ -170,7 +170,7 @@ void I2C1_EV_IRQHandler(void)
 		
 		/* Test on I2C1 EV6 and first EV8 and clear them */
 		case I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED: 
-			print_uart1("c");
+			//print_uart1("c");
 			/* Clear EV6 by setting again the PE bit */
 			//I2C_Cmd(I2C1, ENABLE);
 			/* Send the HMC5843's internal address to read to */
@@ -181,14 +181,14 @@ void I2C1_EV_IRQHandler(void)
 		case I2C_EVENT_MASTER_BYTE_TRANSMITTING:  /* Without BTF, EV8 */     
 			if(i2cWriteIdx < (i2cToWrite))
 			{
-				print_uart1("d");
+				//print_uart1("d");
 				/* Transmit I2C1 data */
 				I2C_SendData(I2C1, i2cWriteBuffer[i2cWriteIdx++]);
 
 			}
 			else
 			{
-				print_uart1("e");
+				//print_uart1("e");
 				//I2C_TransmitPEC(I2C1, ENABLE); 
 				/* Disable I2C1 event and buffer interrupts */
 				I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, DISABLE);
@@ -197,7 +197,7 @@ void I2C1_EV_IRQHandler(void)
 			break;
 	
 		case I2C_EVENT_MASTER_BYTE_TRANSMITTED: /* With BTF EV8-2 */
-			print_uart1("f");
+			//print_uart1("f");
 			I2C_ITConfig(I2C1, I2C_IT_BUF, ENABLE);
 			/* I2C1 Re-START Condition */
 			I2C_GenerateSTART(I2C1, ENABLE);
@@ -207,7 +207,7 @@ void I2C1_EV_IRQHandler(void)
 		case I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED:
 			if(i2cToRead == 1)
 			{
-				print_uart1("g");
+				//print_uart1("g");
 				/* Disable I2C1 acknowledgement */
 				I2C_AcknowledgeConfig(I2C1, DISABLE);
 				/* Send I2C1 STOP Condition */
@@ -217,7 +217,7 @@ void I2C1_EV_IRQHandler(void)
 
 		/* Test on I2C1 EV7 and clear it */
 		case I2C_EVENT_MASTER_BYTE_RECEIVED:
-			print_uart1("h");
+			//print_uart1("h");
 			/* Store I2C1 received data */
 			i2cReadBuffer[i2cReadIdx++] = I2C_ReceiveData (I2C1);
 				// for test
@@ -228,7 +228,7 @@ void I2C1_EV_IRQHandler(void)
 			/* Disable ACK and send I2C1 STOP condition before receiving the last data */
 			if(i2cReadIdx == (i2cToRead - 1))
 			{
-				print_uart1("i");
+				//print_uart1("i");
 				/* Disable I2C1 acknowledgement */
 				I2C_AcknowledgeConfig(I2C1, DISABLE);
 				/* Send I2C1 STOP Condition */
@@ -239,7 +239,7 @@ void I2C1_EV_IRQHandler(void)
 			/* Disable interrupt */
 			if(i2cReadIdx == i2cToRead)
 			{
-				print_uart1("j");
+				//print_uart1("j");
 				/* Disable I2C1 event and buffer interrupts */
 				I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, DISABLE);
 				/* Enable Acknowledgement to be ready for another reception */

@@ -117,7 +117,7 @@ void doDebug()
 	// if parameter value is 1 - 1. bit is set
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_MOT)
 	{
-		sprintf(x,"G-TarAngle-Mot-1:%d:",targetAngle[0]/1000);
+		sprintf(x,"G-TarAngle-Mot:1:%d:",targetAngle[0]/1000);
 		print_uart1(x);
 		sprintf(x,"%d:",targetAngle[1]/1000);
 		print_uart1(x);
@@ -138,11 +138,11 @@ void doDebug()
 	// if parameter value is 1 - 1. bit is set
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_COMP)
 	{
-		sprintf(x,"G-Compass X:Y:Z-Deg:%d:",compassout[0]);
+		sprintf(x,"G-Compass XYZ Deg:1:%d:",compassout[0]);
 		print_uart1(x);
 		sprintf(x,"%d:",compassout[1]);
 		print_uart1(x);
-		sprintf(x,"%d-",compassout[2]);
+		sprintf(x,"%d:",compassout[2]);
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",compassAngle/1000);
 		print_uart1(x);
