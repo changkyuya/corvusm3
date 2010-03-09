@@ -252,7 +252,7 @@ void initCompass()
 	Pause(200);
 		
 	int i;	
-	for (i = 0; i < 100; i++)
+	for (i = 0; i < 10; i++)
 	{
 		//we start at address 0x03 and read 6 values
 		i2cDirection = I2C_TRANSMITTER;
@@ -283,22 +283,16 @@ void initCompass()
 	}
 		
 	
-		
-	
-
-		
-	
-	
-
+	getCompassAngle();	
 }
 
 /* return the compass angel -------------------------------------------------*/
 void getCompassAngle()
 {
 	
-	// we only get new values all 20ms
+	// we only get new values all 300ms
 	// we try to split in parts
-	if (msCount % 20 == 0)
+	if (msCount % 300 == 0)
 	{
 		//we start at address 0x03 and read 6 values
 		i2cDirection = I2C_TRANSMITTER;
@@ -309,6 +303,10 @@ void getCompassAngle()
 		I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
 		/* Send I2C1 START condition */
 		I2C_GenerateSTART(I2C1, ENABLE);
+	}
+	
+	if ((msCount + 100) % 300 == 0)
+	{
 		
 		// values to read
 		i2cDirection = I2C_RECEIVER;
@@ -318,10 +316,11 @@ void getCompassAngle()
 		I2C_ITConfig(I2C1, I2C_IT_EVT | I2C_IT_BUF, ENABLE);
 		/* Send I2C1 START condition */
 		I2C_GenerateSTART(I2C1, ENABLE);
+		
 	}
 	
 	// at offset we calculate degree from compass
-	if ((msCount + 10) % 20 == 0)
+	if ((msCount + 200) % 300 == 0)
 	{
 		for(int i=0; i<3; i++)
 		{
@@ -349,11 +348,11 @@ void getCompassAngle()
 		compassAngle = compval + (parameter[PARA_COMP_DECL] * 1000);
 	  
 		// for test
-		//char x [80];
-		//sprintf(x,"Kompass Test:%d:%d:%d:%d:%d:%d\r\n",comp1[0],comp1[1],comp1[2],comp1[3],comp1[4],comp1[5]);
-		//print_uart1(x);
-		//sprintf(x,"Kompass Test - :%d:%d:%d = %d\r\n",out[0],out[1],out[2],compval);
-		//print_uart1(x);
+		char x [80];
+		sprintf(x,"Kompass Test:%d:%d:%d:%d:%d:%d\r\n",i2cReadBuffer[0],i2cReadBuffer[1],i2cReadBuffer[2],i2cReadBuffer[3],i2cReadBuffer[4],i2cReadBuffer[5]);
+		print_uart1(x);
+		sprintf(x,"Kompass Test - :%d:%d:%d = %d\r\n",compassout[0],compassout[1],compassout[2],compval);
+		print_uart1(x);
 	}
 	
 	

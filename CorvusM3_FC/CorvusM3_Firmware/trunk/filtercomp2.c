@@ -77,7 +77,7 @@ void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copter
 	vs32 accRawValues[3];
 	vs32 gyroRawValues[3];
 	getRawValues(gyroRawValues, accRawValues);
-	getCompassAngle();
+	//getCompassAngle();
 	
 	getGyroAnglesFilterComp2(gyroAngle, gyroRawValues);
 	getACCAnglesFilterComp2(accAngle, accRawValues);
