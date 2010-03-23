@@ -337,11 +337,16 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOC, &GPIO_InitStructure); 
-	// for Debug and Beeper Pin
-	GPIO_InitStructure.GPIO_Pin = GPIO_DBG | GPIO_BEEPER;
+	// for Beeper Pin
+	GPIO_InitStructure.GPIO_Pin = GPIO_BEEPER;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);  
+	// for Debug Pin
+	GPIO_InitStructure.GPIO_Pin = GPIO_DBG;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);  
 	// for Servo0-3 Pin
 	GPIO_InitStructure.GPIO_Pin = GPIO_SERVO0 | GPIO_SERVO1 | GPIO_SERVO2 | GPIO_SERVO3;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
