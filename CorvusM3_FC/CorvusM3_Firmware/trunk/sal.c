@@ -43,7 +43,7 @@ void initFilter(vs32 * gyroAngle, vs32 * copterAngle)
 		case PARA_SW_ACC:
 			initFilterACC(gyroAngle, copterAngle);
 			break;
-		// HH-Mode
+		// ACC Comp2-Mode
 		case PARA_SW_COMP2:
 			initFilterComp2(gyroAngle, copterAngle);
 			break;
@@ -68,7 +68,7 @@ void setAngles(vs32 * gyroAngle, vs32 * copterAngle)
 		case PARA_SW_ACC:
 			setAngleFilterACC(gyroAngle, copterAngle);
 			break;
-		// HH-Mode
+		// ACC Comp2-Mode
 		case PARA_SW_COMP2:
 			setAngleFilterComp2(gyroAngle, copterAngle);
 			break;
@@ -94,7 +94,7 @@ void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 		case PARA_SW_ACC:
 			getCopterAnglesFilterACC(gyroAngle, accAngle, copterAngle);
 			break;
-		// HH-Mode
+		// ACC Comp2-Mode
 		case PARA_SW_COMP2:
 			getCopterAnglesFilterComp2(gyroAngle, accAngle, copterAngle);
 			break;
@@ -116,7 +116,7 @@ void mapReceiverValues(vu16 * receiverChannel, vs32 * targetAngle)
 		case PARA_SW_ACC:
 			mapReceiverValuesFilterACC(receiverChannel, targetAngle);
 			break;
-		// HH-Mode
+		// ACC Comp2-Mode
 		case PARA_SW_COMP2:
 			mapReceiverValuesFilterComp2(receiverChannel, targetAngle);
 			break;

@@ -198,6 +198,7 @@
 #define PARA_HW_PC			0x01
 #define PARA_HW_4PLUS		0x00
 #define PARA_HW_4X			0x02
+#define PARA_HW_COMP		0x04
 
 /* define Para SW values */
 #define PARA_SW_REGLER		0xF  //bitmask 1111

@@ -39,9 +39,11 @@ extern vs32 compassAngle; //statemachine
 void initFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	
-	// setup compass
-	//initCompass();
-	
+	// setup compass only if HW_Setup is 4
+	if (getParameter(PARA_HW) & PARA_HW_COMP)
+	{
+		initCompass();
+	}
 	zeroGyro();
 	setAngleFilterACC(gyroAngle, copterAngle);
 }
@@ -76,7 +78,11 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 	vs32 gyroRawValues[3];
 	getRawValues(gyroRawValues, accRawValues);
 	
-	getCompassAngle();
+	// we read compass only if HW_Bit is set
+	if (getParameter(PARA_HW) & PARA_HW_COMP)
+	{
+		getCompassAngle();
+	}
 	
 	//char x [80];
 	//sprintf(x,"raw value:%d:%d\r\n",gyroRawValues[X],accRawValues[X]);
