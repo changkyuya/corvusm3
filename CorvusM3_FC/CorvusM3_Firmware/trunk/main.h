@@ -65,9 +65,9 @@
 /* Map Pin for LED 1 --> PC13 */
 #define LED PERIPHERAL_BIT(GPIOC->ODR, 13)			
 #define GPIO_LEDPIN GPIO_Pin_13
-/* Map Pin for Debug --> PA00 */
-#define DBG PERIPHERAL_BIT(GPIOA->ODR, 0)			
-#define GPIO_DBG GPIO_Pin_0
+/* Map Pin for Debug --> PB12 */
+#define DBG PERIPHERAL_BIT(GPIOB->ODR, 12)			
+#define GPIO_DBG GPIO_Pin_12
 /* Map Pin for Beeper --> PA01 */
 #define BEEPER PERIPHERAL_BIT(GPIOA->ODR, 1)			
 #define GPIO_BEEPER GPIO_Pin_1
