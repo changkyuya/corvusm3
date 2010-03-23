@@ -5,7 +5,6 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
 
 == Geplante Pinbelegung - *FETT* = realisiert==
 
-  * *PA00* : *Debug PIN*
   * *PA01* : *Beeper*
   * *PA02* : UART2_TX, ADC - frei
   * *PA03* : *RX-UART2 Spektrum Empfänger*
@@ -32,6 +31,7 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PB09* : Schaltausgang - frei
   * *PB10* : *TX-UART3 UART Regler*  (optional I2C)
   * *PB11* : RX-UART3 frei (optional I2C)
+  * *PB12* : *Debug PIN*
   * *PC00* : *Sensoren ACC / Gyro*
   * *PC01* : *Sensoren ACC / Gyro*
   * *PC02* : *Sensoren ACC / Gyro*
