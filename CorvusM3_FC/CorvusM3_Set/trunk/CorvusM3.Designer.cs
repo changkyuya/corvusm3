@@ -42,10 +42,13 @@
             this.comPortToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.closeToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.flashFirmwareToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataTextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -71,7 +74,6 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -150,7 +152,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.comPortToolStripComboBox,
             this.openToolStripButton,
-            this.closeToolStripButton});
+            this.closeToolStripButton,
+            this.toolStripSeparator1,
+            this.flashFirmwareToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(784, 25);
@@ -181,6 +185,21 @@
             this.closeToolStripButton.Size = new System.Drawing.Size(38, 22);
             this.closeToolStripButton.Text = "close";
             this.closeToolStripButton.Click += new System.EventHandler(this.closeToolStripButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // flashFirmwareToolStripButton
+            // 
+            this.flashFirmwareToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.flashFirmwareToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("flashFirmwareToolStripButton.Image")));
+            this.flashFirmwareToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.flashFirmwareToolStripButton.Name = "flashFirmwareToolStripButton";
+            this.flashFirmwareToolStripButton.Size = new System.Drawing.Size(90, 22);
+            this.flashFirmwareToolStripButton.Text = "Flash Firmware";
+            this.flashFirmwareToolStripButton.Click += new System.EventHandler(this.flashFirmwareToolStripButton_Click);
             // 
             // tabControl1
             // 
@@ -238,6 +257,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Graph";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(748, 211);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(32, 17);
+            this.checkBox10.TabIndex = 11;
+            this.checkBox10.Text = "0";
+            this.checkBox10.UseVisualStyleBackColor = true;
             // 
             // checkBox9
             // 
@@ -512,16 +541,6 @@
             this.steeringTimer.Interval = 10;
             this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
             // 
-            // checkBox10
-            // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(748, 211);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(32, 17);
-            this.checkBox10.TabIndex = 11;
-            this.checkBox10.Text = "0";
-            this.checkBox10.UseVisualStyleBackColor = true;
-            // 
             // CorvusM3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -531,8 +550,9 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CorvusM3";
-            this.Text = "CorvusM3";
+            this.Text = "CorvusM3 - v0.1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseMove);
             this.statusStrip1.ResumeLayout(false);
@@ -601,6 +621,8 @@
         private System.Windows.Forms.Button flashButton;
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton flashFirmwareToolStripButton;
 
 
 

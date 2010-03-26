@@ -787,6 +787,21 @@ namespace CorvusM3
             parm.flashParameter();
         }
 
+        private void flashFirmwareToolStripButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog flashFWDialog = new OpenFileDialog();
+            flashFWDialog.Filter = "binary file (*.bin)|*.bin|All files (*.*)|*.*";
+            if (flashFWDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = flashFWDialog.FileName;
+                string applPath = Application.StartupPath;
+
+                System.Diagnostics.Process.Start(applPath + @"\Uploader\STM32\STMFlashLoader.exe", @" -c --pn 2 --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
+            }
+
+
+        }
+
 
 
 
