@@ -74,7 +74,13 @@ int main(void)
 	// calibrate sensor
 	// wait befor calibrate
 	Delay(100);
-	initCompass();
+	
+	// setup compass only if HW_Setup is 4
+	if (getParameter(PARA_HW) & PARA_HW_COMP)
+	{
+		initCompass();
+	}
+	
 	initFilter(gyroAngle, copterAngle);
 	// function open ....
 	setLEDStatus(LED_BLINK);

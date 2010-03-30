@@ -113,6 +113,14 @@ void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	motorTemp[2] = 	pitch - PIDCorr[Y]  - PIDCorr[X] + PIDCorr[Z];
 	motorTemp[3] = 	pitch + PIDCorr[Y]  + PIDCorr[X] + PIDCorr[Z];
 	motorTemp[4] = 	pitch + PIDCorr[Y]  - PIDCorr[X] - PIDCorr[Z];
+	motorTemp[5] = 0;
+	motorTemp[6] = 0;
+	motorTemp[7] = 0;
+	motorTemp[8] = 0;
+	motorTemp[9] = 0;
+	motorTemp[10] = 0;
+	motorTemp[11] = 0;
+	motorTemp[12] = 0;
 	
 	limitMotors(motorTemp, motor);
 			
