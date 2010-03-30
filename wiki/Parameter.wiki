@@ -10,9 +10,9 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 02 || HAL || 1 || 0...RC Empfänger<br />1...PC Steuerung<br />2...X Modus<br />4...Kompass ON  || Bitfeld Kombinationen möglich<br /> PPM oder Spektrum wird automatisch erkannt. PC Steuerung nur möglich wenn kein Empfang und Parameter gesetzt ist ||
 || 03 || Akku || 2236 || || Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = Spannung/5,55). 1 Volt entspricht 223,64 Punte. Default = 2236 = 10 Volt. ||
 || 04 || SAL || 1 || 0...HH Regelung<br />1...ACC Regelung<br />2...ACC Regelung COMP2 || Bitfeld Kombinationen möglich<br />4 bit für Regler ||
-|| 05 || ACC-X-ZERO || 20470 || || Horizontalwert X-Achse für ACC - ADC * 10 ||
-|| 06 || ACC-Y-ZERO || 20330 || || Horizontalwert Y-Achse für ACC - ADC * 10 ||
-|| 07 || ACC-Z-ZERO || 24450 || || Horizontalwert Z-Achse für ACC - ADC * 10 ||
+|| 05 || ACC-X-ZERO || 20470 || || Horizontalwert X-Achse für ACC - ADC x 10 ||
+|| 06 || ACC-Y-ZERO || 20330 || || Horizontalwert Y-Achse für ACC - ADC x 10 ||
+|| 07 || ACC-Z-ZERO || 24450 || || Horizontalwert Z-Achse für ACC - ADC x 10 ||
 || 08 || SMOOTH_ACC || 0 || 0-100 || Glättung zum letzten Wert (0 wäre immer letzter Wert)  || 
 || 09 || SMOOTH_GYRO || 0 || 0-100 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
 || 10 || SMOOTH_RC || 0 || 0-100 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
