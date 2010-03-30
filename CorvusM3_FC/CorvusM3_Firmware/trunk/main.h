@@ -186,7 +186,32 @@
 #define PARA_COMP_CORR_Z	34
 #define PARA_COMP_DECL		35
 #define PARA_COMP_FORCE		36
-#define USED_PARAMETER 		36
+#define PARA_MIXER_MOT1A	37
+#define PARA_MIXER_MOT1B	38
+#define PARA_MIXER_MOT2A	39
+#define PARA_MIXER_MOT2B	40
+#define PARA_MIXER_MOT3A	41
+#define PARA_MIXER_MOT3B	42
+#define PARA_MIXER_MOT4A	43
+#define PARA_MIXER_MOT4B	44
+#define PARA_MIXER_MOT5A	45
+#define PARA_MIXER_MOT5B	46
+#define PARA_MIXER_MOT6A	47
+#define PARA_MIXER_MOT6B	48
+#define PARA_MIXER_MOT7A	49
+#define PARA_MIXER_MOT7B	50
+#define PARA_MIXER_MOT8A	51
+#define PARA_MIXER_MOT8B	52
+#define PARA_MIXER_MOT9A	53
+#define PARA_MIXER_MOT9B	54
+#define PARA_MIXER_MOT10A	55
+#define PARA_MIXER_MOT10B	56
+#define PARA_MIXER_MOT11A	57
+#define PARA_MIXER_MOT11B	58
+#define PARA_MIXER_MOT12A	59
+#define PARA_MIXER_MOT12B	60
+//how much?
+#define USED_PARAMETER 		60
 /* define Para debug values */
 #define PARA_DEBUG_REC  	0x01
 #define PARA_DEBUG_ADC		0x02
@@ -197,7 +222,7 @@
 #define PARA_HW_RC			0x00
 #define PARA_HW_PC			0x01
 #define PARA_HW_4PLUS		0x00
-#define PARA_HW_4X			0x02
+#define PARA_HW_MIXER		0x02
 #define PARA_HW_COMP		0x04
 
 /* define Para SW values */

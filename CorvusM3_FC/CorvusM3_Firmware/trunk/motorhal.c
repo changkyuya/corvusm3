@@ -52,6 +52,14 @@ void stopAllMotors(volatile char * motor)
 	motor[2] = 0x00;
 	motor[3] = 0x00;
 	motor[4] = 0x00;
+	motor[5] = 0x00;
+	motor[6] = 0x00;
+	motor[7] = 0x00;
+	motor[8] = 0x00;
+	motor[9] = 0x00;
+	motor[10] = 0x00;
+	motor[11] = 0x00;
+	motor[12] = 0x00;
 	print_uart3(motor);
 }
 
@@ -60,7 +68,7 @@ void stopAllMotors(volatile char * motor)
 void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 {
 	// no hal used at the moment
-	s16 motorTemp[5];
+	s16 motorTemp[13];
 	
 	// map pitch to quax blmc values from 0-200
 	u8 pitch = (receiverChannel[PITCH] - 1000) / 5;
@@ -69,6 +77,14 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	motorTemp[2] = 	pitch + PIDCorr[Y] - PIDCorr[Z];
 	motorTemp[3] = 	pitch - PIDCorr[X] + PIDCorr[Z];
 	motorTemp[4] = 	pitch + PIDCorr[X] + PIDCorr[Z];
+	motorTemp[5] = 0;
+	motorTemp[6] = 0;
+	motorTemp[7] = 0;
+	motorTemp[8] = 0;
+	motorTemp[9] = 0;
+	motorTemp[10] = 0;
+	motorTemp[11] = 0;
+	motorTemp[12] = 0;
 	
 	limitMotors(motorTemp, motor);
 			
@@ -83,10 +99,10 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 
 
 /* map pid to motors 4 X ----------------------------------------------------*/
-void sendPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
+void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 {
 	// no hal used at the moment
-	s16 motorTemp[5];
+	s16 motorTemp[13];
 	
 	// map pitch to quax blmc values from 0-180 - 20 points for stability
 	// does not work
@@ -118,7 +134,7 @@ void limitMotors(s16 * motorTemp, volatile char * motor)
 	s16 max = 200;
 	
 	u8 i;
-	for (i = 1; i < 5; i++)
+	for (i = 1; i < 13; i++)
 	{
 		min = (motorTemp[i] < min) ? motorTemp[i] : min;
 		max = (motorTemp[i] > max) ? motorTemp[i] : max;
@@ -128,7 +144,7 @@ void limitMotors(s16 * motorTemp, volatile char * motor)
 	min = parameter[PARA_MIN_GAS] - min;
 	max = 200 - max;
 	
-	for (i = 1; i < 5; i++)
+	for (i = 1; i < 13; i++)
 	{
 		motor[i] = motorTemp[i] + min - max;
 	}

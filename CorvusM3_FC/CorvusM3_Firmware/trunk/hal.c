@@ -72,10 +72,10 @@ void getChannels(vu16 *receiverChannel)
 /* map pid to motors -------------------------------------------------------*/
 void sendPIDMotors(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor)
 {
-	if (getParameter(PARA_HW) & PARA_HW_4X)
+	if (getParameter(PARA_HW) & PARA_HW_MIXER)
 	{
-		// X mode
-		sendPIDMotors4X(PIDCorr, receiverChannel, motor);
+		// Mixer mode
+		sendPIDMotorsMixer(PIDCorr, receiverChannel, motor);
 	}
 	else
 	{

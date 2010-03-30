@@ -41,7 +41,7 @@ vu16 receiverChannel[9];
 vs32 targetAngle[3];
 extern vu16 parameter[0x190]; //parameter
 u8 flightState = FLIGHT_START;
-volatile char motor[5]; 
+volatile char motor[13]; 
 vs32 gyroAngle[3];
 //vs16 gyroAngle[3];
 vs32 accAngle[2];

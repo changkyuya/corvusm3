@@ -32,7 +32,7 @@
 void sendMotor(volatile char * motor);
 void stopAllMotors(volatile char * motor);
 void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor);
-void sendPIDMotors4X(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor);
+void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * motor);
 void limitMotors(s16 * motorTemp, volatile char * motor);
 
 #endif /* __MOTORHAL_H */
