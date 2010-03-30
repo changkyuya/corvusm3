@@ -423,5 +423,245 @@ namespace CorvusM3
             }
             get { return parameter[36]; }
         }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT1A [37]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT1A
+        {
+            set
+            {
+                parameter[37] = value;
+                port.Write("s37:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[37]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT1B [38]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT1B
+        {
+            set
+            {
+                parameter[38] = value;
+                port.Write("s38:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[38]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT2A [39]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT2A
+        {
+            set
+            {
+                parameter[39] = value;
+                port.Write("s39:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[39]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT2B [40]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT2B
+        {
+            set
+            {
+                parameter[39] = value;
+                port.Write("s39:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[39]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT3A [40]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT3A
+        {
+            set
+            {
+                parameter[40] = value;
+                port.Write("s40:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[40]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT3B [41]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT3B
+        {
+            set
+            {
+                parameter[41] = value;
+                port.Write("s41:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[41]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT4A [42]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT4A
+        {
+            set
+            {
+                parameter[42] = value;
+                port.Write("s42:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[42]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT4B [43]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT4B
+        {
+            set
+            {
+                parameter[43] = value;
+                port.Write("s43:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[43]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT5A [44]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT5A
+        {
+            set
+            {
+                parameter[44] = value;
+                port.Write("s44:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[44]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT5B [44]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT5B
+        {
+            set
+            {
+                parameter[44] = value;
+                port.Write("s44:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[44]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT6A [45]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT6A
+        {
+            set
+            {
+                parameter[45] = value;
+                port.Write("s45:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[45]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT6B [46]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT6B
+        {
+            set
+            {
+                parameter[46] = value;
+                port.Write("s46:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[46]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT7A [47]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT7A
+        {
+            set
+            {
+                parameter[47] = value;
+                port.Write("s47:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[47]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT7B [48]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT7B
+        {
+            set
+            {
+                parameter[48] = value;
+                port.Write("s48:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[48]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT8A [49]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT8A
+        {
+            set
+            {
+                parameter[49] = value;
+                port.Write("s49:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[49]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT8B [50]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT8B
+        {
+            set
+            {
+                parameter[50] = value;
+                port.Write("s50:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[50]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT9A [51]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT9A
+        {
+            set
+            {
+                parameter[51] = value;
+                port.Write("s51:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[51]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT9B [52]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT9B
+        {
+            set
+            {
+                parameter[52] = value;
+                port.Write("s52:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[52]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT10A [53]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT10A
+        {
+            set
+            {
+                parameter[53] = value;
+                port.Write("s53:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[53]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT10B [54]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT10B
+        {
+            set
+            {
+                parameter[54] = value;
+                port.Write("s54:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[54]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT11A [55]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT11A
+        {
+            set
+            {
+                parameter[55] = value;
+                port.Write("s55:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[55]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT11B [56]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT11B
+        {
+            set
+            {
+                parameter[56] = value;
+                port.Write("s56:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[56]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT12A [57]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT12A
+        {
+            set
+            {
+                parameter[57] = value;
+                port.Write("s57:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[57]; }
+        }
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT12B [58]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        public int PARA_MOT12B
+        {
+            set
+            {
+                parameter[58] = value;
+                port.Write("s58:" + value.ToString() + "\r\n");
+            }
+            get { return parameter[58]; }
+        }
     }
 }
