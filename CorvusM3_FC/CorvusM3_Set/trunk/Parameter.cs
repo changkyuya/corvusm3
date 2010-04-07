@@ -428,10 +428,11 @@ namespace CorvusM3
         {
             set
             {
-                parameter[37] = value;
+                
+                parameter[37] = convertInputToPara( value);
                 port.Write("s37:" + value.ToString() + "\r\n");
             }
-            get { return parameter[37]; }
+            get { return convertParaToInput( parameter[37]); }
         }
         [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT1B [38]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT1B
@@ -662,6 +663,32 @@ namespace CorvusM3
                 port.Write("s58:" + value.ToString() + "\r\n");
             }
             get { return parameter[58]; }
+        }
+
+
+        private int convertInputToPara(int input)
+        {
+            int para;
+
+            int paraLeft;
+            int paraRight;
+
+            paraLeft = Convert.ToInt16(input.ToString().Substring(0,3));
+            paraRight = Convert.ToInt16(input.ToString().Substring(3, 3));
+
+            para = (paraLeft << 8) + (paraRight);
+
+
+            return para;
+        
+        }
+
+        private int convertParaToInput(int para)
+        {
+            int paralinks = Convert.ToInt16(para) >> 8;
+            int pararechts = Convert.ToInt16( para ) & 255;
+
+            return Convert.ToInt16(paralinks.ToString() + pararechts.ToString());
         }
     }
 }
