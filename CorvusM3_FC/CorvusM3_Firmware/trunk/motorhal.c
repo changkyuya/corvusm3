@@ -109,18 +109,28 @@ void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	//u8 pitch = map(receiverChannel[PITCH],1000,2000,0,180);
 	u8 pitch = (receiverChannel[PITCH] - 1000) / 5;
 	
-	motorTemp[1] = 	pitch - PIDCorr[Y]  + PIDCorr[X] - PIDCorr[Z];
-	motorTemp[2] = 	pitch - PIDCorr[Y]  - PIDCorr[X] + PIDCorr[Z];
-	motorTemp[3] = 	pitch + PIDCorr[Y]  + PIDCorr[X] + PIDCorr[Z];
-	motorTemp[4] = 	pitch + PIDCorr[Y]  - PIDCorr[X] - PIDCorr[Z];
-	motorTemp[5] = 0;
-	motorTemp[6] = 0;
-	motorTemp[7] = 0;
-	motorTemp[8] = 0;
-	motorTemp[9] = 0;
-	motorTemp[10] = 0;
-	motorTemp[11] = 0;
-	motorTemp[12] = 0;
+	u8 pitchFactor[12];
+	u8 rollFactor[12];
+	u8 nickFactor[12];
+	u8 yawFactor[12];
+	u8 i;
+	u8 j;
+	for (i = 0; i < 12; i++)
+	{
+		j = (i < 1);
+		// PARA_MIXER_MOT1A = 37
+		pitchFactor[i] = parameter[37 + j] >> 8;
+		rollFactor[i] = parameter[37 + j] & 255;
+		nickFactor[i] = parameter[38 + j] >> 8;
+		yawFactor[i] = parameter[38 + j] & 255;
+	
+	}
+	
+	for (i = 0; i < 12; i++)
+	{
+		motorTemp[i + 1] = (pitch * pitchFactor[i] / 100) + (PIDCorr[X] * rollFactor[i] / 100) + (PIDCorr[Y] * nickFactor[i] / 100) + (PIDCorr[Y] * yawFactor[i] / 100);
+	}
+	
 	
 	limitMotors(motorTemp, motor);
 			
