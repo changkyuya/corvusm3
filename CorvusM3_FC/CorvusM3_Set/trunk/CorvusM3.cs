@@ -802,6 +802,12 @@ namespace CorvusM3
 
         }
 
+        private void buttonMotorMixer_Click(object sender, EventArgs e)
+        {
+            MotorMixer motorMixer = new MotorMixer();
+            motorMixer.Show();
+        }
+
 
 
 

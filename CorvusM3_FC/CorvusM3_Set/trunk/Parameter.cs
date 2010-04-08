@@ -428,11 +428,10 @@ namespace CorvusM3
         {
             set
             {
-                
-                parameter[37] = convertInputToPara( value);
+                parameter[37] = value;
                 port.Write("s37:" + value.ToString() + "\r\n");
             }
-            get { return convertParaToInput( parameter[37]); }
+            get { return parameter[37]; }
         }
         [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT1B [38]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT1B

@@ -74,6 +74,7 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
+            this.buttonMotorMixer = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -477,6 +478,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.buttonMotorMixer);
             this.tabPage5.Controls.Add(this.saveFileButton);
             this.tabPage5.Controls.Add(this.loadFileButton);
             this.tabPage5.Controls.Add(this.flashButton);
@@ -540,6 +542,16 @@
             // 
             this.steeringTimer.Interval = 10;
             this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
+            // 
+            // buttonMotorMixer
+            // 
+            this.buttonMotorMixer.Location = new System.Drawing.Point(656, 132);
+            this.buttonMotorMixer.Name = "buttonMotorMixer";
+            this.buttonMotorMixer.Size = new System.Drawing.Size(105, 28);
+            this.buttonMotorMixer.TabIndex = 6;
+            this.buttonMotorMixer.Text = "MotorMixer";
+            this.buttonMotorMixer.UseVisualStyleBackColor = true;
+            this.buttonMotorMixer.Click += new System.EventHandler(this.buttonMotorMixer_Click);
             // 
             // CorvusM3
             // 
@@ -623,6 +635,7 @@
         private System.Windows.Forms.CheckBox checkBox10;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton flashFirmwareToolStripButton;
+        private System.Windows.Forms.Button buttonMotorMixer;
 
 
 
