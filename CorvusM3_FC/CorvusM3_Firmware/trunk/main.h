@@ -72,7 +72,7 @@
 #define BEEPER PERIPHERAL_BIT(GPIOA->ODR, 1)			
 #define GPIO_BEEPER GPIO_Pin_1
 /* Map Pin for Spektrum Bind --> PA13 */
-#define SPEKTRUM_BIND PERIPHERAL_BIT(GPIOA->ODR, 1)			
+#define SPEKTRUM_BIND PERIPHERAL_BIT(GPIOA->ODR, 13)			
 #define GPIO_SPEKTRUM_BIND GPIO_Pin_13
 /* Map Pin for Servo0 --> PC06 */
 #define SERVO0 PERIPHERAL_BIT(GPIOC->ODR, 6)			

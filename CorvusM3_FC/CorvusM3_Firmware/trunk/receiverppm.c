@@ -86,7 +86,7 @@ void TIM1_CC_IRQHandler(void)
 				{
 					receiverPPMChannel[channelCount] = length;
 					// one set complete
-					if(channelCount == 8)
+					if(channelCount > 4)
 					{
 						receiverPPMChannel[0] = PPM_OK;
 					} 
