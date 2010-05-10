@@ -52,6 +52,10 @@ int main(void)
 	/* Initialize System */
 	initSystem();
 
+	/* switch Spektrum Receiver ON */
+	/* no Bind at the moment */
+	*SPEKTRUM_BIND = 1;
+
 	/* Init virtual EEPROM */
 	initEEPROM();
 	

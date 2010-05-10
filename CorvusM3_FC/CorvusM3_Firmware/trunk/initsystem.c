@@ -342,6 +342,11 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);  
+	// for Spektrum Bind Pin
+	GPIO_InitStructure.GPIO_Pin = GPIO_SPEKTRUM_BIND;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);  
 	// for Debug Pin
 	GPIO_InitStructure.GPIO_Pin = GPIO_DBG;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
