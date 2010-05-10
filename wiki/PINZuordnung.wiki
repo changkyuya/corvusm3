@@ -17,7 +17,7 @@ Basis ist das Headerboard von ETT (ET-ARM STAMP STM32).
   * *PA10* : *RX-UART1 - PC*
   * *PA11* : USB DM - frei
   * *PA12* : USB DP - frei
-  * *PA13* : Schaltausgang Spektrum bind
+  * *PA13* : *Schaltausgang Spektrum bind* immer Ein z.Z.
   * *PA14* : Schaltausgang - frei
   * *PA15* : SPI3_NSS - frei
   * *PB00* : *ADC Spannungsmessung*
