@@ -63,7 +63,7 @@ namespace CorvusM3
             }
             get { return parameter[0]; }
         }
-        [CategoryAttribute("Basis"), DisplayName("Debugoutput [01]"), DescriptionAttribute("0...Debug aus, \r\n1...Empfängersignale, \r\n2...ADC Werte (6x Sensoren, Spannungsmessung), \r\n4...Sensoren (Gyro,ACC), \r\n8...RC und Motoren")]
+        [CategoryAttribute("Basis"), DisplayName("Debugoutput [01]"), DescriptionAttribute("0...Debug aus, \r\n1...Empfängersignale, \r\n2...ADC Werte (6x Sensoren, Spannungsmessung), \r\n4...Sensoren (Gyro,ACC), \r\n8...RC und Motoren, \r\n16...Kompass, \r\n32...PID Werte")]
         public int Debugoutput
         {
             set
@@ -73,7 +73,7 @@ namespace CorvusM3
             }
             get { return parameter[1]; }
         }
-        [CategoryAttribute("Basis"), DisplayName("HAL [02]"), DescriptionAttribute("0...RC Empfänger, \r\n1...PC Steuerung")]
+        [CategoryAttribute("Basis"), DisplayName("HAL [02]"), DescriptionAttribute("0...RC Empfänger, \r\n1...PC Steuerung, \r\n2...Mixer Motor ON, \r\n4...Kompass ON")]
         public int HAL
         {
             set
@@ -93,7 +93,7 @@ namespace CorvusM3
             }
             get { return parameter[3]; }
         }
-        [CategoryAttribute("Basis"), DisplayName("SAL [04]"), DescriptionAttribute("0...HH Regelung, \r\n1...ACC Regelung")]
+        [CategoryAttribute("Basis"), DisplayName("SAL [04]"), DescriptionAttribute("0...HH Regelung, \r\n1...ACC Regelung, \r\n2...ACC Comp2")]
         public int SAL
         {
             set

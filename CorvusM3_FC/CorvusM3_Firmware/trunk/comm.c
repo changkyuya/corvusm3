@@ -175,6 +175,11 @@ void dodComm()
 			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_COMP);
 			send(OK);
 			break;
+		case 'p':
+			//toggle
+			setParameter(PARA_DEBUG, getParameter(PARA_DEBUG) ^ PARA_DEBUG_PID);
+			send(OK);
+			break;
 		default:
 			send(HELP);
 	}

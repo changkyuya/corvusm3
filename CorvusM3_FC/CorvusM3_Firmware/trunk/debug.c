@@ -39,6 +39,7 @@ extern vs32 targetAngle[3]; //statemachine
 extern volatile char motor[5]; //statemachine
 extern s16 compassout[3]; //sensor
 extern vs32 compassAngle; //statemachine
+extern vs32 PIDCorr[3]; //statemachine
 
 /* doDebug - send Debug infos over Serial -----------------------------------*/
 void doDebug()
@@ -145,6 +146,17 @@ void doDebug()
 		sprintf(x,"%d:",compassout[2]);
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",compassAngle/1000);
+		print_uart1(x);
+	}
+
+	/* Debug output for PID */
+	if (getParameter(PARA_DEBUG) & PARA_DEBUG_PID)
+	{
+		sprintf(x,"G-PID(XYZ):1:%d:",PIDCorr[X]);
+		print_uart1(x);
+		sprintf(x,"%d:",PIDCorr[Y]);
+		print_uart1(x);
+		sprintf(x,"%d:\r\n",PIDCorr[Z]);
 		print_uart1(x);
 	}
 	

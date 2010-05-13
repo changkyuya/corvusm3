@@ -20,6 +20,8 @@
 */
 
 #include "pid.h"
+#include <stdio.h>
+#include "serial.h"
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -50,16 +52,36 @@ void calcPIDCorr(vs32 * PIDCorr, vs32 * copterAngle, vs32 * targetAngle)
 	
 	for (i = 0; i < 3; i++)
 	{
-		diff = targetAngle[i] - copterAngle[i];
+		// special for yaw!
+		diff = (targetAngle[i] / 1000) - (copterAngle[i] / 1000);
+		
+		// calc the shortest way for yaw
+		if (i == 2)
+		{
+			if (diff > 18000)
+			{
+				diff = diff - 36000;
+			}
+			if (diff < -18000)
+			{
+				diff = diff + 36000;
+			}
+		}
+		
 		summI[i] += diff;
 		diffLast = diff - diffOld[i];
 		
-		PIDCorr[i] = parameter[23 + (i * 3)] * diff / 100000;
-		PIDCorr[i] +=  parameter[24 + (i * 3)] * summI[i] / 100000;
-		PIDCorr[i] +=  parameter[25 + (i * 3)] * diffLast / 100000;
-		PIDCorr[i] = PIDCorr[i] / 10000;
+		PIDCorr[i] = ( parameter[23 + (i * 3)] * diff ) / 10000;
+		PIDCorr[i] +=  parameter[24 + (i * 3)] * summI[i] / 10000;
+		PIDCorr[i] +=  parameter[25 + (i * 3)] * diffLast / 10000;
+		//PIDCorr[i] = PIDCorr[i] / 1;
 		diffOld[i] = diff;
 	}
+	
+	
+	//char x [80];
+	//sprintf(x,"PIDCorr:%d\r\n",diff);
+	//print_uart1(x);
 }
 
 

@@ -221,6 +221,7 @@
 #define PARA_DEBUG_SENSOR 	0x04
 #define PARA_DEBUG_MOT 		0x08
 #define PARA_DEBUG_COMP		0x10
+#define PARA_DEBUG_PID		0x20
 /* define Para HW values */
 #define PARA_HW_RC			0x00
 #define PARA_HW_PC			0x01
