@@ -74,7 +74,7 @@ void statemachine(void)
 	// try to get channels
 	getChannels(receiverChannel);
 	// map channelvalues to targetAngle
-	mapReceiverValues(receiverChannel, targetAngle);
+	mapReceiverValues(receiverChannel);
 
 	
 	
@@ -121,6 +121,8 @@ void statemachine(void)
 			if (remoteCommands() == RC_MOTORS && neutralRC == 1)
 			{
 				neutralRC = 0;
+				// init filter
+				initFilter(gyroAngle, copterAngle);
 				flightState = FLIGHT_FLYING;
 				print_uart1("Motors ON\r\n");
 			}

@@ -27,7 +27,7 @@
 
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0x190]; //parameter
-
+s16 motorTempOld[13]; 
 
 /* send Motorcommands to BLMC over UART3 ------------------------------------*/
 void sendMotor(volatile char * motor)
@@ -75,8 +75,8 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	
 	motorTemp[1] = 	pitch - PIDCorr[Y] - PIDCorr[Z];
 	motorTemp[2] = 	pitch + PIDCorr[Y] - PIDCorr[Z];
-	motorTemp[3] = 	pitch - PIDCorr[X] + PIDCorr[Z];
-	motorTemp[4] = 	pitch + PIDCorr[X] + PIDCorr[Z];
+	motorTemp[3] = 	pitch + PIDCorr[X] + PIDCorr[Z];
+	motorTemp[4] = 	pitch - PIDCorr[X] + PIDCorr[Z];
 	motorTemp[5] = 0;
 	motorTemp[6] = 0;
 	motorTemp[7] = 0;
@@ -85,6 +85,22 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	motorTemp[10] = 0;
 	motorTemp[11] = 0;
 	motorTemp[12] = 0;
+	
+	u8 i;
+	for (i = 1; i < 13; i++) 
+	{
+		if ((motorTemp[i] - motorTempOld[i]) > 2)
+		{
+			motorTemp[i] = motorTempOld[i] + 2;
+		}
+		if ((motorTempOld[i] - motorTemp[i]) > 2)
+		{
+			motorTemp[i] = motorTempOld[i] - 2;
+		}
+		motorTempOld[i] = motorTemp[i];
+	}
+	
+	
 	
 	limitMotors(motorTemp, motor);
 			

@@ -31,6 +31,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu32 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
+extern vs32 targetAngle[3]; //statemachine
 
 
 /* init filter --------------------------------------------------------------*/
@@ -44,9 +45,9 @@ void initFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 /* set gyro start angle -----------------------------------------------------*/
 void setAngleFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 {
-	copterAngle[X] = gyroAngle[X] = 0;
-	copterAngle[Y] = gyroAngle[Y] = 0;
-	copterAngle[Z] = gyroAngle[Z] = 0;
+	copterAngle[X] = gyroAngle[X] = targetAngle[X] = 0;
+	copterAngle[Y] = gyroAngle[Y] = targetAngle[Y] = 0;
+	copterAngle[Z] = gyroAngle[Z] = targetAngle[Z] = 0;
 	
 	char x [80];
 	sprintf(x,"gyro start value:%d:%d:%d\r\n", gyroAngle[X], gyroAngle[Y], gyroAngle[Z]);
@@ -114,7 +115,7 @@ void getGyroAnglesFilterHH(vs32 * gyroAngle, vs32 * gyroRawValues)
 
 
 /* map receiver to angles for roll nick -------------------------------------*/
-void mapReceiverValuesFilterHH(vu16 * receiverChannel, vs32 * targetAngle)
+void mapReceiverValuesFilterHH(vu16 * receiverChannel)
 {
 	// only use yaw if stick is more than 5 points out of center 
 	

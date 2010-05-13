@@ -33,6 +33,7 @@ extern vu32 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
 vu32 y[2]; // for comp2 filter
 extern vs32 compassAngle; //statemachine
+extern vs32 targetAngle[3]; //statemachine
 
 
 
@@ -60,7 +61,7 @@ void setAngleFilterComp2(vs32 * gyroAngle, vs32 * copterAngle)
 	getACCAnglesFilterComp2(accAngle, accRawValues);
 	copterAngle[X] = gyroAngle[X] = accAngle[X];
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
-	copterAngle[Z] = gyroAngle[Z] = 0;
+	copterAngle[Z] = gyroAngle[Z] = targetAngle[Z] = 0;
 	//init y1 for filter
 	y[X] = 0;
 	y[Y] = 0;
@@ -162,7 +163,7 @@ void getACCAnglesFilterComp2(vs32 * accAngle, vs32 * accRawValues)
 
 
 /* map receiver to angles for roll nick -------------------------------------*/
-void mapReceiverValuesFilterComp2(vu16 * receiverChannel, vs32 * targetAngle)
+void mapReceiverValuesFilterComp2(vu16 * receiverChannel)
 {
 	// 90 = neutral
 	// max is 20 to 160° - this are 70° for 500 points
