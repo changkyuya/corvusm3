@@ -6,7 +6,7 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 
 || Nr || Parameter || Default || mögliche Werte || Info ||
 || 00 || Para-Set || 0 || 0 || Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2) ||
-|| 01 || Debugoutput || 0 || 0...Debug aus<br />1...Empfängersignale<br />2...ADC Werte (6x Sensoren, Spannungsmessung)<br />4...Sensoren (Gyro,ACC)<br />8...RC und Motoren || Bitfeld Kombinationen möglich ||
+|| 01 || Debugoutput || 0 || 0...Debug aus<br />1...Empfängersignale<br />2...ADC Werte (6x Sensoren, Spannungsmessung)<br />4...Sensoren (Gyro,ACC)<br />8...RC und Motoren<br />16...Kompass<br />32...PID XYZ Werte || Bitfeld Kombinationen möglich ||
 || 02 || HAL || 1 || 0...RC Empfänger<br />1...PC Steuerung<br />2...Mixer Motor On<br />4...Kompass ON  || Bitfeld Kombinationen möglich<br /> PPM oder Spektrum wird automatisch erkannt. PC Steuerung nur möglich wenn kein Empfang und Parameter gesetzt ist ||
 || 03 || Akku || 2236 || || Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = Spannung/5,55). 1 Volt entspricht 223,64 Punte. Default = 2236 = 10 Volt. ||
 || 04 || SAL || 1 || 0...HH Regelung<br />1...ACC Regelung<br />2...ACC Regelung COMP2 || Bitfeld Kombinationen möglich<br />4 bit für Regler ||
