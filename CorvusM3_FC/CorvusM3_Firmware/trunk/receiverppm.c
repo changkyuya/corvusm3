@@ -73,7 +73,8 @@ void TIM1_CC_IRQHandler(void)
 		vu16 length = IC2Value - lastIC2Value; 
 
 		// find the start sync gap
-		if(length > 20000) 
+		// 4000 points are 1ms
+		if(length > 20000)   //5ms
 		{
 			channelCount = 0; 
 		}
@@ -82,7 +83,7 @@ void TIM1_CC_IRQHandler(void)
 			if(channelCount > 0 && channelCount < 9)
 			{
 				// if signal is OK 
-				if (length > 3000 && length < 9000)
+				if (length > 3000 && length < 9000)    //>0.75ms && <2.25ms 
 				{
 					receiverPPMChannel[channelCount] = length;
 					// one set complete
