@@ -39,7 +39,7 @@ namespace CorvusM3
             
         }
         public int [] parameter = new int[400];
-        public int maxParameter = 31;
+        public int maxParameter = 58;
 
         public void fillParameter(string para)
         {
@@ -688,6 +688,15 @@ namespace CorvusM3
             int pararechts = Convert.ToInt16( para ) & 255;
 
             return Convert.ToInt16(paralinks.ToString() + pararechts.ToString());
+        }
+
+        public void sendAllPara() {
+
+            for (int i = 0; i <= maxParameter; i++)
+            {
+                port.Write("s" + i.ToString("00") + ":" + parameter[i].ToString() + "\r\n");
+                System.Threading.Thread.Sleep(10);
+            }
         }
     }
 }

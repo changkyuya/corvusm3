@@ -808,6 +808,12 @@ namespace CorvusM3
             motorMixer.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            parm.sendAllPara();
+            
+        }
+
 
 
 

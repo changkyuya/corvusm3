@@ -61,7 +61,8 @@ void loadParameter()
 	EE_ReadVariable(401, &val);
 	if (val != 99)
 	{
-		loadDefault();
+		// we have sometimes a problem ...
+		//loadDefault();
 	}
 	EE_WriteVariable(401, 99);
 	

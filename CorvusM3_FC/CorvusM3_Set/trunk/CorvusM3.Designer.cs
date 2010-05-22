@@ -68,13 +68,14 @@
             this.pitchTrackBar = new System.Windows.Forms.TrackBar();
             this.yawTrackBar = new System.Windows.Forms.TrackBar();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.buttonMotorMixer = new System.Windows.Forms.Button();
             this.saveFileButton = new System.Windows.Forms.Button();
             this.loadFileButton = new System.Windows.Forms.Button();
             this.flashButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
-            this.buttonMotorMixer = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -478,6 +479,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button1);
             this.tabPage5.Controls.Add(this.buttonMotorMixer);
             this.tabPage5.Controls.Add(this.saveFileButton);
             this.tabPage5.Controls.Add(this.loadFileButton);
@@ -491,6 +493,16 @@
             this.tabPage5.Text = "Parameter";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // buttonMotorMixer
+            // 
+            this.buttonMotorMixer.Location = new System.Drawing.Point(656, 132);
+            this.buttonMotorMixer.Name = "buttonMotorMixer";
+            this.buttonMotorMixer.Size = new System.Drawing.Size(105, 28);
+            this.buttonMotorMixer.TabIndex = 6;
+            this.buttonMotorMixer.Text = "MotorMixer";
+            this.buttonMotorMixer.UseVisualStyleBackColor = true;
+            this.buttonMotorMixer.Click += new System.EventHandler(this.buttonMotorMixer_Click);
+            // 
             // saveFileButton
             // 
             this.saveFileButton.Location = new System.Drawing.Point(656, 365);
@@ -503,7 +515,7 @@
             // 
             // loadFileButton
             // 
-            this.loadFileButton.Location = new System.Drawing.Point(656, 331);
+            this.loadFileButton.Location = new System.Drawing.Point(656, 297);
             this.loadFileButton.Name = "loadFileButton";
             this.loadFileButton.Size = new System.Drawing.Size(105, 28);
             this.loadFileButton.TabIndex = 4;
@@ -543,15 +555,15 @@
             this.steeringTimer.Interval = 10;
             this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
             // 
-            // buttonMotorMixer
+            // button1
             // 
-            this.buttonMotorMixer.Location = new System.Drawing.Point(656, 132);
-            this.buttonMotorMixer.Name = "buttonMotorMixer";
-            this.buttonMotorMixer.Size = new System.Drawing.Size(105, 28);
-            this.buttonMotorMixer.TabIndex = 6;
-            this.buttonMotorMixer.Text = "MotorMixer";
-            this.buttonMotorMixer.UseVisualStyleBackColor = true;
-            this.buttonMotorMixer.Click += new System.EventHandler(this.buttonMotorMixer_Click);
+            this.button1.Location = new System.Drawing.Point(656, 331);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 28);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "write ...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // CorvusM3
             // 
@@ -636,6 +648,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton flashFirmwareToolStripButton;
         private System.Windows.Forms.Button buttonMotorMixer;
+        private System.Windows.Forms.Button button1;
 
 
 
