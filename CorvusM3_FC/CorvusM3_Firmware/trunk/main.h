@@ -23,6 +23,11 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 
+/* Define for TEST and options ----------------------------------------------*/
+#define PPM_PA11   // für Tommys kaputtes board
+
+
+
 /* Define for STM fwlib load ------------------------------------------------*/
 #define _DMA
 #define _DMA_Channel1

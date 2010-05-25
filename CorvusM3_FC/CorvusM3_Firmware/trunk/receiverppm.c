@@ -66,8 +66,11 @@ void TIM1_CC_IRQHandler(void)
 		
 		//TIM_ClearITPendingBit(TIM1, TIM_IT_Update); 
 		TIM1_ClearFlag(TIM1_FLAG_CC1); 
+#ifndef PPM_PA11
 		GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
-		
+#else		
+		GPIO_ResetBits(GPIOA, GPIO_Pin_11); 
+#endif	
 		// /* Get the Input Capture value */ 
 		IC2Value = TIM1_GetCapture1(); 
 		vu16 length = IC2Value - lastIC2Value; 
@@ -105,7 +108,11 @@ void TIM1_CC_IRQHandler(void)
 		}
 		// store last time
 		lastIC2Value = IC2Value; 
+#ifndef PPM_PA11
 		if(channelCount == 6) GPIO_SetBits(GPIOA, GPIO_Pin_8); else GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
+#else
+		if(channelCount == 6) GPIO_SetBits(GPIOA, GPIO_Pin_11); else GPIO_ResetBits(GPIOA, GPIO_Pin_11);
+#endif
 		// increase channelCount
 		channelCount++;
 	} 

@@ -197,7 +197,11 @@ void TIM_Configuration(void)
 	/* Timer for PPM decode ---------------------------------------------------*/
 	TIM1_ICInitTypeDef TIM1_ICInitStructure; 
 	//TIM_ICInitStructure.TIM_ICMode = TIM_ICMode_ICAP; 
+#ifndef PPM_PA11
 	TIM1_ICInitStructure.TIM1_Channel = TIM1_Channel_1;   //Pin: PA8
+#else	
+	TIM1_ICInitStructure.TIM1_Channel = TIM1_Channel_4;   //Pin: PA11
+#endif	
 	TIM1_ICInitStructure.TIM1_ICPolarity = TIM1_ICPolarity_Falling; 
 	TIM1_ICInitStructure.TIM1_ICSelection = TIM1_ICSelection_DirectTI; 
 	TIM1_ICInitStructure.TIM1_ICPrescaler = TIM1_ICPSC_DIV1; 
@@ -373,7 +377,11 @@ void GPIO_Configuration(void)
 	
 	/* Configure PA8 for PPM Dekode -----------------------------------------*/
 	/* TIM1 channel 1 pin (PA.08) configuration */
+#ifndef PPM_PA11
 	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_8;
+#else
+	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_11;
+#endif
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
