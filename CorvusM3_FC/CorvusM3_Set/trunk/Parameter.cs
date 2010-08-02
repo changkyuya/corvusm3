@@ -695,7 +695,7 @@ namespace CorvusM3
             for (int i = 0; i <= maxParameter; i++)
             {
                 port.Write("s" + i.ToString("00") + ":" + parameter[i].ToString() + "\r\n");
-                System.Threading.Thread.Sleep(10);
+                System.Threading.Thread.Sleep(50);
             }
         }
     }
