@@ -13,9 +13,9 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 05 || ACC-X-ZERO || 20470 || || Horizontalwert X-Achse für ACC - ADC x 10 ||
 || 06 || ACC-Y-ZERO || 20330 || || Horizontalwert Y-Achse für ACC - ADC x 10 ||
 || 07 || ACC-Z-ZERO || 24450 || || Horizontalwert Z-Achse für ACC - ADC x 10 ||
-|| 08 || SMOOTH_ACC || 0 || 0-100 || Glättung zum letzten Wert (0 wäre immer letzter Wert)  || 
-|| 09 || SMOOTH_GYRO || 0 || 0-100 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
-|| 10 || SMOOTH_RC || 0 || 0-100 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
+|| 08 || SMOOTH_ACC || 0 || 0-99 || Glättung zum letzten Wert (0 wäre immer letzter Wert)  || 
+|| 09 || SMOOTH_GYRO || 0 || 0-99 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
+|| 10 || SMOOTH_RC || 0 || 0-99 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
 || 11 || GYRO_X_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
 || 12 || GYRO_Y_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
 || 13 || GYRO_Z_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
