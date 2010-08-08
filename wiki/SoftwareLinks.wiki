@@ -2,8 +2,8 @@
 
  * GNU Toolchain von CodeSourcery [http://www.codesourcery.com/sgpp/lite/arm/portal/release1033]
  * Editor Programmers Notepad [http://www.pnotepad.org/]
-make ARM Cortex M3: Command: cs-make.exe, Folder: %d, Parameters: all, Shortcut: STRG+M
-make clean: Command: cs-make.exe, Folder: %d, Parameters: clean
+make ARM Cortex M3: Command: cs-make.exe, Folder: %d, Parameters: all, Shortcut: STRG+M<br />
+make clean: Command: cs-make.exe, Folder: %d, Parameters: clean<br />
 upload: Command: $(ProjectPath)flash_erase_all.bat, Shorcut: STRG+Y
 
  * Flash Tool von ST [http://www.st.com/stonline/products/support/micro/files/um0462.zip]
