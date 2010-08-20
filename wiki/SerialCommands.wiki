@@ -39,7 +39,8 @@ Format: r 00(-99, 2-stelliger Parameter)
  * pa ... Print all Parameter   
  * # ... lade Standard Parameter und schreibe in Flash
  * `*` ... speichert alle Parameter ins Flash
- * ~1234:1234:1234:1234 ... RC Werte über PC
+ * ~1234:1234:1234:1234 ... RC Werte über PC (4CH)
+ * <010:150:120:200 ... Motor Werte 1-4 000-200
  * = ... UART1 <=> UART3
  * ? ... Help
 
