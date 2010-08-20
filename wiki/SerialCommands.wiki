@@ -40,7 +40,7 @@ Format: r 00(-99, 2-stelliger Parameter)
  * # ... lade Standard Parameter und schreibe in Flash
  * `*` ... speichert alle Parameter ins Flash
  * ~1234:1234:1234:1234 ... RC Werte über PC
- * = ... UART1 <-> UART3
+ * = ... UART1 <--> UART3
  * ? ... Help
 
 == Output ==
