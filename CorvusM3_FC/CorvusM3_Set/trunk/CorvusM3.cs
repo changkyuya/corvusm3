@@ -45,6 +45,7 @@ namespace CorvusM3
         double counter = 0;
         bool on = false;
         double[] channelValues = new double[8];
+        double[] motorValues = new double[8];
         Parameter parm;
         ArrayList stringBuffer = new ArrayList();
         int bufferCount = 0;
@@ -812,6 +813,59 @@ namespace CorvusM3
         {
             parm.sendAllPara();
             
+        }
+
+        private void motorTimer_Tick(object sender, EventArgs e)
+        {
+            commandTextBox.Text = "<" + motorValues[0].ToString("000") + ":" + motorValues[1].ToString("000") + ":" + motorValues[2].ToString("000") + ":" + motorValues[3].ToString("000");
+            try
+            {
+                if (serial.IsOpen)
+                {
+                    serial.Write("<" + motorValues[0].ToString("000") + ":" + motorValues[1].ToString("000") + ":" + motorValues[2].ToString("000") + ":" + motorValues[3].ToString("000") + "\r\n");
+                }
+            }
+            catch
+            { }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (button2.BackColor == Color.Transparent)
+            {
+                button2.BackColor = Color.Red;
+                motorTimer.Enabled = true;
+            }
+            else
+            {
+                button2.BackColor = Color.Transparent;
+                motorTimer.Enabled = false;
+            }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            label1.Text = trackBar1.Value.ToString();
+            motorValues[0] = trackBar1.Value;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            label2.Text = trackBar2.Value.ToString();
+            motorValues[1] = trackBar2.Value;
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            label3.Text = trackBar3.Value.ToString();
+            motorValues[2] = trackBar3.Value;
+        }
+
+        private void trackBar4_Scroll(object sender, EventArgs e)
+        {
+            label4.Text = trackBar4.Value.ToString();
+            motorValues[3] = trackBar4.Value;
         }
 
 
