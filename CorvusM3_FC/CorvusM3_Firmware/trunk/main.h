@@ -24,7 +24,7 @@
 #define __MAIN_H
 
 /* Define for TEST and options ----------------------------------------------*/
-//#define PPM_PA11   // für Tommys kaputtes board
+#define PPM_PA11   // für Tommys kaputtes board
 
 
 

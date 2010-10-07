@@ -68,13 +68,13 @@ void calcPIDCorr(vs32 * PIDCorr, vs32 * copterAngle, vs32 * targetAngle)
 			}
 		}
 		
-		summI[i] += (diff / 10);
+		summI[i] += (diff / 100);
 		if (diffOld[i] == 0) diffOld[i] = ( copterAngle[i] / 1000 );
 		//diffLast = ( copterAngle[i] / 1000 ) - diffOld[i];
 		diffLast = diffOld[i] - diff;
 		
 		PIDCorr[i] = ( parameter[23 + (i * 3)] * diff ) / 10000;
-		PIDCorr[i] += ( parameter[24 + (i * 3)] * (summI[i] / 100) ) / 100000;
+		PIDCorr[i] -= ( parameter[24 + (i * 3)] * summI[i] ) / 100000;
 		PIDCorr[i] -= ( parameter[25 + (i * 3)] * diffLast  ) / 1000;
 		
 		//limit PID Corr

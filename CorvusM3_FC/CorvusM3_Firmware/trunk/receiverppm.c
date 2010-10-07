@@ -59,7 +59,6 @@ void getPPMChannels(vu16 * receiverChannel)
 /* [0xAC] TIM1 Capture/Compare Interrupt */
 void TIM1_CC_IRQHandler(void) 
 { 	
-#ifndef PPM_PA11
 	if(TIM1_GetITStatus(TIM1_IT_CC1) == SET) 
 	{ 
 		/* Clear TIM1 Capture compare interrupt pending bit */ 
@@ -67,22 +66,13 @@ void TIM1_CC_IRQHandler(void)
 		
 		//TIM_ClearITPendingBit(TIM1, TIM_IT_Update); 
 		TIM1_ClearFlag(TIM1_FLAG_CC1); 
+#ifndef PPM_PA11
 		GPIO_ResetBits(GPIOA, GPIO_Pin_8); 
+#else		
+		GPIO_ResetBits(GPIOA, GPIO_Pin_11); 
+#endif	
 		// /* Get the Input Capture value */ 
 		IC2Value = TIM1_GetCapture1(); 
-#else		
-	if(TIM1_GetITStatus(TIM1_IT_CC4) == SET) 
-	{ 
-		/* Clear TIM1 Capture compare interrupt pending bit */ 
-		TIM1_ClearITPendingBit(TIM1_IT_CC4); 
-		
-		//TIM_ClearITPendingBit(TIM1, TIM_IT_Update); 
-		TIM1_ClearFlag(TIM1_FLAG_CC4); 
-		GPIO_ResetBits(GPIOA, GPIO_Pin_11); 
-		// /* Get the Input Capture value */ 
-		IC2Value = TIM1_GetCapture4(); 
-#endif	
-
 		vu16 length = IC2Value - lastIC2Value; 
 
 		// find the start sync gap
