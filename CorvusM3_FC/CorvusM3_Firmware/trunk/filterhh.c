@@ -45,8 +45,8 @@ void initFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 /* set gyro start angle -----------------------------------------------------*/
 void setAngleFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 {
-	copterAngle[X] = gyroAngle[X] = targetAngle[X] = 0;
-	copterAngle[Y] = gyroAngle[Y] = targetAngle[Y] = 0;
+	copterAngle[X] = gyroAngle[X] = targetAngle[X] = 90;
+	copterAngle[Y] = gyroAngle[Y] = targetAngle[Y] = 90;
 	copterAngle[Z] = gyroAngle[Z] = targetAngle[Z] = 0;
 	
 	char x [80];
@@ -107,7 +107,7 @@ void getGyroAnglesFilterHH(vs32 * gyroAngle, vs32 * gyroRawValues)
 		}
 		if (gyroAngle[i] < 0) 
 		{
-			gyroAngle[i] = 36000000 - gyroAngle[Z];
+			gyroAngle[i] += 36000000;
 		}
 	}
 }
@@ -149,7 +149,7 @@ void mapReceiverValuesFilterHH(vu16 * receiverChannel)
 		}
 		if (targetAngle[i] < 0) 
 		{
-			targetAngle[i] = 36000000 - targetAngle[Z];
+			targetAngle[i] += 36000000;
 		}
 	}
 }

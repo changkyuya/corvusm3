@@ -32,7 +32,6 @@
 void zeroGyro(void);
 void getRawValues(vs32 * gyroValues, vs32 * accValues);
 void zeroACC(void);
-void oversamplingADC(void);
 void initCompass(void);
 void getCompassAngle(void);
 

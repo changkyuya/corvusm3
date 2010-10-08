@@ -113,7 +113,8 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle, vs32 * gyroRawValues)
 	//gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
     //gyroAngle[Y] -=y (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
     //gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
-    gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100);
+    //                        value * 1000                                         1000
+	gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100);
     gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100);
     gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
 	
@@ -123,7 +124,7 @@ void getGyroAnglesFilterACC(vs32 * gyroAngle, vs32 * gyroRawValues)
 	}
 	if (gyroAngle[Z] < 0) 
 	{
-		gyroAngle[Z] = 36000000 - gyroAngle[Z];
+		gyroAngle[Z] += 36000000;
 	}
 	
 	//char x [80];
@@ -177,6 +178,6 @@ void mapReceiverValuesFilterACC(vu16 * receiverChannel)
 	}
 	if (targetAngle[Z] < 0) 
 	{
-		targetAngle[Z] = 36000000 - targetAngle[Z];
+		targetAngle[Z] += 36000000;
 	}
 }
