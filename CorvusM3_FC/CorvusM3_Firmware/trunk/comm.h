@@ -42,6 +42,7 @@ void dopComm(void);
 void dofComm(void);
 void docComm(void);
 void doRCComm(void);
+void doMotComm(void);
 u16 readInt(u8);
 void send(u8);
 void print_para (u8 para);

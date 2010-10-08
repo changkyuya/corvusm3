@@ -90,7 +90,8 @@ void statemachine(void)
 	switch (flightState)
 	{
 		case FLIGHT_START:
-			// do something - beep?
+			// init filter
+			initFilter(gyroAngle, copterAngle);
 			flightState = FLIGHT_RC;
 			break;
 		
