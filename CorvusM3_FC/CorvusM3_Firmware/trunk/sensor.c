@@ -57,20 +57,23 @@ extern vu8 i2cToWrite; //i2c
 void zeroGyro()
 {
 	
-	gyroZero[X] = ADCSensorValue[GYRO_X]* 1000;
-	gyroZero[Y] = ADCSensorValue[GYRO_Y]* 1000;
-	gyroZero[Z] = ADCSensorValue[GYRO_Z]* 1000;
+	gyroZero[X] = 0;
+	gyroZero[Y] = 0;
+	gyroZero[Z] = 0;
 	
-	Pause(50);
-	oversamplingADC();
+	u16 i;
+	for (i = 0; i < 1024; i++)
+	{	
+		gyroZero[X] += ADCSensorValue[GYRO_X]* 1000;
+		gyroZero[Y] += ADCSensorValue[GYRO_Y]* 1000;
+		gyroZero[Z] += ADCSensorValue[GYRO_Z]* 1000;
+		
+		Pause(1);
+	}
 	
-	gyroZero[X] += ADCSensorValue[GYRO_X]* 1000;
-	gyroZero[Y] += ADCSensorValue[GYRO_Y]* 1000;
-	gyroZero[Z] += ADCSensorValue[GYRO_Z]* 1000;
-	
-	gyroZero[X] = gyroZero[X] >> 1;
-	gyroZero[Y] = gyroZero[Y] >> 1;
-	gyroZero[Z] = gyroZero[Z] >> 1;
+	gyroZero[X] = gyroZero[X] >> 10;
+	gyroZero[Y] = gyroZero[Y] >> 10;
+	gyroZero[Z] = gyroZero[Z] >> 10;
 
 	char x [80];
 	sprintf(x,"Gyro-Zero:%d:%d:%d:\r\n",gyroZero[X],gyroZero[Y],gyroZero[Z]);
@@ -83,13 +86,28 @@ void zeroGyro()
 /* Set ACC Values to Zero ---------------------------------------------------*/
 void zeroACC()
 {
-	vs32 gyroValues[3];
-	vs32 accValues[3];
-	getRawValues(gyroValues, accValues);
+	accZero[X] = 0;
+	accZero[Y] = 0;
+	accZero[Z] = 0;
 	
-	accZero[X] = accValues[X] / 100;
-	accZero[Y] = accValues[Y] / 100;
-	accZero[Z] = ((accValues[X] / 100) + (accValues[Y] / 100)) >> 1;
+	u16 i;
+	for (i = 0; i < 1024; i++)
+	{	
+		accZero[X] += ADCSensorValue[ACC_X]* 1000;
+		accZero[Y] += ADCSensorValue[ACC_Y]* 1000;
+		accZero[Z] += ADCSensorValue[ACC_Z]* 1000;
+		
+		Pause(1);
+	}
+	
+	accZero[X] = accZero[X] >> 10;
+	accZero[Y] = accZero[Y] >> 10;
+	accZero[Z] = accZero[Z] >> 10;
+	
+	
+	accZero[X] = accZero[X] / 100;
+	accZero[Y] = accZero[Y] / 100;
+	accZero[Z] = (accZero[X] + accZero[Y]) >> 1;
 	
 	setParameter(PARA_ACC_X_ZERO, accZero[X]);
 	setParameter(PARA_ACC_Y_ZERO, accZero[Y]);
@@ -105,20 +123,18 @@ void zeroACC()
 void getRawValues(vs32 * gyroValues, vs32 * accValues)
 {
 	
-	oversamplingADC();
-	
 	//overADCSensorValue[0] = (ADCSensorValue[0]+ADCSensorValue[7]+ADCSensorValue[14]+ADCSensorValue[21]+ADCSensorValue[28]+ADCSensorValue[35]+ADCSensorValue[42]+ADCSensorValue[49])>>3;
 	//char x [200];
 	//sprintf(x,"%d:%d:%d:%d:%d:%d:%d:%d\r\n",ADCSensorValue[0],ADCSensorValue[7],ADCSensorValue[14],ADCSensorValue[21],ADCSensorValue[28],ADCSensorValue[35],ADCSensorValue[42],ADCSensorValue[49]);
 	//print_uart1(x);
 	
-	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X], oldGyroValues[X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
-	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y], oldGyroValues[Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
-	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z], oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
+	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X] * 1000, oldGyroValues[X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
+	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y] * 1000, oldGyroValues[Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
+	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z] * 1000, oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
 	
-	accValues[X] = smoothValue(ADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
-	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
-	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
+	accValues[X] = smoothValue(ADCSensorValue[ACC_X] * 1000, oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
+	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y] * 1000, oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
+	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z] * 1000, oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
 	
 	u8 i;
 	for (i = 0; i < 3; i++)
@@ -128,18 +144,6 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 	}
 }
 
-
-/* ADC oversampling ---------------------------------------------------------*/
-void oversamplingADC()
-{
-
-	u8 i;
-	
-	for (i = 0; i < 7; i++)
-	{
-		ADCSensorValue[i] = ADCSensorValue[i] * 1000;
-	}
-}
 
 
 /* setup compass hmc5843 ----------------------------------------------------*/
