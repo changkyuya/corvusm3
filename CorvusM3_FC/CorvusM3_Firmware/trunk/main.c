@@ -37,7 +37,7 @@
 extern vu8 RxOutCounter1; //serial
 extern vu8 RxInCounter1; //serial
 extern vu32 msCount; //statemachine
-extern vu16 ADCSensorValue[56];  //initsystem
+extern vu16 ADCSensorValue[7];  //initsystem
 extern vu16 receiverChannel[9];  //statemachine
 extern volatile char motor[5]; //blmc
 extern vs32 gyroAngle[3]; //statemachine

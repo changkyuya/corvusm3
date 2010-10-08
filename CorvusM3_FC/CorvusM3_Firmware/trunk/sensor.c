@@ -31,8 +31,7 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 ADCSensorValue[56];  //initsystem
-vu32 overADCSensorValue[7];
+extern vu16 ADCSensorValue[7];  //initsystem
 vu32 oldGyroValues[3]; // for smooth
 vu32 oldAccValues[3]; // for smooth
 vu32 gyroZero[3];
@@ -57,18 +56,17 @@ extern vu8 i2cToWrite; //i2c
 /* initGyros to set Baise ---------------------------------------------------*/
 void zeroGyro()
 {
-	oversamplingADC();
 	
-	gyroZero[X] = overADCSensorValue[GYRO_X];
-	gyroZero[Y] = overADCSensorValue[GYRO_Y];
-	gyroZero[Z] = overADCSensorValue[GYRO_Z];
+	gyroZero[X] = ADCSensorValue[GYRO_X]* 1000;
+	gyroZero[Y] = ADCSensorValue[GYRO_Y]* 1000;
+	gyroZero[Z] = ADCSensorValue[GYRO_Z]* 1000;
 	
 	Pause(50);
 	oversamplingADC();
 	
-	gyroZero[X] += overADCSensorValue[GYRO_X];
-	gyroZero[Y] += overADCSensorValue[GYRO_Y];
-	gyroZero[Z] += overADCSensorValue[GYRO_Z];
+	gyroZero[X] += ADCSensorValue[GYRO_X]* 1000;
+	gyroZero[Y] += ADCSensorValue[GYRO_Y]* 1000;
+	gyroZero[Z] += ADCSensorValue[GYRO_Z]* 1000;
 	
 	gyroZero[X] = gyroZero[X] >> 1;
 	gyroZero[Y] = gyroZero[Y] >> 1;
@@ -114,13 +112,13 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 	//sprintf(x,"%d:%d:%d:%d:%d:%d:%d:%d\r\n",ADCSensorValue[0],ADCSensorValue[7],ADCSensorValue[14],ADCSensorValue[21],ADCSensorValue[28],ADCSensorValue[35],ADCSensorValue[42],ADCSensorValue[49]);
 	//print_uart1(x);
 	
-	gyroValues[X] = smoothValue(overADCSensorValue[GYRO_X], oldGyroValues[X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
-	gyroValues[Y] = smoothValue(overADCSensorValue[GYRO_Y], oldGyroValues[Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
-	gyroValues[Z] = smoothValue(overADCSensorValue[GYRO_Z], oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
+	gyroValues[X] = smoothValue(ADCSensorValue[GYRO_X], oldGyroValues[X], parameter[PARA_SMOOTH_GYRO]) - gyroZero[X];
+	gyroValues[Y] = smoothValue(ADCSensorValue[GYRO_Y], oldGyroValues[Y], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Y];
+	gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z], oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
 	
-	accValues[X] = smoothValue(overADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
-	accValues[Y] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
-	accValues[Z] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
+	accValues[X] = smoothValue(ADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
+	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
+	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
 	
 	u8 i;
 	for (i = 0; i < 3; i++)
@@ -134,25 +132,12 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 /* ADC oversampling ---------------------------------------------------------*/
 void oversamplingADC()
 {
-	// 8 time oversampling
+
 	u8 i;
-	u8 j = 0;
 	
 	for (i = 0; i < 7; i++)
 	{
-		overADCSensorValue[i] = ADCSensorValue[i];
-	}
-	for (i = 7; i < 56; i++)
-	{
-		overADCSensorValue[j++] += ADCSensorValue[i];
-		if (j > 6)
-		{
-			j = 0;
-		}
-	}
-	for (i = 0; i < 7; i++)
-	{
-		overADCSensorValue[i] = (overADCSensorValue[i] * 1000 ) >> 3;
+		ADCSensorValue[i] = ADCSensorValue[i] * 1000;
 	}
 }
 

@@ -26,7 +26,7 @@
 #include "serial.h"
 
 /* Variables ----------------------------------------------------------------*/
-vu16 ADCSensorValue[56];
+vu16 ADCSensorValue[7];
 
 /* Main Initfunction --------------------------------------------------------*/
 void initSystem()
@@ -221,8 +221,11 @@ void TIM_Configuration(void)
 	/* TIM enable counter */ 
 	TIM1_Cmd(ENABLE); 
 	/* Enable the CC1 Interrupt Request */ 
+#ifndef PPM_PA11
 	TIM1_ITConfig(TIM_IT_CC1, ENABLE); 
-	
+#else	
+	TIM1_ITConfig(TIM_IT_CC4, ENABLE); 
+#endif
 	
 	/* Timer for Servo 0-3 --------------------------------------------------*/
 	/* Time base configuration */
@@ -592,7 +595,7 @@ void initDMA (void)
 	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
 	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)&ADCSensorValue[0];
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	DMA_InitStructure.DMA_BufferSize = 56;
+	DMA_InitStructure.DMA_BufferSize = 7;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
