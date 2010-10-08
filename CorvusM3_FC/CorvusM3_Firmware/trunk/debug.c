@@ -30,8 +30,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0x190];  //statemachine
 extern vu16 receiverChannel[9];  //statemachine
-extern vu16 ADCSensorValue[56]; //initsystem
-extern vu32 overADCSensorValue[7]; // sensor
+extern vu16 ADCSensorValue[7]; //initsystem
 extern vs32 gyroAngle[3];  //statemachine
 extern vs32 accAngle[2];  //statemachine
 extern vs32 copterAngle[3];  //statemachine
@@ -49,17 +48,17 @@ void doDebug()
 	/* Graphoutput must start with 'G' and first value is timer (not used) */
 	if (getParameter(PARA_DEBUG) & PARA_DEBUG_ADC)
 	{
-		sprintf(x,"Gyro-ACC:1:%d:",overADCSensorValue[GYRO_X]);
+		sprintf(x,"Gyro-ACC:1:%d:",ADCSensorValue[GYRO_X]);
 		print_uart1(x);
-		sprintf(x,"%d:",overADCSensorValue[GYRO_Y]);
+		sprintf(x,"%d:",ADCSensorValue[GYRO_Y]);
 		print_uart1(x);
-		sprintf(x,"%d:",overADCSensorValue[GYRO_Z]);
+		sprintf(x,"%d:",ADCSensorValue[GYRO_Z]);
 		print_uart1(x);
-		sprintf(x,"%d:",overADCSensorValue[ACC_X]);
+		sprintf(x,"%d:",ADCSensorValue[ACC_X]);
 		print_uart1(x);
-		sprintf(x,"%d:",overADCSensorValue[ACC_Y]);
+		sprintf(x,"%d:",ADCSensorValue[ACC_Y]);
 		print_uart1(x);
-		sprintf(x,"%d:",overADCSensorValue[ACC_Z]);
+		sprintf(x,"%d:",ADCSensorValue[ACC_Z]);
 		print_uart1(x);
 		sprintf(x,"%d:\r\n",ADCSensorValue[VOLT]);
 		print_uart1(x);
