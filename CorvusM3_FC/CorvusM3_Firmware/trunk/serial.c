@@ -52,6 +52,19 @@ vu8 TxOutCounter3 = 0;
 vu8 RxInCounter3 = 0;
 vu8 RxOutCounter3 = 0; 
 
+vu8 uartmap = FALSE;
+
+
+/* map uart1 to uart3 -------------------------------------------------------*/
+void uartMap()
+{
+	// Controlloop --> statemachine() --> Timer 3
+	// no controlloop
+	TIM_ITConfig(TIM3, TIM_IT_Update, DISABLE);
+	
+	
+	uartmap = TRUE;
+}
 
 /* send byte array over TxBuffer and Interrupt ------------------------------*/
 void print_uart1 (const char * s)
@@ -138,9 +151,16 @@ void USART1_IRQHandler(void)
 	//DEFAULT_EXCEPTION_HANDLER(USART1_IRQHandler, "USART1", 53, 0xD4);
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
 	{		
-		/* Read one byte from the receive data register */
-		RxBuffer1[RxInCounter1++] = (USART_ReceiveData(USART1) & 0x7F);
-	
+		if (uartmap == FALSE)
+		{	/* Read one byte from the receive data register */
+			RxBuffer1[RxInCounter1++] = (USART_ReceiveData(USART1) & 0x7F);
+		}
+		// direct mapping to uart 3
+		else
+		{
+			/* Write one byte to the transmit data register */
+			USART_SendData(USART3, USART_ReceiveData(USART1));
+		}
 	}
 
 	
@@ -232,9 +252,17 @@ void USART3_IRQHandler(void)
 	//DEFAULT_EXCEPTION_HANDLER(USART1_IRQHandler, "USART1", 53, 0xD4);
 	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
 	{		
-		/* Read one byte from the receive data register */
-		RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
-	
+		if (uartmap == FALSE)
+		{
+			/* Read one byte from the receive data register */
+			RxBuffer3[RxInCounter3++] = (USART_ReceiveData(USART3) & 0x7F);
+		}
+		// direct mapping to uart 1
+		else
+		{
+			/* Write one byte to the transmit data register */
+			USART_SendData(USART1, USART_ReceiveData(USART3));
+		}
 	}
 
 	if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET)

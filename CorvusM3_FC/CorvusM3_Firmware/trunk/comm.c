@@ -19,6 +19,7 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "main.h"
 #include "comm.h"
 #include "serial.h"
 #include "eeprom.h"
@@ -26,6 +27,7 @@
 #include "sensor.h"
 #include "filteracc.h"
 #include "sal.h"
+#include "motorhal.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -39,10 +41,9 @@ extern vs32 copterAngle[3]; //statemachine
 vu16 receiverPCChannel[9];
 extern vu32 msCount; //statemachine
 vu32 msLastPCRC;
-
-
 char line[80];
 u8 l = 0;
+extern volatile char motor[13]; //statemachine
 
 
 /* getComm - get message from serial ----------------------------------------*/
@@ -108,6 +109,14 @@ void doComm()
 		// RC signal from Tool
 		case '~':
 			doRCComm();
+			break;
+		// Motor signal from Tool
+		case '<':
+			doMotComm();
+			break;
+		// Map Uart1 to Uart3
+		case '=':
+			uartMap();
 			break;
 		default:
 			send(HELP);
@@ -258,6 +267,20 @@ void doRCComm()
 	msLastPCRC = msCount;
 }
 
+
+/* we get Motor Commands from PC tool ---------------------------------------------*/
+void doMotComm()
+{
+	
+	motor[0] = 0xF5;
+	motor[1] = readInt(1);
+	motor[2] = readInt(5);
+	motor[3] = readInt(9);
+	motor[4] = readInt(13);
+	
+	// command motors
+	sendMotor(motor);
+}
 
 
 /* read ineger from byte array ----------------------------------------------*/
