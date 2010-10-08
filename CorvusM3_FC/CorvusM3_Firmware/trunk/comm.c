@@ -328,6 +328,10 @@ void send(u8 infoText)
 		print_uart1("dc ... Toggle Compass Values on/off\r\n");
 		print_uart1("# ... Load default parameter to flash\r\n");
 		print_uart1("* ... save all Parameter to flash\r\n");
+		Delay(20);
+		print_uart1("~ ... RC Values 4CH ~1234:1234:1234:1234\r\n");
+		print_uart1("< ... Motor 1-4 0-200 <010:150:150:200\r\n");
+		print_uart1("= ... Map UART1 to UART3\r\n");
 		
 		Delay(20);
 		print_uart1("sa ... save ACC Zero\r\n");
