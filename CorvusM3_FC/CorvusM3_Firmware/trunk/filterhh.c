@@ -45,8 +45,8 @@ void initFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 /* set gyro start angle -----------------------------------------------------*/
 void setAngleFilterHH(vs32 * gyroAngle, vs32 * copterAngle)
 {
-	copterAngle[X] = gyroAngle[X] = targetAngle[X] = 90;
-	copterAngle[Y] = gyroAngle[Y] = targetAngle[Y] = 90;
+	copterAngle[X] = gyroAngle[X] = targetAngle[X] = 9000000;
+	copterAngle[Y] = gyroAngle[Y] = targetAngle[Y] = 9000000;
 	copterAngle[Z] = gyroAngle[Z] = targetAngle[Z] = 0;
 	
 	char x [80];

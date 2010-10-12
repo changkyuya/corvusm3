@@ -137,7 +137,7 @@ void statemachine(void)
 			}
 			// flightcontroll
 			calcPIDCorr(PIDCorr, copterAngle, targetAngle);
-			// map PIDCorr to 4 Motors
+			// map PIDCorr to 4 motors and send to motors
 			sendPIDMotors(PIDCorr, receiverChannel, motor);
 			
 			// we like to stop!
