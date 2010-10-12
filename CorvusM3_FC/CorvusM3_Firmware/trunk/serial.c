@@ -208,12 +208,18 @@ void USART2_IRQHandler(void)
 				// for debug
 				//TxBuffer1[TxInCounter1++] = '\r';
 				//TxBuffer1[TxInCounter1++] = '\n';
+				
 				// start new frame
 				byteCount = 1;
 			}
 			else
 			{
 				spektrumBytes[0] = SPEKTRUM_NO;
+				// for debug
+				//TxBuffer1[TxInCounter1++] = '#';
+				//TxBuffer1[TxInCounter1++] = '\r';
+				//TxBuffer1[TxInCounter1++] = '\n';
+				
 				// start new frame
 				byteCount = 1;
 			}
@@ -222,7 +228,7 @@ void USART2_IRQHandler(void)
 		spektrumBytes[byteCount++] = data;
 
 		//test receiver output
-		//TxBuffer1[TxInCounter1++] = data;
+		//TxBuffer1[TxInCounter1++] = spektrumBytes[0];  //data
 		//USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 		
 		oldSpektrumMsCount = msCount;

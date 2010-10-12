@@ -40,7 +40,12 @@ u8 isSpektrumOnline()
 {
 	// OK Byte - test if uart3 interrupt is running
 	// each 11ms one frame comes - 
-	if ((oldSpektrumMsCount + 12) > msCount)
+	
+	//char x[100];
+	//sprintf(x,"%d:%d\r\n",oldSpektrumMsCount, msCount);
+	//print_uart1(x);
+	
+	if ((oldSpektrumMsCount + 22) >= msCount)
 	{
 		return 1;
 	}
@@ -55,8 +60,13 @@ void getSpektrumChannels(vu16 * receiverChannel)
 	u8 i;
 	
 	// OK Byte - test if uart3 interrupt is running
+	
+	//char x[100];
+	//sprintf(x,"%d\r\n",receiverChannel[0]);
+	//print_uart1(x);
+	
 	// each 11ms one frame comes - 
-	if ((oldSpektrumMsCount + 12) > msCount)
+	if ((oldSpektrumMsCount + 22) >= msCount)
 	{
 		receiverChannel[RC_OK] = spektrumBytes[0];
 	}
@@ -65,6 +75,7 @@ void getSpektrumChannels(vu16 * receiverChannel)
 	{
 		receiverChannel[RC_OK] = SPEKTRUM_NO;
 	}
+	
 	
 	// first 2 bytes are not used
 	

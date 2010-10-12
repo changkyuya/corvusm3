@@ -106,6 +106,11 @@ int main(void)
 		if (msCount % 50 == 0)
 		{
 			doDebug();
+			
+			// for test
+			//char x [80];
+			//sprintf(x,"%d\r\n",errorCode);
+			//print_uart1(x);
 		}
 		
 
