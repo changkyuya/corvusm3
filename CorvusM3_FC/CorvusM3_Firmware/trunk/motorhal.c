@@ -178,8 +178,14 @@ void limitMotors(s16 * motorTemp, volatile char * motor)
 	min = parameter[PARA_MIN_GAS] - min;
 	max = 200 - max;
 	
+	//char x [80];
+	//sprintf(x,"%d:%d:%d\r\n",min,max,motorTemp[1]);
+	//print_uart1(x);
+	
 	for (i = 1; i < 13; i++)
 	{
-		motor[i] = motorTemp[i] + min - max;
+		motor[i] = motorTemp[i] - min + max;
+		motor[i] = (motor[i] < parameter[PARA_MIN_GAS]) ? parameter[PARA_MIN_GAS] : motor[i];
+		motor[i] = (motor[i] > 200) ? 200 : motor[i];
 	}
 }
