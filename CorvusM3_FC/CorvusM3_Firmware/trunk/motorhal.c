@@ -73,8 +73,8 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	// map pitch to quax blmc values from 0-200
 	u8 pitch = (receiverChannel[PITCH] - 1000) / (1000 / MAX_GAS_VALUE);
 	
-	motorTemp[1] = pitch - PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000 + 50;
-	motorTemp[2] = pitch + PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000 - 50;
+	motorTemp[1] = pitch - PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000;
+	motorTemp[2] = pitch + PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000;
 	motorTemp[3] = pitch + PIDCorr[X] / 1000 + PIDCorr[Z] / 1000;
 	motorTemp[4] = pitch - PIDCorr[X] / 1000 + PIDCorr[Z] / 1000;
 	
@@ -87,6 +87,7 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	motorTemp[11] = parameter[PARA_MIN_GAS];
 	motorTemp[12] = parameter[PARA_MIN_GAS];
 	
+	/*
 	u8 i;
 	for (i = 1; i < 13; i++) 
 	{
@@ -100,7 +101,7 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 		}
 		motorTempOld[i] = motorTemp[i];
 	}
-	
+	*/
 	
 	
 	limitMotors(motorTemp, motor);
