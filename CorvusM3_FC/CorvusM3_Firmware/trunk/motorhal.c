@@ -71,20 +71,21 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	s16 motorTemp[13];
 	
 	// map pitch to quax blmc values from 0-200
-	u8 pitch = (receiverChannel[PITCH] - 1000) / 5;
+	u8 pitch = (receiverChannel[PITCH] - 1000) / (1000 / MAX_GAS_VALUE);
 	
-	motorTemp[1] = 	pitch - PIDCorr[Y] - PIDCorr[Z];
-	motorTemp[2] = 	pitch + PIDCorr[Y] - PIDCorr[Z];
-	motorTemp[3] = 	pitch + PIDCorr[X] + PIDCorr[Z];
-	motorTemp[4] = 	pitch - PIDCorr[X] + PIDCorr[Z];
-	motorTemp[5] = 0;
-	motorTemp[6] = 0;
-	motorTemp[7] = 0;
-	motorTemp[8] = 0;
-	motorTemp[9] = 0;
-	motorTemp[10] = 0;
-	motorTemp[11] = 0;
-	motorTemp[12] = 0;
+	motorTemp[1] = pitch - PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000;
+	motorTemp[2] = pitch + PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000;
+	motorTemp[3] = pitch + PIDCorr[X] / 1000 + PIDCorr[Z] / 1000;
+	motorTemp[4] = pitch - PIDCorr[X] / 1000 + PIDCorr[Z] / 1000;
+	
+	motorTemp[5] = parameter[PARA_MIN_GAS];
+	motorTemp[6] = parameter[PARA_MIN_GAS];
+	motorTemp[7] = parameter[PARA_MIN_GAS];
+	motorTemp[8] = parameter[PARA_MIN_GAS];
+	motorTemp[9] = parameter[PARA_MIN_GAS];
+	motorTemp[10] = parameter[PARA_MIN_GAS];
+	motorTemp[11] = parameter[PARA_MIN_GAS];
+	motorTemp[12] = parameter[PARA_MIN_GAS];
 	
 	u8 i;
 	for (i = 1; i < 13; i++) 
@@ -123,7 +124,7 @@ void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	// map pitch to quax blmc values from 0-180 - 20 points for stability
 	// does not work
 	//u8 pitch = map(receiverChannel[PITCH],1000,2000,0,180);
-	u8 pitch = (receiverChannel[PITCH] - 1000) / 5;
+	u8 pitch = (receiverChannel[PITCH] - 1000) / (1000 / MAX_GAS_VALUE);
 	
 	u8 pitchFactor[12];
 	u8 rollFactor[12];
@@ -165,7 +166,7 @@ void limitMotors(s16 * motorTemp, volatile char * motor)
 	
 	// this is for quax uart blmc !!!
 	s16 min = parameter[PARA_MIN_GAS];
-	s16 max = 200;
+	s16 max = MAX_GAS_VALUE;
 	
 	u8 i;
 	for (i = 1; i < 13; i++)
@@ -175,17 +176,29 @@ void limitMotors(s16 * motorTemp, volatile char * motor)
 	}
 	
 	//correkt all motors
-	min = parameter[PARA_MIN_GAS] - min;
-	max = 200 - max;
+	min =  min - parameter[PARA_MIN_GAS];
+	max = max - MAX_GAS_VALUE;
 	
 	//char x [80];
 	//sprintf(x,"%d:%d:%d\r\n",min,max,motorTemp[1]);
 	//print_uart1(x);
 	
-	for (i = 1; i < 13; i++)
+	if (max > 0)
 	{
-		motor[i] = motorTemp[i] - min + max;
-		motor[i] = (motor[i] < parameter[PARA_MIN_GAS]) ? parameter[PARA_MIN_GAS] : motor[i];
-		motor[i] = (motor[i] > 200) ? 200 : motor[i];
+		for (i = 1; i < 13; i++)
+		{
+			motor[i] = motorTemp[i] - max;
+			motor[i] = (motor[i] < parameter[PARA_MIN_GAS]) ? parameter[PARA_MIN_GAS] : motor[i];
+		}
 	}
+	else if (min < 0)
+	{
+		for (i = 1; i < 13; i++)
+		{
+			motor[i] = motorTemp[i] - min;
+			motor[i] = (motor[i] > MAX_GAS_VALUE) ? MAX_GAS_VALUE : motor[i];
+		}
+	}
+	
+	
 }

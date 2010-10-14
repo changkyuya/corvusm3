@@ -240,6 +240,8 @@
 #define PARA_SW_ACC			0x01 // to bitmask 1111
 #define PARA_SW_COMP2		0x02 // to bitmask 1111
 
+/* */
+#define MAX_GAS_VALUE		200
 
 /* Struct --------------------------------------------------------------------*/
 
