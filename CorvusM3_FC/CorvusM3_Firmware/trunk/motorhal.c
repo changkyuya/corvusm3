@@ -73,8 +73,8 @@ void sendPIDMotors4Plus(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	// map pitch to quax blmc values from 0-200
 	u8 pitch = (receiverChannel[PITCH] - 1000) / (1000 / MAX_GAS_VALUE);
 	
-	motorTemp[1] = pitch - PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000;
-	motorTemp[2] = pitch + PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000;
+	motorTemp[1] = pitch - PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000 + 50;
+	motorTemp[2] = pitch + PIDCorr[Y] / 1000 - PIDCorr[Z] / 1000 - 50;
 	motorTemp[3] = pitch + PIDCorr[X] / 1000 + PIDCorr[Z] / 1000;
 	motorTemp[4] = pitch - PIDCorr[X] / 1000 + PIDCorr[Z] / 1000;
 	
@@ -176,27 +176,34 @@ void limitMotors(s16 * motorTemp, volatile char * motor)
 	}
 	
 	//correkt all motors
-	min =  min - parameter[PARA_MIN_GAS];
+	min = min - parameter[PARA_MIN_GAS];
 	max = max - MAX_GAS_VALUE;
 	
 	//char x [80];
-	//sprintf(x,"%d:%d:%d\r\n",min,max,motorTemp[1]);
+	//sprintf(x,"%d:%d:%d:%d\r\n",min,max,motorTemp[1],motorTemp[1]);
 	//print_uart1(x);
 	
 	if (max > 0)
 	{
 		for (i = 1; i < 13; i++)
 		{
-			motor[i] = motorTemp[i] - max;
-			motor[i] = (motor[i] < parameter[PARA_MIN_GAS]) ? parameter[PARA_MIN_GAS] : motor[i];
+			motorTemp[i] -= max;
+			motor[i] = (motorTemp[i] < parameter[PARA_MIN_GAS]) ? parameter[PARA_MIN_GAS] : motorTemp[i];
 		}
 	}
 	else if (min < 0)
 	{
 		for (i = 1; i < 13; i++)
 		{
-			motor[i] = motorTemp[i] - min;
-			motor[i] = (motor[i] > MAX_GAS_VALUE) ? MAX_GAS_VALUE : motor[i];
+			motorTemp[i] -= min;
+			motor[i] = (motorTemp[i] > MAX_GAS_VALUE) ? MAX_GAS_VALUE : motorTemp[i];
+		}
+	}
+	else 
+	{
+		for (i = 1; i < 13; i++)
+		{
+			motor[i] = motorTemp[i];
 		}
 	}
 	
