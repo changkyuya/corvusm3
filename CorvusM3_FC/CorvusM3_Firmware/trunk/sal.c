@@ -28,6 +28,8 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
+extern vs32 summI[3]; //pid
+extern vs32 diffOld[3]; //pid
 
 /* init the filter ----------------------------------------------------------*/
 void initFilter(vs32 * gyroAngle, vs32 * copterAngle)
@@ -50,6 +52,13 @@ void initFilter(vs32 * gyroAngle, vs32 * copterAngle)
 		default:
 			break;
 	}	
+	/* Init PID */
+	u8 i;
+	for (i = 0;i < 3; i++)
+	{
+		summI[i] = 0;
+		diffOld[i] = 0;
+	}
 }
 
 
