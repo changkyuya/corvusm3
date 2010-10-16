@@ -174,7 +174,7 @@ void mapReceiverValuesFilterComp2(vu16 * receiverChannel)
 	{
 		if(receiverChannel[PITCH] > 1005)
 		{
-			targetAngle[Z] += (receiverChannel[YAW] - 1500) * 50;
+			targetAngle[Z] += (receiverChannel[YAW] - 1500) * parameter[PARA_STICK_FACTOR];
 		}
 	}
 	
