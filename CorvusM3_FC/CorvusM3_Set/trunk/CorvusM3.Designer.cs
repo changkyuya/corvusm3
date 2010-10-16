@@ -75,18 +75,19 @@
             this.flashButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.trackBar4 = new System.Windows.Forms.TrackBar();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.button2 = new System.Windows.Forms.Button();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
             this.motorTimer = new System.Windows.Forms.Timer(this.components);
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.trackBar4 = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.rescanToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -99,10 +100,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.yawTrackBar)).BeginInit();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // BottomToolStripPanel
@@ -169,6 +170,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.comPortToolStripComboBox,
+            this.rescanToolStripButton,
             this.openToolStripButton,
             this.closeToolStripButton,
             this.toolStripSeparator1,
@@ -577,16 +579,6 @@
             this.propertyGrid.Size = new System.Drawing.Size(634, 401);
             this.propertyGrid.TabIndex = 0;
             // 
-            // steeringTimer
-            // 
-            this.steeringTimer.Interval = 10;
-            this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
-            // 
-            // motorTimer
-            // 
-            this.motorTimer.Interval = 10;
-            this.motorTimer.Tick += new System.EventHandler(this.motorTimer_Tick);
-            // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.label4);
@@ -605,45 +597,41 @@
             this.tabPage6.Text = "Motor";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // label4
             // 
-            this.button2.Location = new System.Drawing.Point(410, 28);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(335, 129);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Start / Stop";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(178, 365);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(13, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "0";
             // 
-            // trackBar1
+            // label3
             // 
-            this.trackBar1.Location = new System.Drawing.Point(28, 28);
-            this.trackBar1.Maximum = 200;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 330);
-            this.trackBar1.TabIndex = 5;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(127, 365);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "0";
             // 
-            // trackBar2
+            // label2
             // 
-            this.trackBar2.Location = new System.Drawing.Point(79, 28);
-            this.trackBar2.Maximum = 200;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(45, 330);
-            this.trackBar2.TabIndex = 6;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(76, 365);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(13, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "0";
             // 
-            // trackBar3
+            // label1
             // 
-            this.trackBar3.Location = new System.Drawing.Point(130, 28);
-            this.trackBar3.Maximum = 200;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar3.Size = new System.Drawing.Size(45, 330);
-            this.trackBar3.TabIndex = 7;
-            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 365);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(13, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "0";
             // 
             // trackBar4
             // 
@@ -655,41 +643,65 @@
             this.trackBar4.TabIndex = 8;
             this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_Scroll);
             // 
-            // label1
+            // trackBar3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 365);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "0";
+            this.trackBar3.Location = new System.Drawing.Point(130, 28);
+            this.trackBar3.Maximum = 200;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar3.Size = new System.Drawing.Size(45, 330);
+            this.trackBar3.TabIndex = 7;
+            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
             // 
-            // label2
+            // trackBar2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(76, 365);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "0";
+            this.trackBar2.Location = new System.Drawing.Point(79, 28);
+            this.trackBar2.Maximum = 200;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar2.Size = new System.Drawing.Size(45, 330);
+            this.trackBar2.TabIndex = 6;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
-            // label3
+            // trackBar1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(127, 365);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(13, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "0";
+            this.trackBar1.Location = new System.Drawing.Point(28, 28);
+            this.trackBar1.Maximum = 200;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar1.Size = new System.Drawing.Size(45, 330);
+            this.trackBar1.TabIndex = 5;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
-            // label4
+            // button2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(178, 365);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "0";
+            this.button2.Location = new System.Drawing.Point(410, 28);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(335, 129);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Start / Stop";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // steeringTimer
+            // 
+            this.steeringTimer.Interval = 10;
+            this.steeringTimer.Tick += new System.EventHandler(this.steeringTimer_Tick);
+            // 
+            // motorTimer
+            // 
+            this.motorTimer.Interval = 10;
+            this.motorTimer.Tick += new System.EventHandler(this.motorTimer_Tick);
+            // 
+            // rescanToolStripButton
+            // 
+            this.rescanToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.rescanToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("rescanToolStripButton.Image")));
+            this.rescanToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rescanToolStripButton.Name = "rescanToolStripButton";
+            this.rescanToolStripButton.Size = new System.Drawing.Size(45, 22);
+            this.rescanToolStripButton.Text = "rescan";
+            this.rescanToolStripButton.Click += new System.EventHandler(this.rescanToolStripButton_Click);
             // 
             // CorvusM3
             // 
@@ -724,10 +736,10 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -792,6 +804,7 @@
         private System.Windows.Forms.TrackBar trackBar4;
         private System.Windows.Forms.TrackBar trackBar3;
         private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.ToolStripButton rescanToolStripButton;
 
 
 

@@ -868,6 +868,21 @@ namespace CorvusM3
             motorValues[3] = trackBar4.Value;
         }
 
+        private void rescanToolStripButton_Click(object sender, EventArgs e)
+        {
+            comPortToolStripComboBox.Items.Clear();
+            
+            foreach (string port in Einstellungen.getPorts)
+            {           
+                comPortToolStripComboBox.Items.Add(port);
+            }
+            try
+            {
+                comPortToolStripComboBox.SelectedItem = Einstellungen.comPort;
+            }
+            catch { }
+        }
+
 
 
 
