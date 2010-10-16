@@ -55,10 +55,11 @@ void setAngleFilterACC(vs32 * gyroAngle, vs32 * copterAngle)
 {
 	vs32 accRawValues[3];
 	vs32 gyroRawValues[3];
-	getRawValues(gyroRawValues, accRawValues);
-	
 	vs32 accAngle[2];
+		
+	getRawValues(gyroRawValues, accRawValues);
 	getACCAnglesFilterACC(accAngle, accRawValues);
+	
 	copterAngle[X] = gyroAngle[X] = accAngle[X];
 	copterAngle[Y] = gyroAngle[Y] = accAngle[Y];
 	copterAngle[Z] = gyroAngle[Z] = targetAngle[Z] = 0;
