@@ -91,7 +91,7 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Y_ZERO], 20330); //20330
 	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Z_ZERO], 24450); //24450
 	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_ACC], 00); 
-	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_GYRO], 00); 
+	EE_WriteVariable(VirtAddVarTab[PARA_STICK_FACTOR], 50); 
 	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_RC], 00); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_X_90], 2200); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Y_90], 2200); 

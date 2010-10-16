@@ -166,7 +166,7 @@
 #define PARA_ACC_Y_ZERO		6
 #define PARA_ACC_Z_ZERO		7
 #define PARA_SMOOTH_ACC		8
-#define PARA_SMOOTH_GYRO	9
+#define PARA_STICK_FACTOR	9
 #define PARA_SMOOTH_RC		10
 #define PARA_GYRO_X_90		11
 #define PARA_GYRO_Y_90		12
