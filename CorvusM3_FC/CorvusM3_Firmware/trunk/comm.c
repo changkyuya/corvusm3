@@ -278,6 +278,10 @@ void doMotComm()
 	motor[3] = readInt(9);
 	motor[4] = readInt(13);
 	
+	char x [80];
+	sprintf(x,"%d:%d:%d:%d\r\n",motor[1],motor[2],motor[3],motor[4]);
+	print_uart1(x);
+			
 	// command motors
 	sendMotor(motor);
 }
