@@ -14,7 +14,7 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 06 || ACC-Y-ZERO || 20330 || || Horizontalwert Y-Achse für ACC - ADC x 10 ||
 || 07 || ACC-Z-ZERO || 24450 || || Horizontalwert Z-Achse für ACC - ADC x 10 ||
 || 08 || SMOOTH_ACC || 0 || 0-99 || Glättung zum letzten Wert (0 wäre immer letzter Wert)  || 
-|| 09 || SMOOTH_GYRO || 0 || 0-99 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
+|| 09 || STICK_FACTOR || 50 || 0-65535 || Stickfaktor HH und Gier || 
 || 10 || SMOOTH_RC || 0 || 0-99 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
 || 11 || GYRO_X_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
 || 12 || GYRO_Y_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
@@ -28,15 +28,15 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 20 || CAM_ROLL || 20500 || || Rollausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
 || 21 || CAM_NICK || 30500 || || Nickausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
 || 22 || MIN_GAS || 32 || || Minimalgas für Regler/Motoren ||
-|| 23 || P_X || || || Proportionalanteil Roll ||
-|| 24 || I_X || || || Proportionalanteil Nick ||
-|| 25 || D_X || || || Integralanteil Roll ||
-|| 26 || P_Y || || || Integralanteil Nick ||
-|| 27 || I_Y || || || Differenzialanteil Roll ||
-|| 28 || D_Y || || || Differenzialanteil Nick ||
-|| 29 || P_Z || || || Proportionalanteil Gier ||
-|| 30 || I_Z || || || Integralanteil Gier ||
-|| 31 || D_Z || || || Differenzialanteil Gier ||
+|| 23 || P_X || 1000 || 0-65535 || Proportionalanteil Roll ||
+|| 24 || I_X || || 0-65535 || Proportionalanteil Nick ||
+|| 25 || D_X || 3000 || 0-65535 || Integralanteil Roll ||
+|| 26 || P_Y || 1000 || 0-65535 || Integralanteil Nick ||
+|| 27 || I_Y || || 0-65535 || Differenzialanteil Roll ||
+|| 28 || D_Y || 3000 || 0-65535 || Differenzialanteil Nick ||
+|| 29 || P_Z || 1000 || 0-65535 || Proportionalanteil Gier ||
+|| 30 || I_Z || 500 || 0-65535 || Integralanteil Gier ||
+|| 31 || D_Z || || 0-65535 || Differenzialanteil Gier ||
 || 32 || COMP_CORR_X || || || Korrekturwert Kompass X Achse ||
 || 33 || COMP_CORR_Y || || || Korrekturwert Kompass Y Achse ||
 || 34 || COMP_CORR_Z || || || Korrekturwert Kompass Z Achse ||
