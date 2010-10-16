@@ -15,9 +15,9 @@ AppUpdatesURL=http://corvusm3.blogspot.com/
 DefaultDirName={pf}\CorvusM3 Set
 DefaultGroupName=CorvusM3
 AllowNoIcons=yes
-LicenseFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\License.txt
-InfoBeforeFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\InstallInfo.txt
-InfoAfterFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\ChangeLog.txt
+LicenseFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\License.txt
+InfoBeforeFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\InstallInfo.txt
+InfoAfterFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\ChangeLog.txt
 OutputDir=D:\Data\Dokumente\Modellbau\CorvusM3\CorvusM3 Setup
 OutputBaseFilename=setup CorvusM3 Set
 SetupIconFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\cm3.ico
@@ -34,14 +34,9 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.vshost.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.vshost.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.vshost.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\ZedGraph.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\Uploader\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\ZedGraph.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\Uploader\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
