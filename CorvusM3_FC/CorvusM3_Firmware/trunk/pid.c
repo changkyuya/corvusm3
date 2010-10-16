@@ -54,46 +54,47 @@ void calcPIDCorr(vs32 * PIDCorr, vs32 * copterAngle, vs32 * targetAngle)
 	{
 		// special for yaw!
 		diff = targetAngle[i] - copterAngle[i];
-		 
+		diff = diff / 1000;	
+ 
 		// calc the shortest way for yaw
-		if (i == 2)
-		{
-			if (diff > 18000000)
+		//if (i == 2)
+		//{
+			if (diff > 18000)
 			{
-				diff -= 36000000;
+				diff -= 36000;
 			}
-			if (diff < -18000000)
+			if (diff < -18000)
 			{
-				diff += 36000000;
+				diff += 36000;
 			}
-		}
+		//}
 		
-		summI[i] += diff / 10000;
+		summI[i] += diff / 10;
 		//Limit I
-		if (summI[i] > 1000000) 
+		if (summI[i] > 100000) 
 		{
-			summI[i] = 10000000;
+			summI[i] = 100000;
 		}
 		
 		diffLast = diffOld[i] - diff;
 		
 		PIDCorr[i] = ( parameter[23 + (i * 3)] * diff ) / 100000;
-		PIDCorr[i] -= ( parameter[24 + (i * 3)] * (summI[i] / 10000) );
-		PIDCorr[i] -= ( parameter[25 + (i * 3)] * diffLast  ) / 10000;
+		PIDCorr[i] += ( parameter[24 + (i * 3)] * summI[i] ) / 10000000;
+		PIDCorr[i] -= ( parameter[25 + (i * 3)] * diffLast  ) / 1000;
 		
 		//limit PID Corr
 		//if (PIDCorr[i] > 50) PIDCorr[i] = 20;
 		//if (PIDCorr[i] < -0) PIDCorr[i] = -20;
 		
-		diffOld[i] = diff;
-		
-		/*
-		if (i == 0)
+		/*if (i == 0)
 		{
 			char x [80];
-			sprintf(x,"SU:%d:%d:%d\r\n",diff,summI[0],PIDCorr[0]);
+			sprintf(x,"%d:%d:%d\r\n",diff,summI[0],PIDCorr[0]);
 			print_uart1(x);
 		}*/
+		
+		diffOld[i] = diff;
+
 	}
 	
 	//char x [80];
