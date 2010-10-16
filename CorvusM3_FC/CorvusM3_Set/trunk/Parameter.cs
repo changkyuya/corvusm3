@@ -143,8 +143,8 @@ namespace CorvusM3
             }
             get { return parameter[8]; }
         }
-        [CategoryAttribute("Sensoren"), DisplayName("SMOOTH_GYRO [09] (0-100)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
-        public int SMOOTHGYRO
+        [CategoryAttribute("RC Channels"), DisplayName("STICK_FACTOR [09]"), DescriptionAttribute("Stick Factor für HH und Yaw - 50 default")]
+        public int STICKFACTOR
         {
             set
             {
