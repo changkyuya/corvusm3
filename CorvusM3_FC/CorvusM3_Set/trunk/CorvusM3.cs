@@ -790,16 +790,24 @@ namespace CorvusM3
 
         private void flashFirmwareToolStripButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog flashFWDialog = new OpenFileDialog();
-            flashFWDialog.Filter = "binary file (*.bin)|*.bin|All files (*.*)|*.*";
-            if (flashFWDialog.ShowDialog() == DialogResult.OK)
+            if (!comPortToolStripComboBox.Selected || comPortToolStripComboBox.SelectedText == "")
             {
-                string path = flashFWDialog.FileName;
-                string applPath = Application.StartupPath;
-
-                System.Diagnostics.Process.Start(applPath + @"\Uploader\STM32\STMFlashLoader.exe", @" -c --pn 2 --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
+                MessageBox.Show("Please select COM Port!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                OpenFileDialog flashFWDialog = new OpenFileDialog();
+                flashFWDialog.Filter = "binary file (*.bin)|*.bin|All files (*.*)|*.*";
+                if (flashFWDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string path = flashFWDialog.FileName;
+                    string applPath = Application.StartupPath;
 
+                    string comPort = comPortToolStripComboBox.SelectedText.Substring(3);
+
+                    System.Diagnostics.Process.Start(applPath + @"\Uploader\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
+                }
+            }
 
         }
 
