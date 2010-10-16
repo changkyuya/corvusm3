@@ -105,15 +105,15 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_CAM_X], 20500);   //servo 2 , 0, wert 500
 	EE_WriteVariable(VirtAddVarTab[PARA_CAM_Y], 30500);   //servo 3 , 0, wert 500
 	EE_WriteVariable(VirtAddVarTab[PARA_MIN_GAS], 32);  // min gas 24 
-	EE_WriteVariable(VirtAddVarTab[PARA_P_X], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_I_X], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_D_X], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_P_Y], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_I_Y], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_D_Y], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_P_Z], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_I_Z], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_D_Z], 0);  
+	EE_WriteVariable(VirtAddVarTab[PARA_P_X], 1000); //23:1000  
+	EE_WriteVariable(VirtAddVarTab[PARA_I_X], 0); //24: 
+	EE_WriteVariable(VirtAddVarTab[PARA_D_X], 3000);  //25:3000
+	EE_WriteVariable(VirtAddVarTab[PARA_P_Y], 1000);  //26:
+	EE_WriteVariable(VirtAddVarTab[PARA_I_Y], 0); //27: 
+	EE_WriteVariable(VirtAddVarTab[PARA_D_Y], 3000);  //28:
+	EE_WriteVariable(VirtAddVarTab[PARA_P_Z], 1000);  //29:
+	EE_WriteVariable(VirtAddVarTab[PARA_I_Z], 500);  //30:
+	EE_WriteVariable(VirtAddVarTab[PARA_D_Z], 0);  //31:
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_X], 0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_Y], 0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_Z], 0);  
