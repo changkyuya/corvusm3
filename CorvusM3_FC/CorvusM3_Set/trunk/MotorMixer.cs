@@ -72,14 +72,19 @@ namespace CorvusM3
             int rechts;
             int para;
 
-            links = Convert.ToInt16(box1.Text);
-            rechts = Convert.ToInt16(box2.Text);
-            if (links < 0)
-                links = links * -1 + 128;
-            if (rechts < 0)
-                rechts = rechts * -1 + 128;
-            para = links * 256 + rechts;
-
+            try
+            {
+                links = Convert.ToInt16(box1.Text);
+                rechts = Convert.ToInt16(box2.Text);
+                if (links < 0)
+                    links = links * -1 + 128;
+                if (rechts < 0)
+                    rechts = rechts * -1 + 128;
+                para = links * 256 + rechts;
+            }
+            catch {
+                para = 0;
+            }
 
             return para.ToString();
         }

@@ -146,7 +146,10 @@ void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	
 	for (i = 0; i < 12; i++)
 	{
-		motorTemp[i + 1] = (pitch * pitchFactor[i] / 100) + (PIDCorr[X] * rollFactor[i] / 100) + (PIDCorr[Y] * nickFactor[i] / 100) + (PIDCorr[Y] * yawFactor[i] / 100);
+		motorTemp[i + 1] = ((pitch * pitchFactor[i]) / 100) + 
+							((PIDCorr[X] * rollFactor[i]) / 100) + 
+							((PIDCorr[Y] * nickFactor[i]) / 100) + 
+							((PIDCorr[Y] * yawFactor[i]) / 100);
 	}
 	
 	
