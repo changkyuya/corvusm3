@@ -119,30 +119,30 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_Z], 0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_DECL], 0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_FORCE], 0); 
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT1A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT1B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT2A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT2B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT3A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT3B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT4A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT4B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT5A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT5B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT6A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT6B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT7A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT7B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT8A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT8B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT9A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT9B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT10A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT10B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT11A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT11B], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT12A], 0);  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT12B], 0);   
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT1A], 25600); //100, 0  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT1B], 58596); //-100, -100
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT2A], 25600); //100, 0  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT2B], 25828); //100, -100  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT3A], 25700); //100, 100 
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT3B], 100); //0, 100  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT4A], 25828); //100, -100  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT4B], 100); //0, 100  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT5A], 25600); //100, 0 - Motor not used 
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT5B], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT6A], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT6B], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT7A], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT7B], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT8A], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT8B], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT9A], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT9B], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT10A], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT10B], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT11A], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT11B], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT12A], 25600);  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT12B], 25600);   
 	//#########################################################################
 	u16 val;
 	u16 i;
