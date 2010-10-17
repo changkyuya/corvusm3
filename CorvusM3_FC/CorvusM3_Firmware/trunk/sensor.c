@@ -31,7 +31,8 @@
 /* Enums --------------------------------------------------------------------*/
 
 /* Variables ----------------------------------------------------------------*/
-extern vu16 ADCSensorValue[7];  //initsystem
+extern vu16 ADCSensorValue[56];  //initsystem
+vu32 overADCSensorValue[7];
 //vu32 oldGyroValues[3]; // for smooth
 vu32 oldAccValues[3]; // for smooth
 vu32 gyroZero[3];
@@ -56,6 +57,8 @@ extern vu8 i2cToWrite; //i2c
 /* initGyros to set Baise ---------------------------------------------------*/
 void zeroGyro()
 {
+	//TODO
+	oversamplingADC();
 	
 	gyroZero[X] = 0;
 	gyroZero[Y] = 0;
@@ -64,9 +67,9 @@ void zeroGyro()
 	u16 i;
 	for (i = 0; i < 1024; i++)
 	{	
-		gyroZero[X] += ADCSensorValue[GYRO_X]* 1000;
-		gyroZero[Y] += ADCSensorValue[GYRO_Y]* 1000;
-		gyroZero[Z] += ADCSensorValue[GYRO_Z]* 1000;
+		gyroZero[X] += overADCSensorValue[GYRO_X];
+		gyroZero[Y] += overADCSensorValue[GYRO_Y];
+		gyroZero[Z] += overADCSensorValue[GYRO_Z];
 		
 		Pause(1);
 	}
@@ -86,6 +89,9 @@ void zeroGyro()
 /* Set ACC Values to Zero ---------------------------------------------------*/
 void zeroACC()
 {
+	//TODO
+	oversamplingADC();	
+
 	accZero[X] = 0;
 	accZero[Y] = 0;
 	accZero[Z] = 0;
@@ -93,9 +99,9 @@ void zeroACC()
 	u16 i;
 	for (i = 0; i < 1024; i++)
 	{	
-		accZero[X] += ADCSensorValue[ACC_X]* 1000;
-		accZero[Y] += ADCSensorValue[ACC_Y]* 1000;
-		accZero[Z] += ADCSensorValue[ACC_Z]* 1000;
+		accZero[X] += overADCSensorValue[ACC_X];
+		accZero[Y] += overADCSensorValue[ACC_Y];
+		accZero[Z] += overADCSensorValue[ACC_Z];
 		
 		Pause(1);
 	}
@@ -122,21 +128,22 @@ void zeroACC()
 /* get RawValues - calculate Gyrovalues and Baise --------------------------*/
 void getRawValues(vs32 * gyroValues, vs32 * accValues)
 {
+	//TODO
+	oversamplingADC();
 	
-	//overADCSensorValue[0] = (ADCSensorValue[0]+ADCSensorValue[7]+ADCSensorValue[14]+ADCSensorValue[21]+ADCSensorValue[28]+ADCSensorValue[35]+ADCSensorValue[42]+ADCSensorValue[49])>>3;
 	//char x [200];
 	//sprintf(x,"%d:%d:%d:%d:%d:%d:%d:%d\r\n",ADCSensorValue[0],ADCSensorValue[7],ADCSensorValue[14],ADCSensorValue[21],ADCSensorValue[28],ADCSensorValue[35],ADCSensorValue[42],ADCSensorValue[49]);
 	//print_uart1(x);
 	
 	// no gyro smooth
-	gyroValues[X] = ADCSensorValue[GYRO_X] * 1000 - gyroZero[X];
-	gyroValues[Y] = ADCSensorValue[GYRO_Y] * 1000 - gyroZero[Y];
-	gyroValues[Z] = ADCSensorValue[GYRO_Z] * 1000 - gyroZero[Z];
+	gyroValues[X] = overADCSensorValue[GYRO_X] - gyroZero[X];
+	gyroValues[Y] = overADCSensorValue[GYRO_Y] - gyroZero[Y];
+	gyroValues[Z] = overADCSensorValue[GYRO_Z] - gyroZero[Z];
 	//gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z] * 1000, oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
 	
-	accValues[X] = smoothValue(ADCSensorValue[ACC_X] * 1000, oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
-	accValues[Y] = smoothValue(ADCSensorValue[ACC_Y] * 1000, oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
-	accValues[Z] = smoothValue(ADCSensorValue[ACC_Z] * 1000, oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
+	accValues[X] = smoothValue(overADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
+	accValues[Y] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
+	accValues[Z] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
 	
 	u8 i;
 	for (i = 0; i < 3; i++)
@@ -146,6 +153,30 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 	}
 }
 
+/* ADC oversampling ---------------------------------------------------------*/
+void oversamplingADC()
+{
+	// 8 time oversampling
+	u8 i;
+	u8 j = 0;
+	
+	for (i = 0; i < 7; i++)
+	{
+		overADCSensorValue[i] = ADCSensorValue[i];
+	}
+	for (i = 7; i < 56; i++)
+	{
+		overADCSensorValue[j++] += ADCSensorValue[i];
+		if (j > 6)
+		{
+			j = 0;
+		}
+	}
+	for (i = 0; i < 7; i++)
+	{
+		overADCSensorValue[i] = (overADCSensorValue[i] * 1000 ) >> 3;
+	}
+}
 
 
 /* setup compass hmc5843 ----------------------------------------------------*/
