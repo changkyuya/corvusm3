@@ -42,3 +42,27 @@ Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 || 34 || COMP_CORR_Z || || || Korrekturwert Kompass Z Achse ||
 || 35 || COMP_DECL || || || Declination (Abweichung zu magnetisch Nord) Grad mit 2 Nachkomma ||
 || 36 || COMP_FORCE || 500 || 0-10000 || Wirkung vom Kompass auf den Gier Gyro (0 ist nur Gyro) ||
+|| 37 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 38 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 39 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 40 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 41 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 42 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 43 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 44 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 45 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 46 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 47 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 48 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 49 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 50 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 51 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 52 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 53 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 54 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 55 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 56 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 57 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 58 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
+|| 59 || MOTOR_MIXER_MOT1A || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Pitch/Roll) ||
+|| 60 || MOTOR_MIXER_MOT1B || 0 || -100 - 100 || Motormischer 2 Werte je 8 Bit (Nick/Yaw) ||
