@@ -28,6 +28,7 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 parameter[0x190]; //parameter
 s16 motorTempOld[13]; 
+extern vu32 msCount; //statemachine for debug
 
 /* send Motorcommands to BLMC over UART3 ------------------------------------*/
 void sendMotor(volatile char * motor)
@@ -127,10 +128,10 @@ void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	//u8 pitch = map(receiverChannel[PITCH],1000,2000,0,180);
 	u8 pitch = (receiverChannel[PITCH] - 1000) / (1000 / MAX_GAS_VALUE);
 	
-	u8 pitchFactor[12];
-	u8 rollFactor[12];
-	u8 nickFactor[12];
-	u8 yawFactor[12];
+	s8 pitchFactor[12];
+	s8 rollFactor[12];
+	s8 nickFactor[12];
+	s8 yawFactor[12];
 	u8 i;
 	u8 j;
 	for (i = 0; i < 12; i++)
@@ -141,8 +142,19 @@ void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 		rollFactor[i] = parameter[37 + j] & 255;
 		nickFactor[i] = parameter[38 + j] >> 8;
 		yawFactor[i] = parameter[38 + j] & 255;
-	
+		
+		/* Debug Output 20Hz ---------------------------------------------------*/
+		/*if (msCount % 50 == 0)
+		{
+			if (i < 4)
+			{
+				char x [80];
+				sprintf(x,"%d,%d:%d:%d:%d#\r\n",j,pitchFactor[i],rollFactor[i],nickFactor[i],yawFactor[i]);
+				print_uart1(x);
+			}
+		}*/
 	}
+	
 	
 	for (i = 0; i < 12; i++)
 	{

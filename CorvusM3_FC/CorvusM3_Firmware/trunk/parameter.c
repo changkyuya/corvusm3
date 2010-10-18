@@ -120,9 +120,9 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_DECL], 0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_FORCE], 0); 
 	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT1A], 25600); //100, 0  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT1B], 58596); //-100, -100
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT1B], 40092); //-100, -100
 	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT2A], 25600); //100, 0  
-	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT2B], 25828); //100, -100  
+	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT2B], 25756); //100, -100  
 	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT3A], 25700); //100, 100 
 	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT3B], 100); //0, 100  
 	EE_WriteVariable(VirtAddVarTab[PARA_MIXER_MOT4A], 25828); //100, -100  

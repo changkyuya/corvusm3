@@ -103,21 +103,15 @@ void getGyroAnglesFilterHH(vs32 * gyroAngle, vs32 * gyroRawValues)
 	//actualGyroRawValues[Y] = (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100);
 	//actualGyroRawValues[Z] = (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
 	
-	actualGyroRawValues[X] = gyroRawValues[X] * parameter[PARA_GYRO_X_90] / 24818;
-	actualGyroRawValues[Y] = gyroRawValues[Y] * parameter[PARA_GYRO_Y_90] / 24818;
-	actualGyroRawValues[Z] = gyroRawValues[Z] * parameter[PARA_GYRO_Z_90] / 24818;
+	//calc with integer
+	actualGyroRawValues[X] = (gyroRawValues[X] * parameter[PARA_GYRO_X_90]) / 24818;
+	actualGyroRawValues[Y] = (gyroRawValues[Y] * parameter[PARA_GYRO_Y_90]) / 24818;
+	actualGyroRawValues[Z] = (gyroRawValues[Z] * parameter[PARA_GYRO_Z_90]) / 24818;
 	
-	/*
 	gyroAngle[X] -= (gyroRawValues3[X] + 2 * gyroRawValues2[X] + 2 * gyroRawValues1[X] + actualGyroRawValues[X]) / 6;
 	gyroAngle[Y] -= (gyroRawValues3[Y] + 2 * gyroRawValues2[Y] + 2 * gyroRawValues1[Y] + actualGyroRawValues[Y]) / 6;
 	gyroAngle[Z] -= (gyroRawValues3[Z] + 2 * gyroRawValues2[Z] + 2 * gyroRawValues1[Z] + actualGyroRawValues[Z]) / 6; 
-	*/
-	
-	//vs32 temp = (gyroRawValues3[X] + 2 * gyroRawValues2[X] + 2 * gyroRawValues1[X] + actualGyroRawValues[X]) / 6;
-	
-	gyroAngle[X] -= actualGyroRawValues[X];
-	gyroAngle[Y] -= (gyroRawValues3[Y] + 2 * gyroRawValues2[Y] + 2 * gyroRawValues1[Y] + actualGyroRawValues[Y]) / 6;
-	gyroAngle[Z] -= actualGyroRawValues[Z]; 
+
 	
 	//char x [80];
 	//sprintf(x,"%d\r\n",actualGyroRawValues[X]);
