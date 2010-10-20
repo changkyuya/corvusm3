@@ -40,6 +40,7 @@
             this.commandTextBox = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.comPortToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.rescanToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.closeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -87,7 +88,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
             this.motorTimer = new System.Windows.Forms.Timer(this.components);
-            this.rescanToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -185,6 +185,16 @@
             this.comPortToolStripComboBox.Name = "comPortToolStripComboBox";
             this.comPortToolStripComboBox.Size = new System.Drawing.Size(121, 25);
             this.comPortToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.comPortToolStripComboBox_SelectedIndexChanged);
+            // 
+            // rescanToolStripButton
+            // 
+            this.rescanToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.rescanToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("rescanToolStripButton.Image")));
+            this.rescanToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rescanToolStripButton.Name = "rescanToolStripButton";
+            this.rescanToolStripButton.Size = new System.Drawing.Size(45, 22);
+            this.rescanToolStripButton.Text = "rescan";
+            this.rescanToolStripButton.Click += new System.EventHandler(this.rescanToolStripButton_Click);
             // 
             // openToolStripButton
             // 
@@ -693,16 +703,6 @@
             this.motorTimer.Interval = 10;
             this.motorTimer.Tick += new System.EventHandler(this.motorTimer_Tick);
             // 
-            // rescanToolStripButton
-            // 
-            this.rescanToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.rescanToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("rescanToolStripButton.Image")));
-            this.rescanToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.rescanToolStripButton.Name = "rescanToolStripButton";
-            this.rescanToolStripButton.Size = new System.Drawing.Size(45, 22);
-            this.rescanToolStripButton.Text = "rescan";
-            this.rescanToolStripButton.Click += new System.EventHandler(this.rescanToolStripButton_Click);
-            // 
             // CorvusM3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -712,7 +712,9 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "CorvusM3";
             this.Text = "CorvusM3 - v0.1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseDown);
