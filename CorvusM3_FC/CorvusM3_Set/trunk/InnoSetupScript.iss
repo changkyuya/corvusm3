@@ -36,7 +36,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\bin\Release\CorvusM3Set.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\ZedGraph.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\Uploader\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\Uploader\*"; DestDir: "{app}\uploader"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
