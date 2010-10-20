@@ -136,7 +136,7 @@ void sendPIDMotorsMixer(vs32 * PIDCorr, vu16 * receiverChannel, volatile char * 
 	u8 j;
 	for (i = 0; i < 12; i++)
 	{
-		j = (i < 1);
+		j = (i << 1);
 		// PARA_MIXER_MOT1A = 37
 		pitchFactor[i] = parameter[37 + j] >> 8;
 		rollFactor[i] = parameter[37 + j] & 255;
