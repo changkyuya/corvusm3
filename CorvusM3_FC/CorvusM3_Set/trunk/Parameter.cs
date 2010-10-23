@@ -39,7 +39,7 @@ namespace CorvusM3
             
         }
         public int [] parameter = new int[400];
-        public int maxParameter = 58;
+        public int maxParameter = 60;
 
         public void fillParameter(string para)
         {
@@ -59,7 +59,7 @@ namespace CorvusM3
             set 
             { 
                 parameter[0] = value;
-                port.Write("s00:" + value.ToString() + "\r\n");
+                port.Write("s00:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[0]; }
         }
@@ -69,7 +69,7 @@ namespace CorvusM3
             set
             {
                 parameter[1] = value;
-                port.Write("s01:" + value.ToString() + "\r\n");
+                port.Write("s01:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[1]; }
         }
@@ -79,7 +79,7 @@ namespace CorvusM3
             set
             {
                 parameter[2] = value;
-                port.Write("s02:" + value.ToString() + "\r\n");
+                port.Write("s02:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[2]; }
         }
@@ -89,7 +89,7 @@ namespace CorvusM3
             set
             {
                 parameter[3] = value;
-                port.Write("s03:" + value.ToString() + "\r\n");
+                port.Write("s03:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[3]; }
         }
@@ -99,7 +99,7 @@ namespace CorvusM3
             set
             {
                 parameter[4] = value;
-                port.Write("s04:" + value.ToString() + "\r\n");
+                port.Write("s04:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[4]; }
         }
@@ -109,7 +109,7 @@ namespace CorvusM3
             set
             {
                 parameter[5] = value;
-                port.Write("s05:" + value.ToString() + "\r\n");
+                port.Write("s05:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[5]; }
         }
@@ -119,7 +119,7 @@ namespace CorvusM3
             set
             {
                 parameter[6] = value;
-                port.Write("s06:" + value.ToString() + "\r\n");
+                port.Write("s06:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[6]; }
         }
@@ -129,7 +129,7 @@ namespace CorvusM3
             set
             {
                 parameter[7] = value;
-                port.Write("s07:" + value.ToString() + "\r\n");
+                port.Write("s07:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[7]; }
         }
@@ -139,7 +139,7 @@ namespace CorvusM3
             set
             {
                 parameter[8] = value;
-                port.Write("s08:" + value.ToString() + "\r\n");
+                port.Write("s08:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[8]; }
         }
@@ -149,7 +149,7 @@ namespace CorvusM3
             set
             {
                 parameter[9] = value;
-                port.Write("s09:" + value.ToString() + "\r\n");
+                port.Write("s09:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[9]; }
         }
@@ -159,7 +159,7 @@ namespace CorvusM3
             set
             {
                 parameter[10] = value;
-                port.Write("s10:" + value.ToString() + "\r\n");
+                port.Write("s10:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[10]; }
         }
@@ -169,7 +169,7 @@ namespace CorvusM3
             set
             {
                 parameter[11] = value;
-                port.Write("s11:" + value.ToString() + "\r\n");
+                port.Write("s11:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[11]; }
         }
@@ -179,7 +179,7 @@ namespace CorvusM3
             set
             {
                 parameter[12] = value;
-                port.Write("s12:" + value.ToString() + "\r\n");
+                port.Write("s12:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[12]; }
         }
@@ -189,7 +189,7 @@ namespace CorvusM3
             set
             {
                 parameter[13] = value;
-                port.Write("s13:" + value.ToString() + "\r\n");
+                port.Write("s13:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[13]; }
         }
@@ -199,7 +199,7 @@ namespace CorvusM3
             set
             {
                 parameter[14] = value;
-                port.Write("s14:" + value.ToString() + "\r\n");
+                port.Write("s14:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[14]; }
         }
@@ -209,7 +209,7 @@ namespace CorvusM3
             set
             {
                 parameter[15] = value;
-                port.Write("s15:" + value.ToString() + "\r\n");
+                port.Write("s15:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[15]; }
         }
@@ -219,7 +219,7 @@ namespace CorvusM3
             set
             {
                 parameter[16] = value;
-                port.Write("s16:" + value.ToString() + "\r\n");
+                port.Write("s16:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[16]; }
         }
@@ -229,7 +229,7 @@ namespace CorvusM3
             set
             {
                 parameter[17] = value;
-                port.Write("s17:" + value.ToString() + "\r\n");
+                port.Write("s17:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[17]; }
         }
@@ -239,7 +239,7 @@ namespace CorvusM3
             set
             {
                 parameter[18] = value;
-                port.Write("s18:" + value.ToString() + "\r\n");
+                port.Write("s18:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[18]; }
         }
@@ -249,7 +249,7 @@ namespace CorvusM3
             set
             {
                 parameter[19] = value;
-                port.Write("s19:" + value.ToString() + "\r\n");
+                port.Write("s19:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[19]; }
         }
@@ -259,7 +259,7 @@ namespace CorvusM3
             set
             {
                 parameter[20] = value;
-                port.Write("s20:" + value.ToString() + "\r\n");
+                port.Write("s20:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[20]; }
         }
@@ -269,7 +269,7 @@ namespace CorvusM3
             set
             {
                 parameter[21] = value;
-                port.Write("s21:" + value.ToString() + "\r\n");
+                port.Write("s21:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[21]; }
         }
@@ -279,7 +279,7 @@ namespace CorvusM3
             set
             {
                 parameter[22] = value;
-                port.Write("s22:" + value.ToString() + "\r\n");
+                port.Write("s22:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[22]; }
         }
@@ -289,7 +289,7 @@ namespace CorvusM3
             set
             {
                 parameter[23] = value;
-                port.Write("s23:" + value.ToString() + "\r\n");
+                port.Write("s23:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[23]; }
         }
@@ -299,7 +299,7 @@ namespace CorvusM3
             set
             {
                 parameter[24] = value;
-                port.Write("s24:" + value.ToString() + "\r\n");
+                port.Write("s24:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[24]; }
         }
@@ -309,7 +309,7 @@ namespace CorvusM3
             set
             {
                 parameter[25] = value;
-                port.Write("s25:" + value.ToString() + "\r\n");
+                port.Write("s25:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[25]; }
         }
@@ -319,7 +319,7 @@ namespace CorvusM3
             set
             {
                 parameter[26] = value;
-                port.Write("s26:" + value.ToString() + "\r\n");
+                port.Write("s26:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[26]; }
         }
@@ -329,7 +329,7 @@ namespace CorvusM3
             set
             {
                 parameter[27] = value;
-                port.Write("s27:" + value.ToString() + "\r\n");
+                port.Write("s27:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[27]; }
         }
@@ -339,7 +339,7 @@ namespace CorvusM3
             set
             {
                 parameter[28] = value;
-                port.Write("s28:" + value.ToString() + "\r\n");
+                port.Write("s28:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[28]; }
         }
@@ -349,7 +349,7 @@ namespace CorvusM3
             set
             {
                 parameter[29] = value;
-                port.Write("s29:" + value.ToString() + "\r\n");
+                port.Write("s29:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[29]; }
         }
@@ -359,7 +359,7 @@ namespace CorvusM3
             set
             {
                 parameter[30] = value;
-                port.Write("s30:" + value.ToString() + "\r\n");
+                port.Write("s30:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[30]; }
         }
@@ -369,7 +369,7 @@ namespace CorvusM3
             set
             {
                 parameter[31] = value;
-                port.Write("s31:" + value.ToString() + "\r\n");
+                port.Write("s31:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[31]; }
         }
@@ -379,7 +379,7 @@ namespace CorvusM3
             set
             {
                 parameter[32] = value;
-                port.Write("s32:" + value.ToString() + "\r\n");
+                port.Write("s32:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[32]; }
         }
@@ -389,7 +389,7 @@ namespace CorvusM3
             set
             {
                 parameter[33] = value;
-                port.Write("s33:" + value.ToString() + "\r\n");
+                port.Write("s33:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[33]; }
         }
@@ -399,7 +399,7 @@ namespace CorvusM3
             set
             {
                 parameter[34] = value;
-                port.Write("s34:" + value.ToString() + "\r\n");
+                port.Write("s34:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[34]; }
         }
@@ -409,7 +409,7 @@ namespace CorvusM3
             set
             {
                 parameter[35] = value;
-                port.Write("s35:" + value.ToString() + "\r\n");
+                port.Write("s35:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[35]; }
         }
@@ -419,7 +419,7 @@ namespace CorvusM3
             set
             {
                 parameter[36] = value;
-                port.Write("s36:" + value.ToString() + "\r\n");
+                port.Write("s36:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[36]; }
         }
@@ -429,7 +429,7 @@ namespace CorvusM3
             set
             {
                 parameter[37] = value;
-                port.Write("s37:" + value.ToString() + "\r\n");
+                port.Write("s37:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[37]; }
         }
@@ -439,7 +439,7 @@ namespace CorvusM3
             set
             {
                 parameter[38] = value;
-                port.Write("s38:" + value.ToString() + "\r\n");
+                port.Write("s38:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[38]; }
         }
@@ -449,7 +449,7 @@ namespace CorvusM3
             set
             {
                 parameter[39] = value;
-                port.Write("s39:" + value.ToString() + "\r\n");
+                port.Write("s39:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[39]; }
         }
@@ -459,207 +459,207 @@ namespace CorvusM3
             set
             {
                 parameter[39] = value;
-                port.Write("s39:" + value.ToString() + "\r\n");
+                port.Write("s39:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[39]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT03A [40]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT03A [41]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT3A
         {
             set
             {
                 parameter[40] = value;
-                port.Write("s40:" + value.ToString() + "\r\n");
+                port.Write("s40:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[40]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT03B [41]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT03B [42]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT3B
         {
             set
             {
                 parameter[41] = value;
-                port.Write("s41:" + value.ToString() + "\r\n");
+                port.Write("s41:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[41]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT04A [42]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT04A [43]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT4A
         {
             set
             {
                 parameter[42] = value;
-                port.Write("s42:" + value.ToString() + "\r\n");
+                port.Write("s42:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[42]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT04B [43]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT04B [44]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT4B
         {
             set
             {
                 parameter[43] = value;
-                port.Write("s43:" + value.ToString() + "\r\n");
+                port.Write("s43:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[43]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT05A [44]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT05A [45]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT5A
         {
             set
             {
                 parameter[44] = value;
-                port.Write("s44:" + value.ToString() + "\r\n");
+                port.Write("s44:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[44]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT05B [44]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT05B [46]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT5B
         {
             set
             {
                 parameter[44] = value;
-                port.Write("s44:" + value.ToString() + "\r\n");
+                port.Write("s44:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[44]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT06A [45]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT06A [47]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT6A
         {
             set
             {
                 parameter[45] = value;
-                port.Write("s45:" + value.ToString() + "\r\n");
+                port.Write("s45:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[45]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT06B [46]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT06B [48]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT6B
         {
             set
             {
                 parameter[46] = value;
-                port.Write("s46:" + value.ToString() + "\r\n");
+                port.Write("s46:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[46]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT07A [47]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT07A [49]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT7A
         {
             set
             {
                 parameter[47] = value;
-                port.Write("s47:" + value.ToString() + "\r\n");
+                port.Write("s47:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[47]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT07B [48]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT07B [50]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT7B
         {
             set
             {
                 parameter[48] = value;
-                port.Write("s48:" + value.ToString() + "\r\n");
+                port.Write("s48:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[48]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT08A [49]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT08A [51]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT8A
         {
             set
             {
                 parameter[49] = value;
-                port.Write("s49:" + value.ToString() + "\r\n");
+                port.Write("s49:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[49]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT08B [50]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT08B [52]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT8B
         {
             set
             {
                 parameter[50] = value;
-                port.Write("s50:" + value.ToString() + "\r\n");
+                port.Write("s50:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[50]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT09A [51]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT09A [53]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT9A
         {
             set
             {
                 parameter[51] = value;
-                port.Write("s51:" + value.ToString() + "\r\n");
+                port.Write("s51:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[51]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT09B [52]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT09B [54]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT9B
         {
             set
             {
                 parameter[52] = value;
-                port.Write("s52:" + value.ToString() + "\r\n");
+                port.Write("s52:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[52]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT10A [53]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT10A [55]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT10A
         {
             set
             {
                 parameter[53] = value;
-                port.Write("s53:" + value.ToString() + "\r\n");
+                port.Write("s53:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[53]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT10B [54]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT10B [56]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT10B
         {
             set
             {
                 parameter[54] = value;
-                port.Write("s54:" + value.ToString() + "\r\n");
+                port.Write("s54:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[54]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT11A [55]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT11A [57]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT11A
         {
             set
             {
                 parameter[55] = value;
-                port.Write("s55:" + value.ToString() + "\r\n");
+                port.Write("s55:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[55]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT11B [56]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT11B [58]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT11B
         {
             set
             {
                 parameter[56] = value;
-                port.Write("s56:" + value.ToString() + "\r\n");
+                port.Write("s56:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[56]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT12A [57]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT12A [59]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT12A
         {
             set
             {
                 parameter[57] = value;
-                port.Write("s57:" + value.ToString() + "\r\n");
+                port.Write("s57:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[57]; }
         }
-        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT12B [58]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
+        [CategoryAttribute("Motor Mixer"), DisplayName("PARA_MOT12B [60]"), DescriptionAttribute("Motormischer - A: 8Bit Pitch, 8Bit Roll - B: 8Bit Nick, 8Bit Yaw")]
         public int PARA_MOT12B
         {
             set
             {
                 parameter[58] = value;
-                port.Write("s58:" + value.ToString() + "\r\n");
+                port.Write("s58:" + value.ToString("00000") + "\r\n");
             }
             get { return parameter[58]; }
         }
@@ -694,7 +694,7 @@ namespace CorvusM3
 
             for (int i = 0; i <= maxParameter; i++)
             {
-                port.Write("s" + i.ToString("00") + ":" + parameter[i].ToString() + "\r\n");
+                port.Write("s" + i.ToString("00") + ":" + parameter[i].ToString("00000") + "\r\n");
                 System.Threading.Thread.Sleep(50);
             }
         }
