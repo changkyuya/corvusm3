@@ -240,6 +240,10 @@ void dosComm()
 		u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
 		setParameter(set, readInt(4));
 		print_para(set);
+		
+		//char x [80];
+		//sprintf(x,"--%d:%d:%d:%d:%d:%d:%d:%d:%d:%d\r\n",line[0]- 0x30,line[1]- 0x30,line[2]- 0x30,line[3]- 0x30,line[4]- 0x30,line[5]- 0x30,line[6]- 0x30,line[7]- 0x30,line[8]- 0x30,line[9]- 0x30);
+		//print_uart1(x);
 	}
 }
 

@@ -49,6 +49,7 @@ namespace CorvusM3
         Parameter parm;
         ArrayList stringBuffer = new ArrayList();
         int bufferCount = 0;
+        int updateCount = 0;
         
 
         public CorvusM3()
@@ -170,6 +171,7 @@ namespace CorvusM3
             counter = 0;
 
             GraphPane myPane = zedGraphControl1.GraphPane;
+            
             myPane.CurveList.Clear();
             myPane.Title.Text = "Debug Graph";
             myPane.XAxis.Title.Text = "Time";
@@ -272,6 +274,14 @@ namespace CorvusM3
 
         private void addGraph()
         {
+            if (Convert.ToInt16(textBoxUpdateTime.Text) > updateCount)
+            {
+                updateCount++;
+                return;
+            }
+            updateCount = 0;
+            
+            
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = "."; 
             
@@ -778,7 +788,7 @@ namespace CorvusM3
             if (serial.IsOpen)
             {
                 serial.Write("pa\r\n");
-
+                MessageBox.Show("Finish!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -786,11 +796,12 @@ namespace CorvusM3
         private void flashButton_Click(object sender, EventArgs e)
         {
             parm.flashParameter();
+            MessageBox.Show("Finish!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void flashFirmwareToolStripButton_Click(object sender, EventArgs e)
         {
-            if (!comPortToolStripComboBox.Selected || comPortToolStripComboBox.SelectedText == "")
+            if (comPortToolStripComboBox.SelectedItem.ToString() == "")
             {
                 MessageBox.Show("Please select COM Port!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -803,7 +814,7 @@ namespace CorvusM3
                     string path = flashFWDialog.FileName;
                     string applPath = Application.StartupPath;
 
-                    string comPort = comPortToolStripComboBox.SelectedText.Substring(3);
+                    string comPort = comPortToolStripComboBox.SelectedItem.ToString().Substring(3);
 
                     System.Diagnostics.Process.Start(applPath + @"\Uploader\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
                 }
@@ -820,7 +831,7 @@ namespace CorvusM3
         private void button1_Click(object sender, EventArgs e)
         {
             parm.sendAllPara();
-            
+            MessageBox.Show("Finish!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void motorTimer_Tick(object sender, EventArgs e)
