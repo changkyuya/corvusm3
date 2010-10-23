@@ -68,6 +68,7 @@ namespace CorvusM3
             try
             {
                 comPortToolStripComboBox.SelectedItem = Einstellungen.comPort;
+                textBoxUpdateTime.Text = Einstellungen.dropFrame;
             }
             catch { }
         }
@@ -632,6 +633,7 @@ namespace CorvusM3
         private void comPortToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Einstellungen.comPort = comPortToolStripComboBox.SelectedItem.ToString();
+            
         }
 
         private void nickRollPanel_MouseDown(object sender, MouseEventArgs e)
@@ -816,7 +818,7 @@ namespace CorvusM3
 
                     string comPort = comPortToolStripComboBox.SelectedItem.ToString().Substring(3);
 
-                    System.Diagnostics.Process.Start(applPath + @"\Uploader\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
+                    System.Diagnostics.Process.Start(applPath + @"\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
                 }
             }
 
@@ -902,6 +904,11 @@ namespace CorvusM3
             catch { }
         }
 
+        private void textBoxUpdateTime_TextChanged(object sender, EventArgs e)
+        {
+            Einstellungen.dropFrame = textBoxUpdateTime.Text;
+        }
+
 
 
 
@@ -928,6 +935,18 @@ namespace CorvusM3
             get 
             {
                 return SerialPort.GetPortNames();
+            }
+        }
+        public static string dropFrame
+        {
+            get
+            {
+                return Properties.Settings.Default.dropFrame;
+            }
+            set
+            {
+                Properties.Settings.Default.dropFrame = value;
+                Properties.Settings.Default.Save();
             }
         }
 
