@@ -4,6 +4,8 @@ Möglich wären 255 Parameter - es sind vorerst 2 Sets mit je 100 Parameter gepl
 Es werden alle Parameter geladen und können jederzeit umgeschaltet werden. 
 Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
 
+Werden die Parameter mit einem anderen Tool eingegeben bitte führende 0 verwenden! Jeden Parameter 5 Stellig! Andernfalls kommt es öfter zu falsch lesen -> Grund wurde noch nicht gefunden.
+
 || Nr || Parameter || Default || mögliche Werte || Info ||
 || 00 || Para-Set || 0 || 0 || Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2) ||
 || 01 || Debugoutput || 0 || 0...Debug aus<br />1...Empfängersignale<br />2...ADC Werte (6x Sensoren, Spannungsmessung)<br />4...Sensoren (Gyro,ACC)<br />8...RC und Motoren<br />16...Kompass<br />32...PID XYZ Werte || Bitfeld Kombinationen möglich ||
