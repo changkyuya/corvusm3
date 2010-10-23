@@ -49,6 +49,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataTextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBoxUpdateTime = new System.Windows.Forms.TextBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
@@ -88,7 +89,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
             this.motorTimer = new System.Windows.Forms.Timer(this.components);
-            this.textBoxUpdateTime = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -290,6 +290,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Graph";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBoxUpdateTime
+            // 
+            this.textBoxUpdateTime.Location = new System.Drawing.Point(747, 272);
+            this.textBoxUpdateTime.Name = "textBoxUpdateTime";
+            this.textBoxUpdateTime.Size = new System.Drawing.Size(21, 20);
+            this.textBoxUpdateTime.TabIndex = 12;
+            this.textBoxUpdateTime.Text = "0";
+            this.textBoxUpdateTime.TextChanged += new System.EventHandler(this.textBoxUpdateTime_TextChanged);
             // 
             // checkBox10
             // 
@@ -704,14 +713,6 @@
             // 
             this.motorTimer.Interval = 10;
             this.motorTimer.Tick += new System.EventHandler(this.motorTimer_Tick);
-            // 
-            // textBoxUpdateTime
-            // 
-            this.textBoxUpdateTime.Location = new System.Drawing.Point(747, 272);
-            this.textBoxUpdateTime.Name = "textBoxUpdateTime";
-            this.textBoxUpdateTime.Size = new System.Drawing.Size(21, 20);
-            this.textBoxUpdateTime.TabIndex = 12;
-            this.textBoxUpdateTime.Text = "0";
             // 
             // CorvusM3
             // 
