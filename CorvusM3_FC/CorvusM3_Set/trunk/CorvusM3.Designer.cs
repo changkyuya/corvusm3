@@ -89,6 +89,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
             this.motorTimer = new System.Windows.Forms.Timer(this.components);
+            this.textBoxLastLine = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -147,7 +148,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.infoToolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 492);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 520);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(784, 22);
             this.statusStrip1.TabIndex = 0;
@@ -161,7 +162,7 @@
             // 
             // commandTextBox
             // 
-            this.commandTextBox.Location = new System.Drawing.Point(4, 467);
+            this.commandTextBox.Location = new System.Drawing.Point(4, 491);
             this.commandTextBox.Name = "commandTextBox";
             this.commandTextBox.Size = new System.Drawing.Size(776, 20);
             this.commandTextBox.TabIndex = 11;
@@ -714,11 +715,19 @@
             this.motorTimer.Interval = 10;
             this.motorTimer.Tick += new System.EventHandler(this.motorTimer_Tick);
             // 
+            // textBoxLastLine
+            // 
+            this.textBoxLastLine.Location = new System.Drawing.Point(4, 467);
+            this.textBoxLastLine.Name = "textBoxLastLine";
+            this.textBoxLastLine.Size = new System.Drawing.Size(776, 20);
+            this.textBoxLastLine.TabIndex = 12;
+            // 
             // CorvusM3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 514);
+            this.ClientSize = new System.Drawing.Size(784, 542);
+            this.Controls.Add(this.textBoxLastLine);
             this.Controls.Add(this.commandTextBox);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
@@ -819,6 +828,7 @@
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.ToolStripButton rescanToolStripButton;
         private System.Windows.Forms.TextBox textBoxUpdateTime;
+        private System.Windows.Forms.TextBox textBoxLastLine;
 
 
 
