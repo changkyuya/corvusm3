@@ -101,6 +101,7 @@ namespace CorvusM3
                 {
                     dataLine = serial.ReadLine();
                     dataTextBox.AppendText(dataLine + "\r\n");
+                    textBoxLastLine.Text = dataLine;
                     if (dataLine.Substring(0, 1) == "P")
                     {
                         parm.fillParameter(dataLine);
@@ -123,6 +124,7 @@ namespace CorvusM3
                 serial.Dispose();
                 infoToolStripStatusLabel.Text = "connection closed";
                 dataTextBox.Text = "";
+                textBoxLastLine.Text = "";
             }
         }
 
