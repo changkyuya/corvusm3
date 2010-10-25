@@ -719,6 +719,7 @@
             // 
             this.textBoxLastLine.Location = new System.Drawing.Point(4, 467);
             this.textBoxLastLine.Name = "textBoxLastLine";
+            this.textBoxLastLine.ReadOnly = true;
             this.textBoxLastLine.Size = new System.Drawing.Size(776, 20);
             this.textBoxLastLine.TabIndex = 12;
             // 
