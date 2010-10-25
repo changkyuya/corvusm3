@@ -212,7 +212,7 @@ void dopComm()
 		// add 2 chars to int from 0..99
 		u8 set = (line[1] - 0x30) * 10 + (line[2] - 0x30);
 		print_para(set);
-		send(OK);
+		//send(OK);
 	}
 }
 
