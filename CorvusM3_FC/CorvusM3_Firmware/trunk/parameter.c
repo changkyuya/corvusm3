@@ -104,7 +104,7 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO3_CH], 8); //Kanal 8  
 	EE_WriteVariable(VirtAddVarTab[PARA_CAM_X], 20500);   //servo 2 , 0, wert 500
 	EE_WriteVariable(VirtAddVarTab[PARA_CAM_Y], 30500);   //servo 3 , 0, wert 500
-	EE_WriteVariable(VirtAddVarTab[PARA_MIN_GAS], 32);  // min gas 24 
+	EE_WriteVariable(VirtAddVarTab[PARA_MIN_GAS], 10);  // min gas 24 
 	EE_WriteVariable(VirtAddVarTab[PARA_P_X], 1000); //23:1000  
 	EE_WriteVariable(VirtAddVarTab[PARA_I_X], 0); //24: 
 	EE_WriteVariable(VirtAddVarTab[PARA_D_X], 3000);  //25:3000

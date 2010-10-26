@@ -45,6 +45,8 @@
             this.closeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.flashFirmwareToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonDebugToFile = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataTextBox = new System.Windows.Forms.TextBox();
@@ -176,7 +178,9 @@
             this.openToolStripButton,
             this.closeToolStripButton,
             this.toolStripSeparator1,
-            this.flashFirmwareToolStripButton});
+            this.flashFirmwareToolStripButton,
+            this.toolStripSeparator2,
+            this.toolStripButtonDebugToFile});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(784, 25);
@@ -232,6 +236,22 @@
             this.flashFirmwareToolStripButton.Size = new System.Drawing.Size(90, 22);
             this.flashFirmwareToolStripButton.Text = "Flash Firmware";
             this.flashFirmwareToolStripButton.Click += new System.EventHandler(this.flashFirmwareToolStripButton_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonDebugToFile
+            // 
+            this.toolStripButtonDebugToFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonDebugToFile.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDebugToFile.Image")));
+            this.toolStripButtonDebugToFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDebugToFile.Name = "toolStripButtonDebugToFile";
+            this.toolStripButtonDebugToFile.Size = new System.Drawing.Size(103, 22);
+            this.toolStripButtonDebugToFile.Text = "Debug to file OFF";
+            this.toolStripButtonDebugToFile.ToolTipText = "Debug to file";
+            this.toolStripButtonDebugToFile.Click += new System.EventHandler(this.toolStripButtonDebugToFile_Click);
             // 
             // tabControl1
             // 
@@ -830,6 +850,8 @@
         private System.Windows.Forms.ToolStripButton rescanToolStripButton;
         private System.Windows.Forms.TextBox textBoxUpdateTime;
         private System.Windows.Forms.TextBox textBoxLastLine;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDebugToFile;
 
 
 

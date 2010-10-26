@@ -50,6 +50,8 @@ namespace CorvusM3
         ArrayList stringBuffer = new ArrayList();
         int bufferCount = 0;
         int updateCount = 0;
+        bool debugToFile = false;
+        StreamWriter debugWriter;
         
 
         public CorvusM3()
@@ -102,6 +104,10 @@ namespace CorvusM3
                     dataLine = serial.ReadLine();
                     dataTextBox.AppendText(dataLine + "\r\n");
                     textBoxLastLine.Text = dataLine;
+                    if (debugToFile == true)
+                    {
+                        debugWriter.WriteLine(dataLine);
+                    }
                     if (dataLine.Substring(0, 1) == "P")
                     {
                         parm.fillParameter(dataLine);
@@ -909,6 +915,24 @@ namespace CorvusM3
         private void textBoxUpdateTime_TextChanged(object sender, EventArgs e)
         {
             Einstellungen.dropFrame = textBoxUpdateTime.Text;
+        }
+
+        private void toolStripButtonDebugToFile_Click(object sender, EventArgs e)
+        {
+            if (debugToFile == false)
+            {
+                debugToFile = true;
+                toolStripButtonDebugToFile.Text = "Debug to File ON";
+                string filename = DateTime.Now.ToShortDateString() + "_" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                MessageBox.Show("Path:" + Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                debugWriter = new StreamWriter(Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"));
+            }
+            else
+            {
+                debugToFile = false;
+                toolStripButtonDebugToFile.Text = "Debug to File OFF";
+                debugWriter.Close();
+            }
         }
 
 
