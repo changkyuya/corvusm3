@@ -19,7 +19,7 @@ LicenseFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3
 InfoBeforeFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\InstallInfo.txt
 InfoAfterFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\ChangeLog.txt
 OutputDir=D:\Data\Dokumente\Modellbau\CorvusM3\CorvusM3 Setup
-OutputBaseFilename=setup CorvusM3 Set
+OutputBaseFilename=setup CorvusM3 Set v0.1
 SetupIconFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\cm3.ico
 Compression=lzma
 SolidCompression=yes
@@ -40,11 +40,11 @@ Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Se
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\CorvusM3 Set"; Filename: "{app}\CorvusM3Set_v0.1.exe"
+Name: "{group}\CorvusM3 Set"; Filename: "{app}\CorvusM3Set.exe"
 Name: "{group}\{cm:ProgramOnTheWeb,CorvusM3 Set}"; Filename: "http://corvusm3.blogspot.com/"
 Name: "{group}\{cm:UninstallProgram,CorvusM3 Set}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\CorvusM3 Set"; Filename: "{app}\CorvusM3Set_v0.1.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\CorvusM3 Set"; Filename: "{app}\CorvusM3Set_v0.1.exe"; Tasks: quicklaunchicon
+Name: "{commondesktop}\CorvusM3 Set"; Filename: "{app}\CorvusM3Set.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\CorvusM3 Set"; Filename: "{app}\CorvusM3Set.exe"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\CorvusM3Set.exe"; Description: "{cm:LaunchProgram,CorvusM3 Set}"; Flags: nowait postinstall skipifsilent
