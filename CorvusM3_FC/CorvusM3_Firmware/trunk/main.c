@@ -60,7 +60,7 @@ int main(void)
 	initEEPROM();
 	
   
-	print_uart1("CorvusM3 FC - Version 0.0a\r\n");
+	print_uart1("CorvusM3 FC - Version 0.1\r\n");
 	
 	// for test
 	//char x [80];
