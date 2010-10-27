@@ -71,6 +71,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AirSpeedIndicatorInstrumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\AltimeterInstrumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\AttitudeIndicatorInstrumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HeadingIndicatorInstrumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\InstrumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TurnCoordinatorInstrumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\VerticalSpeedIndicatorInstrumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CorvusM3.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +164,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cm3.ico" />
+    <None Include="Resources\VerticalSpeedNeedle.bmp" />
+    <None Include="Resources\VerticalSpeedIndicator_Background.bmp" />
+    <None Include="Resources\TurnCoordinatorMarks.bmp" />
+    <None Include="Resources\TurnCoordinatorBall.bmp" />
+    <None Include="Resources\TurnCoordinatorAircraft.bmp" />
+    <None Include="Resources\TurnCoordinator_Background.bmp" />
+    <None Include="Resources\SmallNeedleAltimeter.bmp" />
+    <None Include="Resources\Maquette_Avion.bmp" />
+    <None Include="Resources\LongNeedleAltimeter.bmp" />
+    <None Include="Resources\Indicator_Background.bmp" />
+    <None Include="Resources\Horizon_GroundSky.bmp" />
+    <None Include="Resources\Horizon_Background.bmp" />
+    <None Include="Resources\HeadingWeel.bmp" />
+    <None Include="Resources\HeadingIndicator_Background.bmp" />
+    <None Include="Resources\HeadingIndicator_Aircraft.bmp" />
+    <None Include="Resources\Bandeau_Dérouleur.bmp" />
+    <None Include="Resources\Altimeter_Background.bmp" />
+    <None Include="Resources\AirSpeedNeedle.bmp" />
+    <None Include="Resources\AirSpeedIndicator_Background.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
