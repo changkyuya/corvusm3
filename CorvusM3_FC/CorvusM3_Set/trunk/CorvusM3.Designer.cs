@@ -89,9 +89,12 @@
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button2 = new System.Windows.Forms.Button();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.headingIndicatorInstrumentControl1 = new HeadingIndicatorInstrumentControl();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
             this.motorTimer = new System.Windows.Forms.Timer(this.components);
             this.textBoxLastLine = new System.Windows.Forms.TextBox();
+            this.attitudeIndicatorInstrumentControl1 = new AttitudeIndicatorInstrumentControl();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -108,6 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.tabPage7.SuspendLayout();
             this.SuspendLayout();
             // 
             // BottomToolStripPanel
@@ -261,6 +265,7 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -725,6 +730,25 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.attitudeIndicatorInstrumentControl1);
+            this.tabPage7.Controls.Add(this.headingIndicatorInstrumentControl1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(776, 407);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Cockpit";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // headingIndicatorInstrumentControl1
+            // 
+            this.headingIndicatorInstrumentControl1.Location = new System.Drawing.Point(3, 3);
+            this.headingIndicatorInstrumentControl1.Name = "headingIndicatorInstrumentControl1";
+            this.headingIndicatorInstrumentControl1.Size = new System.Drawing.Size(176, 179);
+            this.headingIndicatorInstrumentControl1.TabIndex = 0;
+            this.headingIndicatorInstrumentControl1.Text = "headingIndicatorInstrumentControl1";
+            // 
             // steeringTimer
             // 
             this.steeringTimer.Interval = 10;
@@ -742,6 +766,14 @@
             this.textBoxLastLine.ReadOnly = true;
             this.textBoxLastLine.Size = new System.Drawing.Size(776, 20);
             this.textBoxLastLine.TabIndex = 12;
+            // 
+            // attitudeIndicatorInstrumentControl1
+            // 
+            this.attitudeIndicatorInstrumentControl1.Location = new System.Drawing.Point(185, 3);
+            this.attitudeIndicatorInstrumentControl1.Name = "attitudeIndicatorInstrumentControl1";
+            this.attitudeIndicatorInstrumentControl1.Size = new System.Drawing.Size(215, 218);
+            this.attitudeIndicatorInstrumentControl1.TabIndex = 1;
+            this.attitudeIndicatorInstrumentControl1.Text = "attitudeIndicatorInstrumentControl1";
             // 
             // CorvusM3
             // 
@@ -783,6 +815,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.tabPage7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -852,6 +885,9 @@
         private System.Windows.Forms.TextBox textBoxLastLine;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButtonDebugToFile;
+        private System.Windows.Forms.TabPage tabPage7;
+        private HeadingIndicatorInstrumentControl headingIndicatorInstrumentControl1;
+        private AttitudeIndicatorInstrumentControl attitudeIndicatorInstrumentControl1;
 
 
 
