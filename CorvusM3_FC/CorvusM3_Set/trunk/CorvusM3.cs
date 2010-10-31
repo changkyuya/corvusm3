@@ -53,6 +53,7 @@ namespace CorvusM3
         bool debugToFile = false;
         StreamWriter debugWriter;
         int cockpitCount = 0;
+        string filename = "";
         
 
         public CorvusM3()
@@ -107,7 +108,8 @@ namespace CorvusM3
                     textBoxLastLine.Text = dataLine;
                     if (debugToFile == true)
                     {
-                        debugWriter.WriteLine(dataLine);
+                        debugWriter.Write(dataLine);
+                        
                     }
                     if (dataLine.Substring(0, 1) == "P")
                     {
@@ -872,6 +874,7 @@ namespace CorvusM3
             {
                 button2.BackColor = Color.Transparent;
                 motorTimer.Enabled = false;
+                commandTextBox.Text = "";
             }
         }
 
@@ -925,7 +928,7 @@ namespace CorvusM3
             {
                 debugToFile = true;
                 toolStripButtonDebugToFile.Text = "Debug to File ON";
-                string filename = DateTime.Now.ToShortDateString() + "_" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                filename = DateTime.Now.ToShortDateString() + "_" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
                 MessageBox.Show("Path:" + Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 debugWriter = new StreamWriter(Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"));
             }
