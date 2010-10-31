@@ -52,6 +52,7 @@ namespace CorvusM3
         int updateCount = 0;
         bool debugToFile = false;
         StreamWriter debugWriter;
+        int cockpitCount = 0;
         
 
         public CorvusM3()
@@ -116,6 +117,7 @@ namespace CorvusM3
                     else 
                     {
                         addGraph();
+                        updateCockpit();
                     }
                 }
             }
@@ -933,6 +935,27 @@ namespace CorvusM3
                 toolStripButtonDebugToFile.Text = "Debug to File OFF";
                 debugWriter.Close();
             }
+        }
+
+        private void updateCockpit() {
+            string[] data = dataLine.Split(':');
+
+            if (data[0] == "G-A-C")
+            {
+                cockpitCount++;
+                if (cockpitCount < 10)
+                {
+                    return;
+                }
+                cockpitCount = 0;
+
+
+                double pitch = Convert.ToDouble(data[7]) / 100 - 90;
+                double roll = Convert.ToDouble(data[8]) / 100 - 90;
+                attitudeIndicatorInstrumentControl1.SetAttitudeIndicatorParameters(-roll, pitch);
+                headingIndicatorInstrumentControl1.SetHeadingIndicatorParameters(Convert.ToInt32(data[9]) / 100);
+            }
+
         }
 
 

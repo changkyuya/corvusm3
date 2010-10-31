@@ -90,11 +90,11 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button2 = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.attitudeIndicatorInstrumentControl1 = new AttitudeIndicatorInstrumentControl();
             this.headingIndicatorInstrumentControl1 = new HeadingIndicatorInstrumentControl();
             this.steeringTimer = new System.Windows.Forms.Timer(this.components);
             this.motorTimer = new System.Windows.Forms.Timer(this.components);
             this.textBoxLastLine = new System.Windows.Forms.TextBox();
-            this.attitudeIndicatorInstrumentControl1 = new AttitudeIndicatorInstrumentControl();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -741,6 +741,14 @@
             this.tabPage7.Text = "Cockpit";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // attitudeIndicatorInstrumentControl1
+            // 
+            this.attitudeIndicatorInstrumentControl1.Location = new System.Drawing.Point(185, 3);
+            this.attitudeIndicatorInstrumentControl1.Name = "attitudeIndicatorInstrumentControl1";
+            this.attitudeIndicatorInstrumentControl1.Size = new System.Drawing.Size(215, 218);
+            this.attitudeIndicatorInstrumentControl1.TabIndex = 1;
+            this.attitudeIndicatorInstrumentControl1.Text = "attitudeIndicatorInstrumentControl1";
+            // 
             // headingIndicatorInstrumentControl1
             // 
             this.headingIndicatorInstrumentControl1.Location = new System.Drawing.Point(3, 3);
@@ -767,14 +775,6 @@
             this.textBoxLastLine.Size = new System.Drawing.Size(776, 20);
             this.textBoxLastLine.TabIndex = 12;
             // 
-            // attitudeIndicatorInstrumentControl1
-            // 
-            this.attitudeIndicatorInstrumentControl1.Location = new System.Drawing.Point(185, 3);
-            this.attitudeIndicatorInstrumentControl1.Name = "attitudeIndicatorInstrumentControl1";
-            this.attitudeIndicatorInstrumentControl1.Size = new System.Drawing.Size(215, 218);
-            this.attitudeIndicatorInstrumentControl1.TabIndex = 1;
-            this.attitudeIndicatorInstrumentControl1.Text = "attitudeIndicatorInstrumentControl1";
-            // 
             // CorvusM3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -789,7 +789,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CorvusM3";
-            this.Text = "CorvusM3 - v0.1";
+            this.Text = "CorvusM3 - v0.2a";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseMove);
             this.statusStrip1.ResumeLayout(false);
