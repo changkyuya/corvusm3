@@ -35,9 +35,6 @@ extern vs32 targetAngle[3]; //statemachine
 vs32 gyroRawValues1[3]; //-1 Value for Runge-Kutta or Integration
 vs32 gyroRawValues2[3]; //-2 Value for Runge-Kutta or Integration
 vs32 gyroRawValues3[3]; //-3 Value for Runge-Kutta or Integration
-vs32 gyroRawValues4[3]; //-4 Value for Runge-Kutta or Integration
-vs32 gyroRawValues5[3]; //-5 Value for Runge-Kutta or Integration
-vs32 gyroRawValues6[3]; //-6 Value for Runge-Kutta or Integration
 
 
 /* init filter --------------------------------------------------------------*/

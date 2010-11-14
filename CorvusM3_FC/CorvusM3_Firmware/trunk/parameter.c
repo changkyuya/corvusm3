@@ -86,18 +86,18 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_DEBUG], 0);
 	EE_WriteVariable(VirtAddVarTab[PARA_HW], 3); //0=RC,1=PC,2=MotMix,4=Compass
 	EE_WriteVariable(VirtAddVarTab[PARA_VOLT], 2236); //2236 = 10 Volt
-	EE_WriteVariable(VirtAddVarTab[PARA_SW], 0);  //0=HH,1=acc,2=comp2 
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_X_ZERO], 20470); //20470
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Y_ZERO], 20330); //20330
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Z_ZERO], 24450); //24450
-	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_ACC], 00); 
+	EE_WriteVariable(VirtAddVarTab[PARA_SW], 1);  //0=HH,1=acc,2=comp2 
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_X_ZERO], 20536); //20470
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Y_ZERO], 20369); //20330
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_Z_ZERO], 20452); //24450
+	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_ACC], 5000); 
 	EE_WriteVariable(VirtAddVarTab[PARA_STICK_FACTOR], 50); 
 	EE_WriteVariable(VirtAddVarTab[PARA_SMOOTH_RC], 00); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_X_90], 2200); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Y_90], 2200); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Z_90], 2200); 
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 0); //500 
-	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 0); //500
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 5000); //500 
+	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 2500); //500
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO0_CH], 5); //Kanal 5
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO1_CH], 6); //Kanal 6
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO2_CH], 7); //Kanal 7 
