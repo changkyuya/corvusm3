@@ -58,14 +58,14 @@ void Pause(u32 approxms)
 /* Smooth Values with factor ------------------------------------------------*/
 s32 smoothValue(s32 actual, s32 previous, u16 smooth) 
 {
-	return (actual + ((previous - actual) * smooth / 100.0));
+	return (actual + (((previous - actual) * smooth) / 10000));
 }
 
 
 /* weighting values ---------------------------------------------------------*/
 s32 weightingValues(s32 first, s32 secound, u16 weightingFirst) 
 {
-	return (secound + ((first - secound) * weightingFirst / 10000.0));
+	return (secound + (((first - secound) * weightingFirst) / 10000));
 }
 
 

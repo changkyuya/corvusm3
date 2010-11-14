@@ -33,7 +33,13 @@ extern vu32 gyroZero[3]; // sensor
 extern vu16 parameter[0x190]; //parameter
 extern vs32 compassAngle; //statemachine
 extern vs32 targetAngle[3]; //statemachine
-
+extern vs32 gyroRawValues1[3]; //filter HH
+extern vs32 gyroRawValues2[3]; //filter HH
+extern vs32 gyroRawValues3[3]; //filter HH
+vs32 accOldRawValue[2]; //smooth ACC with parameter
+vs32 accRawValues1[2]; //ACC smooth Filter
+vs32 accRawValues2[2]; //ACC smooth Filter
+vs32 accRawValues3[2]; //ACC smooth Filter
 
 
 /* init filter --------------------------------------------------------------*/
@@ -111,21 +117,59 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 // ADC * 3,3 / 4095 / 2000 * 1000 
 void getGyroAnglesFilterACC(vs32 * gyroAngle, vs32 * gyroRawValues)
 {
-	//gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100000);
-    //gyroAngle[Y] -=y (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100000);
-    //gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100000);
-    //                        value * 1000                                         1000
+	u8 i;
+	//#################
+	//http://tom.pycke.be/mav/70/gyroscope-to-roll-pitch-and-yaw
+	//try runge-kutta integration http://de.wikipedia.org/wiki/Runge-Kutta-Verfahren
+	//integration(i) = integration(i-1) + 1/6 ( vali-3 + 2 vali-2 + 2 vali-1 + vali)
+	
+	vs32 actualGyroRawValues[3];
+	//actualGyroRawValues[X] = (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100);
+	//actualGyroRawValues[Y] = (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100);
+	//actualGyroRawValues[Z] = (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
+	
+	//calc with integer
+	actualGyroRawValues[X] = (gyroRawValues[X] * parameter[PARA_GYRO_X_90]) / 24818;
+	actualGyroRawValues[Y] = (gyroRawValues[Y] * parameter[PARA_GYRO_Y_90]) / 24818;
+	actualGyroRawValues[Z] = (gyroRawValues[Z] * parameter[PARA_GYRO_Z_90]) / 24818;
+	
+	gyroAngle[X] -= (gyroRawValues3[X] + 2 * gyroRawValues2[X] + 2 * gyroRawValues1[X] + actualGyroRawValues[X]) / 6;
+	gyroAngle[Y] -= (gyroRawValues3[Y] + 2 * gyroRawValues2[Y] + 2 * gyroRawValues1[Y] + actualGyroRawValues[Y]) / 6;
+	gyroAngle[Z] -= (gyroRawValues3[Z] + 2 * gyroRawValues2[Z] + 2 * gyroRawValues1[Z] + actualGyroRawValues[Z]) / 6; 
+
+	
+	//char x [80];
+	//sprintf(x,"%d\r\n",actualGyroRawValues[X]);
+	//print_uart1(x);
+	
+	for (i = 0; i < 3; i++)
+	{
+		gyroRawValues3[i] = gyroRawValues2[i];
+		gyroRawValues2[i] = gyroRawValues1[i];
+		gyroRawValues1[i] = actualGyroRawValues[i];
+	}
+	
+	//#### end test runge-kutta integration ####
+	
+	/*
 	gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100);
     gyroAngle[Y] -= (vs32) (gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 100);
     gyroAngle[Z] -= (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
+	*/
 	
-	if (gyroAngle[Z] >= 36000000) 
+	// overrun
+	//u8 i;
+	for (i = 0; i < 3; i++)
 	{
-		gyroAngle[Z] -= 36000000;
-	}
-	if (gyroAngle[Z] < 0) 
-	{
-		gyroAngle[Z] += 36000000;
+		
+		if (gyroAngle[i] >= 36000000) 
+		{
+			gyroAngle[i] -= 36000000;
+		}
+		if (gyroAngle[i] < 0) 
+		{
+			gyroAngle[i] += 36000000;
+		}
 	}
 	
 	//char x [80];
@@ -142,14 +186,33 @@ void getACCAnglesFilterACC(vs32 * accAngle, vs32 * accRawValues)
 	// 180 / PI = 57.2957795
 	// minus 90 grad für level
 	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
+	u8 i;
+	vs32 actualAccRawValues[2];
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 , accRawValues[X] - parameter[PARA_ACC_X_ZERO] * 100 ) * 5729577.95);
+	actualAccRawValues[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 , accRawValues[X] - parameter[PARA_ACC_X_ZERO] * 100 ) * 5729577.95);
 	//change direction
-	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] * 100 , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 ) * 5729577.95 + 9000000);
-
+	actualAccRawValues[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] * 100 , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 ) * 5729577.95 + 9000000);
 	
+	actualAccRawValues[X] = smoothValue(actualAccRawValues[X], accOldRawValue[X], parameter[PARA_SMOOTH_ACC]);
+	actualAccRawValues[Y] = smoothValue(actualAccRawValues[Y], accOldRawValue[Y], parameter[PARA_SMOOTH_ACC]);
+	
+	//accOldRawValue[X] = actualAccRawValues[X];
+	//accOldRawValue[Y] = actualAccRawValues[Y];
+	
+	accAngle[X] = (accRawValues3[X] + 2 * accRawValues2[X] + 2 * accRawValues1[X] + actualAccRawValues[X]) / 6;
+	accAngle[Y] = (accRawValues3[Y] + 2 * accRawValues2[Y] + 2 * accRawValues1[Y] + actualAccRawValues[Y]) / 6; 
+	
+	accOldRawValue[X] = accAngle[X];
+	accOldRawValue[Y] = accAngle[Y]; 
+	
+	for (i = 0; i < 2; i++)
+	{
+		accRawValues3[i] = accRawValues2[i];
+		accRawValues2[i] = accRawValues1[i];
+		accRawValues1[i] = actualAccRawValues[i];
+	}
 	//char x [80];
 	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
 	//print_uart1(x);
