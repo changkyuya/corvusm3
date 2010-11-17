@@ -19,7 +19,7 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filtercomp2.h"
+#include "filtercomp2.h" 
 #include "parameter.h"
 #include "sensor.h"
 #include <math.h>
@@ -128,7 +128,6 @@ void getCopterAnglesFilterComp2(vs32 * gyroAngle, vs32 * accAngle, vs32 * copter
 // ADC * 3,3 / 4095 / 2000 * 1000 
 void getGyroAnglesFilterComp2(vs32 * gyroAngle, vs32 * gyroRawValues)
 {
-	u8 i;
 	//#################
 	//http://tom.pycke.be/mav/70/gyroscope-to-roll-pitch-and-yaw
 	//try runge-kutta integration http://de.wikipedia.org/wiki/Runge-Kutta-Verfahren
@@ -140,7 +139,7 @@ void getGyroAnglesFilterComp2(vs32 * gyroAngle, vs32 * gyroRawValues)
 	//actualGyroRawValues[Z] = (vs32) (gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 100);
 	
 	//calc with integer
-	actualGyroRawValues[Z] = gyroRawValues[Z] * parameter[PARA_GYRO_Z_90]) / 24818;
+	actualGyroRawValues[Z] = (gyroRawValues[Z] * parameter[PARA_GYRO_Z_90]) / 24818;
 	
 	gyroAngle[Z] -= (gyroRawValues3[Z] + 2 * gyroRawValues2[Z] + 2 * gyroRawValues1[Z] + actualGyroRawValues[Z]) / 6; 
 
