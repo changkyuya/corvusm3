@@ -36,10 +36,6 @@ extern vs32 targetAngle[3]; //statemachine
 extern vs32 gyroRawValues1[3]; //filter HH
 extern vs32 gyroRawValues2[3]; //filter HH
 extern vs32 gyroRawValues3[3]; //filter HH
-vs32 accOldRawValue[2]; //smooth ACC with parameter
-vs32 accRawValues1[2]; //ACC smooth Filter
-vs32 accRawValues2[2]; //ACC smooth Filter
-vs32 accRawValues3[2]; //ACC smooth Filter
 
 
 /* init filter --------------------------------------------------------------*/
@@ -187,32 +183,13 @@ void getACCAnglesFilterACC(vs32 * accAngle, vs32 * accRawValues)
 	// minus 90 grad für level
 	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
 	u8 i;
-	vs32 actualAccRawValues[2];
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;
-	actualAccRawValues[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 , accRawValues[X] - parameter[PARA_ACC_X_ZERO] * 100 ) * 5729577.95);
-	//change direction
-	actualAccRawValues[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] * 100 , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 ) * 5729577.95 + 9000000);
+	accAngle[X] = (vs32) (atan2(accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 , accRawValues[X] - parameter[PARA_ACC_X_ZERO] * 100 ) * 5729577.95);
+	accAngle[Y] = (vs32) (atan2(accRawValues[Y] - parameter[PARA_ACC_Y_ZERO] * 100 , accRawValues[Z] - parameter[PARA_ACC_Z_ZERO] * 100 ) * 5729577.95 + 9000000);
 	
-	actualAccRawValues[X] = smoothValue(actualAccRawValues[X], accOldRawValue[X], parameter[PARA_SMOOTH_ACC]);
-	actualAccRawValues[Y] = smoothValue(actualAccRawValues[Y], accOldRawValue[Y], parameter[PARA_SMOOTH_ACC]);
-	
-	//accOldRawValue[X] = actualAccRawValues[X];
-	//accOldRawValue[Y] = actualAccRawValues[Y];
-	
-	accAngle[X] = (accRawValues3[X] + 2 * accRawValues2[X] + 2 * accRawValues1[X] + actualAccRawValues[X]) / 6;
-	accAngle[Y] = (accRawValues3[Y] + 2 * accRawValues2[Y] + 2 * accRawValues1[Y] + actualAccRawValues[Y]) / 6; 
-	
-	accOldRawValue[X] = accAngle[X];
-	accOldRawValue[Y] = accAngle[Y]; 
-	
-	for (i = 0; i < 2; i++)
-	{
-		accRawValues3[i] = accRawValues2[i];
-		accRawValues2[i] = accRawValues1[i];
-		accRawValues1[i] = actualAccRawValues[i];
-	}
+
 	//char x [80];
 	//sprintf(x,"test:%d:%d:\r\n",accAngle[X],accAngle[Y]);
 	//print_uart1(x);

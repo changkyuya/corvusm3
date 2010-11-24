@@ -5,14 +5,14 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
-[assembly: AssemblyTitle("YACOset")]
+[assembly: AssemblyTitle("CorvusM3Set")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("YACOset")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2009")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("CorvusM3Set")]
+[assembly: AssemblyCopyright("Thorsten Raab")]
+[assembly: AssemblyTrademark("CorvusM3")]
+[assembly: AssemblyCulture("EN")]
 
 // Durch Festlegen von ComVisible auf "false" werden die Typen in dieser Assembly unsichtbar 
 // für COM-Komponenten. Wenn Sie auf einen Typ in dieser Assembly von 
