@@ -58,7 +58,7 @@ void Pause(u32 approxms)
 /* Smooth Values with factor ------------------------------------------------*/
 s32 smoothValue(s32 actual, s32 previous, u16 smooth) 
 {
-	return (actual + (((previous - actual) * smooth) / 10000));
+	return (actual + (((previous - actual) * smooth) / 100));
 }
 
 
