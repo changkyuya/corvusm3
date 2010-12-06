@@ -88,9 +88,6 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 		getCompassAngle();
 	}
 	
-	//char x [80];
-	//sprintf(x,"raw value:%d:%d\r\n",gyroRawValues[X],accRawValues[X]);
-	//print_uart1(x);
 	
 	// get basis angles from sensors
 	getGyroAnglesFilterACC(gyroAngle, gyroRawValues);
@@ -100,6 +97,10 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
 	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
 	copterAngle[Z] = gyroAngle[Z];
+	
+	//char x [80];
+	//sprintf(x,"%d:%d:%d:%d\r\n",copterAngle[X],accAngle[X],gyroAngle[X],parameter[PARA_ACC_FORCE]);
+	//print_uart1(x);
 	
 	// trimm gyro to new Angle
 	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
@@ -182,7 +183,6 @@ void getACCAnglesFilterACC(vs32 * accAngle, vs32 * accRawValues)
 	// 180 / PI = 57.2957795
 	// minus 90 grad für level
 	//ACCAngle[X] = atan2((ACCRaw[Z] + corrACC[X]) * factorACC[X], (ACCRaw[X] + corrACC[X]) * factorACC[X]) * 57.2957795 + 90;
-	u8 i;
 	
 	// atan2 works - if it is to slow we can use fastatan2
 	//accAngle[X] = fastatan2(ADCSensorValue[ACC_Z] - parameter[PARA_ACC_X_ZERO] , ADCSensorValue[ACC_X] - parameter[PARA_ACC_X_ZERO] ) * 57.2957795 * 100.0;

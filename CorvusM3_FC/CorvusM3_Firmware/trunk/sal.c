@@ -24,6 +24,7 @@
 #include "filteracc.h"
 #include "filtercomp2.h"
 #include "filterhh.h"
+#include "filterdcm.h"
 
 /* Enums --------------------------------------------------------------------*/
 
@@ -48,6 +49,10 @@ void initFilter(vs32 * gyroAngle, vs32 * copterAngle)
 		// ACC Comp2-Mode
 		case PARA_SW_COMP2:
 			initFilterComp2(gyroAngle, copterAngle);
+			break;
+		// DCM-Mode
+		case PARA_SW_DCM:
+			initFilterDCM(gyroAngle, copterAngle);
 			break;
 		default:
 			break;
@@ -81,6 +86,10 @@ void setAngles(vs32 * gyroAngle, vs32 * copterAngle)
 		case PARA_SW_COMP2:
 			setAngleFilterComp2(gyroAngle, copterAngle);
 			break;
+		// DCM-Mode
+		case PARA_SW_DCM:
+			setAngleFilterDCM(gyroAngle, copterAngle);
+			break;
 		default:
 			break;
 	}	
@@ -107,6 +116,10 @@ void getCopterAngles(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAngle)
 		case PARA_SW_COMP2:
 			getCopterAnglesFilterComp2(gyroAngle, accAngle, copterAngle);
 			break;
+		// ACC Comp2-Mode
+		case PARA_SW_DCM:
+			getCopterAnglesFilterDCM(copterAngle);
+			break;
 		default:
 			break;
 	}	
@@ -128,6 +141,10 @@ void mapReceiverValues(vu16 * receiverChannel)
 		// ACC Comp2-Mode
 		case PARA_SW_COMP2:
 			mapReceiverValuesFilterComp2(receiverChannel);
+			break;
+		// DCM-Mode
+		case PARA_SW_DCM:
+			mapReceiverValuesFilterDCM(receiverChannel);
 			break;
 		default:
 			break;

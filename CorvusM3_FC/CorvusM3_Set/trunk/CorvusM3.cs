@@ -854,7 +854,15 @@ namespace CorvusM3
             try
             {
                 if (serial.IsOpen)
-                {
+                {   
+                    //CorvusM3 does not accept zero values
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (motorValues[i] == 0)
+                        {
+                            motorValues[i] = 1;
+                        }
+                    }
                     serial.Write("<" + motorValues[0].ToString("000") + ":" + motorValues[1].ToString("000") + ":" + motorValues[2].ToString("000") + ":" + motorValues[3].ToString("000") + "\r\n");
                 }
             }

@@ -275,6 +275,7 @@ void doRCComm()
 /* we get Motor Commands from PC tool ---------------------------------------------*/
 void doMotComm()
 {
+	u8 i;
 	
 	motor[0] = 0xF5;
 	motor[1] = readInt(1);
@@ -282,8 +283,14 @@ void doMotComm()
 	motor[3] = readInt(9);
 	motor[4] = readInt(13);
 	
+	for (i = 1; i < 5; i++)
+	{
+		if (motor[i] == 0)
+			motor[i] = 1;
+	}
+	
 	char x [80];
-	sprintf(x,"%d:%d:%d:%d\r\n",motor[1],motor[2],motor[3],motor[4]);
+	sprintf(x,"Mot:%d:%d:%d:%d\r\n",motor[1],motor[2],motor[3],motor[4]);
 	print_uart1(x);
 			
 	// command motors
