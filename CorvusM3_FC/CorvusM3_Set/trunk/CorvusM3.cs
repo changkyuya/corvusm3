@@ -937,8 +937,13 @@ namespace CorvusM3
                 debugToFile = true;
                 toolStripButtonDebugToFile.Text = "Debug to File ON";
                 filename = DateTime.Now.ToShortDateString() + "_" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
-                MessageBox.Show("Path:" + Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult dRes = MessageBox.Show("Open Debug-File: " + Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"), "Open Debug-File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 debugWriter = new StreamWriter(Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"));
+                debugWriter.WriteLine("Debug: " + filename);
+                if (dRes == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(Path.Combine(Path.GetTempPath(), "CorvusM3_log_" + filename + ".txt"));
+                }
             }
             else
             {
