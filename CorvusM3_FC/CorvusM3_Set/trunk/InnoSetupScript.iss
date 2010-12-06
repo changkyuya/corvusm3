@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{7E95C347-5CEB-4A34-9A9D-79A10E76D2DD}
 AppName=CorvusM3 Set
-AppVerName=CorvusM3 Set v0.2a
+AppVerName=CorvusM3 Set v0.3
 AppPublisher=Thorsten Raab
 AppPublisherURL=http://corvusm3.blogspot.com/
 AppSupportURL=http://corvusm3.blogspot.com/
@@ -19,7 +19,7 @@ LicenseFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3
 InfoBeforeFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\InstallInfo.txt
 InfoAfterFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\ChangeLog.txt
 OutputDir=D:\Data\Dokumente\Modellbau\CorvusM3\CorvusM3 Setup
-OutputBaseFilename=setup CorvusM3 Set v0.2a
+OutputBaseFilename=setup CorvusM3 Set v0.3
 SetupIconFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\cm3.ico
 Compression=lzma
 SolidCompression=yes

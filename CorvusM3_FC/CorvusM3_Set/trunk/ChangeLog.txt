@@ -1,8 +1,11 @@
+Version 0.3:
+- Motor Tool
+- Remote
+
 Version 0.2a:
 - Cockpit
 - rescan Ports
 - log to File
 
 Version 0.1:
-============
 - initial Version
