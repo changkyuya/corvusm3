@@ -651,7 +651,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "0";
+            this.label4.Text = "1";
             // 
             // label3
             // 
@@ -660,7 +660,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 13);
             this.label3.TabIndex = 11;
-            this.label3.Text = "0";
+            this.label3.Text = "1";
             // 
             // label2
             // 
@@ -669,7 +669,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 10;
-            this.label2.Text = "0";
+            this.label2.Text = "1";
             // 
             // label1
             // 
@@ -678,46 +678,54 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 13);
             this.label1.TabIndex = 9;
-            this.label1.Text = "0";
+            this.label1.Text = "1";
             // 
             // trackBar4
             // 
             this.trackBar4.Location = new System.Drawing.Point(181, 28);
             this.trackBar4.Maximum = 200;
+            this.trackBar4.Minimum = 1;
             this.trackBar4.Name = "trackBar4";
             this.trackBar4.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar4.Size = new System.Drawing.Size(45, 330);
             this.trackBar4.TabIndex = 8;
+            this.trackBar4.Value = 1;
             this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_Scroll);
             // 
             // trackBar3
             // 
             this.trackBar3.Location = new System.Drawing.Point(130, 28);
             this.trackBar3.Maximum = 200;
+            this.trackBar3.Minimum = 1;
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar3.Size = new System.Drawing.Size(45, 330);
             this.trackBar3.TabIndex = 7;
+            this.trackBar3.Value = 1;
             this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
             // 
             // trackBar2
             // 
             this.trackBar2.Location = new System.Drawing.Point(79, 28);
             this.trackBar2.Maximum = 200;
+            this.trackBar2.Minimum = 1;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar2.Size = new System.Drawing.Size(45, 330);
             this.trackBar2.TabIndex = 6;
+            this.trackBar2.Value = 1;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // trackBar1
             // 
             this.trackBar1.Location = new System.Drawing.Point(28, 28);
             this.trackBar1.Maximum = 200;
+            this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar1.Size = new System.Drawing.Size(45, 330);
             this.trackBar1.TabIndex = 5;
+            this.trackBar1.Value = 1;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // button2
@@ -743,17 +751,17 @@
             // 
             // attitudeIndicatorInstrumentControl1
             // 
-            this.attitudeIndicatorInstrumentControl1.Location = new System.Drawing.Point(185, 3);
+            this.attitudeIndicatorInstrumentControl1.Location = new System.Drawing.Point(186, 12);
             this.attitudeIndicatorInstrumentControl1.Name = "attitudeIndicatorInstrumentControl1";
-            this.attitudeIndicatorInstrumentControl1.Size = new System.Drawing.Size(215, 218);
+            this.attitudeIndicatorInstrumentControl1.Size = new System.Drawing.Size(232, 235);
             this.attitudeIndicatorInstrumentControl1.TabIndex = 1;
             this.attitudeIndicatorInstrumentControl1.Text = "attitudeIndicatorInstrumentControl1";
             // 
             // headingIndicatorInstrumentControl1
             // 
-            this.headingIndicatorInstrumentControl1.Location = new System.Drawing.Point(3, 3);
+            this.headingIndicatorInstrumentControl1.Location = new System.Drawing.Point(8, 12);
             this.headingIndicatorInstrumentControl1.Name = "headingIndicatorInstrumentControl1";
-            this.headingIndicatorInstrumentControl1.Size = new System.Drawing.Size(176, 179);
+            this.headingIndicatorInstrumentControl1.Size = new System.Drawing.Size(163, 164);
             this.headingIndicatorInstrumentControl1.TabIndex = 0;
             this.headingIndicatorInstrumentControl1.Text = "headingIndicatorInstrumentControl1";
             // 
@@ -789,7 +797,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CorvusM3";
-            this.Text = "CorvusM3 - v0.2a";
+            this.Text = "CorvusM3 - v0.3";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.nickRollPanel_MouseMove);
             this.statusStrip1.ResumeLayout(false);
@@ -886,8 +894,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButtonDebugToFile;
         private System.Windows.Forms.TabPage tabPage7;
-        private HeadingIndicatorInstrumentControl headingIndicatorInstrumentControl1;
         private AttitudeIndicatorInstrumentControl attitudeIndicatorInstrumentControl1;
+        private HeadingIndicatorInstrumentControl headingIndicatorInstrumentControl1;
 
 
 
