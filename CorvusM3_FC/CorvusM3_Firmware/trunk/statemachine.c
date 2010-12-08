@@ -51,6 +51,7 @@ vs32 copterAngle[3];
 vu8 errorCode;
 vu8 neutralRC;
 vs32 PIDCorr[3];
+u8 calibrate = FALSE;
  
 
 	
@@ -116,6 +117,7 @@ void statemachine(void)
 				neutralRC = 0;
 				errorCode |= ERROR_SENSOR; // set bit - led flashing
 				initFilter(gyroAngle, copterAngle);
+				calibrate = TRUE;
 			}
 			
 			// start motors
@@ -123,7 +125,8 @@ void statemachine(void)
 			{
 				neutralRC = 0;
 				// init filter
-				initFilter(gyroAngle, copterAngle);
+				if (calibrate == FALSE)
+					initFilter(gyroAngle, copterAngle);
 				flightState = FLIGHT_FLYING;
 				print_uart1("Motors ON\r\n");
 			}
