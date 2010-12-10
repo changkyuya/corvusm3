@@ -133,7 +133,7 @@ namespace CorvusM3
             }
             get { return parameter[7]; }
         }
-        [CategoryAttribute("Sensoren"), DisplayName("SMOOTH_ACC [08] (0-100)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
+        [CategoryAttribute("Sensoren"), DisplayName("SMOOTH_ACC [08] (0-1000)"), DescriptionAttribute("Glättung zum letzten Wert (0 wäre immer letzter Wert)")]
         public int SMOOTHACC
         {
             set
