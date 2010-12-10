@@ -145,6 +145,10 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 	accValues[Y] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
 	accValues[Z] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
 	
+	//char x [200];
+	//sprintf(x,"%d:%d:%d\r\n",overADCSensorValue[ACC_X],oldAccValues[X],accValues[X]);
+	//print_uart1(x);
+	
 	u8 i;
 	for (i = 0; i < 3; i++)
 	{
