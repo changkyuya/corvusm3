@@ -30,25 +30,23 @@
 
 /* Define --------------------------------------------------------------------*/
 
-#define Kp_ROLLPITCH 0.0125  //0.010 // Pitch&Roll Proportional Gain
-#define Ki_ROLLPITCH 0.000010 // Pitch&Roll Integrator Gain
-#define Kp_YAW 0.5     // Yaw Porportional Gain  
-#define Ki_YAW 0.00005 // Yaw Integrator Gain
+#define Kp_ROLLPITCH 125  // Pitch&Roll Proportional Gain
+#define Ki_ROLLPITCH 1 // Pitch&Roll Integrator Gain
+
 
 /* Function prototypes -------------------------------------------------------*/
 void initFilterDCM(vs32 * gyroAngle, vs32 * copterAngle);
 void setAngleFilterDCM(vs32 * gyroAngle, vs32 * copterAngle);
 void getCopterAnglesFilterDCM(vs32 * copterAngle);
 void mapReceiverValuesFilterDCM(vu16 * receiverChannel);
-float Vector_Dot_Product(float vector1[3],float vector2[3]);
-void Vector_Cross_Product(float vectorOut[3], float v1[3],float v2[3]);
-void Vector_Scale(float vectorOut[3],float vectorIn[3], float scale2);
-void Vector_Add(float vectorOut[3],float vectorIn1[3], float vectorIn2[3]);
-void Matrix_Multiply(float a[3][3], float b[3][3],float mat[3][3]);
+s32 Vector_Dot_Product(vs32 vector1[3],vs32 vector2[3]);
+void Vector_Cross_Product(vs32 vectorOut[3], vs32 v1[3],vs32 v2[3]);
+void Vector_Scale(vs32 vectorOut[3],vs32 vectorIn[3], vs32 scale2);
+void Vector_Add(vs32 vectorOut[3],vs32 vectorIn1[3], vs32 vectorIn2[3]);
+void Matrix_Multiply(vs32 a[3][3], vs32 b[3][3],vs32 mat[3][3]);
 void Normalize(void);
 void Drift_correction(void);
-void Accel_adjust(void);
-void Matrix_update(vs32 * gyroRawValues, vs32 * accRawValues);
+void Matrix_update();
 void Euler_angles(vs32 * copterAngle);
 
 #endif /* __FILTERDCM_H */
