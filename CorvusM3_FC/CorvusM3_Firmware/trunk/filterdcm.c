@@ -34,18 +34,18 @@ extern vu16 parameter[0x190]; //parameter
 extern vs32 compassAngle; //statemachine
 extern vs32 targetAngle[3]; //statemachine
 
-float Accel_Vector[3]= {0,0,0}; //Store the acceleration in a vector
-float Gyro_Vector[3]= {0,0,0};//Store the gyros rutn rate in a vector
-float Omega_Vector[3]= {0,0,0}; //Corrected Gyro_Vector data
-float Omega_P[3]= {0,0,0};//Omega Proportional correction
-float Omega_I[3]= {0,0,0};//Omega Integrator
-float Omega[3]= {0,0,0};
-float errorRollPitch[3]= {0,0,0};
-//float errorYaw[3]= {0,0,0};
+vs32 Accel_Vector[3]= {0,0,0}; //Store the acceleration in a vector
+vs32 Gyro_Vector[3]= {0,0,0};//Store the gyros rutn rate in a vector
+vs32 Omega_Vector[3]= {0,0,0}; //Corrected Gyro_Vector data
+vs32 Omega_P[3]= {0,0,0};//Omega Proportional correction
+vs32 Omega_I[3]= {0,0,0};//Omega Integrator
+vs32 Omega[3]= {0,0,0};
+vs32 errorRollPitch[3]= {0,0,0};
+//vs32 errorYaw[3]= {0,0,0};
 
 
 
-float DCM_Matrix[3][3]= {
+vs32 DCM_Matrix[3][3]= {
   {
     1,0,0  }
   ,{
@@ -53,10 +53,10 @@ float DCM_Matrix[3][3]= {
   ,{
     0,0,1  }
 }; 
-float Update_Matrix[3][3]={{0,1,2},{3,4,5},{6,7,8}}; //Gyros here
+vs32 Update_Matrix[3][3]={{0,1,2},{3,4,5},{6,7,8}}; //Gyros here
 
 
-float Temporary_Matrix[3][3]={
+vs32 Temporary_Matrix[3][3]={
   {
     0,0,0  }
   ,{
@@ -131,8 +131,28 @@ void getCopterAnglesFilterDCM(vs32 * copterAngle)
 	
 	// IMU DCM Algorithm
     /* Original code from Jordi Muñoz and William Premerlani                  */
-	//Read_adc_raw();
-    Matrix_update(gyroRawValues, accRawValues); 
+		/*
+	gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100);
+	ToRad *0.01745329252  // *pi/180
+	ToDeg *57.2957795131  // *180/pi
+	*/
+
+	//Gyro_Vector[0] = Gyro_Scaled_X(read_adc(0)); //gyro x roll
+	// ADC Values mit 3 nachkomma - DCM mit 4 Nachkomma
+	
+	Gyro_Vector[0] = (vs32) ((gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 10) * 0.01745329252); // * parameter[PARA_GYRO_X_90];
+	Gyro_Vector[1] = (vs32) ((gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 10) * 0.01745329252); // * parameter[PARA_GYRO_X_90];
+	Gyro_Vector[2] = (vs32) ((gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 10) * 0.01745329252); // * parameter[PARA_GYRO_X_90];
+
+	Accel_Vector[0] = -accRawValues[Y]; // acc Y
+	Accel_Vector[1] = -accRawValues[X]; // acc X
+	Accel_Vector[2] = accRawValues[Z]; // acc z
+
+	//char xx [80];
+	//sprintf(xx,"gv:%f:%f:%f\r\n",Gyro_Vector[0],Gyro_Vector[1],Gyro_Vector[2]);
+	//print_uart1(xx);
+	
+	Matrix_update(); 
     Normalize();
     //Drift_correction();
     Euler_angles(copterAngle);
@@ -174,36 +194,36 @@ void mapReceiverValuesFilterDCM(vu16 * receiverChannel)
 // ***********************************************************************************************
 
 //Computes the dot product of two vectors
-float Vector_Dot_Product(float vector1[3],float vector2[3])
+s32 Vector_Dot_Product(vs32 vector1[3],vs32 vector2[3])
 {
-	float op=0;
+	vs32 op=0;
 
 	for(int c=0; c<3; c++)
 	{
-		op+=vector1[c]*vector2[c];
+		op+=vector1[c]*vector2[c] / 10000;
 	}
 
 	return op; 
 }
 
 //Computes the cross product of two vectors
-void Vector_Cross_Product(float vectorOut[3], float v1[3],float v2[3])
+void Vector_Cross_Product(vs32 vectorOut[3], vs32 v1[3],vs32 v2[3])
 {
-	vectorOut[0] = (v1[1]*v2[2]) - (v1[2]*v2[1]);
-	vectorOut[1] = (v1[2]*v2[0]) - (v1[0]*v2[2]);
-	vectorOut[2] = (v1[0]*v2[1]) - (v1[1]*v2[0]);
+	vectorOut[0] = (v1[1]*v2[2]) / 10000 - (v1[2]*v2[1]) / 10000;
+	vectorOut[1] = (v1[2]*v2[0]) / 10000 - (v1[0]*v2[2]) / 10000;
+	vectorOut[2] = (v1[0]*v2[1]) / 10000 - (v1[1]*v2[0]) / 10000;
 }
 
 //Multiply the vector by a scalar. 
-void Vector_Scale(float vectorOut[3],float vectorIn[3], float scale2)
+void Vector_Scale(vs32 vectorOut[3],vs32 vectorIn[3], vs32 scale2)
 {
 	for(int c=0; c<3; c++)
 	{
-		vectorOut[c] = vectorIn[c] * scale2; 
+		vectorOut[c] = (vectorIn[c] * scale2) / 10000; 
 	}
 }
 
-void Vector_Add(float vectorOut[3],float vectorIn1[3], float vectorIn2[3])
+void Vector_Add(vs32 vectorOut[3],vs32 vectorIn1[3], vs32 vectorIn2[3])
 {
 	for(int c=0; c<3; c++)
 	{
@@ -213,21 +233,20 @@ void Vector_Add(float vectorOut[3],float vectorIn1[3], float vectorIn2[3])
 
 /**************************************************/
 //Multiply two 3x3 matrixs. This function developed by Jordi can be easily adapted to multiple n*n matrix's. (Pero me da flojera!). 
-void Matrix_Multiply(float a[3][3], float b[3][3],float mat[3][3])
+void Matrix_Multiply(vs32 a[3][3], vs32 b[3][3],vs32 mat[3][3])
 {
-	float op[3]; 
+	vs32 op[3]; 
 	for(int x=0; x<3; x++)
 	{
 		for(int y=0; y<3; y++)
 		{
 			for(int w=0; w<3; w++)
 			{
-				op[w] = a[x][w] * b[w][y];
+				op[w] = (a[x][w] * b[w][y]) / 10000;
 			} 
 			mat[x][y] = 0;
 			mat[x][y] = op[0] + op[1] + op[2];
 
-			//float test=mat[x][y];
 		}
 	}
 }
@@ -236,9 +255,9 @@ void Matrix_Multiply(float a[3][3], float b[3][3],float mat[3][3])
 /**************************************************/
 void Normalize(void)
 {
-	float error=0;
-	float temporary[3][3];
-	float renorm=0;
+	vs32 error=0;
+	vs32 temporary[3][3];
+	vs32 renorm=0;
 
 	error = -Vector_Dot_Product(&DCM_Matrix[0][0],&DCM_Matrix[1][0])*.5; //eq.19
 
@@ -250,13 +269,13 @@ void Normalize(void)
 
 	Vector_Cross_Product(&temporary[2][0],&temporary[0][0],&temporary[1][0]); // c= a x b //eq.20
 
-	renorm = .5 *(3 - Vector_Dot_Product(&temporary[0][0],&temporary[0][0])); //eq.21
+	renorm = (30000 - Vector_Dot_Product(&temporary[0][0],&temporary[0][0])) / 2; //eq.21
 	Vector_Scale(&DCM_Matrix[0][0], &temporary[0][0], renorm);
 
-	renorm = .5 *(3 - Vector_Dot_Product(&temporary[1][0],&temporary[1][0])); //eq.21
+	renorm = (30000 - Vector_Dot_Product(&temporary[1][0],&temporary[1][0])) / 2; //eq.21
 	Vector_Scale(&DCM_Matrix[1][0], &temporary[1][0], renorm);
 
-	renorm = .5 *(3 - Vector_Dot_Product(&temporary[2][0],&temporary[2][0])); //eq.21
+	renorm = (30000 - Vector_Dot_Product(&temporary[2][0],&temporary[2][0])) / 2; //eq.21
 	Vector_Scale(&DCM_Matrix[2][0], &temporary[2][0], renorm);
 }
 
@@ -268,9 +287,9 @@ void Drift_correction(void)
 	//float mag_heading_y;
 	//float errorCourse;
 	//static float Scaled_Omega_P[3];
-	static float Scaled_Omega_I[3];
+	static vs32 Scaled_Omega_I[3];
 	//float Accel_magnitude;
-	float Accel_weight;
+	vs32 Accel_weight;
 
 	//*****Roll and Pitch***************
 
@@ -303,35 +322,10 @@ void Drift_correction(void)
 	*/
 }
 /**************************************************/
-void Accel_adjust(void)
+
+void Matrix_update()
 {
- 
-	//Accel_Vector[1] += Accel_Scale(speed_3d*Omega[2]);  // Centrifugal force on Acc_y = GPS_speed*GyroZ
-	//Accel_Vector[2] -= Accel_Scale(speed_3d*Omega[1]);  // Centrifugal force on Acc_z = GPS_speed*GyroY
 
-}
-/**************************************************/
-
-void Matrix_update(vs32 * gyroRawValues, vs32 * accRawValues)
-{
-	/*
-	gyroAngle[X] -= (vs32) (gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 100);
-	ToRad *0.01745329252  // *pi/180
-	ToDeg *57.2957795131  // *180/pi
-	*/
-
-	//Gyro_Vector[0] = Gyro_Scaled_X(read_adc(0)); //gyro x roll
-	Gyro_Vector[0] = - (gyroRawValues[X] / 1000.0) *  0.40293 * 0.01745329252; // * parameter[PARA_GYRO_X_90];
-	Gyro_Vector[1] =   (gyroRawValues[Y] / 1000.0) *  0.40293 * 0.01745329252; // * parameter[PARA_GYRO_Y_90];
-	Gyro_Vector[2] = - (gyroRawValues[Z] / 1000.0) *  0.40293 * 0.01745329252; // * parameter[PARA_GYRO_Z_90];
-
-	Accel_Vector[0] = accRawValues[X] / 1000.0; // acc x
-	Accel_Vector[1] = accRawValues[Y] / 1000.0; // acc y
-	Accel_Vector[2] = accRawValues[Z] / 1000.0; // acc z
-
-	//char xx [80];
-	//sprintf(xx,"gv:%f:%f:%f\r\n",Gyro_Vector[0],Gyro_Vector[1],Gyro_Vector[2]);
-	//print_uart1(xx);
 
 	Vector_Add(&Omega[0], &Gyro_Vector[0], &Omega_I[0]);//adding integrator
 	Vector_Add(&Omega_Vector[0], &Omega[0], &Omega_P[0]);//adding proportional
@@ -374,9 +368,10 @@ void Matrix_update(vs32 * gyroRawValues, vs32 * accRawValues)
 void Euler_angles(vs32 * copterAngle)
 {
 // Euler angles from DCM matrix
-    copterAngle[Y] = (vs32) ((asin(-DCM_Matrix[2][0]) * 100000.0 * 57.2957795131) + 18000000.0);
-    copterAngle[X] = (vs32) ((atan2(DCM_Matrix[2][1],DCM_Matrix[2][2]) * 100000.0  * 57.2957795131) + 18000000.0);
-    copterAngle[Z] = (vs32) ((atan2(DCM_Matrix[1][0],DCM_Matrix[0][0]) * 100000.0  * 57.2957795131) + 18000000.0);
+    //5 nachkommastellen (intern mit 4 in DCM)
+	copterAngle[Y] = (vs32) ((asin(DCM_Matrix[2][0] / 10000.0) * 5729578 ) + 18000000);
+    copterAngle[X] = (vs32) ((atan2(DCM_Matrix[2][1],DCM_Matrix[2][2]) * 5729578) + 18000000);
+    copterAngle[Z] = (vs32) ((atan2(DCM_Matrix[1][0],DCM_Matrix[0][0]) * 5729578) + 18000000);
 	
 	//char xx [80];
 	//sprintf(xx,"x:%f:%d\r\n",DCM_Matrix[2][0],copterAngle[Y]);

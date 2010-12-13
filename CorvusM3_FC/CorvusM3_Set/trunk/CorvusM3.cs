@@ -830,7 +830,7 @@ namespace CorvusM3
 
                     string comPort = comPortToolStripComboBox.SelectedItem.ToString().Substring(3);
 
-                    System.Diagnostics.Process.Start(applPath + @"\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
+                    System.Diagnostics.Process.Start(applPath + @"\uploader\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
                 }
             }
 
