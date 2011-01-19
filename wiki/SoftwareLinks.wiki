@@ -6,7 +6,7 @@ make ARM Cortex M3: Command: cs-make.exe, Folder: %d, Parameters: all, Shortcut:
 make clean: Command: cs-make.exe, Folder: %d, Parameters: clean<br />
 upload: Command: $(ProjectPath)flash_erase_all.bat, Shorcut: STRG+Y
 
- * Flash Tool von ST [http://www.st.com/stonline/products/support/micro/files/um0462.zip]
+ * Flash Tool von ST [http://www.st.com/stonline/stappl/resourceSelector/app?page=resourceSelector&doctype=SW_DEMO&ClassID=1734]
  * Microsoft Visual C# Express [http://www.microsoft.com/germany/Express/download/default.aspx]
  * Terminalprogramm [http://www.der-hammer.info/terminal/]
  * Soundkarten Oszilloskop [http://www.zeitnitz.de/Christian/scope_de]
