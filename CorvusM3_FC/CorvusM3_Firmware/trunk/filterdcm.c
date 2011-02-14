@@ -140,16 +140,16 @@ void getCopterAnglesFilterDCM(vs32 * copterAngle)
 	//Gyro_Vector[0] = Gyro_Scaled_X(read_adc(0)); //gyro x roll
 	// ADC Values mit 3 nachkomma - DCM mit 4 Nachkomma
 	
-	Gyro_Vector[0] = (vs32) ((gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 10) * 0.01745329252); // * parameter[PARA_GYRO_X_90];
-	Gyro_Vector[1] = (vs32) ((gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 10) * 0.01745329252); // * parameter[PARA_GYRO_X_90];
-	Gyro_Vector[2] = (vs32) ((gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 10) * 0.01745329252); // * parameter[PARA_GYRO_X_90];
+	Gyro_Vector[0] = 4;//(vs32) ((gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 10.0) * 0.01745329252); 
+	Gyro_Vector[1] = 0;//(vs32) ((gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 10.0) * 0.01745329252);
+	Gyro_Vector[2] = 0;//(vs32) ((gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 10.0) * 0.01745329252); 
 
 	Accel_Vector[0] = -accRawValues[Y]; // acc Y
 	Accel_Vector[1] = -accRawValues[X]; // acc X
 	Accel_Vector[2] = accRawValues[Z]; // acc z
 
 	//char xx [80];
-	//sprintf(xx,"gv:%f:%f:%f\r\n",Gyro_Vector[0],Gyro_Vector[1],Gyro_Vector[2]);
+	//sprintf(xx,"gv:%d:%d:%d\r\n",Gyro_Vector[0],Gyro_Vector[1],Gyro_Vector[2]);
 	//print_uart1(xx);
 	
 	Matrix_update(); 
@@ -331,19 +331,19 @@ void Matrix_update()
 	Vector_Add(&Omega_Vector[0], &Omega[0], &Omega_P[0]);//adding proportional
 
 	//char xx [80];
-	//sprintf(xx,"go:%f:%f:%f\r\n",Omega_Vector[0],Omega_Vector[1],Omega_Vector[2]);
+	//sprintf(xx,"go:%d:%d:%d\r\n",Omega_Vector[0],Omega_Vector[1],Omega_Vector[2]);
 	//print_uart1(xx);
 
 	//Accel_adjust();//adjusting centrifugal acceleration. // Not used for quadcopter
 
 	Update_Matrix[0][0] = 0;
-	Update_Matrix[0][1] = -MAINLOOPTIME * Omega_Vector[2];//-z
-	Update_Matrix[0][2] =  MAINLOOPTIME * Omega_Vector[1];//y
-	Update_Matrix[1][0] =  MAINLOOPTIME * Omega_Vector[2];//z
+	Update_Matrix[0][1] = -Gyro_Vector[2];// -MAINLOOPTIME * Omega_Vector[2];//-z
+	Update_Matrix[0][2] =  Gyro_Vector[1];//  MAINLOOPTIME * Omega_Vector[1];//y
+	Update_Matrix[1][0] =  Gyro_Vector[2];//  MAINLOOPTIME * Omega_Vector[2];//z
 	Update_Matrix[1][1] = 0;
-	Update_Matrix[1][2] = -MAINLOOPTIME * Omega_Vector[0];//-x
-	Update_Matrix[2][0] = -MAINLOOPTIME * Omega_Vector[1];//-y
-	Update_Matrix[2][1] =  MAINLOOPTIME * Omega_Vector[0];//x
+	Update_Matrix[1][2] = -Gyro_Vector[0];// -MAINLOOPTIME * Omega_Vector[0];//-x
+	Update_Matrix[2][0] = -Gyro_Vector[1];// -MAINLOOPTIME * Omega_Vector[1];//-y
+	Update_Matrix[2][1] =  Gyro_Vector[0];//  MAINLOOPTIME * Omega_Vector[0];//x
 	Update_Matrix[2][2] = 0;
 
 	Matrix_Multiply(DCM_Matrix,Update_Matrix,Temporary_Matrix); //a*b=c
@@ -369,11 +369,11 @@ void Euler_angles(vs32 * copterAngle)
 {
 // Euler angles from DCM matrix
     //5 nachkommastellen (intern mit 4 in DCM)
-	copterAngle[Y] = (vs32) ((asin(DCM_Matrix[2][0] / 10000.0) * 5729578 ) + 18000000);
-    copterAngle[X] = (vs32) ((atan2(DCM_Matrix[2][1],DCM_Matrix[2][2]) * 5729578) + 18000000);
-    copterAngle[Z] = (vs32) ((atan2(DCM_Matrix[1][0],DCM_Matrix[0][0]) * 5729578) + 18000000);
+	copterAngle[Y] = (vs32) ((asin(DCM_Matrix[2][0] / 10000.0) * 5729578.0 ) + 18000000.0);
+    copterAngle[X] = (vs32) ((atan2(DCM_Matrix[2][1],DCM_Matrix[2][2]) * 5729578.0) + 18000000.0);
+    copterAngle[Z] = (vs32) ((atan2(DCM_Matrix[1][0],DCM_Matrix[0][0]) * 5729578.0) + 18000000.0);
 	
 	//char xx [80];
-	//sprintf(xx,"x:%f:%d\r\n",DCM_Matrix[2][0],copterAngle[Y]);
+	//sprintf(xx,"x:%d\r\n",DCM_Matrix[2][0]);
 	//print_uart1(xx);
  }

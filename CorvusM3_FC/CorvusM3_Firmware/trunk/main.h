@@ -240,7 +240,7 @@
 #define PARA_SW_ACC			0x01 // to bitmask 1111
 #define PARA_SW_COMP2		0x02 // to bitmask 1111
 #define PARA_SW_DCM			0x03 // to bitmask 1111
-#define MAINLOOPTIME		1.0 //Mainlooptime ms
+#define MAINLOOPTIME		1 //Mainlooptime ms
 
 /* */
 #define MAX_GAS_VALUE		200

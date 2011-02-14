@@ -152,20 +152,20 @@ void mapReceiverValuesFilterHH(vu16 * receiverChannel)
 {
 	// only use yaw if stick is more than 5 points out of center 
 	
-	if (receiverChannel[ROLL] < 1495 || receiverChannel[ROLL] > 1505)
+	if (receiverChannel[ROLL] < 1490 || receiverChannel[ROLL] > 1510)
 	{
 		targetAngle[X] += (receiverChannel[ROLL] - 1500) * parameter[PARA_STICK_FACTOR];
 	}
 	
-	if (receiverChannel[NICK] < 1495 || receiverChannel[NICK] > 1505)
+	if (receiverChannel[NICK] < 1490 || receiverChannel[NICK] > 1510)
 	{
 		targetAngle[Y] += (receiverChannel[NICK] - 1500) * parameter[PARA_STICK_FACTOR];
 	}
 	
 	// only use yaw if stick is more than 5 points out of center and pitch not min
-	if (receiverChannel[YAW] < 1495 || receiverChannel[YAW] > 1505)
+	if (receiverChannel[YAW] < 1490 || receiverChannel[YAW] > 1510)
 	{
-		if(receiverChannel[PITCH] > 1005)
+		if(receiverChannel[PITCH] > 1010)
 		{
 			targetAngle[Z] -= (receiverChannel[YAW] - 1500) * parameter[PARA_STICK_FACTOR];
 		}
