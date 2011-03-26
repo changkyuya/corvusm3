@@ -36,5 +36,6 @@ void Pause(u32 approxms);
 s32 smoothValue(s32 actual, s32 previous, u16 smooth); 
 float fastatan2(float y, float x);
 s32 weightingValues(s32 first, s32 secound, u16 weightingFirst); 
+s32 abs (s32 value);
 
 #endif /* __TOOLS_H */

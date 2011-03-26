@@ -92,19 +92,24 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 	// get basis angles from sensors
 	getGyroAnglesFilterACC(gyroAngle, gyroRawValues);
 	getACCAnglesFilterACC(accAngle, accRawValues);
-		
+	
+	s32 factorDegree = (abs(copterAngle[X] - 9000000) / 100000) + (abs(copterAngle[Y] - 9000000) / 100000)+ 10;
+	factorDegree = factorDegree * factorDegree;
+	u32 accForce = (parameter[PARA_ACC_FORCE] * 100 / factorDegree) + 1;
+	u32 gyroCorr = (parameter[PARA_GYRO_CORR] * 100 / factorDegree) + 1;
+	
 	//needs about 50us (all 5)
-	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], parameter[PARA_ACC_FORCE]); 
-	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], parameter[PARA_ACC_FORCE]); 
+	copterAngle[X] = weightingValues(accAngle[X], gyroAngle[X], accForce); 
+	copterAngle[Y] = weightingValues(accAngle[Y], gyroAngle[Y], accForce); 
 	copterAngle[Z] = gyroAngle[Z];
 	
 	//char x [80];
-	//sprintf(x,"%d:%d:%d:%d\r\n",copterAngle[X],accAngle[X],gyroAngle[X],parameter[PARA_ACC_FORCE]);
+	//sprintf(x,"%d:%d:%d\r\n",factorDegree,abs(copterAngle[X] - 9000000),abs(copterAngle[Y] - 9000000));
 	//print_uart1(x);
 	
 	// trimm gyro to new Angle
-	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], parameter[PARA_GYRO_CORR]); 
-	gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], parameter[PARA_GYRO_CORR]); 
+	gyroAngle[X] = weightingValues(copterAngle[X], gyroAngle[X], gyroCorr); 
+	gyroAngle[Y] = weightingValues(copterAngle[Y], gyroAngle[Y], gyroCorr); 
 }
 
 
