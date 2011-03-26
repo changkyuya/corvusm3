@@ -37,6 +37,12 @@ vu32 overADCSensorValue[7];
 vu32 oldAccValues[3]; // for smooth
 vu32 gyroZero[3];
 vu32 accZero[3];
+
+vu32 accBufferX[100];
+vu32 accBufferY[100];
+vu32 accBufferZ[100];
+vu8 accBufferCounter = 0;
+
 extern vu16 parameter[0x190]; //parameter
 extern vs32 compassAngle; //statemachine
 extern vu32 msCount; //statemachine -> for compass all 20ms
@@ -141,15 +147,43 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 	gyroValues[Z] = overADCSensorValue[GYRO_Z] - gyroZero[Z];
 	//gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z] * 1000, oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
 	
-	accValues[X] = smoothValue(overADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
-	accValues[Y] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
-	accValues[Z] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
+	// Try 
+	accBufferX[accBufferCounter] = smoothValue(overADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
+	accBufferY[accBufferCounter] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
+	accBufferZ[accBufferCounter] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
+	
+	u8 maxBufferCount = parameter[PARA_SMOOTH_ACC] / 10;
+	
+	accBufferCounter++;
+	if (accBufferCounter > maxBufferCount-1)
+	{
+		accBufferCounter = 0;
+	}
+	
+	accValues[X] = accBufferX[0];
+	accValues[Y] = accBufferY[0];
+	accValues[Z] = accBufferZ[0];
+	
+	u8 i;
+	for (i = 1; i < maxBufferCount; i++)
+	{
+		accValues[X] += accBufferX[i];
+		accValues[Y] += accBufferY[i];
+		accValues[Z] += accBufferZ[i];
+	}
+	
+	accValues[X] = accValues[X] / maxBufferCount;
+	accValues[Y] = accValues[Y] / maxBufferCount;
+	accValues[Z] = accValues[Z] / maxBufferCount;
+	
+	//accValues[X] = smoothValue(overADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
+	//accValues[Y] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
+	//accValues[Z] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
 	
 	//char x [200];
 	//sprintf(x,"%d:%d:%d\r\n",overADCSensorValue[ACC_X],oldAccValues[X],accValues[X]);
 	//print_uart1(x);
 	
-	u8 i;
 	for (i = 0; i < 3; i++)
 	{
 		//oldGyroValues[i] = gyroValues[i];
