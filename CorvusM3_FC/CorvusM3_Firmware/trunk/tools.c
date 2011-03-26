@@ -109,3 +109,10 @@ float fastatan2(float y, float x)
 		return (angle);
 	}
 }
+
+s32 abs (s32 value)
+{
+	if (value < 0)
+		value = value * -1;
+	return value;	
+}
