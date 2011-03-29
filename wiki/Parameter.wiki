@@ -21,8 +21,8 @@ Werden die Parameter mit einem anderen Tool eingegeben bitte führende 0 verwend
 || 11 || GYRO_X_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
 || 12 || GYRO_Y_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
 || 13 || GYRO_Z_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
-|| 14 || ACC_FORCE || 500 || 0-10000 || Wirkung vom ACC auf den Gyro (0 ist nur Gyro)<br />Bei Comp2 Filter 500 = 5Hz ||
-|| 15 || GYRO_CORR || 500 || 0-10000 || Berichtigung Gyro-Zero über ACC ||
+|| 14 || ACC_FORCE || 100 || 0-1000 || Wirkung vom ACC auf den Gyro (0 ist nur Gyro)<br />Bei Comp2 Filter 500 = 5Hz ||
+|| 15 || GYRO_CORR || 10 || 0-1000 || Berichtigung Gyro-Zero über ACC ||
 || 16 || SERVO0_CH || 5 || || Kanalmapping für Servo 0 ||
 || 17 || SERVO1_CH || 6 || || Kanalmapping für Servo 1 ||
 || 18 || SERVO2_CH || 7 || || Kanalmapping für Servo 2 ||
