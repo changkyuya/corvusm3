@@ -65,7 +65,7 @@ s32 smoothValue(s32 actual, s32 previous, u16 smooth)
 /* weighting values ---------------------------------------------------------*/
 s32 weightingValues(s32 first, s32 secound, u16 weightingFirst) 
 {
-	return (secound + (((first - secound) * weightingFirst) / 100));
+	return (secound + (((first - secound) * weightingFirst) / 1000));
 }
 
 

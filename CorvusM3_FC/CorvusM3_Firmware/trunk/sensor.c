@@ -78,6 +78,20 @@ void zeroGyro()
 		gyroZero[Z] += overADCSensorValue[GYRO_Z];
 		
 		Pause(1);
+	}	
+	
+	gyroZero[X] = 0;
+	gyroZero[Y] = 0;
+	gyroZero[Z] = 0;
+	
+
+	for (i = 0; i < 1024; i++)
+	{	
+		gyroZero[X] += overADCSensorValue[GYRO_X];
+		gyroZero[Y] += overADCSensorValue[GYRO_Y];
+		gyroZero[Z] += overADCSensorValue[GYRO_Z];
+		
+		Pause(1);
 	}
 	
 	gyroZero[X] = gyroZero[X] >> 10;

@@ -140,7 +140,7 @@ void getCopterAnglesFilterDCM(vs32 * copterAngle)
 	//Gyro_Vector[0] = Gyro_Scaled_X(read_adc(0)); //gyro x roll
 	// ADC Values mit 3 nachkomma - DCM mit 4 Nachkomma
 	
-	Gyro_Vector[0] = 4;//(vs32) ((gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 10.0) * 0.01745329252); 
+	Gyro_Vector[0] = 1000;//(vs32) ((gyroRawValues[X] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_X_90] * 10.0) * 0.01745329252); 
 	Gyro_Vector[1] = 0;//(vs32) ((gyroRawValues[Y] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Y_90] * 10.0) * 0.01745329252);
 	Gyro_Vector[2] = 0;//(vs32) ((gyroRawValues[Z] * ( 3.3 / 4095.0 / 2000.0 ) * parameter[PARA_GYRO_Z_90] * 10.0) * 0.01745329252); 
 
