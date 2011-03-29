@@ -1,3 +1,6 @@
+Version 0.4:
+- acc, gyro corr * 10
+
 Version 0.3:
 - Motor Tool
 - Remote

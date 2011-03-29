@@ -96,8 +96,8 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_X_90], 2200); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Y_90], 2200); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Z_90], 2200); 
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 50); //50 
-	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 25); //25
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 100); //50 
+	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 10); //25
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO0_CH], 5); //Kanal 5
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO1_CH], 6); //Kanal 6
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO2_CH], 7); //Kanal 7 
@@ -111,8 +111,8 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_P_Y], 1000);  //26:
 	EE_WriteVariable(VirtAddVarTab[PARA_I_Y], 0); //27: 
 	EE_WriteVariable(VirtAddVarTab[PARA_D_Y], 3000);  //28:
-	EE_WriteVariable(VirtAddVarTab[PARA_P_Z], 1000);  //29:
-	EE_WriteVariable(VirtAddVarTab[PARA_I_Z], 500);  //30:
+	EE_WriteVariable(VirtAddVarTab[PARA_P_Z], 0);  //29:
+	EE_WriteVariable(VirtAddVarTab[PARA_I_Z], 0);  //30:
 	EE_WriteVariable(VirtAddVarTab[PARA_D_Z], 0);  //31:
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_X], 0);  
 	EE_WriteVariable(VirtAddVarTab[PARA_COMP_CORR_Y], 0);  

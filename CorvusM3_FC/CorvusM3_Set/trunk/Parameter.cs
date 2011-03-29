@@ -93,7 +93,7 @@ namespace CorvusM3
             }
             get { return parameter[3]; }
         }
-        [CategoryAttribute("Basis"), DisplayName("SAL [04]"), DescriptionAttribute("0...HH Regelung, \r\n1...ACC Regelung, \r\n2...ACC Comp2")]
+        [CategoryAttribute("Basis"), DisplayName("SAL [04]"), DescriptionAttribute("0...HH Regelung, \r\n1...ACC Regelung, \r\n2...ACC Comp2, \r\n3...DCM")]
         public int SAL
         {
             set
@@ -193,7 +193,7 @@ namespace CorvusM3
             }
             get { return parameter[13]; }
         }
-        [CategoryAttribute("Sensoren"), DisplayName("ACC_FORCE [14] (0-100)"), DescriptionAttribute("Wirkung vom ACC auf den Gyro (0 ist nur Gyro)")]
+        [CategoryAttribute("Sensoren"), DisplayName("ACC_FORCE [14] (0-1000)"), DescriptionAttribute("Wirkung vom ACC auf den Gyro (0 ist nur Gyro)")]
         public int ACCFORCE
         {
             set
@@ -203,7 +203,7 @@ namespace CorvusM3
             }
             get { return parameter[14]; }
         }
-        [CategoryAttribute("Sensoren"), DisplayName("GYRO_CORR [15] (0-100)"), DescriptionAttribute("Berichtigung Gyro-Zero über ACC")]
+        [CategoryAttribute("Sensoren"), DisplayName("GYRO_CORR [15] (0-1000)"), DescriptionAttribute("Berichtigung Gyro-Zero über ACC")]
         public int GYROCORR
         {
             set
