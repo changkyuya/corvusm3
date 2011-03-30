@@ -96,8 +96,8 @@ void loadDefault()
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_X_90], 2200); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Y_90], 2200); 
 	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_Z_90], 2200); 
-	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 100); //50 
-	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 10); //25
+	EE_WriteVariable(VirtAddVarTab[PARA_ACC_FORCE], 300); //50 
+	EE_WriteVariable(VirtAddVarTab[PARA_GYRO_CORR], 50); //25
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO0_CH], 5); //Kanal 5
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO1_CH], 6); //Kanal 6
 	EE_WriteVariable(VirtAddVarTab[PARA_SERVO2_CH], 7); //Kanal 7 
