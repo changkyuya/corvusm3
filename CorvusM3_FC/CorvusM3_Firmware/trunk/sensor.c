@@ -33,15 +33,12 @@
 /* Variables ----------------------------------------------------------------*/
 extern vu16 ADCSensorValue[56];  //initsystem
 vu32 overADCSensorValue[7];
-//vu32 oldGyroValues[3]; // for smooth
-vu32 oldAccValues[3]; // for smooth
 vu32 gyroZero[3];
 vu32 accZero[3];
 
-vu32 accBufferX[100];
-vu32 accBufferY[100];
-vu32 accBufferZ[100];
-vu8 accBufferCounter = 0;
+volatile long long accBufferX;
+volatile long long accBufferY;
+volatile long long accBufferZ;
 
 extern vu16 parameter[0x190]; //parameter
 extern vs32 compassAngle; //statemachine
@@ -164,47 +161,22 @@ void getRawValues(vs32 * gyroValues, vs32 * accValues)
 	//gyroValues[Z] = smoothValue(ADCSensorValue[GYRO_Z] * 1000, oldGyroValues[Z], parameter[PARA_SMOOTH_GYRO]) - gyroZero[Z];
 	
 	// Try 
-	accBufferX[accBufferCounter] = smoothValue(overADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
-	accBufferY[accBufferCounter] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
-	accBufferZ[accBufferCounter] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
+	// sum = sum * (filter - 1) / filter + neu
+	// mittel = sum / filter
+
+	accBufferX = ((accBufferX * (parameter[PARA_SMOOTH_ACC] - 1)) / parameter[PARA_SMOOTH_ACC]) + overADCSensorValue[ACC_X];
+	accBufferY = ((accBufferY * (parameter[PARA_SMOOTH_ACC] - 1)) / parameter[PARA_SMOOTH_ACC]) + overADCSensorValue[ACC_Y];
+	accBufferZ = ((accBufferZ * (parameter[PARA_SMOOTH_ACC] - 1)) / parameter[PARA_SMOOTH_ACC]) + overADCSensorValue[ACC_Z];	
 	
-	u8 maxBufferCount = parameter[PARA_SMOOTH_ACC] / 10;
+	accValues[X] = accBufferX / parameter[PARA_SMOOTH_ACC];
+	accValues[Y] = accBufferY / parameter[PARA_SMOOTH_ACC];
+	accValues[Z] = accBufferZ / parameter[PARA_SMOOTH_ACC];
 	
-	accBufferCounter++;
-	if (accBufferCounter > maxBufferCount-1)
-	{
-		accBufferCounter = 0;
-	}
-	
-	accValues[X] = accBufferX[0];
-	accValues[Y] = accBufferY[0];
-	accValues[Z] = accBufferZ[0];
-	
-	u8 i;
-	for (i = 1; i < maxBufferCount; i++)
-	{
-		accValues[X] += accBufferX[i];
-		accValues[Y] += accBufferY[i];
-		accValues[Z] += accBufferZ[i];
-	}
-	
-	accValues[X] = accValues[X] / maxBufferCount;
-	accValues[Y] = accValues[Y] / maxBufferCount;
-	accValues[Z] = accValues[Z] / maxBufferCount;
-	
-	//accValues[X] = smoothValue(overADCSensorValue[ACC_X], oldAccValues[X], parameter[PARA_SMOOTH_ACC]);
-	//accValues[Y] = smoothValue(overADCSensorValue[ACC_Y], oldAccValues[Y], parameter[PARA_SMOOTH_ACC]);
-	//accValues[Z] = smoothValue(overADCSensorValue[ACC_Z], oldAccValues[Z], parameter[PARA_SMOOTH_ACC]);
-	
-	//char x [200];
-	//sprintf(x,"%d:%d:%d\r\n",overADCSensorValue[ACC_X],oldAccValues[X],accValues[X]);
-	//print_uart1(x);
-	
-	for (i = 0; i < 3; i++)
-	{
-		//oldGyroValues[i] = gyroValues[i];
-		oldAccValues[i] = accValues[i];
-	}
+
+//	char x [200];
+//	sprintf(x,"%d:%d:%d\r\n",accBufferX,overADCSensorValue[ACC_X],accValues[X]);
+//	print_uart1(x);
+
 }
 
 /* ADC oversampling ---------------------------------------------------------*/
