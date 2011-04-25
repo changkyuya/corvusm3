@@ -120,7 +120,7 @@ void getCopterAnglesFilterACC(vs32 * gyroAngle, vs32 * accAngle, vs32 * copterAn
 void getGyroAnglesFilterACC(vs32 * gyroAngle, vs32 * gyroRawValues)
 {
 	u8 i;
-	//#################
+	//################# 
 	//http://tom.pycke.be/mav/70/gyroscope-to-roll-pitch-and-yaw
 	//try runge-kutta integration http://de.wikipedia.org/wiki/Runge-Kutta-Verfahren
 	//integration(i) = integration(i-1) + 1/6 ( vali-3 + 2 vali-2 + 2 vali-1 + vali)
