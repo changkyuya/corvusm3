@@ -5,6 +5,7 @@
 make ARM Cortex M3: Command: cs-make.exe, Folder: %d, Parameters: all, Shortcut: STRG+M<br />
 make clean: Command: cs-make.exe, Folder: %d, Parameters: clean<br />
 upload: Command: $(ProjectPath)flash_erase_all.bat, Shorcut: STRG+Y
+ * Leaflabs IDE [http://leaflabs.com/docs/maple-ide-install.html]
 
  * Flash Tool von ST [http://www.st.com/stonline/stappl/resourceSelector/app?page=resourceSelector&doctype=SW_DEMO&ClassID=1734]
  * Microsoft Visual C# Express [http://www.microsoft.com/germany/Express/download/default.aspx]
