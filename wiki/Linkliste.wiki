@@ -23,6 +23,7 @@
  * Gyro: [http://tom.pycke.be/mav/70/gyroscope-to-roll-pitch-and-yaw]
  * PID: [http://forum.mikrokopter.de/topic-post76057.html]
  * Achsenkopplung: [http://forum.mikrokopter.de/topic-2319.html]
+ * DCM: [http://www.starlino.com/dcm_tutorial.html]
 
  * Kompass 3-Achs: [http://forum.xufo.net/bb/viewtopic.php?t=6302&highlight=]
  * MM3: [http://carancho.com/AeroQuad/forum/index.php?topic=91.0]
