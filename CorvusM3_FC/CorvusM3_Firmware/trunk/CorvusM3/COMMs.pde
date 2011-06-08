@@ -70,9 +70,6 @@ void sendSerialTelemetry() {
                         Calibrate_Pitch();
 			queryType = 'x';
 			break;
-		case 'w': 		
-                        Show_Angle();
-			break;
 		case '#': 						
 			Reset_Settings();
 			queryType = 'x';
@@ -99,7 +96,6 @@ void sendSerialTelemetry() {
                         SerPrln(" r - Show_Receiver_Values()");
                         SerPrln(" s - Show_Sensor_Data");
                         SerPrln(" T - Calibrate_Remote");
-                        SerPrln(" w - Show Angles");
                         SerPrln(" # - Reset_Settings");
                         SerPrln(" * - writeUserConfig to flash");
                         SerPrln(" x - stop output");
@@ -121,7 +117,7 @@ void show_all_Parameter() {
     SerPri("p");
     SerPri(i);
     SerPri(";");
-    SerPrln(readEEPROM(i));
+    SerPrln(readEEPROM(i),10);
   }
 }
 
@@ -129,11 +125,11 @@ void show_all_Parameter() {
   Show Parameter - p
 ****************************************************/
 void show_Parameter() {
-  float tmpAdr =   readFloatSerial();
+  int tmpAdr = (int)readFloatSerial();
   SerPri("p");
   SerPri(tmpAdr);
   SerPri(";");
-  SerPrln(readEEPROM(tmpAdr));
+  SerPrln(readEEPROM(tmpAdr),10);
 }
 /****************************************************
   write Parameter - p
@@ -142,11 +138,11 @@ void write_Parameter() {
   float tmpAdr = readFloatSerial();
   float tmpValue = readFloatSerial();
   writeEEPROM(tmpValue, tmpAdr);
-  readUserConfig();
-  SerPri("p");
-  SerPri(tmpAdr);
-  SerPri(";");
-  SerPrln(readEEPROM(tmpAdr));
+//  readUserConfig();
+//  SerPri("p");
+//  SerPri(tmpAdr);
+//  SerPri(";");
+//  SerPrln(readEEPROM(tmpAdr));
 }
 
 
@@ -427,24 +423,6 @@ void Show_Receiver_Values() {
     SerPrln(ch_aux4); 
 }
 
-/****************************************************
-  SHOW ANGLE - w
-****************************************************/
-void Show_Angle() {
-
-    SerPri(degrees(roll));
-    comma();
-    SerPri(degrees(nick));
-    comma();
-    SerPri(degrees(yaw));
-    comma();
-    SerPri(err_roll);
-    comma();
-    SerPri(err_nick);
-    comma();
-    SerPrln(err_yaw);
-
-}
 
 
 /****************************************************
