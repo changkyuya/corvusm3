@@ -75,7 +75,6 @@ byte errorRadio = 1;
 #define SerRea  Serial1.read
 #define SerFlu  Serial1.flush
 #define SerBeg  Serial1.begin
-#define SerP    Serial1.printf_P
 
 
 
