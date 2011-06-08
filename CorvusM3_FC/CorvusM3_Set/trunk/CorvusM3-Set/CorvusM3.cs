@@ -34,7 +34,7 @@ namespace CorvusM3
 {
     public partial class CorvusM3 : Form
     {
-        int maxGraphValues = 500;
+        int maxGraphValues = 100;
         Serial serialComm = new Serial();
         bool serialIsOpen = false;
         bool isRemoteOn = false;
@@ -89,24 +89,36 @@ namespace CorvusM3
             {
                 string[] values = p.Split(','); 
                 chartGyro.Series[0].Points.AddY(values[1]);
-                if (chartGyro.Series[0].Points.Count > maxGraphValues)
-                    chartGyro.Series[0].Points.RemoveAt(0);
                 chartGyro.Series[1].Points.AddY(values[2]);
                 chartGyro.Series[2].Points.AddY(values[3]);
+                if (chartGyro.Series[0].Points.Count > maxGraphValues)
+                {
+                    chartGyro.Series[0].Points.RemoveAt(0);
+                    chartGyro.Series[1].Points.RemoveAt(0);
+                    chartGyro.Series[2].Points.RemoveAt(0);
+                }
                 chartGyro.ResetAutoValues();
 
                 chartACC.Series[0].Points.AddY(values[4]);
-                if (chartACC.Series[0].Points.Count > maxGraphValues)
-                    chartACC.Series[0].Points.RemoveAt(0);
                 chartACC.Series[1].Points.AddY(values[5]);
                 chartACC.Series[2].Points.AddY(values[6]);
+                if (chartACC.Series[0].Points.Count > maxGraphValues)
+                {
+                    chartACC.Series[0].Points.RemoveAt(0);
+                    chartACC.Series[1].Points.RemoveAt(0);
+                    chartACC.Series[2].Points.RemoveAt(0);
+                }
                 chartACC.ResetAutoValues();
 
                 chartCopter.Series[0].Points.AddY(values[8]);
-                if (chartCopter.Series[0].Points.Count > maxGraphValues)
-                    chartCopter.Series[0].Points.RemoveAt(0);
                 chartCopter.Series[1].Points.AddY(values[9]);
                 chartCopter.Series[2].Points.AddY(values[10]);
+                if (chartCopter.Series[0].Points.Count > maxGraphValues)
+                {
+                    chartCopter.Series[0].Points.RemoveAt(0);
+                    chartCopter.Series[1].Points.RemoveAt(0);
+                    chartCopter.Series[2].Points.RemoveAt(0);
+                }
                 chartCopter.ResetAutoValues();
             }
             catch { }
@@ -215,8 +227,6 @@ namespace CorvusM3
             catch { }
         }
 
-
-
         private void toolStripButtonScanPorts_Click(object sender, EventArgs e)
         {
             toolStripComboBoxSerialPorts.Items.Clear();
@@ -229,10 +239,7 @@ namespace CorvusM3
             {
                 try
                 {
-                    serialComm.closePort();
-                    serialIsOpen = false;
-                    toolStripButtonSerOpenClose.Text = "open";
-                    toolStripStatusLabel.Text = "connection closed";
+                    closeConnection();
                 }
                 catch (Exception ex)
                 {
@@ -255,8 +262,6 @@ namespace CorvusM3
             }
         }
 
-
-
         private void buttonLoadFile_Click(object sender, EventArgs e)
         {
             parameter.loadFile();
@@ -274,7 +279,24 @@ namespace CorvusM3
             if (e.KeyCode == Keys.Enter)
             {
                 serialComm.sendData(textBoxCLICommand.Text);
+                switch (textBoxCLICommand.Text.Substring(0,1))
+                {
+                    case "r":
+                        onRemote();
+                        offGraph();
+                        break;
+                    case "s":
+                        onGraph();
+                        offRemote();
+                        break;
+                    case "x":
+                        offRemote();
+                        offGraph();
+                        break;
+                }
                 textBoxCLICommand.Text = "";
+                
+
             }
         }
 
@@ -368,16 +390,13 @@ namespace CorvusM3
             if (isRemoteOn == false)
             {
                 serialComm.sendData("r");
-                isRemoteOn = true;
-                buttonRemoteOnOff.Text = "off Remote";
-                isGraphOn = false;
-                buttonOnOffGraph.Text = "on Graph";
+                onRemote();
+                offGraph();
             }
             else 
             {
                 serialComm.sendData("x");
-                isRemoteOn = false;
-                buttonRemoteOnOff.Text = "on Remote";
+                offRemote();
             }
         }
 
@@ -394,16 +413,12 @@ namespace CorvusM3
             if (isGraphOn == false)
             {
                 serialComm.sendData("s");
-                isGraphOn = true;
-                buttonOnOffGraph.Text = "off Graph";
-                isRemoteOn = false;
-                buttonRemoteOnOff.Text = "on Remote";
+                onGraph();
+                offRemote();
             }
             else
             {
-                serialComm.sendData("x");
-                isGraphOn = false;
-                buttonOnOffGraph.Text = "on Graph";
+                offGraph();
             }
         }
 
@@ -438,15 +453,18 @@ namespace CorvusM3
                 else
                 {
                     OpenFileDialog flashFWDialog = new OpenFileDialog();
+                    flashFWDialog.InitialDirectory = ProgramSetting.binPath;
                     flashFWDialog.Filter = "binary file (*.bin)|*.bin|All files (*.*)|*.*";
                     if (flashFWDialog.ShowDialog() == DialogResult.OK)
                     {
+                        ProgramSetting.binPath = flashFWDialog.InitialDirectory;
                         string path = flashFWDialog.FileName;
                         string applPath = Application.StartupPath;
 
                         string comPort = toolStripComboBoxSerialPorts.SelectedItem.ToString().Substring(3);
 
-                        serialComm.closePort();
+                        // cloase serial Port
+                        closeConnection();
                         System.Diagnostics.Process.Start(applPath + @"\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
                     }
                 }
@@ -457,5 +475,36 @@ namespace CorvusM3
             }
         }
 
+        private void closeConnection()
+        {
+            if (serialIsOpen == true)
+            {
+                serialComm.closePort();
+                serialIsOpen = false;
+                toolStripButtonSerOpenClose.Text = "open";
+                toolStripStatusLabel.Text = "connection closed";
+            }
+        }
+
+        private void offRemote()
+        {
+            isRemoteOn = false;
+            buttonRemoteOnOff.Text = "on Remote";
+        }
+        private void onRemote()
+        {
+            isRemoteOn = true;
+            buttonRemoteOnOff.Text = "off Remote";
+        }
+        private void offGraph()
+        {
+            isGraphOn = false;
+            buttonOnOffGraph.Text = "on Graph";
+        }
+        private void onGraph()
+        {
+            isGraphOn = true;
+            buttonOnOffGraph.Text = "off Graph";
+        }
     }
 }

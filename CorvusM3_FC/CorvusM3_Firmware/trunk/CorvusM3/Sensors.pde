@@ -73,6 +73,8 @@ void calibrateSensors(void) {
 
   for(gyro = 0; gyro <= 2; gyro++)  
     AN_OFFSET[gyro] = aux_float[gyro];    // Update sensor OFFSETs from values read
+    
+
 }
 
 

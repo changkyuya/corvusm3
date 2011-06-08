@@ -33,5 +33,14 @@ namespace CorvusM3
                 Properties.Settings.Default.Save();
             }
         }
+        public static string binPath
+        {
+            get { return Properties.Settings.Default.binPath; }
+            set
+            {
+                Properties.Settings.Default.binPath = value;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }

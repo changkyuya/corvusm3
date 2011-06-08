@@ -58,5 +58,17 @@ namespace CorvusM3.Properties {
                 this["windowWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Thorsten\\AppData\\Local\\Temp\\build5476604910801276629.tmp")]
+        public string binPath {
+            get {
+                return ((string)(this["binPath"]));
+            }
+            set {
+                this["binPath"] = value;
+            }
+        }
     }
 }
