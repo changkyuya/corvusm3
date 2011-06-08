@@ -440,10 +440,10 @@ void Show_Sensor_Data() {
     SerPri(read_adc(2));
     //SerPri(AN[2]);
     comma();
-    SerPri(read_adc(4));
+    SerPri(read_adc(3));
     //SerPri(AN[3]);
     comma();
-    SerPri(read_adc(3));
+    SerPri(read_adc(4));
     //SerPri(AN[4]);
     comma();
     SerPri(read_adc(5));
