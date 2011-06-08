@@ -117,7 +117,7 @@ void show_all_Parameter() {
     SerPri("p");
     SerPri(i);
     SerPri(";");
-    SerPrln(readEEPROM(i),10);
+    SerPrln(readEEPROM(i),4);
   }
 }
 
@@ -129,7 +129,7 @@ void show_Parameter() {
   SerPri("p");
   SerPri(tmpAdr);
   SerPri(";");
-  SerPrln(readEEPROM(tmpAdr),10);
+  SerPrln(readEEPROM(tmpAdr),4);
 }
 /****************************************************
   write Parameter - p

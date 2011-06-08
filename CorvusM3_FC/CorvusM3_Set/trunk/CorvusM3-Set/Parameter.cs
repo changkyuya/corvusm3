@@ -147,13 +147,13 @@ namespace CorvusM3
         }
 
 
-        [CategoryAttribute("DCM"), DisplayName("ROLLNICK P [13]"), DescriptionAttribute("Default 0.0014")]
+        [CategoryAttribute("DCM"), DisplayName("ROLLNICK P [13]"), DescriptionAttribute("Default 0.14 (*0.01)")]
         public float Kp_ROLLNICK
         {
             set { parameter[13] = value; serialComm.setParameter(13, value); }
             get { return parameter[13]; }
         }
-        [CategoryAttribute("DCM"), DisplayName("ROLLNICK I [14]"), DescriptionAttribute("Default 0.00000015")]
+        [CategoryAttribute("DCM"), DisplayName("ROLLNICK I [14]"), DescriptionAttribute("Default 0.15 (*0.000001)")]
         public float Ki_ROLLNICK
         {
             set { parameter[14] = value; serialComm.setParameter(14, value); }
@@ -165,7 +165,7 @@ namespace CorvusM3
             set { parameter[15] = value; serialComm.setParameter(15, value); }
             get { return parameter[15]; }
         }
-        [CategoryAttribute("DCM"), DisplayName("YAW I [16]"), DescriptionAttribute("Default 0.00002")]
+        [CategoryAttribute("DCM"), DisplayName("YAW I [16]"), DescriptionAttribute("Default 0.2 (*0.0001)")]
         public float Ki_YAW
         {
             set { parameter[16] = value; serialComm.setParameter(16, value); }
