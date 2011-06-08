@@ -76,6 +76,10 @@ namespace CorvusM3
                 case "s":
                     updateGraph(e.Dataline);
                     break;
+                //parameter
+                case "p":
+                    propertyGridParameter.Refresh();
+                    break;
             }
         }
 
@@ -268,8 +272,10 @@ namespace CorvusM3
         private void textBoxCLICommand_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
                 serialComm.sendData(textBoxCLICommand.Text);
-            textBoxCLICommand.Text = "";
+                textBoxCLICommand.Text = "";
+            }
         }
 
         private void toolStripComboBoxSerialPorts_SelectedIndexChanged(object sender, EventArgs e)
@@ -411,6 +417,7 @@ namespace CorvusM3
         private void buttonLoadParameter_Click(object sender, EventArgs e)
         {
             serialComm.sendData("a");
+
         }
 
         private void buttonSetDefault_Click(object sender, EventArgs e)
@@ -439,6 +446,7 @@ namespace CorvusM3
 
                         string comPort = toolStripComboBoxSerialPorts.SelectedItem.ToString().Substring(3);
 
+                        serialComm.closePort();
                         System.Diagnostics.Process.Start(applPath + @"\STM32\STMFlashLoader.exe", @" -c --pn " + comPort + " --br 115200 -i STM32F10xxExx -e --all -d --a 8000000 --fn " + path + @" -p --dwp");
                     }
                 }

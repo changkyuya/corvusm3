@@ -52,6 +52,8 @@
             this.toolStripComboBoxSerialPorts = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButtonSerOpenClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonScanPorts = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonFlashFirmware = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageCLI = new System.Windows.Forms.TabPage();
             this.textBoxCLIDisplay = new System.Windows.Forms.TextBox();
@@ -120,8 +122,6 @@
             this.buttonSaveFile = new System.Windows.Forms.Button();
             this.buttonLoadParameter = new System.Windows.Forms.Button();
             this.buttonSetDefault = new System.Windows.Forms.Button();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonFlashFirmware = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.chartGyro)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -264,6 +264,21 @@
             this.toolStripButtonScanPorts.Size = new System.Drawing.Size(35, 22);
             this.toolStripButtonScanPorts.Text = "scan";
             this.toolStripButtonScanPorts.Click += new System.EventHandler(this.toolStripButtonScanPorts_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonFlashFirmware
+            // 
+            this.toolStripButtonFlashFirmware.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonFlashFirmware.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFlashFirmware.Image")));
+            this.toolStripButtonFlashFirmware.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonFlashFirmware.Name = "toolStripButtonFlashFirmware";
+            this.toolStripButtonFlashFirmware.Size = new System.Drawing.Size(88, 22);
+            this.toolStripButtonFlashFirmware.Text = "flash Firmware";
+            this.toolStripButtonFlashFirmware.Click += new System.EventHandler(this.toolStripButtonFlashFirmware_Click);
             // 
             // tabControl1
             // 
@@ -1143,21 +1158,6 @@
             this.buttonSetDefault.Text = "set Default";
             this.buttonSetDefault.UseVisualStyleBackColor = true;
             this.buttonSetDefault.Click += new System.EventHandler(this.buttonSetDefault_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButtonFlashFirmware
-            // 
-            this.toolStripButtonFlashFirmware.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonFlashFirmware.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFlashFirmware.Image")));
-            this.toolStripButtonFlashFirmware.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonFlashFirmware.Name = "toolStripButtonFlashFirmware";
-            this.toolStripButtonFlashFirmware.Size = new System.Drawing.Size(88, 22);
-            this.toolStripButtonFlashFirmware.Text = "flash Firmware";
-            this.toolStripButtonFlashFirmware.Click += new System.EventHandler(this.toolStripButtonFlashFirmware_Click);
             // 
             // CorvusM3
             // 
