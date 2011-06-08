@@ -63,9 +63,9 @@ void Drift_correction(void)
   errorRollNick[0] = constrain(errorRollNick[0],-50,50);
   errorRollNick[1] = constrain(errorRollNick[1],-50,50);
   errorRollNick[2] = constrain(errorRollNick[2],-50,50);
-  Vector_Scale(&Omega_P[0],&errorRollNick[0],parameter[Kp_ROLLNICK]);
+  Vector_Scale(&Omega_P[0],&errorRollNick[0],parameter[Kp_ROLLNICK]*0.01);
   
-  Vector_Scale(&Scaled_Omega_I[0],&errorRollNick[0],parameter[Ki_ROLLNICK]);
+  Vector_Scale(&Scaled_Omega_I[0],&errorRollNick[0],parameter[Ki_ROLLNICK]*0.000001);
   Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);
   
   //*****YAW***************
@@ -74,7 +74,7 @@ void Drift_correction(void)
 //    errorCourse= (DCM_Matrix[0][0]*AP_Compass.heading_y) - (DCM_Matrix[1][0]*AP_Compass.heading_x);  //Calculating YAW error
 //    Vector_Scale(errorYaw,&DCM_Matrix[2][0],errorCourse); //Applys the yaw correction to the XYZ rotation of the aircraft, depeding the position.
 //  
-//    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],Kp_YAW);
+//    Vector_Scale(&Scaled_Omega_P[0],&errorYaw[0],parameter[Kp_YAW]);
 //    Vector_Add(Omega_P,Omega_P,Scaled_Omega_P);//Adding  Proportional.
 //    
 //    // Limit max errorYaw to limit max Omega_I
@@ -82,7 +82,7 @@ void Drift_correction(void)
 //    errorYaw[1] = constrain(errorYaw[1],-50,50);
 //    errorYaw[2] = constrain(errorYaw[2],-50,50);
 //  
-//    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],Ki_YAW);
+//    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],parameter[Ki_YAW]*0.0001);
 //    Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);//adding integrator to the Omega_I
 //  }
 

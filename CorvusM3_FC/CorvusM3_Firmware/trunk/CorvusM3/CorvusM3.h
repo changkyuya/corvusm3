@@ -67,6 +67,7 @@ byte errorRadio = 1;
 #define SERIAL1_BAUD 115200
 
 //#define SerBau  115200      // Baud setting moved close next to port selection
+
 #define SerPri  Serial1.print
 #define SerPrln Serial1.println
 #define SerPriln Serial1.println
@@ -309,10 +310,10 @@ void defaultUserConfig() {
   parameter[acc_offset_x]               = 2057;
   parameter[acc_offset_y]               = 2044;
   parameter[acc_offset_z]               = 2052;
-  parameter[Kp_ROLLNICK]               = 0.0014;
-  parameter[Ki_ROLLNICK]               = 0.00000015;
+  parameter[Kp_ROLLNICK]               = 0.14;
+  parameter[Ki_ROLLNICK]               = 0.15;
   parameter[Kp_YAW]                     = 1.0;
-  parameter[Ki_YAW]                     = 0.00002;
+  parameter[Ki_YAW]                     = 0.2;
   parameter[XMITFACTOR]                 = 0.32;
   parameter[Kp_RateRoll]                = 1.95;
   parameter[Ki_RateRoll]                = 0.0;
