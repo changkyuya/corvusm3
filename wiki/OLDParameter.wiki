@@ -1,0 +1,69 @@
+= Parameter =
+Möglich wären 255 Parameter - es sind vorerst 2 Sets mit je 100 Parameter geplant wobei der Parameter 00 das Startset angibt.
+Es werden alle Parameter geladen und können jederzeit umgeschaltet werden. 
+Alle Parameter sind 16bit Integer. Mögliche Werte 0-65535.
+
+Werden die Parameter mit einem anderen Tool eingegeben bitte führende 0 verwenden! Jeden Parameter 5 Stellig! Andernfalls kommt es öfter zu falsch lesen -> Grund wurde noch nicht gefunden.
+
+|| Nr || Parameter || Default || mögliche Werte || Info ||
+|| 00 || Para-Set || 0 || 0 || Im Moment nur 0 berücksichtigt. Dieser Parameter gibt das Startset an. Besser gesagt die Verschiebung (wenn 100 dann wäre der Parameter 01 auf 101 zu finden - also Setting 2) ||
+|| 01 || Debugoutput || 0 || 0...Debug aus<br />1...Empfängersignale<br />2...ADC Werte (6x Sensoren, Spannungsmessung)<br />4...Sensoren (Gyro,ACC)<br />8...RC und Motoren<br />16...Kompass<br />32...PID XYZ Werte || Bitfeld Kombinationen möglich ||
+|| 02 || HAL || 1 || 0...RC Empfänger<br />1...PC Steuerung<br />2...Mixer Motor On<br />4...Kompass ON  || Bitfeld Kombinationen möglich<br /> PPM oder Spektrum wird automatisch erkannt. PC Steuerung nur möglich wenn kein Empfang und Parameter gesetzt ist ||
+|| 03 || Akku || 2236 || || Einstellung in Punkte vom 12bit ADC. Spannungsteiler (10K auf +, 2K2 auf GND = Spannung/5,55). 1 Volt entspricht 223,64 Punte. Default = 2236 = 10 Volt. ||
+|| 04 || SAL || 1 || 0...HH Regelung<br />1...ACC Regelung<br />2...ACC Regelung COMP2 || Bitfeld Kombinationen möglich<br />4 bit für Regler ||
+|| 05 || ACC-X-ZERO || 20470 || || Horizontalwert X-Achse für ACC - ADC x 10 ||
+|| 06 || ACC-Y-ZERO || 20330 || || Horizontalwert Y-Achse für ACC - ADC x 10 ||
+|| 07 || ACC-Z-ZERO || 24450 || || Horizontalwert Z-Achse für ACC - ADC x 10 ||
+|| 08 || SMOOTH_ACC || 0 || 0-999 || Glättung zum letzten Wert (0 wäre immer letzter Wert)  || 
+|| 09 || STICK_FACTOR || 30 || 1-50 || Stick Faktor für HH und Gier || 
+|| 10 || SMOOTH_RC || 0 || 0-99 || Glättung zum letzten Wert (0 wäre immer letzter Wert) || 
+|| 11 || GYRO_X_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
+|| 12 || GYRO_Y_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
+|| 13 || GYRO_Z_90 || 2200 || || Gyro Anpassung für 90 Grad Drehung ||
+|| 14 || ACC_FORCE || 100 || 0-1000 || Wirkung vom ACC auf den Gyro (0 ist nur Gyro)<br />Bei Comp2 Filter 500 = 5Hz ||
+|| 15 || GYRO_CORR || 10 || 0-1000 || Berichtigung Gyro-Zero über ACC ||
+|| 16 || SERVO0_CH || 5 || || Kanalmapping für Servo 0 ||
+|| 17 || SERVO1_CH || 6 || || Kanalmapping für Servo 1 ||
+|| 18 || SERVO2_CH || 7 || || Kanalmapping für Servo 2 ||
+|| 19 || SERVO3_CH || 8 || || Kanalmapping für Servo 3 ||
+|| 20 || CAM_ROLL || 20500 || || Rollausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
+|| 21 || CAM_NICK || 30500 || || Nickausgleich für Servo, <br />1. Stelle Servo0-3, <br />2. Stelle invertiert (0,1),<br />3.-5. Faktor (500) ||
+|| 22 || MIN_GAS || 32 || || Minimalgas für Regler/Motoren ||
+|| 23 || P_X || 1000 || 0-65535 || Proportionalanteil Roll ||
+|| 24 || I_X || || 0-65535 || Proportionalanteil Nick ||
+|| 25 || D_X || 3000 || 0-65535 || Integralanteil Roll ||
+|| 26 || P_Y || 1000 || 0-65535 || Integralanteil Nick ||
+|| 27 || I_Y || || 0-65535 || Differenzialanteil Roll ||
+|| 28 || D_Y || 3000 || 0-65535 || Differenzialanteil Nick ||
+|| 29 || P_Z || 1000 || 0-65535 || Proportionalanteil Gier ||
+|| 30 || I_Z || 500 || 0-65535 || Integralanteil Gier ||
+|| 31 || D_Z || || 0-65535 || Differenzialanteil Gier ||
+|| 32 || COMP_CORR_X || || || Korrekturwert Kompass X Achse ||
+|| 33 || COMP_CORR_Y || || || Korrekturwert Kompass Y Achse ||
+|| 34 || COMP_CORR_Z || || || Korrekturwert Kompass Z Achse ||
+|| 35 || COMP_DECL || || || Declination (Abweichung zu magnetisch Nord) Grad mit 2 Nachkomma ||
+|| 36 || COMP_FORCE || 500 || 0-10000 || Wirkung vom Kompass auf den Gier Gyro (0 ist nur Gyro) ||
+|| 37 || MOTOR_MIXER_MOT1A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch 100/Roll 0) ||
+|| 38 || MOTOR_MIXER_MOT1B || 58596 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick -100/Yaw -100) ||
+|| 39 || MOTOR_MIXER_MOT2A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch 100/Roll 0) ||
+|| 40 || MOTOR_MIXER_MOT2B || 25828 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick 100/Yaw -100) ||
+|| 41 || MOTOR_MIXER_MOT3A || 25700 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch 100/Roll 100) ||
+|| 42 || MOTOR_MIXER_MOT3B || 100 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick 0/Yaw 100) ||
+|| 43 || MOTOR_MIXER_MOT4A || 25828 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch 100/Roll -100) ||
+|| 44 || MOTOR_MIXER_MOT4B || 100 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick 0/Yaw 100) ||
+|| 45 || MOTOR_MIXER_MOT5A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch 100 wenn Motor nicht benutzt/Roll 0) ||
+|| 46 || MOTOR_MIXER_MOT5B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
+|| 47 || MOTOR_MIXER_MOT6A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch/Roll) ||
+|| 48 || MOTOR_MIXER_MOT6B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
+|| 49 || MOTOR_MIXER_MOT7A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch/Roll) ||
+|| 50 || MOTOR_MIXER_MOT7B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
+|| 51 || MOTOR_MIXER_MOT8A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch/Roll) ||
+|| 52 || MOTOR_MIXER_MOT8B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
+|| 53 || MOTOR_MIXER_MOT9A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch/Roll) ||
+|| 54 || MOTOR_MIXER_MOT9B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
+|| 55 || MOTOR_MIXER_MOT10A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch/Roll) ||
+|| 56 || MOTOR_MIXER_MOT10B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
+|| 57 || MOTOR_MIXER_MOT11A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch/Roll) ||
+|| 58 || MOTOR_MIXER_MOT11B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
+|| 59 || MOTOR_MIXER_MOT12A || 25600 || || Motormischer 2 Werte (-100/100) je 8 Bit (Pitch/Roll) ||
+|| 60 || MOTOR_MIXER_MOT12B || 0 || || Motormischer 2 Werte (-100/100) je 8 Bit (Nick/Yaw) ||
