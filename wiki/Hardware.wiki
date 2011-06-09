@@ -1,6 +1,21 @@
-= Hardware für das Protoboard =
+= Aktuelle Testhardware =
+
+ * CorvusM3 Board
+ * Cornix 4-Fach Regler
+ * Corone 300 Rahmen
+
+Alle Komponenten von [http://www.semotech.de]
+
+= Mögliche Selbstbauhardware =
+
+ * Maple RET6
+ * z.B. Sparkfun Sensoren
+
+= Hardware für das Protoboard (alt) =
 
  * ET-STM32 Stamp [http://www.futurlec.com/ET-STM32_Stamp.shtml]
  * IMU 5 Degrees of Freedom [http://www.sparkfun.com/commerce/product_info.php?products_id=9268]
  * Gyro Breakout Board - IDG500 [http://www.sparkfun.com/commerce/product_info.php?products_id=9094]
  * Triple Axis Magnetometer Breakout - HMC5843 [http://www.sparkfun.com/commerce/product_info.php?products_id=9371]
+
+ 
