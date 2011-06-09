@@ -69,7 +69,7 @@ namespace CorvusM3
             {
                 while (serPort.BytesToRead > 0)
                 {
-                    dataEventArgs.Dataline = serPort.ReadLine();
+                    dataEventArgs.Dataline = serPort.ReadLine().ToString();
                     RaiseNewDataEvent();
                 }
             }

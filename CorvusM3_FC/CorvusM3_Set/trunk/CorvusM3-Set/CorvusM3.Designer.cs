@@ -122,6 +122,7 @@
             this.buttonSaveFile = new System.Windows.Forms.Button();
             this.buttonLoadParameter = new System.Windows.Forms.Button();
             this.buttonSetDefault = new System.Windows.Forms.Button();
+            this.buttonSaveToFlash = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chartGyro)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -1104,6 +1105,7 @@
             this.tableLayoutPanel9.Controls.Add(this.buttonSaveFile, 0, 3);
             this.tableLayoutPanel9.Controls.Add(this.buttonLoadParameter, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.buttonSetDefault, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.buttonSaveToFlash, 0, 2);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
@@ -1126,6 +1128,7 @@
             this.buttonLoadFile.TabIndex = 3;
             this.buttonLoadFile.Text = "load File";
             this.buttonLoadFile.UseVisualStyleBackColor = true;
+            this.buttonLoadFile.Click += new System.EventHandler(this.buttonLoadFile_Click);
             // 
             // buttonSaveFile
             // 
@@ -1136,6 +1139,7 @@
             this.buttonSaveFile.TabIndex = 2;
             this.buttonSaveFile.Text = "save File";
             this.buttonSaveFile.UseVisualStyleBackColor = true;
+            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
             // 
             // buttonLoadParameter
             // 
@@ -1158,6 +1162,17 @@
             this.buttonSetDefault.Text = "set Default";
             this.buttonSetDefault.UseVisualStyleBackColor = true;
             this.buttonSetDefault.Click += new System.EventHandler(this.buttonSetDefault_Click);
+            // 
+            // buttonSaveToFlash
+            // 
+            this.buttonSaveToFlash.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonSaveToFlash.Location = new System.Drawing.Point(3, 97);
+            this.buttonSaveToFlash.Name = "buttonSaveToFlash";
+            this.buttonSaveToFlash.Size = new System.Drawing.Size(190, 23);
+            this.buttonSaveToFlash.TabIndex = 5;
+            this.buttonSaveToFlash.Text = "save to Flash";
+            this.buttonSaveToFlash.UseVisualStyleBackColor = true;
+            this.buttonSaveToFlash.Click += new System.EventHandler(this.buttonSaveToFlash_Click);
             // 
             // CorvusM3
             // 
@@ -1318,6 +1333,7 @@
         private System.Windows.Forms.Button buttonSetDefault;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonFlashFirmware;
+        private System.Windows.Forms.Button buttonSaveToFlash;
     }
 }
 

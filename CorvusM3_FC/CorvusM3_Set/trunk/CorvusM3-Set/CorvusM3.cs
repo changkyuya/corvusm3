@@ -250,7 +250,7 @@ namespace CorvusM3
             {
                 try
                 {
-                    serialComm.openPort(toolStripComboBoxSerialPorts.SelectedItem.ToString());
+                    serialComm.openPort(toolStripComboBoxSerialPorts.Text);
                     serialIsOpen = true;
                     toolStripButtonSerOpenClose.Text = "close";
                     toolStripStatusLabel.Text = "connection open";
@@ -279,20 +279,23 @@ namespace CorvusM3
             if (e.KeyCode == Keys.Enter)
             {
                 serialComm.sendData(textBoxCLICommand.Text);
-                switch (textBoxCLICommand.Text.Substring(0,1))
+                if (textBoxCLICommand.Text.Length > 0)
                 {
-                    case "r":
-                        onRemote();
-                        offGraph();
-                        break;
-                    case "s":
-                        onGraph();
-                        offRemote();
-                        break;
-                    case "x":
-                        offRemote();
-                        offGraph();
-                        break;
+                    switch (textBoxCLICommand.Text.Substring(0, 1))
+                    {
+                        case "r":
+                            onRemote();
+                            offGraph();
+                            break;
+                        case "s":
+                            onGraph();
+                            offRemote();
+                            break;
+                        case "x":
+                            offRemote();
+                            offGraph();
+                            break;
+                    }
                 }
                 textBoxCLICommand.Text = "";
                 
@@ -389,13 +392,11 @@ namespace CorvusM3
         {
             if (isRemoteOn == false)
             {
-                serialComm.sendData("r");
-                onRemote();
                 offGraph();
+                onRemote();
             }
             else 
             {
-                serialComm.sendData("x");
                 offRemote();
             }
         }
@@ -412,9 +413,8 @@ namespace CorvusM3
 
             if (isGraphOn == false)
             {
-                serialComm.sendData("s");
-                onGraph();
                 offRemote();
+                onGraph();
             }
             else
             {
@@ -489,22 +489,32 @@ namespace CorvusM3
         private void offRemote()
         {
             isRemoteOn = false;
+            serialComm.sendData("x");
             buttonRemoteOnOff.Text = "on Remote";
         }
         private void onRemote()
         {
             isRemoteOn = true;
+            serialComm.sendData("r");
             buttonRemoteOnOff.Text = "off Remote";
         }
         private void offGraph()
         {
             isGraphOn = false;
+            serialComm.sendData("x");
             buttonOnOffGraph.Text = "on Graph";
         }
         private void onGraph()
         {
             isGraphOn = true;
+            serialComm.sendData("s");
             buttonOnOffGraph.Text = "off Graph";
         }
+
+        private void buttonSaveToFlash_Click(object sender, EventArgs e)
+        {
+            serialComm.sendData("*");
+        }
+
     }
 }
