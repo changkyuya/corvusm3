@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CorvusM3));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartGyro = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -118,11 +118,12 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.propertyGridParameter = new System.Windows.Forms.PropertyGrid();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonLoadFile = new System.Windows.Forms.Button();
             this.buttonSaveFile = new System.Windows.Forms.Button();
+            this.buttonLoadFile = new System.Windows.Forms.Button();
             this.buttonLoadParameter = new System.Windows.Forms.Button();
             this.buttonSetDefault = new System.Windows.Forms.Button();
             this.buttonSaveToFlash = new System.Windows.Forms.Button();
+            this.progressBarSaveFlash = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.chartGyro)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -177,28 +178,28 @@
             // 
             // chartGyro
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartGyro.ChartAreas.Add(chartArea1);
+            chartArea10.Name = "ChartArea1";
+            this.chartGyro.ChartAreas.Add(chartArea10);
             this.chartGyro.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartGyro.Legends.Add(legend1);
+            legend10.Name = "Legend1";
+            this.chartGyro.Legends.Add(legend10);
             this.chartGyro.Location = new System.Drawing.Point(0, 0);
             this.chartGyro.Name = "chartGyro";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Legend = "Legend1";
-            series1.Name = "Gyro Roll";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Gyro Nick";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.Legend = "Legend1";
-            series3.Name = "Gyro Yaw";
-            this.chartGyro.Series.Add(series1);
-            this.chartGyro.Series.Add(series2);
-            this.chartGyro.Series.Add(series3);
+            series28.ChartArea = "ChartArea1";
+            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series28.Legend = "Legend1";
+            series28.Name = "Gyro Roll";
+            series29.ChartArea = "ChartArea1";
+            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series29.Legend = "Legend1";
+            series29.Name = "Gyro Nick";
+            series30.ChartArea = "ChartArea1";
+            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series30.Legend = "Legend1";
+            series30.Name = "Gyro Yaw";
+            this.chartGyro.Series.Add(series28);
+            this.chartGyro.Series.Add(series29);
+            this.chartGyro.Series.Add(series30);
             this.chartGyro.Size = new System.Drawing.Size(645, 166);
             this.chartGyro.TabIndex = 0;
             this.chartGyro.Text = "chart1";
@@ -394,56 +395,56 @@
             // 
             // chartACC
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartACC.ChartAreas.Add(chartArea2);
+            chartArea11.Name = "ChartArea1";
+            this.chartACC.ChartAreas.Add(chartArea11);
             this.chartACC.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartACC.Legends.Add(legend2);
+            legend11.Name = "Legend1";
+            this.chartACC.Legends.Add(legend11);
             this.chartACC.Location = new System.Drawing.Point(0, 0);
             this.chartACC.Name = "chartACC";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series4.Legend = "Legend1";
-            series4.Name = "ACC Roll";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series5.Legend = "Legend1";
-            series5.Name = "ACC Nick";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series6.Legend = "Legend1";
-            series6.Name = "ACC Z";
-            this.chartACC.Series.Add(series4);
-            this.chartACC.Series.Add(series5);
-            this.chartACC.Series.Add(series6);
+            series31.ChartArea = "ChartArea1";
+            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series31.Legend = "Legend1";
+            series31.Name = "ACC Roll";
+            series32.ChartArea = "ChartArea1";
+            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series32.Legend = "Legend1";
+            series32.Name = "ACC Nick";
+            series33.ChartArea = "ChartArea1";
+            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series33.Legend = "Legend1";
+            series33.Name = "ACC Z";
+            this.chartACC.Series.Add(series31);
+            this.chartACC.Series.Add(series32);
+            this.chartACC.Series.Add(series33);
             this.chartACC.Size = new System.Drawing.Size(645, 163);
             this.chartACC.TabIndex = 1;
             this.chartACC.Text = "chart2";
             // 
             // chartCopter
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartCopter.ChartAreas.Add(chartArea3);
+            chartArea12.Name = "ChartArea1";
+            this.chartCopter.ChartAreas.Add(chartArea12);
             this.chartCopter.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chartCopter.Legends.Add(legend3);
+            legend12.Name = "Legend1";
+            this.chartCopter.Legends.Add(legend12);
             this.chartCopter.Location = new System.Drawing.Point(0, 0);
             this.chartCopter.Name = "chartCopter";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series7.Legend = "Legend1";
-            series7.Name = "Copter Roll";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series8.Legend = "Legend1";
-            series8.Name = "Copter Nick";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series9.Legend = "Legend1";
-            series9.Name = "Copter Yaw";
-            this.chartCopter.Series.Add(series7);
-            this.chartCopter.Series.Add(series8);
-            this.chartCopter.Series.Add(series9);
+            series34.ChartArea = "ChartArea1";
+            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series34.Legend = "Legend1";
+            series34.Name = "Copter Roll";
+            series35.ChartArea = "ChartArea1";
+            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series35.Legend = "Legend1";
+            series35.Name = "Copter Nick";
+            series36.ChartArea = "ChartArea1";
+            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series36.Legend = "Legend1";
+            series36.Name = "Copter Yaw";
+            this.chartCopter.Series.Add(series34);
+            this.chartCopter.Series.Add(series35);
+            this.chartCopter.Series.Add(series36);
             this.chartCopter.Size = new System.Drawing.Size(645, 131);
             this.chartCopter.TabIndex = 1;
             this.chartCopter.Text = "chart3";
@@ -1004,15 +1005,16 @@
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel13.Controls.Add(this.buttonRemoteOnOff, 0, 0);
             this.tableLayoutPanel13.Controls.Add(this.buttonSetMidValues, 0, 1);
-            this.tableLayoutPanel13.Controls.Add(this.buttonSaveConfigRemote, 0, 3);
-            this.tableLayoutPanel13.Controls.Add(this.buttonResetValues, 0, 4);
+            this.tableLayoutPanel13.Controls.Add(this.buttonSaveConfigRemote, 0, 4);
+            this.tableLayoutPanel13.Controls.Add(this.buttonResetValues, 0, 5);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 5;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel13.Size = new System.Drawing.Size(171, 474);
@@ -1101,23 +1103,36 @@
             // 
             this.tableLayoutPanel9.ColumnCount = 1;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Controls.Add(this.buttonLoadFile, 0, 3);
-            this.tableLayoutPanel9.Controls.Add(this.buttonSaveFile, 0, 3);
+            this.tableLayoutPanel9.Controls.Add(this.buttonSaveFile, 0, 5);
+            this.tableLayoutPanel9.Controls.Add(this.buttonLoadFile, 0, 4);
             this.tableLayoutPanel9.Controls.Add(this.buttonLoadParameter, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.buttonSetDefault, 0, 1);
             this.tableLayoutPanel9.Controls.Add(this.buttonSaveToFlash, 0, 2);
+            this.tableLayoutPanel9.Controls.Add(this.progressBarSaveFlash, 0, 3);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 4;
+            this.tableLayoutPanel9.RowCount = 6;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(196, 474);
             this.tableLayoutPanel9.TabIndex = 0;
+            this.tableLayoutPanel9.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel9_Paint);
+            // 
+            // buttonSaveFile
+            // 
+            this.buttonSaveFile.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonSaveFile.Location = new System.Drawing.Point(3, 428);
+            this.buttonSaveFile.Name = "buttonSaveFile";
+            this.buttonSaveFile.Size = new System.Drawing.Size(190, 23);
+            this.buttonSaveFile.TabIndex = 7;
+            this.buttonSaveFile.Text = "save File";
+            this.buttonSaveFile.UseVisualStyleBackColor = true;
+            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
             // 
             // buttonLoadFile
             // 
@@ -1129,17 +1144,6 @@
             this.buttonLoadFile.Text = "load File";
             this.buttonLoadFile.UseVisualStyleBackColor = true;
             this.buttonLoadFile.Click += new System.EventHandler(this.buttonLoadFile_Click);
-            // 
-            // buttonSaveFile
-            // 
-            this.buttonSaveFile.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonSaveFile.Location = new System.Drawing.Point(3, 428);
-            this.buttonSaveFile.Name = "buttonSaveFile";
-            this.buttonSaveFile.Size = new System.Drawing.Size(190, 23);
-            this.buttonSaveFile.TabIndex = 2;
-            this.buttonSaveFile.Text = "save File";
-            this.buttonSaveFile.UseVisualStyleBackColor = true;
-            this.buttonSaveFile.Click += new System.EventHandler(this.buttonSaveFile_Click);
             // 
             // buttonLoadParameter
             // 
@@ -1173,6 +1177,15 @@
             this.buttonSaveToFlash.Text = "save to Flash";
             this.buttonSaveToFlash.UseVisualStyleBackColor = true;
             this.buttonSaveToFlash.Click += new System.EventHandler(this.buttonSaveToFlash_Click);
+            // 
+            // progressBarSaveFlash
+            // 
+            this.progressBarSaveFlash.Dock = System.Windows.Forms.DockStyle.Top;
+            this.progressBarSaveFlash.Location = new System.Drawing.Point(3, 144);
+            this.progressBarSaveFlash.Name = "progressBarSaveFlash";
+            this.progressBarSaveFlash.Size = new System.Drawing.Size(190, 23);
+            this.progressBarSaveFlash.TabIndex = 8;
+            this.progressBarSaveFlash.Visible = false;
             // 
             // CorvusM3
             // 
@@ -1329,11 +1342,12 @@
         private System.Windows.Forms.Button buttonAccCenter;
         private System.Windows.Forms.Button buttonLoadParameter;
         private System.Windows.Forms.Button buttonLoadFile;
-        private System.Windows.Forms.Button buttonSaveFile;
         private System.Windows.Forms.Button buttonSetDefault;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonFlashFirmware;
         private System.Windows.Forms.Button buttonSaveToFlash;
+        private System.Windows.Forms.Button buttonSaveFile;
+        private System.Windows.Forms.ProgressBar progressBarSaveFlash;
     }
 }
 

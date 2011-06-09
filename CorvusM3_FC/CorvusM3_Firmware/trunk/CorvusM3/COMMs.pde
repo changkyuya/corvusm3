@@ -112,13 +112,13 @@ void sendSerialTelemetry() {
   Show all Parameter - a
 ****************************************************/
 void show_all_Parameter() {
-  for (int i = 0; i <= LAST_PARAMETER; i++)
+  for (int i = 1; i <= LAST_PARAMETER; i++)
   {
     SerPri("p");
     SerPri(i);
     SerPri(";");
     char buf[20];
-    SerPrln(gcvt(readEEPROM(i),6,buf));
+    SerPrln(readEEPROM(i),4);
   }
 }
 
@@ -131,7 +131,7 @@ void show_Parameter() {
   SerPri(tmpAdr);
   SerPri(";");
   char buf[20];
-  SerPrln(gcvt(readEEPROM(tmpAdr),6,buf));
+  SerPrln(readEEPROM(tmpAdr),4);
 }
 /****************************************************
   write Parameter - p
@@ -176,27 +176,27 @@ void show_Motors() {
 void Show_Stable_PIDs() {
     
   char buf[20];
-    SerPri(gcvt(parameter[KP_QUAD_ROLL],6,buf));
+    SerPri(parameter[KP_QUAD_ROLL],4);
     comma();
-    SerPri(gcvt(parameter[KI_QUAD_ROLL],6,buf));
+    SerPri(parameter[KI_QUAD_ROLL],4);
     comma();
-    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_ROLL],6,buf));
+    SerPri(parameter[STABLE_MODE_KP_RATE_ROLL],4);
     comma();
-    SerPri(gcvt(parameter[KP_QUAD_NICK],6,buf));
+    SerPri(parameter[KP_QUAD_NICK],4);
     comma();
-    SerPri(gcvt(parameter[KI_QUAD_NICK],6,buf));
+    SerPri(parameter[KI_QUAD_NICK],4);
     comma();
-    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_NICK],6,buf));
+    SerPri(parameter[STABLE_MODE_KP_RATE_NICK],4);
     comma();
-    SerPri(gcvt(parameter[KP_QUAD_YAW],6,buf));
+    SerPri(parameter[KP_QUAD_YAW],4);
     comma();
-    SerPri(gcvt(parameter[KI_QUAD_YAW],6,buf));
+    SerPri(parameter[KI_QUAD_YAW],4);
     comma();
-    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_YAW],6,buf));
+    SerPri(parameter[STABLE_MODE_KP_RATE_YAW],4);
     comma();
-    SerPri(gcvt(parameter[Kp_ROLLNICK],6,buf));
+    SerPri(parameter[Kp_ROLLNICK],4);
     comma();
-    SerPrln(gcvt(parameter[Ki_ROLLNICK],6,buf));
+    SerPrln(parameter[Ki_ROLLNICK],4);
 //    comma();
 //    SerPrln(STABLE_MODE_KP_RATE, 3);    // NOT USED NOW
 }
@@ -208,41 +208,14 @@ void Show_Stable_PIDs() {
 void Calibrate_Pitch() {
   int tmp = 1200;
 
-  SerPrln("Move your pitch to MIN, reading starts in 3 seconds");
+  SerPrln("Don't move your sticks, reading starts in 3 seconds");
   delay(1000);
   SerPrln("2. ");
   delay(1000);
   SerPrln("1. ");
   delay(1000);
-  SerPrln("Reading Pitch value, enter x to exit");
-
-  SerFlu();
-  delay(50);
-  for (int i = 0; i < 50; i++) {
-     if (reciverPPM.GetState() > 0)
-     {
-       ch_pitch = reciverPPM.InputCh(CH_PITCH);
-     }
-     else
-     {
-         // we read all spektrum bytes
-        while (Serial2.available()) {
-          reciverSpek.regByte(Serial2.read());
-        }
-       ch_pitch = reciverSpek.InputCh(CH_PITCH);
-     }
-     
-    SerPri("Pitch channel: ");
-    SerPrln(ch_pitch);
-    if(tmp > ch_pitch) tmp = ch_pitch;
-    delay(50);
-    if(SerAva() > 0){
-      break; 
-    }
-  }
-
-  SerPrln();
-  SerPri("Lowest pitch value: ");
+  SerPrln("Reading Pitch value");
+  tmp = ch_pitch;
   SerPrln(tmp);
   SerPrln();
   SerPrln("Saving MIN_PITCH to EEPROM");
@@ -256,42 +229,8 @@ void Calibrate_Pitch() {
   SerPrln();
   
   // READ ROLL MID
-  tmp = 1500;
-  SerPrln("Move your roll to MID, reading starts in 3 seconds");
-  delay(1000);
-  SerPrln("2. ");
-  delay(1000);
-  SerPrln("1. ");
-  delay(1000);
-  SerPrln("Reading Roll value, enter x to exit");
-
-  SerFlu();
-  delay(50);
-  for (int i = 0; i < 50; i++) {
-     if (reciverPPM.GetState() > 0)
-     {
-       ch_roll = reciverPPM.InputCh(CH_ROLL);
-     }
-     else
-     {
-         // we read all spektrum bytes
-        while (Serial2.available()) {
-          reciverSpek.regByte(Serial2.read());
-        }
-       ch_roll = reciverSpek.InputCh(CH_ROLL);
-     }
-     
-    SerPri("Roll channel: ");
-    SerPrln(ch_roll);
-    tmp += ch_pitch;
-    delay(50);
-    if(SerAva() > 0){
-      break; 
-    }
-  }
-  tmp = tmp / 50;
-  SerPrln();
-  SerPri("Mid roll value: ");
+  SerPrln("Reading Roll value");
+  tmp = ch_roll;
   SerPrln(tmp);
   SerPrln();
   SerPrln("Saving roll_mid to EEPROM");
@@ -305,42 +244,8 @@ void Calibrate_Pitch() {
   SerPrln();
   
   // READ Nick MID
-  tmp = 1500;
-  SerPrln("Move your nick to MID, reading starts in 3 seconds");
-  delay(1000);
-  SerPrln("2. ");
-  delay(1000);
-  SerPrln("1. ");
-  delay(1000);
-  SerPrln("Reading Nick value, enter x to exit");
-
-  SerFlu();
-  delay(50);
-  for (int i = 0; i < 50; i++) {
-     if (reciverPPM.GetState() > 0)
-     {
-       ch_nick = reciverPPM.InputCh(CH_NICK);
-     }
-     else
-     {
-         // we read all spektrum bytes
-        while (Serial2.available()) {
-          reciverSpek.regByte(Serial2.read());
-        }
-       ch_nick = reciverSpek.InputCh(CH_NICK);
-     }
-     
-    SerPri("Nick channel: ");
-    SerPrln(ch_nick);
-    tmp += ch_nick;
-    delay(50);
-    if(SerAva() > 0){
-      break; 
-    }
-  }
-  tmp = tmp / 50;
-  SerPrln();
-  SerPri("Mid nick value: ");
+  SerPrln("Reading Nick value");
+  tmp = ch_nick;
   SerPrln(tmp);
   SerPrln();
   SerPrln("Saving nick_mid to EEPROM");
@@ -354,42 +259,8 @@ void Calibrate_Pitch() {
   SerPrln();
   
   // READ Yaw MID
-  tmp = 1500;
-  SerPrln("Move your yaw to MID, reading starts in 3 seconds");
-  delay(1000);
-  SerPrln("2. ");
-  delay(1000);
-  SerPrln("1. ");
-  delay(1000);
   SerPrln("Reading Yaw value, enter x to exit");
-
-  SerFlu();
-  delay(50);
-  for (int i = 0; i < 50; i++) {
-     if (reciverPPM.GetState() > 0)
-     {
-       ch_yaw = reciverPPM.InputCh(CH_YAW);
-     }
-     else
-     {
-         // we read all spektrum bytes
-        while (Serial2.available()) {
-          reciverSpek.regByte(Serial2.read());
-        }
-       ch_yaw = reciverSpek.InputCh(CH_YAW);
-     }
-     
-    SerPri("Yaw channel: ");
-    SerPrln(ch_yaw);
-    tmp += ch_yaw;
-    delay(50);
-    if(SerAva() > 0){
-      break; 
-    }
-  }
-  tmp = tmp / 50;
-  SerPrln();
-  SerPri("Mid yaw value: ");
+  tmp = ch_yaw;
   SerPrln(tmp);
   SerPrln();
   SerPrln("Saving yaw_mid to EEPROM");

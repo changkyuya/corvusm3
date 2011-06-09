@@ -81,22 +81,30 @@ int limitRange(int data, int minLimit, int maxLimit) {
 
 
 void pid_Tuning() {
-  
-  //we read channel 6 for pid tuning
+
   if (parameter[TUNING_PARA] > 0)
   {
+    
     //split parameter in 2 values
     int first = (int) parameter[TUNING_PARA] / 100;
     int second = (int) parameter[TUNING_PARA] - (first * 100);
     
     if (first > 0)
     {
-      parameter[first] = map(ch_aux2, 1000, 2000, parameter[TUNING_MIN], parameter[TUNING_MIN]);
+      parameter[first] = mapfloat(ch_aux2, 1000, 2000, parameter[TUNING_MIN], parameter[TUNING_MAX]);
+      writeEEPROM(parameter[first], first);
     }
     
     if (second > 0)
     {
-      parameter[second] = map(ch_aux2, 1000, 2000, parameter[TUNING_MIN], parameter[TUNING_MIN]);
+      parameter[second] = mapfloat(ch_aux2, 1000, 2000, parameter[TUNING_MIN], parameter[TUNING_MAX]);
+      writeEEPROM(parameter[second], second);
     }
   } 
+}
+
+
+float mapfloat(float value, float fromStart, float fromEnd, float toStart, float toEnd) 
+{
+    return (value - fromStart) * (toEnd - toStart) / (fromEnd - fromStart) + toStart;
 }
