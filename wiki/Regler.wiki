@@ -5,6 +5,8 @@ als Regler können z.B. umgebaute China-Regler mit Quax-UART Software verwendet 
 Für meinen Kopter werden die 4-Fach-Regler von Klempnertommy verwendet.
 (http://www.semotech.de)
 
+[http://4.bp.blogspot.com/_6-4DWYoFTNY/TLnCW5uxhyI/AAAAAAAAARA/S7_RABqwFzg/s1600/R0014026.JPG]
+
 ==Das Protokoll sieht 1-12 Regler vor==
 bei 4 Regler: *F5 00 00 00 00*<br />
 F5 ... Start<br />
