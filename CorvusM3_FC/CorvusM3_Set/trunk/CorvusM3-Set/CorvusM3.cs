@@ -513,7 +513,13 @@ namespace CorvusM3
 
         private void buttonSaveToFlash_Click(object sender, EventArgs e)
         {
-            serialComm.sendData("*");
+            for (int i = 0; i < parameter.parameter.Length; i++ )
+            {
+                serialComm.setParameter(i, parameter.parameter[i]);
+                Thread.Sleep(100);
+            }
+            MessageBox.Show("OK", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
     }

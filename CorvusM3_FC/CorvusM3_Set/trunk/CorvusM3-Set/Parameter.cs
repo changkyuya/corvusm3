@@ -32,7 +32,7 @@ namespace CorvusM3
 {
     class Parameter
     {
-        float [] parameter = new float[37];
+        public float [] parameter = new float[37];
         private Serial serialComm;
         private PropertyGrid propGrid;
 

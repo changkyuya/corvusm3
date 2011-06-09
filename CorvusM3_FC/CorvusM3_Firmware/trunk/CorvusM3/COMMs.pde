@@ -118,7 +118,7 @@ void show_all_Parameter() {
     SerPri(i);
     SerPri(";");
     char buf[20];
-    SerPrln(gcvt(readEEPROM(i),10,buf));
+    SerPrln(gcvt(readEEPROM(i),6,buf));
   }
 }
 
@@ -131,7 +131,7 @@ void show_Parameter() {
   SerPri(tmpAdr);
   SerPri(";");
   char buf[20];
-  SerPrln(gcvt(readEEPROM(tmpAdr),10,buf));
+  SerPrln(gcvt(readEEPROM(tmpAdr),6,buf));
 }
 /****************************************************
   write Parameter - p
@@ -176,27 +176,27 @@ void show_Motors() {
 void Show_Stable_PIDs() {
     
   char buf[20];
-    SerPri(gcvt(parameter[KP_QUAD_ROLL],10,buf));
+    SerPri(gcvt(parameter[KP_QUAD_ROLL],6,buf));
     comma();
-    SerPri(gcvt(parameter[KI_QUAD_ROLL],10,buf));
+    SerPri(gcvt(parameter[KI_QUAD_ROLL],6,buf));
     comma();
-    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_ROLL],10,buf));
+    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_ROLL],6,buf));
     comma();
-    SerPri(gcvt(parameter[KP_QUAD_NICK],10,buf));
+    SerPri(gcvt(parameter[KP_QUAD_NICK],6,buf));
     comma();
-    SerPri(gcvt(parameter[KI_QUAD_NICK],10,buf));
+    SerPri(gcvt(parameter[KI_QUAD_NICK],6,buf));
     comma();
-    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_NICK],10,buf));
+    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_NICK],6,buf));
     comma();
-    SerPri(gcvt(parameter[KP_QUAD_YAW],10,buf));
+    SerPri(gcvt(parameter[KP_QUAD_YAW],6,buf));
     comma();
-    SerPri(gcvt(parameter[KI_QUAD_YAW],10,buf));
+    SerPri(gcvt(parameter[KI_QUAD_YAW],6,buf));
     comma();
-    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_YAW],10,buf));
+    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_YAW],6,buf));
     comma();
-    SerPri(gcvt(parameter[Kp_ROLLNICK],10,buf));
+    SerPri(gcvt(parameter[Kp_ROLLNICK],6,buf));
     comma();
-    SerPrln(gcvt(parameter[Ki_ROLLNICK],10,buf));
+    SerPrln(gcvt(parameter[Ki_ROLLNICK],6,buf));
 //    comma();
 //    SerPrln(STABLE_MODE_KP_RATE, 3);    // NOT USED NOW
 }
@@ -468,8 +468,6 @@ void Show_Sensor_Data() {
 ****************************************************/
 void Reset_Settings() {
 	SerPrln("Reseting EEPROM to default!"); 
-	delay(500);
-	SerPrln("Reseting to factory settings!");
 	defaultUserConfig();
 	delay(200);
 	SerPrln("Saving to EEPROM");
