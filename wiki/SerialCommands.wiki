@@ -12,5 +12,5 @@ r - Show_Receiver_Values()<BR />
 s - Show_Sensor_Data<BR />
 T - Calibrate_Remote<BR />
 # - Reset_Settings<BR />
-* - writeUserConfig to flash<BR />
+`*` - writeUserConfig to flash<BR />
 x - stop output
