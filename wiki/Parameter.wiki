@@ -1,4 +1,41 @@
 #labels Phase-Deploy,Parameter
 = Parameter =
 
-||Nr||Name||Default||Bemerkung|| ||0||KP_QUAD_ROLL||4.0||PIPrate für ACC Mode|| ||1||KI_QUAD_ROLL||0.15||PIPrate für ACC Mode|| ||2||STABLE_MODE_KP_RATE_ROLL||1.2||PIPrate für ACC Mode|| ||3||KP_QUAD_NICK||4.0||PIPrate für ACC Mode|| ||4||KI_QUAD_NICK||0.15||PIPrate für ACC Mode|| ||5||STABLE_MODE_KP_RATE_NICK||1.2||PIPrate für ACC Mode|| ||6||KP_QUAD_YAW||3.0||PIPrate für ACC Mode|| ||7||KI_QUAD_YAW||0.15||PIPrate für ACC Mode|| ||8||STABLE_MODE_KP_RATE_YAW||2.4||PIPrate für ACC Mode|| ||9||STABLE_MODE_KP_RATE||0.2||NOT USED NOW|| ||10||acc_offset_x||2057||ACC Neutralwert Roll|| ||11||acc_offset_y||2044||ACC Neutralwert Nick|| ||12||acc_offset_z||2052||ACC Neutralwert Z (wird um 407 korrigiert bei Autocalibrierung)|| ||13||Kp_ROLLNICK||0.14||ACC Korrekturfaktor P in DCM|| ||14||Ki_ROLLNICK0.15||ACC Korrekturfaktor I in DCM|| ||15||Kp_YAW||1.0||Kompass Korrekturfaktor P in DCM|| ||16||Ki_YAW0.2||Kompass Korrekturfaktor I in DCM|| ||17||XMITFACTOR||0.32||Drehfaktor für HH Mode|| ||18||Kp_RateRoll?||1.95||PID für HH Mode|| ||19||Ki_RateRoll?||0.0||PID für HH Mode|| ||20||Kd_RateRoll?||0.0||PID für HH Mode|| ||21||Kp_RateNick?||1.95||PID für HH Mode|| ||22||Ki_RateNick?||0.0||PID für HH Mode|| ||23||Kd_RateNick?||0.0||PID für HH Mode|| ||24||Kp_RateYaw?||3.2||PID für HH Mode|| ||25||Ki_RateYaw?||0.0||PID für HH Mode|| ||26||Kd_RateYaw?||0.0||PID für HH Mode|| ||27||roll_mid||1520||Neutralwert RC Roll|| ||28||nick_mid||1500||Neutralwert RC Roll|| ||29||yaw_mid||1522||Neutralwert RC Roll|| ||30||MIN_PITCH||1178||min Wert für Pitch|| ||31||BAT_WARNING||10.0||Schwellwert in Volt|| ||32||STICK_TO_ANGLE_FACTOR||5.0||Stick Faktor (divisor)|| ||33||YAW_STICK_TO_ANGLE_FACTOR||1150.0||Stick Faktor (divisor)|| ||34||TUNING_PARA||0||Parameter der verändert werden soll (2 gleichzeitig möglich aabb)|| ||35||TUNING_MIN||0||min Parameter Wert bei Remote 1000 Aux2|| ||36||TUNING_MAX||0||max Parameter Wert bei Remote 2000 Aux2|| 
+||Nr||Name||Default||Bemerkung|| 
+||0||KP_QUAD_ROLL||4.0||PIPrate für ACC Mode|| 
+||1||KI_QUAD_ROLL||0.15||PIPrate für ACC Mode||
+||2||STABLE_MODE_KP_RATE_ROLL||1.2||PIPrate für ACC Mode||
+||3||KP_QUAD_NICK||4.0||PIPrate für ACC Mode||
+||4||KI_QUAD_NICK||0.15||PIPrate für ACC Mode||
+||5||STABLE_MODE_KP_RATE_NICK||1.2||PIPrate für ACC Mode||
+||6||KP_QUAD_YAW||3.0||PIPrate für ACC Mode||
+||7||KI_QUAD_YAW||0.15||PIPrate für ACC Mode||
+||8||STABLE_MODE_KP_RATE_YAW||2.4||PIPrate für ACC Mode||
+||9||STABLE_MODE_KP_RATE||0.2||NOT USED NOW||
+||10||acc_offset_x||2057||ACC Neutralwert Roll||
+||11||acc_offset_y||2044||ACC Neutralwert Nick||
+||12||acc_offset_z||2052||ACC Neutralwert Z (wird um 407 korrigiert bei Autocalibrierung)|| 
+||13||Kp_ROLLNICK||0.14||ACC Korrekturfaktor P in DCM|| 
+||14||Ki_ROLLNICK0.15||ACC Korrekturfaktor I in DCM||
+||15||Kp_YAW||1.0||Kompass Korrekturfaktor P in DCM||
+||16||Ki_YAW0.2||Kompass Korrekturfaktor I in DCM||
+||17||XMITFACTOR||0.32||Drehfaktor für HH Mode|| 
+||18||Kp_RateRoll?||1.95||PID für HH Mode|| 
+||19||Ki_RateRoll?||0.0||PID für HH Mode|| 
+||20||Kd_RateRoll?||0.0||PID für HH Mode|| 
+||21||Kp_RateNick?||1.95||PID für HH Mode|| 
+||22||Ki_RateNick?||0.0||PID für HH Mode|| 
+||23||Kd_RateNick?||0.0||PID für HH Mode|| 
+||24||Kp_RateYaw?||3.2||PID für HH Mode|| 
+||25||Ki_RateYaw?||0.0||PID für HH Mode|| 
+||26||Kd_RateYaw?||0.0||PID für HH Mode||
+||27||roll_mid||1520||Neutralwert RC Roll||
+||28||nick_mid||1500||Neutralwert RC Roll||
+||29||yaw_mid||1522||Neutralwert RC Roll|| 
+||30||MIN_PITCH||1178||min Wert für Pitch||
+||31||BAT_WARNING||10.0||Schwellwert in Volt||
+||32||STICK_TO_ANGLE_FACTOR||5.0||Stick Faktor (divisor)||
+||33||YAW_STICK_TO_ANGLE_FACTOR||1150.0||Stick Faktor (divisor)||
+||34||TUNING_PARA||0||Parameter der verändert werden soll (2 gleichzeitig möglich aabb)|| 
+||35||TUNING_MIN||0||min Parameter Wert bei Remote 1000 Aux2||
+||36||TUNING_MAX||0||max Parameter Wert bei Remote 2000 Aux2|| 
