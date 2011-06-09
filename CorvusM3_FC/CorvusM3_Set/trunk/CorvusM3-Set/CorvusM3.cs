@@ -403,6 +403,8 @@ namespace CorvusM3
 
         private void buttonSaveConfigRemote_Click(object sender, EventArgs e)
         {
+            offGraph();
+            offRemote();
             serialComm.sendData("x");
             tabControl1.SelectedIndex = 0;
             serialComm.sendData("T");
@@ -513,12 +515,25 @@ namespace CorvusM3
 
         private void buttonSaveToFlash_Click(object sender, EventArgs e)
         {
+            if (serialIsOpen == false)
+                return;
+
+            progressBarSaveFlash.Show();
             for (int i = 0; i < parameter.parameter.Length; i++ )
             {
                 serialComm.setParameter(i, parameter.parameter[i]);
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
+                progressBarSaveFlash.Value = Convert.ToInt16( (100.0 / Convert.ToDouble(parameter.parameter.Length)) * Convert.ToDouble(i) );
+                
             }
-            MessageBox.Show("OK", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            progressBarSaveFlash.Value = 100;
+            Thread.Sleep(100);
+            progressBarSaveFlash.Hide();
+        }
+
+        private void tableLayoutPanel9_Paint(object sender, PaintEventArgs e)
+        {
 
         }
 

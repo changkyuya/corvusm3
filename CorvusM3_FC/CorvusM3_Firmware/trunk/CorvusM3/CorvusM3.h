@@ -255,45 +255,45 @@ unsigned long elapsedTime			= 0;		// for doing custom events
 
 
 // EEPROM storage addresses
-#define KP_QUAD_ROLL        0
-#define KI_QUAD_ROLL        1
-#define STABLE_MODE_KP_RATE_ROLL  2
-#define KP_QUAD_NICK       3
-#define KI_QUAD_NICK       4
-#define STABLE_MODE_KP_RATE_NICK  5
-#define KP_QUAD_YAW         6
-#define KI_QUAD_YAW         7
-#define STABLE_MODE_KP_RATE_YAW  8
-#define STABLE_MODE_KP_RATE  9      // NOT USED NOW
-#define acc_offset_x        10
-#define acc_offset_y        11
-#define acc_offset_z        12
-#define Kp_ROLLNICK        13
-#define Ki_ROLLNICK        14
-#define Kp_YAW              15
-#define Ki_YAW              16
-#define XMITFACTOR          17
-#define Kp_RateRoll         18
-#define Ki_RateRoll         19
-#define Kd_RateRoll         20
-#define Kp_RateNick        21
-#define Ki_RateNick        22
-#define Kd_RateNick        23
-#define Kp_RateYaw          24
-#define Ki_RateYaw          25
-#define Kd_RateYaw          26
-#define roll_mid             27
-#define nick_mid            28
-#define yaw_mid              29
-#define MIN_PITCH        30
-#define BAT_WARNING      31
-#define STICK_TO_ANGLE_FACTOR    32
-#define YAW_STICK_TO_ANGLE_FACTOR  33
-#define TUNING_PARA    34
-#define TUNING_MIN      35
-#define TUNING_MAX      36
+#define KP_QUAD_ROLL        1
+#define KI_QUAD_ROLL        2
+#define STABLE_MODE_KP_RATE_ROLL  3
+#define KP_QUAD_NICK       4
+#define KI_QUAD_NICK       5
+#define STABLE_MODE_KP_RATE_NICK  6
+#define KP_QUAD_YAW         7
+#define KI_QUAD_YAW         8
+#define STABLE_MODE_KP_RATE_YAW  9
+#define STABLE_MODE_KP_RATE  10      // NOT USED NOW
+#define acc_offset_x        11
+#define acc_offset_y        12
+#define acc_offset_z        13
+#define Kp_ROLLNICK        14
+#define Ki_ROLLNICK        15
+#define Kp_YAW              16
+#define Ki_YAW              17
+#define XMITFACTOR          18
+#define Kp_RateRoll         19
+#define Ki_RateRoll         20
+#define Kd_RateRoll         21
+#define Kp_RateNick        22
+#define Ki_RateNick        23
+#define Kd_RateNick        24
+#define Kp_RateYaw          25
+#define Ki_RateYaw          26
+#define Kd_RateYaw          27
+#define roll_mid             28
+#define nick_mid            29
+#define yaw_mid              30
+#define MIN_PITCH        31
+#define BAT_WARNING      32
+#define STICK_TO_ANGLE_FACTOR    33
+#define YAW_STICK_TO_ANGLE_FACTOR  34
+#define TUNING_PARA    35
+#define TUNING_MIN      36
+#define TUNING_MAX      37
 
-#define LAST_PARAMETER            36
+#define LAST_PARAMETER            37
 
 float parameter[LAST_PARAMETER + 1];
 

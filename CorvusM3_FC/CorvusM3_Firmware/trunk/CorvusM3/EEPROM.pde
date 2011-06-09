@@ -43,7 +43,7 @@ void writeEEPROM(float value, int address) {
 
 void readUserConfig() {
 
-  for (int i = 0; i <= LAST_PARAMETER; i++)
+  for (int i = 1; i <= LAST_PARAMETER; i++)
   {
     parameter[i] = readEEPROM(i);
   }  
@@ -51,7 +51,7 @@ void readUserConfig() {
 
 void writeUserConfig() {
 
-  for (int i = 0; i <= LAST_PARAMETER; i++)
+  for (int i = 1; i <= LAST_PARAMETER; i++)
   {
     writeEEPROM(parameter[i], i);
   }  
