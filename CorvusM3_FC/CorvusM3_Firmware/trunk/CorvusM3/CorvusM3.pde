@@ -184,9 +184,10 @@ void loop()
     case 4:  // second Barometer + RangeFinder reading (2x10Hz = 20Hz)
       medium_loopCounter++;
       break;
-    case 5:  //  Battery monitor (10Hz)
+    case 5:  //  Battery monitor / PID Tuning (10Hz)
       medium_loopCounter=0;
       read_battery();         // Battery monitor
+      pid_Tuning();
       break;	
     }
   }

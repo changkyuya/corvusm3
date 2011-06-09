@@ -289,9 +289,13 @@ unsigned long elapsedTime			= 0;		// for doing custom events
 #define BAT_WARNING      31
 #define STICK_TO_ANGLE_FACTOR    32
 #define YAW_STICK_TO_ANGLE_FACTOR  33
+#define TUNING_PARA    34
+#define TUNING_MIN      35
+#define TUNING_MAX      36
 
-#define LAST_PARAMETER            33
-float parameter[34];
+#define LAST_PARAMETER            36
+
+float parameter[LAST_PARAMETER + 1];
 
 
 // This function call contains the default values that are set to the ArduCopter
@@ -331,6 +335,9 @@ void defaultUserConfig() {
   parameter[BAT_WARNING]               = 10.0;
   parameter[STICK_TO_ANGLE_FACTOR]    = 5.0;
   parameter[YAW_STICK_TO_ANGLE_FACTOR] = 1150.0;
+  parameter[TUNING_PARA]              = 0;
+  parameter[TUNING_MIN]                = 0;
+  parameter[TUNING_MAX]                = 0;
 }
 
 // end of file
