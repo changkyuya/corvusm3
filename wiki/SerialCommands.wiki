@@ -1,1 +1,16 @@
 #labels Phase-Implementation,Serial
+= Serial Commands =
+
+? - Menü / Hilfe
+a - Show all Parameter
+C - Calibrate_Accel_Offset
+M - Test Motors
+m - Show Control and Motors
+p - Show Parameter px
+P - Receive Parameter P1;xx.x
+r - Show_Receiver_Values()
+s - Show_Sensor_Data
+T - Calibrate_Remote
+# - Reset_Settings
+* - writeUserConfig to flash
+x - stop output
