@@ -55,5 +55,6 @@ void writeUserConfig() {
   {
     writeEEPROM(parameter[i], i);
   }  
+  SerPrln("write OK");
 }
 

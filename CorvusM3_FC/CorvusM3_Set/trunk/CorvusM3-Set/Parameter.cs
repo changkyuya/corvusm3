@@ -236,19 +236,19 @@ namespace CorvusM3
         }
 
 
-        [CategoryAttribute("Remote"), DisplayName("\tROLL Center [27]"), DescriptionAttribute("Default 1500")]
+        [CategoryAttribute("Remote"), DisplayName("\tCenter ROLL [27]"), DescriptionAttribute("Default 1500")]
         public float CHROLL_MID
         {
             set { parameter[27] = value; serialComm.setParameter(27, value); }
             get { return parameter[27]; }
         }
-        [CategoryAttribute("Remote"), DisplayName("\tNICK Center [28]"), DescriptionAttribute("Default 1500")]
+        [CategoryAttribute("Remote"), DisplayName("\tCenter NICK [28]"), DescriptionAttribute("Default 1500")]
         public float CHNICK_MID
         {
             set { parameter[28] = value; serialComm.setParameter(28, value); }
             get { return parameter[28]; }
         }
-        [CategoryAttribute("Remote"), DisplayName("\tYAW Center [29]"), DescriptionAttribute("Default 1500")]
+        [CategoryAttribute("Remote"), DisplayName("\tCenter YAW [29]"), DescriptionAttribute("Default 1500")]
         public float CHYAW_MID
         {
             set { parameter[29] = value; serialComm.setParameter(29, value); }

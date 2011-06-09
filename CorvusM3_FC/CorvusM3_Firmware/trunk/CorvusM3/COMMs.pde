@@ -117,7 +117,8 @@ void show_all_Parameter() {
     SerPri("p");
     SerPri(i);
     SerPri(";");
-    SerPrln(readEEPROM(i),4);
+    char buf[20];
+    SerPrln(gcvt(readEEPROM(i),10,buf));
   }
 }
 
@@ -129,15 +130,17 @@ void show_Parameter() {
   SerPri("p");
   SerPri(tmpAdr);
   SerPri(";");
-  SerPrln(readEEPROM(tmpAdr),4);
+  char buf[20];
+  SerPrln(gcvt(readEEPROM(tmpAdr),10,buf));
 }
 /****************************************************
   write Parameter - p
 ****************************************************/
 void write_Parameter() {
-  float tmpAdr = readFloatSerial();
+  int tmpAdr = readFloatSerial();
   float tmpValue = readFloatSerial();
   writeEEPROM(tmpValue, tmpAdr);
+  parameter[tmpAdr] = tmpValue;
 //  readUserConfig();
 //  SerPri("p");
 //  SerPri(tmpAdr);
@@ -172,27 +175,28 @@ void show_Motors() {
 ****************************************************/
 void Show_Stable_PIDs() {
     
-    SerPri(parameter[KP_QUAD_ROLL]);
+  char buf[20];
+    SerPri(gcvt(parameter[KP_QUAD_ROLL],10,buf));
     comma();
-    SerPri(parameter[KI_QUAD_ROLL]);
+    SerPri(gcvt(parameter[KI_QUAD_ROLL],10,buf));
     comma();
-    SerPri(parameter[STABLE_MODE_KP_RATE_ROLL]);
+    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_ROLL],10,buf));
     comma();
-    SerPri(parameter[KP_QUAD_NICK]);
+    SerPri(gcvt(parameter[KP_QUAD_NICK],10,buf));
     comma();
-    SerPri(parameter[KI_QUAD_NICK]);
+    SerPri(gcvt(parameter[KI_QUAD_NICK],10,buf));
     comma();
-    SerPri(parameter[STABLE_MODE_KP_RATE_NICK]);
+    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_NICK],10,buf));
     comma();
-    SerPri(parameter[KP_QUAD_YAW]);
+    SerPri(gcvt(parameter[KP_QUAD_YAW],10,buf));
     comma();
-    SerPri(parameter[KI_QUAD_YAW]);
+    SerPri(gcvt(parameter[KI_QUAD_YAW],10,buf));
     comma();
-    SerPri(parameter[STABLE_MODE_KP_RATE_YAW]);
+    SerPri(gcvt(parameter[STABLE_MODE_KP_RATE_YAW],10,buf));
     comma();
-    SerPri(parameter[Kp_ROLLNICK]);
+    SerPri(gcvt(parameter[Kp_ROLLNICK],10,buf));
     comma();
-    SerPrln(parameter[Ki_ROLLNICK]);
+    SerPrln(gcvt(parameter[Ki_ROLLNICK],10,buf));
 //    comma();
 //    SerPrln(STABLE_MODE_KP_RATE, 3);    // NOT USED NOW
 }
