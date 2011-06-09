@@ -1,16 +1,16 @@
 = RC Steuerung =
 
 == Kanalzuordnung ==
-* PITCH = Kanal 1* (+ Gas / - Aus)<BR />
-* ROLL = Kanal 2* (- links / + rechts)<BR />
-* NICK = Kanal 3* (- vorne / + hinten)<BR />
-* YAW = Kanal 4* (- gegen Uhrzeiger / + im Uhrzeiger)
+*PITCH = Kanal 1* (+ Gas / - Aus)<BR />
+*ROLL = Kanal 2* (- links / + rechts)<BR />
+*NICK = Kanal 3* (- vorne / + hinten)<BR />
+*YAW = Kanal 4* (- gegen Uhrzeiger / + im Uhrzeiger)
 
-* Aux1 = min ACC Mode / max HH Mode<BR />
-* Aux2 = Tuning Parameter
+*Aux1* = min ACC Mode / max HH Mode<BR />
+*Aux2* = Tuning Parameter
 
 == spezial Kommandos ==
-* PITCH min + YAW links* = starte Motoren<BR />
-* PITCH max + YAW links* = init Gyros<BR />
+*PITCH min + YAW links* = starte Motoren<BR />
+*PITCH max + YAW links* = init Gyros<BR />
 
 vor jedem Kommand muss PITCH min + YAW mitte sein!
