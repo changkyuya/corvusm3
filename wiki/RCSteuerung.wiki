@@ -14,3 +14,5 @@
 *PITCH max + YAW links* = init Gyros<BR />
 
 vor jedem Kommand muss PITCH min + YAW mitte sein!
+
+[http://1.bp.blogspot.com/-LS6GfN6K5E4/Te-d_JbjIBI/AAAAAAAAAUg/nrfD4p2LkGI/s1600/cm3_2.jpg]
