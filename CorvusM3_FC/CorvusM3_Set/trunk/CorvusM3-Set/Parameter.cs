@@ -32,7 +32,7 @@ namespace CorvusM3
 {
     class Parameter
     {
-        float [] parameter = new float[34];
+        float [] parameter = new float[37];
         private Serial serialComm;
         private PropertyGrid propGrid;
 
@@ -236,25 +236,25 @@ namespace CorvusM3
         }
 
 
-        [CategoryAttribute("Remote"), DisplayName("ROLL Center [27]"), DescriptionAttribute("Default 1500")]
+        [CategoryAttribute("Remote"), DisplayName("\tROLL Center [27]"), DescriptionAttribute("Default 1500")]
         public float CHROLL_MID
         {
             set { parameter[27] = value; serialComm.setParameter(27, value); }
             get { return parameter[27]; }
         }
-        [CategoryAttribute("Remote"), DisplayName("NICK Center [28]"), DescriptionAttribute("Default 1500")]
+        [CategoryAttribute("Remote"), DisplayName("\tNICK Center [28]"), DescriptionAttribute("Default 1500")]
         public float CHNICK_MID
         {
             set { parameter[28] = value; serialComm.setParameter(28, value); }
             get { return parameter[28]; }
         }
-        [CategoryAttribute("Remote"), DisplayName("YAW Center [29]"), DescriptionAttribute("Default 1500")]
+        [CategoryAttribute("Remote"), DisplayName("\tYAW Center [29]"), DescriptionAttribute("Default 1500")]
         public float CHYAW_MID
         {
             set { parameter[29] = value; serialComm.setParameter(29, value); }
             get { return parameter[29]; }
         }
-        [CategoryAttribute("Remote"), DisplayName("PITCH min [30]"), DescriptionAttribute("Default 1100")]
+        [CategoryAttribute("Remote"), DisplayName("\tPITCH min [30]"), DescriptionAttribute("Default 1100")]
         public float MIN_PITCH
         {
             set { parameter[30] = value; serialComm.setParameter(30, value); }
@@ -268,17 +268,35 @@ namespace CorvusM3
             get { return parameter[31]; }
         }
 
-        [CategoryAttribute("Remote"), DisplayName("Stick to Angle Divisor ROLL/NICK [32]"), DescriptionAttribute("Default 5.0")]
+        [CategoryAttribute("Remote"), DisplayName("\tStick to Angle Divisor ROLL/NICK [32]"), DescriptionAttribute("Default 5.0")]
         public float STICK_TO_ANGLE_FACTOR
         {
             set { parameter[32] = value; serialComm.setParameter(32, value); }
             get { return parameter[32]; }
         }
-        [CategoryAttribute("Remote"), DisplayName("Stick to Angle Divisor YAW [33]"), DescriptionAttribute("Default 1150.0")]
+        [CategoryAttribute("Remote"), DisplayName("\tStick to Angle Divisor YAW [33]"), DescriptionAttribute("Default 1150.0")]
         public float YAW_STICK_TO_ANGLE_FACTOR
         {
             set { parameter[33] = value; serialComm.setParameter(33, value); }
             get { return parameter[33]; }
+        }
+        [CategoryAttribute("Remote"), DisplayName("PID Tuning VALUE [34]"), DescriptionAttribute("Default 0, can use 2 Parameter 1123 = Parameter 11 and 23")]
+        public float PID_TUNING_VALUE
+        {
+            set { parameter[34] = value; serialComm.setParameter(34, value); }
+            get { return parameter[34]; }
+        }
+        [CategoryAttribute("Remote"), DisplayName("PID Tuning MIN [35]"), DescriptionAttribute("Default 0")]
+        public float PID_TUNING_MIN
+        {
+            set { parameter[35] = value; serialComm.setParameter(35, value); }
+            get { return parameter[35]; }
+        }
+        [CategoryAttribute("Remote"), DisplayName("PID Tuning MAX [36]"), DescriptionAttribute("Default 0")]
+        public float PID_TUNING_MAX
+        {
+            set { parameter[36] = value; serialComm.setParameter(36, value); }
+            get { return parameter[36]; }
         }
 
 
