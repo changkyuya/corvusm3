@@ -3,10 +3,10 @@
 
 == Funktionen ==
 
- * schnelle ATAN2 Funktion: [http://www.dspguru.com/comp.dsp/tricks/alg/fxdatan2.htm] 
+ * schnelle ATAN2 Funktion: [http://www.dspguru.com/dsp/tricks/parabolic-approximation-of-sin-and-cos] 
  * Sin/Cos mit Stütztabelle: [http://www.mikrocontroller.net/articles/Sinus_berechnung] 
  * Sin/Cos aus MK Projekt: [http://svn.mikrokopter.de/mikrowebsvn/filedetails.php?repname=FlightCtrl&path=/tags/V0.76g/mymath.c]
- * Simultaneous Parabolic Approximation of Sin and Cos: [http://www.dspguru.com/comp.dsp/tricks/alg/sincos.htm]
+ * Simultaneous Parabolic Approximation of Sin and Cos: [http://www.dspguru.com/dsp/tricks/parabolic-approximation-of-sin-and-cos]
  * Lookup table: [http://en.wikipedia.org/wiki/Lookup_table]
 
 == Infos und Beispiele ==
