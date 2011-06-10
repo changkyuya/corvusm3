@@ -1,0 +1,6 @@
+CM3_RC_Class	KEYWORD1
+begin	KEYWORD2
+InputCh	KEYWORD2
+OutputCh	KEYWORD2
+GetState	KEYWORD2
+
