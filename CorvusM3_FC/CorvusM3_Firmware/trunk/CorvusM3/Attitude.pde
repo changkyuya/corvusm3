@@ -20,13 +20,13 @@
 */
 
 
-/* ************************************************************ */
+//******************************************************************************
 // STABLE MODE
 // PI absolute angle control driving a P rate control
 // Input : desired Roll, Pitch and Yaw absolute angles. Output : Motor commands
+//******************************************************************************
 void Attitude_control_v3(int command_roll, int command_nick, int command_yaw)
 {
-  
   float stable_roll,stable_nick,stable_yaw;
   
   // ROLL CONTROL    
@@ -78,8 +78,9 @@ void Attitude_control_v3(int command_roll, int command_nick, int command_yaw)
   control_yaw = constrain(control_yaw,-MAX_CONTROL_OUTPUT,MAX_CONTROL_OUTPUT);
 }
 
-
+//******************************************************************************
 // ACRO MODE
+//******************************************************************************
 void Rate_control_v2()
 {
   static float previousRollRate, previousNickRate, previousYawRate;

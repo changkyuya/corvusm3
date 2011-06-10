@@ -18,8 +18,16 @@
     You should have received a copy of the GNU General Public License
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+//******************************************************************************
 // Utilities for writing and reading from the EEPROM
-float readEEPROM(int address) {
+//******************************************************************************
+
+//******************************************************************************
+// Read EEPROM
+//******************************************************************************
+float readEEPROM(int address) 
+{
   union floatStore {
     byte floatByte[4];
     float floatVal;
@@ -30,7 +38,11 @@ float readEEPROM(int address) {
   return floatOut.floatVal;
 }
 
-void writeEEPROM(float value, int address) {
+//******************************************************************************
+// write EEPROM
+//******************************************************************************
+void writeEEPROM(float value, int address) 
+{
   union floatStore {
     byte floatByte[4];
     float floatVal;
@@ -41,16 +53,22 @@ void writeEEPROM(float value, int address) {
     EEPROM.write((address * 4) + i, floatIn.floatByte[i]);
 }
 
-void readUserConfig() {
-
+//******************************************************************************
+// Read user configuration
+//******************************************************************************
+void readUserConfig() 
+{
   for (int i = 1; i <= LAST_PARAMETER; i++)
   {
     parameter[i] = readEEPROM(i);
   }  
 }
 
-void writeUserConfig() {
-
+//******************************************************************************
+// write User Config
+//******************************************************************************
+void writeUserConfig() 
+{
   for (int i = 1; i <= LAST_PARAMETER; i++)
   {
     writeEEPROM(parameter[i], i);

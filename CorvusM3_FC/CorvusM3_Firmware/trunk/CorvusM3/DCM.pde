@@ -18,8 +18,9 @@
     You should have received a copy of the GNU General Public License
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
-/* ******* DCM IMU functions ********************* */
-/**************************************************/
+//******************************************************************************
+// DCM IMU functions
+//******************************************************************************
 void Normalize(void)
 {
   float error=0;
@@ -46,7 +47,9 @@ void Normalize(void)
   Vector_Scale(&DCM_Matrix[2][0], &temporary[2][0], renorm);
 }
 
-/**************************************************/
+//******************************************************************************
+// Drift Correction
+//******************************************************************************
 void Drift_correction(void)
 {
   //Compensation the Roll, Pitch and Yaw drift. 
@@ -85,16 +88,20 @@ void Drift_correction(void)
 //    Vector_Scale(&Scaled_Omega_I[0],&errorYaw[0],parameter[Ki_YAW]*0.0001);
 //    Vector_Add(Omega_I,Omega_I,Scaled_Omega_I);//adding integrator to the Omega_I
 //  }
-
 }
-/**************************************************/
+
+//******************************************************************************
+// Not used
+//******************************************************************************
 void Accel_adjust(void)
 {
   //Accel_Vector[1] += Accel_Scale(speed_3d*Omega[2]);  // Centrifugal force on Acc_y = GPS_speed*GyroZ
   //Accel_Vector[2] -= Accel_Scale(speed_3d*Omega[1]);  // Centrifugal force on Acc_z = GPS_speed*GyroY
 }
-/**************************************************/
 
+//******************************************************************************
+// Matrix update
+//******************************************************************************
 void Matrix_update(void)
 {
   Gyro_Vector[0]=Gyro_Scaled_X(read_adc(0)); //gyro x roll
@@ -145,6 +152,9 @@ void Matrix_update(void)
   }
 }
 
+//******************************************************************************
+// Euler angles
+//******************************************************************************
 void Euler_angles(void)
 {
   #if OUTPUTMODE == 2          // Only accelerometer info (debugging purposes)
@@ -158,9 +168,13 @@ void Euler_angles(void)
   #endif
 }
 
-
+//******************************************************************************
 // VECTOR FUNCTIONS
-//Computes the dot product of two vectors
+//******************************************************************************
+
+//******************************************************************************
+// Computes the dot product of two vectors
+//******************************************************************************
 float Vector_Dot_Product(float vector1[3],float vector2[3])
 {
   float op=0;
@@ -173,7 +187,9 @@ float Vector_Dot_Product(float vector1[3],float vector2[3])
   return op; 
 }
 
+//******************************************************************************
 //Computes the cross product of two vectors
+//******************************************************************************
 void Vector_Cross_Product(float vectorOut[3], float v1[3],float v2[3])
 {
   vectorOut[0]= (v1[1]*v2[2]) - (v1[2]*v2[1]);
@@ -181,7 +197,9 @@ void Vector_Cross_Product(float vectorOut[3], float v1[3],float v2[3])
   vectorOut[2]= (v1[0]*v2[1]) - (v1[1]*v2[0]);
 }
 
+//******************************************************************************
 //Multiply the vector by a scalar. 
+//******************************************************************************
 void Vector_Scale(float vectorOut[3],float vectorIn[3], float scale2)
 {
   for(int c=0; c<3; c++)
@@ -190,6 +208,9 @@ void Vector_Scale(float vectorOut[3],float vectorIn[3], float scale2)
   }
 }
 
+//******************************************************************************
+// Vector ADD
+//******************************************************************************
 void Vector_Add(float vectorOut[3],float vectorIn1[3], float vectorIn2[3])
 {
   for(int c=0; c<3; c++)
@@ -198,8 +219,13 @@ void Vector_Add(float vectorOut[3],float vectorIn1[3], float vectorIn2[3])
   }
 }
 
-/********* MATRIX FUNCTIONS *****************************************/
-//Multiply two 3x3 matrixs. This function developed by Jordi can be easily adapted to multiple n*n matrix's. (Pero me da flojera!). 
+//******************************************************************************
+// MATRIX FUNCTIONS 
+//******************************************************************************
+
+//******************************************************************************
+// Multiply two 3x3 matrixs. This function developed by Jordi can be easily adapted to multiple n*n matrix's. (Pero me da flojera!). 
+//******************************************************************************
 void Matrix_Multiply(float a[3][3], float b[3][3],float mat[3][3])
 {
   float op[3]; 

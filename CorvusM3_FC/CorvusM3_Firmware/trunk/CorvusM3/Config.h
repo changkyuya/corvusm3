@@ -24,25 +24,17 @@
 // level readings. (you need a multimeter to measure and set this of course)
 #define VOLT_DIV_RATIO 	5.55		//  10K +, 2K2 GND = V / 5,55
 
-/*
-= ============================================================================ =
- 5. SETUP SAFETY FEATURES
- = ============================================================================ =
- 
- This section helps you setup the safety features of your multicopter.
- Defaults are generally okay. We advise you to read through them, but not to
- change anything unless you are very sure about what you are doing.
- */
+//******************************************************************************
+// SETUP SAFETY FEATURES
+//******************************************************************************
 #define ARM_DELAY 50                      // How long you need to keep rudder to
 // max right for arming motors
 // (units*0.02, so 50units = 1 second)
 #define DISARM_DELAY 25                   // How long you need to keep rudder to
 // max left for disarming motors
 
-
 // from Attitude.pde
 #define MAX_CONTROL_OUTPUT 250
-
 
 /*For debugging purposes DCM*/
 #define OUTPUTMODE 1  //If value = 1 will print the corrected data, 0 will print uncorrected data of the gyros (with drift), 2 Accel only data

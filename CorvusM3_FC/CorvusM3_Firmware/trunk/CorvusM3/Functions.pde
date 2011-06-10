@@ -19,12 +19,13 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Flash those A,B,C LEDs on IMU Board
-// 
-// Function: FullBlink(int, int);
-//           int 1 = 
-void FullBlink(int count, int blinkdelay) {
-  for(int i = 0; i <= count; i++) {
+//******************************************************************************
+// LED Function
+//******************************************************************************
+void FullBlink(int count, int blinkdelay) 
+{
+  for(int i = 0; i <= count; i++) 
+  {
     digitalWrite(LED_Red, HIGH);
     delay(blinkdelay);
     digitalWrite(LED_Red, LOW);
@@ -32,11 +33,9 @@ void FullBlink(int count, int blinkdelay) {
   }
 }
 
-
-
-
-
+//******************************************************************************
 // Funtion to normalize an angle in degrees to -180,180 degrees
+//******************************************************************************
 float Normalize_angle(float angle)
 {
   if (angle > 180)         
@@ -46,7 +45,10 @@ float Normalize_angle(float angle)
   else
     return(angle);
 }
+
+//******************************************************************************
 // Maximun slope filter for radio inputs... (limit max differences between readings)
+//******************************************************************************
 int channel_filter(int ch, int ch_old)
 {
   int diff_ch_old;
@@ -65,26 +67,24 @@ int channel_filter(int ch, int ch_old)
       return(ch_old + 60);
   }
   return((ch + ch_old) >> 1);   // Small filtering
-
 }
 
-
-
+//******************************************************************************
 // Faster and smaller replacement for contrain() function
+//******************************************************************************
 int limitRange(int data, int minLimit, int maxLimit) {
   if (data < minLimit) return minLimit;
   else if (data > maxLimit) return maxLimit;
   else return data;
 }
 
-
-
-
-void pid_Tuning() {
-
+//******************************************************************************
+// PID Tuning
+//******************************************************************************
+void pid_Tuning() 
+{
   if (parameter[TUNING_PARA] > 0)
   {
-    
     //split parameter in 2 values
     int first = (int) parameter[TUNING_PARA] / 100;
     int second = (int) parameter[TUNING_PARA] - (first * 100);
@@ -103,7 +103,9 @@ void pid_Tuning() {
   } 
 }
 
-
+//******************************************************************************
+// map Float Value
+//******************************************************************************
 float mapfloat(float value, float fromStart, float fromEnd, float toStart, float toEnd) 
 {
     return (value - fromStart) * (toEnd - toStart) / (fromEnd - fromStart) + toStart;
