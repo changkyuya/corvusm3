@@ -1,0 +1,9 @@
+1. Install Dot.Net 3.5 Redistributable!
+
+http://www.microsoft.com/downloads/details.aspx?FamilyId=333325FD-AE52-4E35-B531-508D977D32A6&displaylang=en
+
+INFO:
+=====
+Softwarefehler können als Issue unter http://code.google.com/p/corvusm3 angelegt werden.
+
+Der Sourcecode steht über http://code.google.com/p/corvusm3 zur Verfügung.
