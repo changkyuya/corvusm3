@@ -19,6 +19,9 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+//******************************************************************************
+// Motor Stop
+//******************************************************************************
 void motor_stop()
 {  
   char start = 0xF5;
@@ -30,8 +33,9 @@ void motor_stop()
   Serial3.write(stop);
 }
 
-
+//******************************************************************************
 // Send output commands to ESC´s
+//******************************************************************************
 void motor_output()
 {
   int pitch;
@@ -43,23 +47,21 @@ void motor_output()
     control_yaw = 0; 
 
   // Copter mix
-  if (motorArmed == 1) {   
-
-          // minThrottle= 0 to MIN_THROTTLE = remote value from EEPR
-          rightMotor = constrain(pitch - control_roll + control_yaw, minPitch, 2000);
-          leftMotor = constrain(pitch + control_roll + control_yaw, minPitch, 2000);
-          frontMotor = constrain(pitch + control_nick - control_yaw, minPitch, 2000);
-          backMotor = constrain(pitch - control_nick - control_yaw, minPitch, 2000);
-
-
-  } else {    // MOTORS DISARMED
-
-
-      //rightMotor = MIN_THROTTLE;
-      rightMotor = parameter[MIN_PITCH];
-      leftMotor = parameter[MIN_PITCH];
-      frontMotor = parameter[MIN_PITCH];
-      backMotor = parameter[MIN_PITCH];
+  if (motorArmed == 1) 
+  {   
+    // minThrottle= 0 to MIN_THROTTLE = remote value from EEPR
+    rightMotor = constrain(pitch - control_roll + control_yaw, minPitch, 2000);
+    leftMotor = constrain(pitch + control_roll + control_yaw, minPitch, 2000);
+    frontMotor = constrain(pitch + control_nick - control_yaw, minPitch, 2000);
+    backMotor = constrain(pitch - control_nick - control_yaw, minPitch, 2000);
+  } 
+  else 
+  {    // MOTORS DISARMED
+    //rightMotor = MIN_THROTTLE;
+    rightMotor = parameter[MIN_PITCH];
+    leftMotor = parameter[MIN_PITCH];
+    frontMotor = parameter[MIN_PITCH];
+    backMotor = parameter[MIN_PITCH];
 
     // Reset_I_Terms();
     roll_I = 0;     // reset I terms of PID controls
@@ -71,10 +73,10 @@ void motor_output()
   }
 
   // Send commands to motors
-//    CM3_RC.OutputCh(0, rightMotor);   // Right motor
-//    CM3_RC.OutputCh(1, leftMotor);    // Left motor
-//    CM3_RC.OutputCh(2, frontMotor);   // Front motor
-//    CM3_RC.OutputCh(3, backMotor);    // Back motor   
+  //    CM3_RC.OutputCh(0, rightMotor);   // Right motor
+  //    CM3_RC.OutputCh(1, leftMotor);    // Left motor
+  //    CM3_RC.OutputCh(2, frontMotor);   // Front motor
+  //    CM3_RC.OutputCh(3, backMotor);    // Back motor   
   
   //we use 10 as mingas
   char sr = map(rightMotor, parameter[MIN_PITCH], 2000, 0, 200);
@@ -88,12 +90,6 @@ void motor_output()
   Serial3.write(sb);
   Serial3.write(sr);
   Serial3.write(sl);
-  
-//  
-//  Serial1.print(sf);
-//  Serial1.print(sb);
-//  Serial1.print(sr);
-//  Serial1.println(sl);
 }
 
 

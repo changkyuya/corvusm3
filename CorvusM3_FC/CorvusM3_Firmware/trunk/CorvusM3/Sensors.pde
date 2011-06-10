@@ -18,17 +18,23 @@
     You should have received a copy of the GNU General Public License
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
-/* ******* ADC functions ********************* */
+
+//******************************************************************************
+// ADC functions 
+//******************************************************************************
+
+//******************************************************************************
 // Read all the ADC channles
+//******************************************************************************
 void Read_adc_raw(void)
 {
-  //int temp;
-  
   for (int i=0;i<7;i++)
     AN[i] = adc.Ch(sensors[i]);
 }
 
+//******************************************************************************
 // Returns an analog value with the offset
+//******************************************************************************
 int read_adc(int select)
 {
   if (SENSOR_SIGN[select]<0)
@@ -37,7 +43,11 @@ int read_adc(int select)
     return (AN[select]-AN_OFFSET[select]);
 }
 
-void calibrateSensors(void) {
+//******************************************************************************
+// Calibrate Sensors
+//******************************************************************************
+void calibrateSensors(void) 
+{
   int i;
   int j = 0;
   byte gyro;
@@ -68,17 +78,14 @@ void calibrateSensors(void) {
     if((i % 5) == 0) j++;
     if(j >= 3) j = 0;
   }
-  
-
 
   for(gyro = 0; gyro <= 2; gyro++)  
     AN_OFFSET[gyro] = aux_float[gyro];    // Update sensor OFFSETs from values read
-    
-
 }
 
-
-
+//******************************************************************************
+// Read Battery
+//******************************************************************************
 void read_battery(void)
 {
   battery_voltage = BATTERY_VOLTAGE(adc.Ch(sensors[6])) * .1 + battery_voltage * .9;

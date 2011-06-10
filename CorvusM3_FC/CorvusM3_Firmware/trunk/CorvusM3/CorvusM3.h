@@ -19,12 +19,11 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-
 #include "WProgram.h"
 
-
-// Radio definition for REDFOX
+//******************************************************************************
+// Radio definition
+//******************************************************************************
 #define CH_ROLL 3
 #define CH_NICK 1
 #define CH_PITCH 2
@@ -36,7 +35,9 @@
 
 byte errorRadio = 1;
 
-//Axis
+//******************************************************************************
+// Axis
+//******************************************************************************
 #define ROLL 0
 #define NICK 1
 #define YAW 2
@@ -53,21 +54,19 @@ byte errorRadio = 1;
 #define LASTSENSOR 6
 
 
-/* ************************************************************** */
-/* CM3 Hardware definitions */
-
+//******************************************************************************
+// CM3 Hardware definitions 
+//******************************************************************************
 #define LED_Red 21     // C_LED
 #define SPEKTRUM_BIND_PIN   39
 #define DEBUG_PIN  31
 #define BEEPER_PIN 3
 
 
-/* ************************************************** */
-/* Serial port definitions */
+//******************************************************************************
+// Serial port definitions 
+//******************************************************************************
 #define SERIAL1_BAUD 115200
-
-//#define SerBau  115200      // Baud setting moved close next to port selection
-
 #define SerPri  Serial1.print
 #define SerPrln Serial1.println
 #define SerPriln Serial1.println
@@ -79,21 +78,20 @@ byte errorRadio = 1;
 
 
 
-/* *********************************************** */
+//******************************************************************************
 // IMU definitions
 // Sensor: GYROX, GYROY, GYROZ, ACCELX, ACCELY, ACCELZ, BAT
-//uint8_t 
+//******************************************************************************
 byte sensors[7] = {0, 1, 2, 3, 4, 5, 6};  // CM3 Layout
 
 // Sensor: GYROX, GYROY, GYROZ,   ACCELX, ACCELY, ACCELZ,     MAGX, MAGY, MAGZ,     BAT
 int SENSOR_SIGN[]={
   1, 1, -1,    1, 1, 1,     -1, -1, -1,    1}; 
  //{-1,1,-1,1,-1,1,-1,-1,-1};
- 
-/* CM3 Hardware definitions, END */
 
-/* *********************************************** */
-/* General definitions */
+//******************************************************************************
+// General definitions 
+//******************************************************************************
 #define TRUE 1
 #define FALSE 0
 #define ON 1
@@ -113,14 +111,9 @@ int SENSOR_SIGN[]={
 #define ToRad(x) (x*0.01745329252)	// *pi/180
 #define ToDeg(x) (x*57.2957795131)	// *180/pi
 
-
-
 #define Gyro_Scaled_X(x) x*ToRad(Gyro_Gain_X) //Return the scaled ADC raw data of the gyro in radians for second
 #define Gyro_Scaled_Y(x) x*ToRad(Gyro_Gain_Y) //Return the scaled ADC raw data of the gyro in radians for second
 #define Gyro_Scaled_Z(x) x*ToRad(Gyro_Gain_Z) //Return the scaled ADC raw data of the gyro in radians for second
-
-
-
 
 int AN[7]; //array that store the 7 ADC channels
 int AN_OFFSET[6]; //Array that store the Offset of the gyros and accelerometers
@@ -180,12 +173,6 @@ int control_roll;           // PID control results
 int control_nick;
 int control_yaw;
 
-// Wind Compensation variables
-//int control_wind_roll;
-//int control_wind_nick;
-//int max_wind_angle;
-//int Gyro_drift_error_sum;
-
 // Attitude PID controls
 float roll_I=0;
 float roll_D;
@@ -206,7 +193,6 @@ byte gled_status = HIGH;
 long gled_timer;
 long gled_speed;
 
-
 int   Neutro_yaw;
 int   ch_roll;
 int   ch_nick;
@@ -222,7 +208,6 @@ int frontMotor;
 int backMotor;
 int leftMotor;
 int rightMotor;
-
 
 byte  motorArmed = 0;                              // 0 = motors disarmed, 1 = motors armed
 byte  motorSafety = 1;                             // 0 = safety off, 1 = on.  When On, sudden increases in throttle not allowed
@@ -240,9 +225,9 @@ byte Disarming_counter=0;
 byte Safety_counter=0;
 byte neutralYAWarm = 0;
 
-
+//******************************************************************************
 // System Timers
-// --------------
+//******************************************************************************
 unsigned long fast_loopTimer		        = 0;		// Time in miliseconds of main control loop
 unsigned long medium_loopTimer		        = 0;		// Time in miliseconds of navigation control loop
 byte   medium_loopCounter			= 0;		// Counters for branching from main control loop to slower loops
@@ -253,94 +238,95 @@ int   mainLoop_count 				= 0;
 unsigned long elapsedTime			= 0;		// for doing custom events
 
 
-
+//******************************************************************************
 // EEPROM storage addresses
-#define KP_QUAD_ROLL        1
-#define KI_QUAD_ROLL        2
-#define STABLE_MODE_KP_RATE_ROLL  3
-#define KP_QUAD_NICK       4
-#define KI_QUAD_NICK       5
-#define STABLE_MODE_KP_RATE_NICK  6
-#define KP_QUAD_YAW         7
-#define KI_QUAD_YAW         8
-#define STABLE_MODE_KP_RATE_YAW  9
-#define STABLE_MODE_KP_RATE  10      // NOT USED NOW
-#define acc_offset_x        11
-#define acc_offset_y        12
-#define acc_offset_z        13
-#define Kp_ROLLNICK        14
-#define Ki_ROLLNICK        15
-#define Kp_YAW              16
-#define Ki_YAW              17
-#define XMITFACTOR          18
-#define Kp_RateRoll         19
-#define Ki_RateRoll         20
-#define Kd_RateRoll         21
-#define Kp_RateNick        22
-#define Ki_RateNick        23
-#define Kd_RateNick        24
-#define Kp_RateYaw          25
-#define Ki_RateYaw          26
-#define Kd_RateYaw          27
-#define roll_mid             28
-#define nick_mid            29
-#define yaw_mid              30
-#define MIN_PITCH        31
-#define BAT_WARNING      32
-#define STICK_TO_ANGLE_FACTOR    33
-#define YAW_STICK_TO_ANGLE_FACTOR  34
-#define TUNING_PARA    35
-#define TUNING_MIN      36
-#define TUNING_MAX      37
+//******************************************************************************
+#define KP_QUAD_ROLL                    1
+#define KI_QUAD_ROLL                    2
+#define STABLE_MODE_KP_RATE_ROLL        3
+#define KP_QUAD_NICK                    4
+#define KI_QUAD_NICK                    5
+#define STABLE_MODE_KP_RATE_NICK        6
+#define KP_QUAD_YAW                     7
+#define KI_QUAD_YAW                     8
+#define STABLE_MODE_KP_RATE_YAW         9
+#define STABLE_MODE_KP_RATE             10      // NOT USED NOW
+#define acc_offset_x                    11
+#define acc_offset_y                    12
+#define acc_offset_z                    13
+#define Kp_ROLLNICK                     14
+#define Ki_ROLLNICK                     15
+#define Kp_YAW                          16
+#define Ki_YAW                          17
+#define XMITFACTOR                      18
+#define Kp_RateRoll                     19
+#define Ki_RateRoll                     20
+#define Kd_RateRoll                     21
+#define Kp_RateNick                     22
+#define Ki_RateNick                     23
+#define Kd_RateNick                     24
+#define Kp_RateYaw                      25
+#define Ki_RateYaw                      26
+#define Kd_RateYaw                      27
+#define roll_mid                        28
+#define nick_mid                        29
+#define yaw_mid                         30
+#define MIN_PITCH                       31
+#define BAT_WARNING                     32
+#define STICK_TO_ANGLE_FACTOR           33
+#define YAW_STICK_TO_ANGLE_FACTOR       34
+#define TUNING_PARA                     35
+#define TUNING_MIN                      36
+#define TUNING_MAX                      37
 
-#define LAST_PARAMETER            37
+#define LAST_PARAMETER                  37
 
 float parameter[LAST_PARAMETER + 1];
 
-
-// This function call contains the default values that are set to the ArduCopter
-// when a "Default EEPROM Value" command is sent through serial interface
-void defaultUserConfig() {
-  parameter[KP_QUAD_ROLL]               = 4.0;
-  parameter[KI_QUAD_ROLL]               = 0.15;
-  parameter[STABLE_MODE_KP_RATE_ROLL]   = 1.2;
-  parameter[KP_QUAD_NICK]              = 4.0;
-  parameter[KI_QUAD_NICK]              = 0.15;
-  parameter[STABLE_MODE_KP_RATE_NICK]  = 1.2;
-  parameter[KP_QUAD_YAW]                = 3.0;
-  parameter[KI_QUAD_YAW]                = 0.15;
-  parameter[STABLE_MODE_KP_RATE_YAW]    = 2.4;
-  parameter[STABLE_MODE_KP_RATE]        = 0.2;     // NOT USED NOW
-  parameter[acc_offset_x]               = 2057;
-  parameter[acc_offset_y]               = 2044;
-  parameter[acc_offset_z]               = 2052;
-  parameter[Kp_ROLLNICK]               = 0.14;
-  parameter[Ki_ROLLNICK]               = 0.15;
-  parameter[Kp_YAW]                     = 1.0;
-  parameter[Ki_YAW]                     = 0.2;
-  parameter[XMITFACTOR]                 = 0.32;
-  parameter[Kp_RateRoll]                = 1.95;
-  parameter[Ki_RateRoll]                = 0.0;
-  parameter[Kd_RateRoll]                = 0.0;
-  parameter[Kp_RateNick]               = 1.95;
-  parameter[Ki_RateNick]               = 0.0;
-  parameter[Kd_RateNick]               = 0.0;  
-  parameter[Kp_RateYaw]                 = 3.2;
-  parameter[Ki_RateYaw]                 = 0.0;
-  parameter[Kd_RateYaw]                 = 0.0;
-  parameter[roll_mid]                   = 1520;
-  parameter[nick_mid]                  = 1500;
-  parameter[yaw_mid]                    = 1522;
-  parameter[MIN_PITCH]               = 1178; 
-  parameter[BAT_WARNING]               = 10.0;
-  parameter[STICK_TO_ANGLE_FACTOR]    = 5.0;
-  parameter[YAW_STICK_TO_ANGLE_FACTOR] = 1150.0;
-  parameter[TUNING_PARA]              = 0;
-  parameter[TUNING_MIN]                = 0;
-  parameter[TUNING_MAX]                = 0;
+//******************************************************************************
+// default values 
+//******************************************************************************
+void defaultUserConfig() 
+{
+  parameter[KP_QUAD_ROLL]                 = 4.0;
+  parameter[KI_QUAD_ROLL]                 = 0.15;
+  parameter[STABLE_MODE_KP_RATE_ROLL]     = 1.2;
+  parameter[KP_QUAD_NICK]                 = 4.0;
+  parameter[KI_QUAD_NICK]                 = 0.15;
+  parameter[STABLE_MODE_KP_RATE_NICK]     = 1.2;
+  parameter[KP_QUAD_YAW]                  = 3.0;
+  parameter[KI_QUAD_YAW]                  = 0.15;
+  parameter[STABLE_MODE_KP_RATE_YAW]      = 2.4;
+  parameter[STABLE_MODE_KP_RATE]          = 0.2;     // NOT USED NOW
+  parameter[acc_offset_x]                 = 2057;
+  parameter[acc_offset_y]                 = 2044;
+  parameter[acc_offset_z]                 = 2052;
+  parameter[Kp_ROLLNICK]                  = 0.14;
+  parameter[Ki_ROLLNICK]                  = 0.15;
+  parameter[Kp_YAW]                       = 1.0;
+  parameter[Ki_YAW]                       = 0.2;
+  parameter[XMITFACTOR]                   = 0.32;
+  parameter[Kp_RateRoll]                  = 1.95;
+  parameter[Ki_RateRoll]                  = 0.0;
+  parameter[Kd_RateRoll]                  = 0.0;
+  parameter[Kp_RateNick]                  = 1.95;
+  parameter[Ki_RateNick]                  = 0.0;
+  parameter[Kd_RateNick]                  = 0.0;  
+  parameter[Kp_RateYaw]                   = 3.2;
+  parameter[Ki_RateYaw]                   = 0.0;
+  parameter[Kd_RateYaw]                   = 0.0;
+  parameter[roll_mid]                     = 1520;
+  parameter[nick_mid]                     = 1500;
+  parameter[yaw_mid]                      = 1522;
+  parameter[MIN_PITCH]                    = 1178; 
+  parameter[BAT_WARNING]                  = 10.0;
+  parameter[STICK_TO_ANGLE_FACTOR]        = 5.0;
+  parameter[YAW_STICK_TO_ANGLE_FACTOR]    = 1150.0;
+  parameter[TUNING_PARA]                  = 0;
+  parameter[TUNING_MIN]                   = 0;
+  parameter[TUNING_MAX]                   = 0;
 }
 
-// end of file
 
 
 

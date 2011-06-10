@@ -20,98 +20,101 @@
 */
 
 
-		 
-void readSerialCommand() {
-		//if(!ShowMenu) Show_Menu();
-	// Check for serial message
-	if (SerAva()) {
-	    byte tmp = 	queryType;
-            queryType = SerRea();
-            if (queryType == '\r' || queryType == '\n')
-            {
-              queryType = tmp;
-            }
-        }
+//******************************************************************************
+// Read Serial Command
+//******************************************************************************		 
+void readSerialCommand() 
+{
+  //if(!ShowMenu) Show_Menu();
+  // Check for serial message
+  if (SerAva()) {
+    byte tmp = 	queryType;
+    queryType = SerRea();
+    if (queryType == '\r' || queryType == '\n')
+    {
+      queryType = tmp;
+    }
+  }
 }
 
-//******************************************************************************************************************
-
-void sendSerialTelemetry() {
-	float aux_float[3]; // used for sensor calibration
-	switch (queryType) {
+//******************************************************************************
+// Send Serial Telemetry
+//******************************************************************************
+void sendSerialTelemetry() 
+{
+  float aux_float[3]; // used for sensor calibration
+    switch (queryType) {
   
-		// Choices are made here, moved all actual logic into 
-		// functions more towards the bottom (kidogo, Feb 6, 2011)
-                case 'a': 						
-			show_all_Parameter();
-			queryType = 'x';
-			break;
-                case 'C': 						
-			Calibrate_Accel_Offset();
-			queryType = 'x';
-			break;
-		case 'p': 						
-			//Show_Stable_PIDs();
-			show_Parameter();
-                        queryType = 'x';
-			break;
-		case 'P': 						
-			//Receive_Stable_PID();						
-			write_Parameter();
-			queryType = 'x';
-			break;
-		case 'r': 						
-			Show_Receiver_Values();
-			break;
-		case 's': 						
-			Show_Sensor_Data();
-			break;
-		case 'T': 		
-                        Calibrate_Pitch();
-			queryType = 'x';
-			break;
-		case '#': 						
-			Reset_Settings();
-			queryType = 'x';
-			break;
-		case '*': 						
-			writeUserConfig();
-			queryType = 'x';
-			break;
-		case 'M': 						
-		        RUN_Motors();
-			queryType = 'x';
-			break;
-		case 'm': 						
-		        show_Motors();
-			break;
-                case '?':
-                
-                        SerPrln(" a - Show all Parameter");
-                        SerPrln(" C - Calibrate_Accel_Offset");
-                        SerPrln(" M - Test Motors");
-                        SerPrln(" m - Show Control and Motors");
-                        SerPrln(" p - Show Parameter px");
-                        SerPrln(" P - Receive Parameter P1;xx.x");
-                        SerPrln(" r - Show_Receiver_Values()");
-                        SerPrln(" s - Show_Sensor_Data");
-                        SerPrln(" T - Calibrate_Remote");
-                        SerPrln(" # - Reset_Settings");
-                        SerPrln(" * - writeUserConfig to flash");
-                        SerPrln(" x - stop output");
-                        
-			queryType = 'x';
-                        break;
-                default:
-                        break;
-	}
+    // Choices are made here, moved all actual logic into 
+    // functions more towards the bottom (kidogo, Feb 6, 2011)
+    case 'a': 						
+      show_all_Parameter();
+      queryType = 'x';
+      break;
+    case 'C': 						
+      Calibrate_Accel_Offset();
+      queryType = 'x';
+      break;
+    case 'p': 						
+      //Show_Stable_PIDs();
+      show_Parameter();
+      queryType = 'x';
+      break;
+    case 'P': 						
+      //Receive_Stable_PID();						
+      write_Parameter();
+      queryType = 'x';
+      break;
+    case 'r': 						
+      Show_Receiver_Values();
+      break;
+    case 's': 						
+      Show_Sensor_Data();
+      break;
+    case 'T': 		
+      Calibrate_Pitch();
+      queryType = 'x';
+      break;
+    case '#': 						
+      Reset_Settings();
+      queryType = 'x';
+      break;
+    case '*': 						
+      writeUserConfig();
+      queryType = 'x';
+      break;
+    case 'M': 						
+      RUN_Motors();
+      queryType = 'x';
+      break;
+    case 'm': 						
+      show_Motors();
+      break;
+    case '?':            
+      SerPrln(" a - Show all Parameter");
+      SerPrln(" C - Calibrate_Accel_Offset");
+      SerPrln(" M - Test Motors");
+      SerPrln(" m - Show Control and Motors");
+      SerPrln(" p - Show Parameter px");
+      SerPrln(" P - Receive Parameter P1;xx.x");
+      SerPrln(" r - Show_Receiver_Values()");
+      SerPrln(" s - Show_Sensor_Data");
+      SerPrln(" T - Calibrate_Remote");
+      SerPrln(" # - Reset_Settings");
+      SerPrln(" * - writeUserConfig to flash");
+      SerPrln(" x - stop output");            
+      queryType = 'x';
+      break;
+    default:
+      break;
+  }
 }
 
-
-/****************************************************
-  Show all Parameter - a
-****************************************************/
-void show_all_Parameter() {
+//******************************************************************************
+// Show all Parameter - a
+//******************************************************************************
+void show_all_Parameter() 
+{
   for (int i = 1; i <= LAST_PARAMETER; i++)
   {
     SerPri("p");
@@ -122,9 +125,9 @@ void show_all_Parameter() {
   }
 }
 
-/****************************************************
-  Show Parameter - p
-****************************************************/
+//******************************************************************************
+//  Show Parameter - p
+//******************************************************************************
 void show_Parameter() {
   int tmpAdr = (int)readFloatSerial();
   SerPri("p");
@@ -133,48 +136,50 @@ void show_Parameter() {
   char buf[20];
   SerPrln(readEEPROM(tmpAdr),4);
 }
-/****************************************************
-  write Parameter - p
-****************************************************/
-void write_Parameter() {
+
+//******************************************************************************
+//  write Parameter - p
+//******************************************************************************
+void write_Parameter() 
+{
   int tmpAdr = readFloatSerial();
   float tmpValue = readFloatSerial();
   writeEEPROM(tmpValue, tmpAdr);
   parameter[tmpAdr] = tmpValue;
-//  readUserConfig();
-//  SerPri("p");
-//  SerPri(tmpAdr);
-//  SerPri(";");
-//  SerPrln(readEEPROM(tmpAdr));
+  SerPri("=");
+  SerPri(tmpAdr);
+  SerPri(";");
+  SerPrln(readEEPROM(tmpAdr));
 }
 
 
-/****************************************************
-  Show Control Values and Motor - m
-****************************************************/
-void show_Motors() {
-    SerPri(control_roll);
-    comma();
-    SerPri(control_nick);
-    comma();
-    SerPri(control_yaw);
-    comma();
-    SerPri(frontMotor);
-    comma();
-    SerPri(backMotor);
-    comma();
-    SerPri(leftMotor);
-    comma();
-    SerPrln(rightMotor);
-    comma();
+//******************************************************************************
+//  Show Control Values and Motor - m
+//******************************************************************************
+void show_Motors() 
+{
+  SerPri(control_roll);
+  comma();
+  SerPri(control_nick);
+  comma();
+  SerPri(control_yaw);
+  comma();
+  SerPri(frontMotor);
+  comma();
+  SerPri(backMotor);
+  comma();
+  SerPri(leftMotor);
+  comma();
+  SerPrln(rightMotor);
+  comma();
 }
 
 
-/****************************************************
-  SHOW STABLE MODE PIDS - p
-****************************************************/
-void Show_Stable_PIDs() {
-    
+//******************************************************************************
+//  SHOW STABLE MODE PIDS - p
+//******************************************************************************
+void Show_Stable_PIDs() 
+{ 
   char buf[20];
     SerPri(parameter[KP_QUAD_ROLL],4);
     comma();
@@ -197,15 +202,14 @@ void Show_Stable_PIDs() {
     SerPri(parameter[Kp_ROLLNICK],4);
     comma();
     SerPrln(parameter[Ki_ROLLNICK],4);
-//    comma();
-//    SerPrln(STABLE_MODE_KP_RATE, 3);    // NOT USED NOW
 }
 
 
-/****************************************************
-  CALIBRATE THROTTLE - T
-****************************************************/
-void Calibrate_Pitch() {
+//******************************************************************************
+//  CALIBRATE THROTTLE - T
+//******************************************************************************
+void Calibrate_Pitch() 
+{
   int tmp = 1200;
 
   SerPrln("Don't move your sticks, reading starts in 3 seconds");
@@ -275,10 +279,11 @@ void Calibrate_Pitch() {
 }
 
 
-/****************************************************
-  SHOW RECEIVER VALUES - r
-****************************************************/
-void Show_Receiver_Values() { 
+//******************************************************************************
+//  SHOW RECEIVER VALUES - r
+//******************************************************************************
+void Show_Receiver_Values() 
+{ 
     SerPri("r");
     comma();
     SerPri(ch_roll); // Aileron
@@ -300,10 +305,11 @@ void Show_Receiver_Values() {
 
 
 
-/****************************************************
-  SHOW SENSOR DATA - s
-****************************************************/
-void Show_Sensor_Data() {
+//******************************************************************************
+//  SHOW SENSOR DATA - s
+//******************************************************************************
+void Show_Sensor_Data() 
+{
     SerPri("s");
     comma();
     SerPri(read_adc(0));
@@ -334,10 +340,11 @@ void Show_Sensor_Data() {
 	
 }
 
-/****************************************************
-  RESET SETTINGS - #
-****************************************************/
-void Reset_Settings() {
+//******************************************************************************
+//  RESET SETTINGS - #
+//******************************************************************************
+void Reset_Settings() 
+{
 	SerPrln("Reseting EEPROM to default!"); 
 	defaultUserConfig();
 	delay(200);
@@ -346,11 +353,11 @@ void Reset_Settings() {
 	SerPrln("Done..");
 }
 
-/****************************************************
-  CALIBRATE ACCELEROMETER OFFSET - C
-****************************************************/
-void Calibrate_Accel_Offset() {
-
+//******************************************************************************
+//  CALIBRATE ACCELEROMETER OFFSET - C
+//******************************************************************************
+void Calibrate_Accel_Offset() 
+{
   int loopy;
   long xx = 0, xy = 0, xz = 0; 
 
@@ -435,196 +442,203 @@ void Calibrate_Accel_Offset() {
 }
 
 
-/****************************************************
-  RECEIVE STABLE MODE PID VALUES - P
-****************************************************/
-void Receive_Stable_PID() {
-    SerPrln("P Roll:");
-    while (!SerAva()) {}
-    parameter[KP_QUAD_ROLL] = readFloatSerial();
-    SerPrln("I Roll:");
-    while (!SerAva()) {}
-    parameter[KI_QUAD_ROLL] = readFloatSerial();
-    SerPrln("P Rate Roll:");
-    while (!SerAva()) {}
-    parameter[STABLE_MODE_KP_RATE_ROLL] = readFloatSerial();
-    SerPrln("P Pitch/Nick:");
-    while (!SerAva()) {}
-    parameter[KP_QUAD_NICK] = readFloatSerial();
-    SerPrln("I Nick:");
-    while (!SerAva()) {}
-    parameter[KI_QUAD_NICK] = readFloatSerial();
-    SerPrln("P Rate Nick:");
-    while (!SerAva()) {}
-    parameter[STABLE_MODE_KP_RATE_NICK] = readFloatSerial();
-    SerPrln("P Yaw:");
-    while (!SerAva()) {}
-    parameter[KP_QUAD_YAW] = readFloatSerial();
-    SerPrln("I Yaw:");
-    while (!SerAva()) {}
-    parameter[KI_QUAD_YAW] = readFloatSerial();
-    SerPrln("P Rate Yaw:");
-    while (!SerAva()) {}
-    parameter[STABLE_MODE_KP_RATE_YAW] = readFloatSerial();
-    SerPrln("P Roll/Nick ACC:");
-    while (!SerAva()) {}
-    parameter[Kp_ROLLNICK] = readFloatSerial();
-    SerPrln("I Roll/Nick ACC:");
-    while (!SerAva()) {}
-    parameter[Ki_ROLLNICK] = readFloatSerial();
-//    SerPrln("P Roll:");
-//    STABLE_MODE_KP_RATE = readFloatSerial();   // NOT USED NOW
+//******************************************************************************
+//  RECEIVE STABLE MODE PID VALUES - P
+//******************************************************************************
+void Receive_Stable_PID() 
+{
+  SerPrln("P Roll:");
+  while (!SerAva()) {}
+  parameter[KP_QUAD_ROLL] = readFloatSerial();
+  SerPrln("I Roll:");
+  while (!SerAva()) {}
+  parameter[KI_QUAD_ROLL] = readFloatSerial();
+  SerPrln("P Rate Roll:");
+  while (!SerAva()) {}
+  parameter[STABLE_MODE_KP_RATE_ROLL] = readFloatSerial();
+  SerPrln("P Pitch/Nick:");
+  while (!SerAva()) {}
+  parameter[KP_QUAD_NICK] = readFloatSerial();
+  SerPrln("I Nick:");
+  while (!SerAva()) {}
+  parameter[KI_QUAD_NICK] = readFloatSerial();
+  SerPrln("P Rate Nick:");
+  while (!SerAva()) {}
+  parameter[STABLE_MODE_KP_RATE_NICK] = readFloatSerial();
+  SerPrln("P Yaw:");
+  while (!SerAva()) {}
+  parameter[KP_QUAD_YAW] = readFloatSerial();
+  SerPrln("I Yaw:");
+  while (!SerAva()) {}
+  parameter[KI_QUAD_YAW] = readFloatSerial();
+  SerPrln("P Rate Yaw:");
+  while (!SerAva()) {}
+  parameter[STABLE_MODE_KP_RATE_YAW] = readFloatSerial();
+  SerPrln("P Roll/Nick ACC:");
+  while (!SerAva()) {}
+  parameter[Kp_ROLLNICK] = readFloatSerial();
+  SerPrln("I Roll/Nick ACC:");
+  while (!SerAva()) {}
+  parameter[Ki_ROLLNICK] = readFloatSerial();
     
-	SerPrln("Saving to EEPROM");
-	writeUserConfig();
-
+  SerPrln("Saving to EEPROM");
+  writeUserConfig();
 }
 
-/****************************************************
-  RUN MOTORS 
-****************************************************/
-void RUN_Motors() {
+//******************************************************************************
+//  RUN MOTORS 
+//******************************************************************************
+void RUN_Motors() 
+{
+  SerPrln("Hit numbers 1 - 4 for corresponding motor.");
+  SerPrln("Motor will pulse slowly! (20% Throttle)");
+  SerPrln("SAFETY!! Remove all propellers before doing stick movements");
+  SerPrln();
+  SerPrln("Exit from test by x + Enter");
+  SerPrln();
 
-	SerPrln("Hit numbers 1 - 4 for corresponding motor.");
-	SerPrln("Motor will pulse slowly! (20% Throttle)");
-	SerPrln("SAFETY!! Remove all propellers before doing stick movements");
-	SerPrln();
-	SerPrln("Exit from test by x + Enter");
-	SerPrln();
-
-	SerFlu();
-	delay(50);
-	while(1) {
-
-
-                if(SerAva() > 0)
-                {
-                  byte motorNr = SerRea();
+  SerFlu();
+  delay(50);
+  while(1) 
+  {
+    if(SerAva() > 0)
+    {
+      byte motorNr = SerRea();
                   
-                  char frontMotor;
-                  char backMotor;
-                  char leftMotor;
-                  char rightMotor;
-                  
-                  switch (motorNr)
-                  {
-                    case '1':
-                      frontMotor = 20;
-                      backMotor = 1;
-                      leftMotor = 1;
-                      rightMotor = 1;
-                      break;
-                    case '2':
-                      frontMotor = 1;
-                      backMotor = 20;
-                      leftMotor = 1;
-                      rightMotor = 1;
-                      break;
-                    case '3':
-                      frontMotor = 1;
-                      backMotor = 1;
-                      leftMotor = 20;
-                      rightMotor = 1;
-                      break;
-                    case '4':
-                      frontMotor = 1;
-                      backMotor = 1;
-                      leftMotor = 1;
-                      rightMotor = 20;
-                      break;
-                    case 'x':
-                      return;
-                      break;
-                    default:
-                      frontMotor = 0;
-                      backMotor = 0;
-                      leftMotor = 0;
-                      rightMotor = 0;
-                      break;
-                      
-                  }
-  
-            	  char start = 0xF5;
+      char frontMotor;
+      char backMotor;
+      char leftMotor;
+      char rightMotor;
+      
+      switch (motorNr)
+      {
+        case '1':
+          frontMotor = 20;
+          backMotor = 1;
+          leftMotor = 1;
+          rightMotor = 1;
+          break;
+        case '2':
+          frontMotor = 1;
+          backMotor = 20;
+          leftMotor = 1;
+          rightMotor = 1;
+          break;
+        case '3':
+          frontMotor = 1;
+          backMotor = 1;
+          leftMotor = 20;
+          rightMotor = 1;
+          break;
+        case '4':
+          frontMotor = 1;
+          backMotor = 1;
+          leftMotor = 1;
+          rightMotor = 20;
+          break;
+        case 'x':
+          return;
+          break;
+        default:
+          frontMotor = 0;
+          backMotor = 0;
+          leftMotor = 0;
+          rightMotor = 0;
+          break;
           
-                    Serial3.write(start);
-                    Serial3.write(frontMotor);
-                    Serial3.write(backMotor);
-                    Serial3.write(rightMotor);
-                    Serial3.write(leftMotor);
-                }
-	} 
+      }
+      char start = 0xF5;
+          
+      Serial3.write(start);
+      Serial3.write(frontMotor);
+      Serial3.write(backMotor);
+      Serial3.write(rightMotor);
+      Serial3.write(leftMotor);
+    }
+  } 
 }
 
 
-//******************************************************************************************************************
+//******************************************************************************
 // SUPPORTING FUNCTIONS BELOW 
-//******************************************************************************************************************
+//******************************************************************************
 
-/****************************************************
-  PRINT COMMA OVER SERIAL
-****************************************************/
-void comma() {
-	SerPri(',');
+//******************************************************************************
+//  PRINT COMMA OVER SERIAL
+//******************************************************************************
+void comma() 
+{
+  SerPri(',');
 }
 
-/****************************************************
-  PRINT TAB OVER SERIAL
-****************************************************/
-void tab() {
-	SerPri("\t");
+//******************************************************************************
+//  PRINT TAB OVER SERIAL
+//******************************************************************************
+void tab() 
+{
+  SerPri("\t");
 }
 
-/****************************************************
-  PRINT COMMA, SPACE OVER SERIAL
-****************************************************/
-void cspc() {
-	SerPri(", ");
+//******************************************************************************
+//  PRINT COMMA, SPACE OVER SERIAL
+//******************************************************************************
+void cspc() 
+{
+  SerPri(", ");
 }
 
-/****************************************************
-  WAIT FOR SERIAL ENTER
-****************************************************/
-void WaitSerialEnter() {
-	// Flush serials
-	SerFlu();
-	delay(50);
-	while(1) {
-		if(SerAva() > 0){
-			break; 
-		}
-		delay(20);
-	}
-	delay(250);
-	SerFlu();  
+//******************************************************************************
+//  WAIT FOR SERIAL ENTER
+//******************************************************************************
+void WaitSerialEnter() 
+{
+  // Flush serials
+  SerFlu();
+  delay(50);
+  while(1) 
+  {
+    if(SerAva() > 0)
+    {
+      break; 
+    }
+    delay(20);
+  }
+  delay(250);
+  SerFlu();  
 }
 
-/****************************************************
-  PRINT COMMAND TO CLEAR REMOTE SERIAL CONSOLE
-****************************************************/
-void SerPriClScr() {  // Clears the remote serial console
-	SerPrln(". . . .");
+//******************************************************************************
+//  PRINT COMMAND TO CLEAR REMOTE SERIAL CONSOLE
+//******************************************************************************
+void SerPriClScr() 
+{  // Clears the remote serial console
+  SerPrln(". . . .");
 }
 
-/****************************************************
-  READ FLOATING POINT VALUE OVER SERIAL
-****************************************************/
-float readFloatSerial() {
-	byte index = 0;
-	byte timeout = 0;
-	char data[128] = "";
+//******************************************************************************
+//  READ FLOATING POINT VALUE OVER SERIAL
+//******************************************************************************
+float readFloatSerial() 
+{
+  byte index = 0;
+  byte timeout = 0;
+  char data[128] = "";
 
-	do {
-		if (SerAva() == 0) {
-			delay(10);
-			timeout++;
-		} else {
-			data[index] = SerRea();
-			timeout = 0;
-			index++;
-		}
-	}  
-	while ((data[constrain(index-1, 0, 128)] != ';') && (timeout < 5) && (index < 128));
-	//Serial1.println(atof(data));
-        return atof(data);
+  do {
+    if (SerAva() == 0) 
+    {
+      delay(10);
+      timeout++;
+    } 
+    else 
+    {
+      data[index] = SerRea();
+      timeout = 0;
+      index++;
+    }
+  }  
+  while ((data[constrain(index-1, 0, 128)] != ';') && (timeout < 5) && (index < 128));
+  //Serial1.println(atof(data));
+  return atof(data);
 }
 

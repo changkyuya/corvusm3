@@ -19,7 +19,9 @@
     along with Corvus M3.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+//******************************************************************************
 // General Initialization for all APM electronics
+//******************************************************************************
 void APM_Init() {
   
   disableDebugPorts();  
@@ -40,7 +42,6 @@ void APM_Init() {
   
   reciverPPM.Init();             // APM Radio initialization
   
-
   motor_stop();
   
   // Wiggle LEDs while ESCs are rebooting  
@@ -48,29 +49,14 @@ void APM_Init() {
   
   adc.Init();            // APM ADC library initialization
   
-  //DataFlash.Init();          // DataFlash log initialization
-  
-  //flightOrientation = 1;// X Mode // + Mode.
-  //flightMode = 1; // Stable Mode.
-  
-     // Safety measure for Channel mids
+  // Safety measure for Channel mids
   if(parameter[roll_mid] < 1400 || parameter[roll_mid] > 1600) parameter[roll_mid] = 1500;
   if(parameter[nick_mid] < 1400 || parameter[nick_mid] > 1600) parameter[nick_mid] = 1500;
   if(parameter[yaw_mid] < 1400 || parameter[yaw_mid] > 1600) parameter[yaw_mid] = 1500;
   
-
   motor_stop();
   
   calibrateSensors();         // Calibrate neutral values of gyros  (in Sensors.pde)
-  
-    //  Neutro_yaw = APM_RC.InputCh(3); // Take yaw neutral radio value
-//  for(int i=0;i<6;i++)
-//  {
-//    SerPri("AN[]:");
-//    SerPrln(AN_OFFSET[i]);
-//  }
-//  SerPri("Yaw neutral value:");
-//  SerPrln(parameter[yaw_mid]);
 
   delay(1000);
 }

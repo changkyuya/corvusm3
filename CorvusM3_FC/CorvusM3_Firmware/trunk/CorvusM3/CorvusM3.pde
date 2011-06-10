@@ -35,9 +35,9 @@
           
 */
 
-/* ************************************************************ */
-/* **************** MAIN PROGRAM - INCLUDES ******************* */
-/* ************************************************************ */
+//******************************************************************************
+// MAIN PROGRAM
+//******************************************************************************
 
 #include <stdlib.h>
 #include <math.h>
@@ -48,33 +48,26 @@
 #include <CM3_SpektrumRC.h>
 #include <EEPROM.h>             // EEPROM 
 
-
 /* Software version */
 #define VER 0.01    // Current software version 
-
 
 // Sensors - declare one global instance
 CM3_ADC	adc;
 CM3_SpektrumRC reciverSpek;
 CM3_RC_Class reciverPPM;
 
-/* ************************************************************ */
-/* ************* MAIN PROGRAM - DECLARATIONS ****************** */
-/* ************************************************************ */
-
 //byte flightMode;
-
 unsigned long currentTime;  // current time in milliseconds
 unsigned long currentTimeMicros = 0, previousTimeMicros = 0;  // current and previous loop time in microseconds
 unsigned long mainLoop = 0;
 unsigned long mediumLoop = 0;
 unsigned long slowLoop = 0;
 
-/* ************************************************************ */
-/* **************** MAIN PROGRAM - SETUP ********************** */
-/* ************************************************************ */
-void setup() {
-  
+//******************************************************************************
+// MAIN PROGRAM - SETUP
+//******************************************************************************
+void setup() 
+{
   APM_Init();                // APM Hardware initialization (in System.pde)
 
   mainLoop = millis();       // Initialize timers
@@ -82,7 +75,6 @@ void setup() {
   motorArmed = 0;
   
   Read_adc_raw();            // Initialize ADC readings...
-  
   
   SerPri("Corvus M3 - v");
   SerPrln(VER);
@@ -93,12 +85,9 @@ void setup() {
   digitalWrite(BEEPER_PIN, LOW);
 }
 
-/* ************************************************************ */
-/* ************** MAIN PROGRAM - MAIN LOOP ******************** */
-/* ************************************************************ */
-
-/* ***************************************************** */
-// Main loop 
+//******************************************************************************
+// MAIN PROGRAM - MAIN LOOP
+//****************************************************************************** 
 void loop()
 {
   currentTimeMicros = micros();
@@ -130,7 +119,8 @@ void loop()
     digitalWrite(DEBUG_PIN, LOW);
 
     // Read radio values (if new data is available)
-    if (reciverPPM.GetState() > 0 || reciverSpek.GetState() > 0) {  // New radio frame?
+    if (reciverPPM.GetState() > 0 || reciverSpek.GetState() > 0) 
+    {  // New radio frame?
       read_radio();
       errorRadio = FALSE;
     }
@@ -157,15 +147,13 @@ void loop()
     motor_output();
   }
 
-
   // Medium loop (about 60Hz) 
-  if ((currentTime-mediumLoop)>=17){
+  if ((currentTime-mediumLoop)>=17)
+  {
     mediumLoop = currentTime;
-
-    
-
     // Each of the six cases executes at 10Hz
-    switch (medium_loopCounter){
+    switch (medium_loopCounter)
+    {
     case 0:   // Magnetometer reading (10Hz)
       medium_loopCounter++;
       slowLoop++;
@@ -192,8 +180,6 @@ void loop()
     }
   }
 
-
-    
   //search blink time
   if (battwarning == TRUE || errorRadio == TRUE)
   {
@@ -207,14 +193,16 @@ void loop()
   }  
   
   // AM and Mode status LED lights
-  if(millis() - gled_timer > gled_speed) {
+  if(millis() - gled_timer > gled_speed) 
+  {
     gled_timer = millis();
     if(gled_status == HIGH) { 
       digitalWrite(LED_Red, LOW);
       digitalWrite(BEEPER_PIN, HIGH);
       gled_status = LOW;
     } 
-    else {
+    else 
+    {
       digitalWrite(LED_Red, HIGH);
       digitalWrite(BEEPER_PIN, LOW);
       gled_status = HIGH;
