@@ -6,8 +6,8 @@
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{7E95C347-5CEB-4A34-9A9D-79A10E76D2DD}
-AppName=CorvusM3
-AppVerName=CorvusM3 v0.1
+AppName=CorvusM3 - Set
+AppVerName=CorvusM3 - Set - v0.01
 AppPublisher=Thorsten Raab
 AppPublisherURL=http://corvusm3.blogspot.com/
 AppSupportURL=http://corvusm3.blogspot.com/
@@ -15,12 +15,12 @@ AppUpdatesURL=http://corvusm3.blogspot.com/
 DefaultDirName={pf}\CorvusM3
 DefaultGroupName=CorvusM3
 AllowNoIcons=yes
-LicenseFile=C:\Users\wyraabth\Dropbox\Privat\CorvusM3\CorvusM3-Set\CorvusM3-Set\License.txt
-InfoBeforeFile=C:\Users\wyraabth\Dropbox\Privat\CorvusM3\CorvusM3-Set\CorvusM3-Set\InstallInfo.txt
-InfoAfterFile=C:\Users\wyraabth\Dropbox\Privat\CorvusM3\CorvusM3-Set\CorvusM3-Set\ChangeLog.txt
+LicenseFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\CorvusM3-Set\License.txt
+InfoBeforeFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\CorvusM3-Set\InstallInfo.txt
+InfoAfterFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\CorvusM3-Set\ChangeLog.txt
 OutputDir=D:\Data\Desktop
-OutputBaseFilename=setup CorvusM3 v0.1
-SetupIconFile=C:\Users\wyraabth\Dropbox\Privat\CorvusM3\CorvusM3-Set\CorvusM3-Set\cm3.ico
+OutputBaseFilename=setup CorvusM3 Set v0.01
+SetupIconFile=D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\CorvusM3-Set\cm3.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -33,9 +33,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\wyraabth\Dropbox\Privat\CorvusM3\CorvusM3-Set\CorvusM3-Set\bin\Release\CorvusM3.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\wyraabth\Dropbox\Privat\CorvusM3\CorvusM3-Set\CorvusM3-Set\bin\Release\CorvusM3.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\wyraabth\Dropbox\Privat\CorvusM3\CorvusM3-Set\STM32\*"; DestDir: "{app}\STM32"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\CorvusM3-Set\bin\Release\CorvusM3.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\CorvusM3-Set\bin\Release\CorvusM3.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Data\Dokumente\Modellbau\CorvusM3\GoogleCode\CorvusM3_FC\CorvusM3_Set\trunk\STM32\*"; DestDir: "{app}\STM32"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
