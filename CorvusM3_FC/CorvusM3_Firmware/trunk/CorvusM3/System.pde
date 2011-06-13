@@ -41,8 +41,7 @@ void APM_Init() {
   readUserConfig();          // Load user configurable items from EEPROM
   
   reciverPPM.Init();             // APM Radio initialization
-  // read also channel mapping new
-  remoteChannelMapping();
+
   
   
   motor_stop();

@@ -63,6 +63,8 @@ unsigned long mainLoop = 0;
 unsigned long mediumLoop = 0;
 unsigned long slowLoop = 0;
 
+unsigned long debugtime[10];
+
 //******************************************************************************
 // MAIN PROGRAM - SETUP
 //******************************************************************************
@@ -109,11 +111,34 @@ void loop()
     digitalWrite(DEBUG_PIN, HIGH);
     
     //IMU DCM Algorithm
+#if DEBUGTIME == 1
+    debugtime[0] = micros();
+#endif
     Read_adc_raw();       // Read sensors raw data
+#if DEBUGTIME == 1
+    debugtime[1] = micros() - debugtime[0];
+    debugtime[0] = micros();
+#endif
     Matrix_update(); 
-    Normalize();          
+#if DEBUGTIME == 1
+    debugtime[2] = micros() - debugtime[0];
+    debugtime[0] = micros();
+#endif
+    Normalize();   
+#if DEBUGTIME == 1   
+    debugtime[3] = micros() - debugtime[0]; 
+    debugtime[0] = micros();
+#endif   
     Drift_correction();
+#if DEBUGTIME == 1
+    debugtime[4] = micros() - debugtime[0];
+    debugtime[0] = micros();
+#endif
     Euler_angles();
+#if DEBUGTIME == 1
+    debugtime[5] = micros() - debugtime[0];
+    debugtime[0] = micros();
+#endif
     
     //test loop time
     digitalWrite(DEBUG_PIN, LOW);
@@ -129,8 +154,12 @@ void loop()
       errorRadio = TRUE;
     }
 
+#if DEBUGTIME == 1
+    debugtime[6] = micros() - debugtime[0];
+    debugtime[0] = micros();
+#endif
     // Attitude control switch AUX1
-   if (ch_aux1 < 1500)
+   if (ch_aux1 < 1600)
    {   
      // STABLE Mode
       Attitude_control_v3(command_rx_roll,command_rx_nick,command_rx_yaw);
@@ -143,9 +172,18 @@ void loop()
       command_rx_yaw = ToDeg(yaw);
    }
 
+#if DEBUGTIME == 1
+    debugtime[7] = micros() - debugtime[0];
+    debugtime[0] = micros();
+#endif
     // Send output commands to motor ESCs...
     motor_output();
   }
+  
+#if DEBUGTIME == 1
+    debugtime[8] = micros() - debugtime[0];
+    debugtime[0] = micros();
+#endif
 
   // Medium loop (about 60Hz) 
   if ((currentTime-mediumLoop)>=17)
@@ -159,6 +197,23 @@ void loop()
       slowLoop++;
       break;
     case 1:  // Debug
+#if DEBUGTIME == 1
+      SerPri(debugtime[1]);
+      comma();
+      SerPri(debugtime[2]);
+      comma();
+      SerPri(debugtime[3]);
+      comma();
+      SerPri(debugtime[4]);
+      comma();
+      SerPri(debugtime[5]);
+      comma();
+      SerPri(debugtime[6]);
+      comma();
+      SerPri(debugtime[7]);
+      comma();
+      SerPrln(debugtime[8]);
+#endif
       medium_loopCounter++;
       break;
     case 2:  // Send serial telemetry (10Hz)

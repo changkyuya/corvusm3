@@ -55,10 +55,18 @@ volatile unsigned int diff;
   	 // if sync we read
      if (sync==1) 
      {
-          rcValue[currentChannel] = diff;
-          currentChannel++;
-		  if(diff<=2200 && diff>=900)radio_status_rc++;
-	}
+		  if(diff<=2200 && diff>=900)
+      { 
+        rcValue[currentChannel] = diff;
+        currentChannel++;
+        radio_status_rc++;
+	    }
+	    else
+	    {
+    		 sync=0;
+    		 radio_status_rc=0;
+      }
+	  }
 	 if (currentChannel>8)
 	 {	
 		 sync=0;
