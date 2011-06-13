@@ -46,8 +46,8 @@
 
 // IDG500 Sensitivity (from datasheet) => 2.0mV/º/s, 0.8mV/ADC step => 0.8/3.33 = 0.4
 // Tested values : 
-#define Gyro_Gain_X 0.9 // i don't know why ... 0.4  //X axis Gyro gain
-#define Gyro_Gain_Y 0.9 //Y axis Gyro gain
-#define Gyro_Gain_Z 0.9 //Z axis Gyro gain
+//#define Gyro_Gain_X 0.9 // i don't know why ... 0.4  //X axis Gyro gain
+//#define Gyro_Gain_Y 0.9 //Y axis Gyro gain
+//#define Gyro_Gain_Z 0.9 //Z axis Gyro gain
 
 

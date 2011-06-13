@@ -104,9 +104,9 @@ void Accel_adjust(void)
 //******************************************************************************
 void Matrix_update(void)
 {
-  Gyro_Vector[0]=Gyro_Scaled_X(read_adc(0)); //gyro x roll
-  Gyro_Vector[1]=Gyro_Scaled_Y(read_adc(1)); //gyro y pitch
-  Gyro_Vector[2]=Gyro_Scaled_Z(read_adc(2)); //gyro Z yaw
+  Gyro_Vector[0]=read_adc(0) * ToRad(parameter[GYRO_GAIN_X]);  //Gyro_Scaled_X(read_adc(0)); //gyro x roll
+  Gyro_Vector[1]=read_adc(1) * ToRad(parameter[GYRO_GAIN_Y]);  //Gyro_Scaled_Y(read_adc(1)); //gyro y pitch
+  Gyro_Vector[2]=read_adc(2) * ToRad(parameter[GYRO_GAIN_Z]);  //Gyro_Scaled_Z(read_adc(2)); //gyro Z yaw
   
   // Low pass filter on accelerometer data (to filter vibrations)
   Accel_Vector[0]=Accel_Vector[0]*0.6 + (float)read_adc(4)*0.4; // acc x --> CM3 Change x/y

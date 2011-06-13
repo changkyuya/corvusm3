@@ -278,22 +278,24 @@ namespace CorvusM3
         {
             if (e.KeyCode == Keys.Enter)
             {
-                serialComm.sendData(textBoxCLICommand.Text);
                 if (textBoxCLICommand.Text.Length > 0)
                 {
                     switch (textBoxCLICommand.Text.Substring(0, 1))
                     {
                         case "r":
-                            onRemote();
                             offGraph();
+                            onRemote();
                             break;
                         case "s":
-                            onGraph();
                             offRemote();
+                            onGraph();
                             break;
                         case "x":
                             offRemote();
                             offGraph();
+                            break;
+                        default:
+                            serialComm.sendData(textBoxCLICommand.Text);
                             break;
                     }
                 }

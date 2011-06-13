@@ -30,26 +30,26 @@ void read_radio()
   if (reciverPPM.GetState() > 0)
   {
     // We apply the Radio calibration parameters (from configurator) except for throttle
-    ch_pitch = channel_filter(reciverPPM.InputCh(remote_assignment[3]), ch_pitch);
-    ch_roll = channel_filter(reciverPPM.InputCh(remote_assignment[0]), ch_roll);
-    ch_nick = channel_filter(reciverPPM.InputCh(remote_assignment[1]), ch_nick);
-    ch_yaw = channel_filter(reciverPPM.InputCh(remote_assignment[2]), ch_yaw);
-    ch_aux1 = reciverPPM.InputCh(remote_assignment[4]);
-    ch_aux2 = reciverPPM.InputCh(remote_assignment[5]);
-    ch_aux3 = reciverPPM.InputCh(remote_assignment[6]);
-    ch_aux4 = reciverPPM.InputCh(remote_assignment[7]);
+    ch_pitch = channel_filter(reciverPPM.InputCh(remote_assignment[RC_PITCH]), ch_pitch);
+    ch_roll = channel_filter(reciverPPM.InputCh(remote_assignment[RC_ROLL]), ch_roll);
+    ch_nick = channel_filter(reciverPPM.InputCh(remote_assignment[RC_NICK]), ch_nick);
+    ch_yaw = channel_filter(reciverPPM.InputCh(remote_assignment[RC_YAW]), ch_yaw);
+    ch_aux1 = reciverPPM.InputCh(RC_AUX1);
+    ch_aux2 = reciverPPM.InputCh(RC_AUX2);
+    ch_aux3 = reciverPPM.InputCh(RC_AUX3);
+    ch_aux4 = reciverPPM.InputCh(RC_AUX4);
   } 
   else // we have spektrum
   {
     // We apply the Radio calibration parameters (from configurator) except for throttle
-    ch_pitch = channel_filter(reciverSpek.InputCh(remote_assignment[3]), ch_pitch);
-    ch_roll = channel_filter(reciverSpek.InputCh(remote_assignment[0]), ch_roll);
-    ch_nick = channel_filter(reciverSpek.InputCh(remote_assignment[1]), ch_nick);
-    ch_yaw = channel_filter(reciverSpek.InputCh(remote_assignment[2]), ch_yaw);
-    ch_aux1 = reciverSpek.InputCh(remote_assignment[4]);
-    ch_aux2 = reciverSpek.InputCh(remote_assignment[5]);
-    ch_aux3 = reciverSpek.InputCh(remote_assignment[6]);
-    ch_aux4 = reciverSpek.InputCh(remote_assignment[7]);
+    ch_pitch = channel_filter(reciverSpek.InputCh(remote_assignment[RC_PITCH]), ch_pitch);
+    ch_roll = channel_filter(reciverSpek.InputCh(remote_assignment[RC_ROLL]), ch_roll);
+    ch_nick = channel_filter(reciverSpek.InputCh(remote_assignment[RC_NICK]), ch_nick);
+    ch_yaw = channel_filter(reciverSpek.InputCh(remote_assignment[RC_YAW]), ch_yaw);
+    ch_aux1 = reciverSpek.InputCh(RC_AUX1);
+    ch_aux2 = reciverSpek.InputCh(RC_AUX2);
+    ch_aux3 = reciverSpek.InputCh(RC_AUX3);
+    ch_aux4 = reciverSpek.InputCh(RC_AUX4);
   }
 
 
