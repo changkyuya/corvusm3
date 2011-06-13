@@ -79,7 +79,6 @@ void sendSerialTelemetry()
       break;
     case '*': 						
       writeUserConfig();
-      APM_Init();
       queryType = 'x';
       break;
     case 'M': 						

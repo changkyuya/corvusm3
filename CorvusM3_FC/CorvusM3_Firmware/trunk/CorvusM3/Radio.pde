@@ -24,6 +24,9 @@
 //******************************************************************************
 void read_radio()
 {
+  // read also channel mapping new
+  remoteChannelMapping();
+  
   int tempPitch = 0;
 
   // Commands from radio Rx

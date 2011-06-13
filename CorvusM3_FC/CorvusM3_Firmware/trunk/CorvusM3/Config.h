@@ -50,4 +50,4 @@
 //#define Gyro_Gain_Y 0.9 //Y axis Gyro gain
 //#define Gyro_Gain_Z 0.9 //Z axis Gyro gain
 
-
+#define DEBUGTIME 0
