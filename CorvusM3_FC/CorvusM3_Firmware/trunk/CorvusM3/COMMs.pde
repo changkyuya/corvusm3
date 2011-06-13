@@ -81,6 +81,7 @@ void sendSerialTelemetry()
       break;
     case '*': 						
       writeUserConfig();
+      APM_Init();
       queryType = 'x';
       break;
     case 'M': 						
@@ -345,12 +346,13 @@ void Show_Sensor_Data()
 //******************************************************************************
 void Reset_Settings() 
 {
-	SerPrln("Reseting EEPROM to default!"); 
-	defaultUserConfig();
-	delay(200);
-	SerPrln("Saving to EEPROM");
-	writeUserConfig();
-	SerPrln("Done..");
+  SerPrln("Reseting EEPROM to default!"); 
+  defaultUserConfig();
+  delay(200);
+  SerPrln("Saving to EEPROM");
+  writeUserConfig();
+  SerPrln("Restart Loop");
+  APM_Init();
 }
 
 //******************************************************************************

@@ -32,7 +32,7 @@ namespace CorvusM3
 {
     class Parameter
     {
-        public float [] parameter = new float[38];
+        public float [] parameter = new float[40];
         private Serial serialComm;
         private PropertyGrid propGrid;
 
@@ -297,6 +297,18 @@ namespace CorvusM3
         {
             set { parameter[37] = value; serialComm.setParameter(37, value); }
             get { return parameter[37]; }
+        }
+        [CategoryAttribute("Remote"), DisplayName("Channel Mapping [38]"), DescriptionAttribute("Default 31024567; 8 Digits for each channel (Roll,Nick,Yaw,Pitch,Aux1-4)")]
+        public float CHANNEL_ASSIGNMENT
+        {
+            set { parameter[38] = value; serialComm.setParameter(38, value); }
+            get { return parameter[38]; }
+        }
+        [CategoryAttribute("Basis"), DisplayName("Min Gas [39]"), DescriptionAttribute("Default 60; Minimum Gas - Map from 1000-2000 to 0-200")]
+        public float MIN_GAS
+        {
+            set { parameter[39] = value; serialComm.setParameter(39, value); }
+            get { return parameter[39]; }
         }
 
 

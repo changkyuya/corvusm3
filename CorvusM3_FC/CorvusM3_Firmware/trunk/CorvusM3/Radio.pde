@@ -30,27 +30,28 @@ void read_radio()
   if (reciverPPM.GetState() > 0)
   {
     // We apply the Radio calibration parameters (from configurator) except for throttle
-    ch_pitch = channel_filter(reciverPPM.InputCh(CH_PITCH), ch_pitch);
-    ch_roll = channel_filter(reciverPPM.InputCh(CH_ROLL), ch_roll);
-    ch_nick = channel_filter(reciverPPM.InputCh(CH_NICK), ch_nick);
-    ch_yaw = channel_filter(reciverPPM.InputCh(CH_YAW), ch_yaw);
-    ch_aux1 = reciverPPM.InputCh(CH_AUX1);
-    ch_aux2 = reciverPPM.InputCh(CH_AUX2);
-    ch_aux3 = reciverPPM.InputCh(CH_AUX3);
-    ch_aux4 = reciverPPM.InputCh(CH_AUX4);
+    ch_pitch = channel_filter(reciverPPM.InputCh(remote_assignment[3]), ch_pitch);
+    ch_roll = channel_filter(reciverPPM.InputCh(remote_assignment[0]), ch_roll);
+    ch_nick = channel_filter(reciverPPM.InputCh(remote_assignment[1]), ch_nick);
+    ch_yaw = channel_filter(reciverPPM.InputCh(remote_assignment[2]), ch_yaw);
+    ch_aux1 = reciverPPM.InputCh(remote_assignment[4]);
+    ch_aux2 = reciverPPM.InputCh(remote_assignment[5]);
+    ch_aux3 = reciverPPM.InputCh(remote_assignment[6]);
+    ch_aux4 = reciverPPM.InputCh(remote_assignment[7]);
   } 
   else // we have spektrum
   {
     // We apply the Radio calibration parameters (from configurator) except for throttle
-    ch_pitch = channel_filter(reciverSpek.InputCh(CH_PITCH), ch_pitch);
-    ch_roll = channel_filter(reciverSpek.InputCh(CH_ROLL), ch_roll);
-    ch_nick = channel_filter(reciverSpek.InputCh(CH_NICK), ch_nick);
-    ch_yaw = channel_filter(reciverSpek.InputCh(CH_YAW), ch_yaw);
-    ch_aux1 = reciverSpek.InputCh(CH_AUX1);
-    ch_aux2 = reciverSpek.InputCh(CH_AUX2);
-    ch_aux3 = reciverSpek.InputCh(CH_AUX3);
-    ch_aux4 = reciverSpek.InputCh(CH_AUX4);
+    ch_pitch = channel_filter(reciverSpek.InputCh(remote_assignment[3]), ch_pitch);
+    ch_roll = channel_filter(reciverSpek.InputCh(remote_assignment[0]), ch_roll);
+    ch_nick = channel_filter(reciverSpek.InputCh(remote_assignment[1]), ch_nick);
+    ch_yaw = channel_filter(reciverSpek.InputCh(remote_assignment[2]), ch_yaw);
+    ch_aux1 = reciverSpek.InputCh(remote_assignment[4]);
+    ch_aux2 = reciverSpek.InputCh(remote_assignment[5]);
+    ch_aux3 = reciverSpek.InputCh(remote_assignment[6]);
+    ch_aux4 = reciverSpek.InputCh(remote_assignment[7]);
   }
+
 
   // IN STABLE MODE we convert stick positions to absolute angles
   command_rx_roll = (ch_roll - parameter[roll_mid]) / parameter[STICK_TO_ANGLE_FACTOR];       // Convert stick position to absolute angles
@@ -83,7 +84,7 @@ void read_radio()
         {
           motorArmed = 1;
           neutralYAWarm = 0;
-          minPitch = parameter[MIN_PITCH] + 60;  // A minimun value for mantain a bit if throttle
+          minPitch = parameter[MIN_PITCH] + parameter[MIN_GAS];  // A minimun value for mantain a bit if throttle
         }
       }
       else
@@ -120,4 +121,6 @@ void read_radio()
     neutralYAWarm = 0;
   } 
 }
+
+
 
