@@ -62,6 +62,7 @@ unsigned long currentTimeMicros = 0, previousTimeMicros = 0;  // current and pre
 unsigned long mainLoop = 0;
 unsigned long mediumLoop = 0;
 unsigned long slowLoop = 0;
+int radioErrorCounter = 0;
 
 unsigned long debugtime[10];
 
@@ -151,7 +152,12 @@ void loop()
     }
     else
     {
-      errorRadio = TRUE;
+      radioErrorCounter++;
+      if (radioErrorCounter > 5)
+      {
+        errorRadio = TRUE;
+        radioErrorCounter = 0;
+      }
     }
 
 #if DEBUGTIME == 1

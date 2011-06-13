@@ -78,6 +78,10 @@ void calibrateSensors(void)
     if((i % 5) == 0) j++;
     if(j >= 3) j = 0;
   }
+  
+  digitalWrite(BEEPER_PIN, HIGH);
+  delay(100);
+  digitalWrite(BEEPER_PIN, LOW);
 
   for(gyro = 0; gyro <= 2; gyro++)  
     AN_OFFSET[gyro] = aux_float[gyro];    // Update sensor OFFSETs from values read
