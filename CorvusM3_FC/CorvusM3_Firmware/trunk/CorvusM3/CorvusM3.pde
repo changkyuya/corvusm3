@@ -49,7 +49,7 @@
 #include <EEPROM.h>             // EEPROM 
 
 /* Software version */
-#define VER 0.01.b1    // Current software version 
+#define VER 0.02    // Current software version 
 
 // Sensors - declare one global instance
 CM3_ADC	adc;

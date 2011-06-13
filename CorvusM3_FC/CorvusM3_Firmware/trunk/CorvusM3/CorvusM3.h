@@ -24,23 +24,33 @@
 //******************************************************************************
 // Radio definition
 //******************************************************************************
-#define CH_ROLL 3
-#define CH_NICK 1
-#define CH_PITCH 2
-#define CH_YAW 0
-#define CH_AUX1 4
-#define CH_AUX2 5
-#define CH_AUX3 6
-#define CH_AUX4 7
+#define RC_ROLL 0
+#define RC_NICK 1
+#define RC_YAW 2
+#define RC_PITCH 3
+#define RC_AUX1 4
+#define RC_AUX2 5
+#define RC_AUX3 6
+#define RC_AUX4 7
+int remote_assignment[]={1, 2, 3, 4, 5, 6, 7};
+  
+//#define CH_ROLL 3
+//#define CH_NICK 1
+//#define CH_PITCH 2
+//#define CH_YAW 0
+//#define CH_AUX1 4
+//#define CH_AUX2 5
+//#define CH_AUX3 6
+//#define CH_AUX4 7
 
 byte errorRadio = 1;
 
 //******************************************************************************
 // Axis
 //******************************************************************************
-#define ROLL 0
-#define NICK 1
-#define YAW 2
+#define ROLL 0 
+#define NICK 1 
+#define YAW 2 
 #define XAXIS 0
 #define YAXIS 1
 #define ZAXIS 2
@@ -278,8 +288,10 @@ unsigned long elapsedTime			= 0;		// for doing custom events
 #define TUNING_PARA                     35
 #define TUNING_MIN                      36
 #define TUNING_MAX                      37
+#define CHANNEL_ASSIGNMENT              38
+#define MIN_GAS                         39
 
-#define LAST_PARAMETER                  37
+#define LAST_PARAMETER                  39
 
 float parameter[LAST_PARAMETER + 1];
 
@@ -325,7 +337,10 @@ void defaultUserConfig()
   parameter[TUNING_PARA]                  = 0;
   parameter[TUNING_MIN]                   = 0;
   parameter[TUNING_MAX]                   = 0;
+  parameter[CHANNEL_ASSIGNMENT]           = 31024567;
+  parameter[MIN_GAS]                      = 60;
 }
+
 
 
 

@@ -110,3 +110,21 @@ float mapfloat(float value, float fromStart, float fromEnd, float toStart, float
 {
     return (value - fromStart) * (toEnd - toStart) / (fromEnd - fromStart) + toStart;
 }
+
+
+
+//******************************************************************************
+// Remote Assignment
+//******************************************************************************
+void remoteChannelMapping(void) 
+{
+  //split channel assignment
+  remote_assignment[0] = (int)parameter[CHANNEL_ASSIGNMENT] / 10000000;
+  remote_assignment[1] = ((int)parameter[CHANNEL_ASSIGNMENT] % 10000000) / 1000000;
+  remote_assignment[2] = ((int)parameter[CHANNEL_ASSIGNMENT] % 1000000) / 100000;
+  remote_assignment[3] = ((int)parameter[CHANNEL_ASSIGNMENT] % 100000) / 10000;
+  remote_assignment[4] = ((int)parameter[CHANNEL_ASSIGNMENT] % 10000) / 1000;
+  remote_assignment[5] = ((int)parameter[CHANNEL_ASSIGNMENT] % 1000) / 100;
+  remote_assignment[6] = ((int)parameter[CHANNEL_ASSIGNMENT] % 100) / 10;
+  remote_assignment[7] = ((int)parameter[CHANNEL_ASSIGNMENT] % 10);
+}

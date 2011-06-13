@@ -41,13 +41,13 @@ void loop()
   
   delay(2); // simulate mainloop
   
-    Serial1.print(reciver.getThro());
+    Serial1.print(reciver.InputCh(0));
     Serial1.print("\t");
-    Serial1.print(reciver.getRoll());
+    Serial1.print(reciver.InputCh(1));
     Serial1.print("\t");
-    Serial1.print(reciver.getPitch());
+    Serial1.print(reciver.InputCh(2));
     Serial1.print("\t");
-    Serial1.print(reciver.getYaw());
+    Serial1.print(reciver.InputCh(3));
     Serial1.println();
 
   
