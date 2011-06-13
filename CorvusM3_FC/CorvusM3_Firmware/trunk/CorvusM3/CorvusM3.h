@@ -199,7 +199,7 @@ float 	battery_voltage 	= 11;		// Battery Voltage, initialized above threshold f
 byte battwarning = 0;
 
 // Mode LED timers and variables, used to blink LED_Green
-byte gled_status = HIGH;
+byte gled_status = 1;
 long gled_timer;
 long gled_speed;
 
