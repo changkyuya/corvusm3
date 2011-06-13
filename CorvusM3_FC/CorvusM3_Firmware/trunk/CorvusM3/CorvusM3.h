@@ -32,7 +32,7 @@
 #define RC_AUX2 5
 #define RC_AUX3 6
 #define RC_AUX4 7
-int remote_assignment[]={1, 2, 3, 4, 5, 6, 7};
+int remote_assignment[]={0, 1, 2, 3};
   
 //#define CH_ROLL 3
 //#define CH_NICK 1
@@ -121,9 +121,9 @@ int SENSOR_SIGN[]={
 #define ToRad(x) (x*0.01745329252)	// *pi/180
 #define ToDeg(x) (x*57.2957795131)	// *180/pi
 
-#define Gyro_Scaled_X(x) x*ToRad(Gyro_Gain_X) //Return the scaled ADC raw data of the gyro in radians for second
-#define Gyro_Scaled_Y(x) x*ToRad(Gyro_Gain_Y) //Return the scaled ADC raw data of the gyro in radians for second
-#define Gyro_Scaled_Z(x) x*ToRad(Gyro_Gain_Z) //Return the scaled ADC raw data of the gyro in radians for second
+//#define Gyro_Scaled_X(x) x*ToRad(Gyro_Gain_X) //Return the scaled ADC raw data of the gyro in radians for second
+//#define Gyro_Scaled_Y(x) x*ToRad(Gyro_Gain_Y) //Return the scaled ADC raw data of the gyro in radians for second
+//#define Gyro_Scaled_Z(x) x*ToRad(Gyro_Gain_Z) //Return the scaled ADC raw data of the gyro in radians for second
 
 int AN[7]; //array that store the 7 ADC channels
 int AN_OFFSET[6]; //Array that store the Offset of the gyros and accelerometers
@@ -290,8 +290,11 @@ unsigned long elapsedTime			= 0;		// for doing custom events
 #define TUNING_MAX                      37
 #define CHANNEL_ASSIGNMENT              38
 #define MIN_GAS                         39
+#define GYRO_GAIN_X                     40
+#define GYRO_GAIN_Y                     41
+#define GYRO_GAIN_Z                     42
 
-#define LAST_PARAMETER                  39
+#define LAST_PARAMETER                  42
 
 float parameter[LAST_PARAMETER + 1];
 
@@ -337,8 +340,11 @@ void defaultUserConfig()
   parameter[TUNING_PARA]                  = 0;
   parameter[TUNING_MIN]                   = 0;
   parameter[TUNING_MAX]                   = 0;
-  parameter[CHANNEL_ASSIGNMENT]           = 31024567;
+  parameter[CHANNEL_ASSIGNMENT]           = 3102;
   parameter[MIN_GAS]                      = 60;
+  parameter[GYRO_GAIN_X]                  = 0.9;
+  parameter[GYRO_GAIN_Y]                  = 0.9;
+  parameter[GYRO_GAIN_Z]                  = 0.9;
 }
 
 

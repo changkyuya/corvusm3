@@ -55,15 +55,13 @@ void sendSerialTelemetry()
       Calibrate_Accel_Offset();
       queryType = 'x';
       break;
-    case 'p': 						
-      //Show_Stable_PIDs();
-      show_Parameter();
-      queryType = 'x';
-      break;
-    case 'P': 						
-      //Receive_Stable_PID();						
+    case 'P': 									
       write_Parameter();
       queryType = 'x';
+      break;
+    case 'p': 		
+      show_Parameter();
+      queryType = 'x';	
       break;
     case 'r': 						
       Show_Receiver_Values();
@@ -121,7 +119,6 @@ void show_all_Parameter()
     SerPri("p");
     SerPri(i);
     SerPri(";");
-    char buf[20];
     SerPrln(readEEPROM(i),4);
   }
 }
@@ -134,12 +131,11 @@ void show_Parameter() {
   SerPri("p");
   SerPri(tmpAdr);
   SerPri(";");
-  char buf[20];
-  SerPrln(readEEPROM(tmpAdr),4);
+  SerPrln(readEEPROM(tmpAdr),4);				
 }
 
 //******************************************************************************
-//  write Parameter - p
+//  write Parameter - P
 //******************************************************************************
 void write_Parameter() 
 {
@@ -150,7 +146,7 @@ void write_Parameter()
   SerPri("=");
   SerPri(tmpAdr);
   SerPri(";");
-  SerPrln(readEEPROM(tmpAdr));
+  SerPrln(readEEPROM(tmpAdr),4);
 }
 
 
@@ -211,14 +207,141 @@ void Show_Stable_PIDs()
 //******************************************************************************
 void Calibrate_Pitch() 
 {
-  int tmp = 1200;
+  int tmp;
+  int tmp_ch[4];
+  
+//  SerPrln("Move all Sticks to mid position!");
+//  delay(1000);
+//  SerPrln("2. ");
+//  delay(1000);
+//  SerPrln("1. ");
+//  delay(1000);
+//  // we read all spektrum bytes
+//  while (Serial2.available()) {
+//    reciverSpek.regByte(Serial2.read());
+//  }
+//  read_radio();
+//  
+//  SerPrln("Move Roll Stick to max/min");
+//  delay(1000);
+//  SerPrln("2. ");
+//  delay(1000);
+//  SerPrln("1. ");
+//  delay(1000);
+//  // we read all spektrum bytes
+//  while (Serial2.available()) {
+//    reciverSpek.regByte(Serial2.read());
+//  }
+//  read_radio();
+//  
+//  if(ch_roll < 1300 || ch_roll > 1600)
+//    tmp_ch[0] = 0;
+//  if(ch_nick < 1300 || ch_nick > 1600)
+//    tmp_ch[0] = 1;
+//  if(ch_yaw < 1300 || ch_yaw > 1600)
+//    tmp_ch[0] = 2;
+//  if(ch_pitch < 1300 || ch_pitch > 1600)
+//    tmp_ch[0] = 3;
+//   
+//  SerPri("Roll Pos: ");  
+//  SerPrln(tmp_ch[0]);
+//  
+//  SerPrln("Move Nick Stick to max/min");
+//  delay(1000);
+//  SerPrln("2. ");
+//  delay(1000);
+//  SerPrln("1. ");
+//  delay(1000);
+//  // we read all spektrum bytes
+//  while (Serial2.available()) {
+//    reciverSpek.regByte(Serial2.read());
+//  }
+//  read_radio();
+//  
+//  if(ch_roll < 1300 || ch_roll > 1600)
+//    tmp_ch[1] = 0;
+//  if(ch_nick < 1300 || ch_nick > 1600)
+//    tmp_ch[1] = 1;
+//  if(ch_yaw < 1300 || ch_yaw > 1600)
+//    tmp_ch[1] = 2;
+//  if(ch_pitch < 1300 || ch_pitch > 1600)
+//    tmp_ch[1] = 3;
+//    
+//  SerPri("Nick Pos: ");
+//  SerPrln(tmp_ch[1]);
+//  
+//  SerPrln("Move Yaw Stick to max/min");
+//  delay(1000);
+//  SerPrln("2. ");
+//  delay(1000);
+//  SerPrln("1. ");
+//  delay(1000);
+//  // we read all spektrum bytes
+//  while (Serial2.available()) {
+//    reciverSpek.regByte(Serial2.read());
+//  }
+//  read_radio();
+//  
+//  if(ch_roll < 1300 || ch_roll > 1600)
+//    tmp_ch[2] = 0;
+//  if(ch_nick < 1300 || ch_nick > 1600)
+//    tmp_ch[2] = 1;
+//  if(ch_yaw < 1300 || ch_yaw > 1600)
+//    tmp_ch[2] = 2;
+//  if(ch_pitch < 1300 || ch_pitch > 1600)
+//    tmp_ch[2] = 3;
+//    
+//  SerPri("Yaw Pos: ");
+//  SerPrln(tmp_ch[2]);
+//  
+//  SerPrln("Move Pitch Stick to max/min");
+//  delay(1000);
+//  SerPrln("2. ");
+//  delay(1000);
+//  SerPrln("1. ");
+//  delay(1000);
+//  // we read all spektrum bytes
+//  while (Serial2.available()) {
+//    reciverSpek.regByte(Serial2.read());
+//  }
+//  read_radio();
+//  
+//  if(ch_roll < 1300 || ch_roll > 1600)
+//    tmp_ch[3] = 0;
+//  if(ch_nick < 1300 || ch_nick > 1600)
+//    tmp_ch[3] = 1;
+//  if(ch_yaw < 1300 || ch_yaw > 1600)
+//    tmp_ch[3] = 2;
+//  if(ch_pitch < 1300 || ch_pitch > 1600)
+//    tmp_ch[3] = 3;
+//    
+//  SerPri("Pitch Pos: ");
+//  SerPrln(tmp_ch[3]);
+//  
+//  remote_assignment[0] = tmp_ch[0];
+//  remote_assignment[1] = tmp_ch[1];
+//  remote_assignment[2] = tmp_ch[2];
+//  remote_assignment[3] = tmp_ch[3];
+//  
+//  tmp = (remote_assignment[0] * 1000) + (remote_assignment[1] * 100) + (remote_assignment[2] * 10) + remote_assignment[0];
+//  
+//  SerPri("Parameter [38]: ");
+//  SerPrln(tmp);
+//  
+//  writeEEPROM(tmp, CHANNEL_ASSIGNMENT);
 
-  SerPrln("Don't move your sticks, reading starts in 3 seconds");
+  tmp = 1200;
+  SerPrln("Reading mid values! Pitch to min, Roll/Nick/Yaw mid. Starts in 3 seconds");
   delay(1000);
   SerPrln("2. ");
   delay(1000);
   SerPrln("1. ");
   delay(1000);
+  // we read all spektrum bytes
+  while (Serial2.available()) {
+    reciverSpek.regByte(Serial2.read());
+  }
+  read_radio();
   SerPrln("Reading Pitch value");
   tmp = ch_pitch;
   SerPrln(tmp);

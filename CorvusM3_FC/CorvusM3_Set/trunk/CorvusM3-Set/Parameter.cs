@@ -32,7 +32,7 @@ namespace CorvusM3
 {
     class Parameter
     {
-        public float [] parameter = new float[40];
+        public float [] parameter = new float[43];
         private Serial serialComm;
         private PropertyGrid propGrid;
 
@@ -64,8 +64,6 @@ namespace CorvusM3
                 string [] data = e.Dataline.Split(';');
                 data[0] = data[0].Substring(1);
                 parameter[Convert.ToInt16(data[0])] = float.Parse(data[1].Replace('.', ','));
-                serialComm.setParameter(Convert.ToInt16(data[0]), float.Parse(data[1].Replace('.',',')));
-                
             }
         }
 
@@ -298,7 +296,7 @@ namespace CorvusM3
             set { parameter[37] = value; serialComm.setParameter(37, value); }
             get { return parameter[37]; }
         }
-        [CategoryAttribute("Remote"), DisplayName("Channel Mapping [38]"), DescriptionAttribute("Default 31024567; 8 Digits for each channel (Roll,Nick,Yaw,Pitch,Aux1-4)")]
+        [CategoryAttribute("Remote"), DisplayName("Channel Mapping [38]"), DescriptionAttribute("Default 3102; 8 Digits for each channel (Roll,Nick,Yaw,Pitch")]
         public float CHANNEL_ASSIGNMENT
         {
             set { parameter[38] = value; serialComm.setParameter(38, value); }
@@ -309,6 +307,25 @@ namespace CorvusM3
         {
             set { parameter[39] = value; serialComm.setParameter(39, value); }
             get { return parameter[39]; }
+        }
+
+        [CategoryAttribute("Sensors"), DisplayName("Gyro Gain X [40]"), DescriptionAttribute("Default 0.9")]
+        public float GYRO_GAIN_X
+        {
+            set { parameter[40] = value; serialComm.setParameter(40, value); }
+            get { return parameter[40]; }
+        }
+        [CategoryAttribute("Sensors"), DisplayName("Gyro Gain Y [41]"), DescriptionAttribute("Default 0.9")]
+        public float GYRO_GAIN_Y
+        {
+            set { parameter[41] = value; serialComm.setParameter(41, value); }
+            get { return parameter[41]; }
+        }
+        [CategoryAttribute("Sensors"), DisplayName("Gyro Gain Z [42]"), DescriptionAttribute("Default 0.9")]
+        public float GYRO_GAIN_Z
+        {
+            set { parameter[42] = value; serialComm.setParameter(42, value); }
+            get { return parameter[42]; }
         }
 
 

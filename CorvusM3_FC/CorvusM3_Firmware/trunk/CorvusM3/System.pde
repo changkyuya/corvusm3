@@ -62,6 +62,8 @@ void APM_Init() {
   calibrateSensors();         // Calibrate neutral values of gyros  (in Sensors.pde)
 
   delay(1000);
+  
+  SerPrln("Ready");
 }
 
 
