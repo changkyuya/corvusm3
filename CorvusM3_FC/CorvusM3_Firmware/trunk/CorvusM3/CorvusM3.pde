@@ -101,11 +101,11 @@ void loop()
     reciverSpek.regByte(Serial2.read());
   }
 
-  // Main loop at 500Hz (IMU + control)
-  if ((currentTime-mainLoop) > 2)    // about 500Hz (every 2ms)
+  // Main loop at 1000Hz (IMU + control)
+  if ((currentTimeMicros-mainLoop) > 1000)    // about 1000Hz (every 1ms)
   {
     G_Dt = (currentTimeMicros-previousTimeMicros) * 0.000001;   // Microseconds!!!
-    mainLoop = currentTime;
+    mainLoop = currentTimeMicros;
     previousTimeMicros = currentTimeMicros;
 
     //test loop time
@@ -257,16 +257,16 @@ void loop()
   if(millis() - gled_timer > gled_speed) 
   {
     gled_timer = millis();
-    if(gled_status == HIGH) { 
+    if(gled_status == 1) { 
       digitalWrite(LED_Red, LOW);
       digitalWrite(BEEPER_PIN, HIGH);
-      gled_status = LOW;
+      gled_status = 0;
     } 
     else 
     {
       digitalWrite(LED_Red, HIGH);
       digitalWrite(BEEPER_PIN, LOW);
-      gled_status = HIGH;
+      gled_status = 1;
     } 
   }
 }
