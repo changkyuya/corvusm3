@@ -16,9 +16,9 @@
 ||12||acc_offset_y||2044||ACC Neutralwert Nick||
 ||13||acc_offset_z||2052||ACC Neutralwert Z (wird um 407 korrigiert bei Autocalibrierung)|| 
 ||14||Kp_ROLLNICK||0.14||ACC Korrekturfaktor P in DCM|| 
-||15||Ki_ROLLNICK0.15||ACC Korrekturfaktor I in DCM||
+||15||Ki_ROLLNICK||0.15||ACC Korrekturfaktor I in DCM||
 ||16||Kp_YAW||1.0||Kompass Korrekturfaktor P in DCM||
-||17||Ki_YAW0.2||Kompass Korrekturfaktor I in DCM||
+||17||Ki_YAW||0.2||Kompass Korrekturfaktor I in DCM||
 ||18||XMITFACTOR||0.32||Drehfaktor für HH Mode|| 
 ||19||Kp_RateRoll?||1.95||PID für HH Mode|| 
 ||20||Ki_RateRoll?||0.0||PID für HH Mode|| 
