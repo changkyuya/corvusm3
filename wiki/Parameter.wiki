@@ -39,5 +39,12 @@
 ||35||TUNING_PARA||0||Parameter der verändert werden soll (2 gleichzeitig möglich aabb)|| 
 ||36||TUNING_MIN||0||min Parameter Wert bei Remote 1000 Aux2||
 ||37||TUNING_MAX||0||max Parameter Wert bei Remote 2000 Aux2|| 
+||38||CHANNEL_ASSIGNMENT||3102||8 Digits for each channel (Roll,Nick,Yaw,Pitch)||
+||39||MIN_GAS||60||Map from 1000-2000 to 0-200||
+||40||GYRO_GAIN_X||0.9||||
+||41||GYRO_GAIN_Y||0.9||||
+||42||GYRO_GAIN_Z||0.9||||
+||43||MAX_MOTOR_OUTPUT||200||||
+||44||MOT_CONF||0||0 = + (front pointing towards front motor), 1 = X (front between front and right motor), 2 = X (front pointing towards front motor)||
 
 [http://2.bp.blogspot.com/-PeuMfhxVw6M/Te-d-XUPJkI/AAAAAAAAAUc/HEWFNnJOJcQ/s1600/cm3_3.jpg]
