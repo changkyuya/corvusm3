@@ -153,7 +153,7 @@ void loop()
     else
     {
       radioErrorCounter++;
-      if (radioErrorCounter > 5)
+      if (radioErrorCounter > 100)
       {
         errorRadio = TRUE;
         radioErrorCounter = 0;
