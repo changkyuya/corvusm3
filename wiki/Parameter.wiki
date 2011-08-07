@@ -34,7 +34,7 @@
 ||30||yaw_mid||1522||Neutralwert RC Roll|| 
 ||31||MIN_PITCH||1178||min Wert für Pitch||
 ||32||BAT_WARNING||10.0||Schwellwert in Volt||
-||33||STICK_TO_ANGLE_FACTOR||5.0||Stick Faktor (divisor)||
+||33||STICK_TO_ANGLE_FACTOR||7.0||Stick Faktor (divisor)||
 ||34||YAW_STICK_TO_ANGLE_FACTOR||1150.0||Stick Faktor (divisor)||
 ||35||TUNING_PARA||0||Parameter der verändert werden soll (2 gleichzeitig möglich aabb)|| 
 ||36||TUNING_MIN||0||min Parameter Wert bei Remote 1000 Aux2||
