@@ -60,6 +60,10 @@ void read_radio()
   command_rx_roll = (ch_roll - parameter[roll_mid]) / parameter[STICK_TO_ANGLE_FACTOR];       // Convert stick position to absolute angles
   command_rx_nick = (ch_nick - parameter[nick_mid]) / parameter[STICK_TO_ANGLE_FACTOR];
 
+  // if you nick more then 90 degrees dcm flips
+  command_rx_roll = limitRange(command_rx_roll, -70, 70);
+  command_rx_nick = limitRange(command_rx_nick, -70, 70);
+
   // YAW
   if (abs(ch_yaw-yaw_mid)>6)   // Take into account a bit of "dead zone" on yaw
   {

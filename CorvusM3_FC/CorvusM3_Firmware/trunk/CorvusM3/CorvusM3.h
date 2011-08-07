@@ -335,7 +335,7 @@ void defaultUserConfig()
   parameter[yaw_mid]                      = 1522;
   parameter[MIN_PITCH]                    = 1178; 
   parameter[BAT_WARNING]                  = 10.0;
-  parameter[STICK_TO_ANGLE_FACTOR]        = 5.0;
+  parameter[STICK_TO_ANGLE_FACTOR]        = 7.0;
   parameter[YAW_STICK_TO_ANGLE_FACTOR]    = 1150.0;
   parameter[TUNING_PARA]                  = 0;
   parameter[TUNING_MIN]                   = 0;

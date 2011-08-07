@@ -109,8 +109,8 @@ void Matrix_update(void)
   Gyro_Vector[2]=read_adc(2) * ToRad(parameter[GYRO_GAIN_Z]);  //Gyro_Scaled_Z(read_adc(2)); //gyro Z yaw
   
   // Low pass filter on accelerometer data (to filter vibrations)
-  Accel_Vector[0]=Accel_Vector[0]*0.6 + (float)read_adc(4)*0.4; // acc x --> CM3 Change x/y
-  Accel_Vector[1]=Accel_Vector[1]*0.6 + (float)read_adc(3)*0.4; // acc y --> CM3 Change x/y
+  Accel_Vector[0]=Accel_Vector[0]*0.6 + (float)read_adc(3)*0.4; // acc x --> CM3 Change x/y
+  Accel_Vector[1]=Accel_Vector[1]*0.6 + (float)read_adc(4)*0.4; // acc y --> CM3 Change x/y
   Accel_Vector[2]=Accel_Vector[2]*0.6 + (float)read_adc(5)*0.4; // acc z
   
   Vector_Add(&Omega[0], &Gyro_Vector[0], &Omega_I[0]);//adding integrator
