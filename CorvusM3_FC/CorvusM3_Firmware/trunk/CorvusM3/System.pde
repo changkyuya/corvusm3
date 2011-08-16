@@ -26,25 +26,12 @@ void APM_Init() {
   
   disableDebugPorts();  
   
-  Serial1.begin(SERIAL1_BAUD);
-  Serial2.begin(115200); //spektrum
-  Serial3.begin(115200); //ESC
-  
   pinMode(LED_Red,OUTPUT);    // Red LED     (PC13) = 21
-  
-  pinMode(SPEKTRUM_BIND_PIN,OUTPUT);    // Spektrum Bind Pin
-  digitalWrite(SPEKTRUM_BIND_PIN, HIGH);
   
   pinMode(DEBUG_PIN, OUTPUT);
   pinMode(BEEPER_PIN, OUTPUT);
   
   readUserConfig();          // Load user configurable items from EEPROM
-  
-  reciverPPM.Init();             // APM Radio initialization
-
-  
-  
-  motor_stop();
   
   // Wiggle LEDs while ESCs are rebooting  
   FullBlink(50,20);
@@ -56,11 +43,18 @@ void APM_Init() {
   if(parameter[nick_mid] < 1400 || parameter[nick_mid] > 1600) parameter[nick_mid] = 1500;
   if(parameter[yaw_mid] < 1400 || parameter[yaw_mid] > 1600) parameter[yaw_mid] = 1500;
   
-  motor_stop();
-  
   calibrateSensors();         // Calibrate neutral values of gyros  (in Sensors.pde)
 
   delay(1000);
+  
+  pinMode(SPEKTRUM_BIND_PIN,OUTPUT);    // Spektrum Bind Pin
+  digitalWrite(SPEKTRUM_BIND_PIN, HIGH);
+  
+  Serial1.begin(SERIAL1_BAUD);
+  Serial2.begin(115200); //spektrum
+  Serial3.begin(115200); //ESC
+
+  reciverPPM.Init();             // APM Radio initialization
   
   SerPrln("Ready");
 }
