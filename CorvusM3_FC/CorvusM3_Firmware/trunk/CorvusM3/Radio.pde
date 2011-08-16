@@ -55,15 +55,24 @@ void read_radio()
     ch_aux4 = reciverSpek.InputCh(RC_AUX4);
   }
 
-
-  // IN STABLE MODE we convert stick positions to absolute angles
-  command_rx_roll = (ch_roll - parameter[roll_mid]) / parameter[STICK_TO_ANGLE_FACTOR];       // Convert stick position to absolute angles
-  command_rx_nick = (ch_nick - parameter[nick_mid]) / parameter[STICK_TO_ANGLE_FACTOR];
-
-  // if you nick more then 90 degrees dcm flips
-  command_rx_roll = limitRange(command_rx_roll, -70, 70);
-  command_rx_nick = limitRange(command_rx_nick, -70, 70);
-
+  switch ((int)parameter[MOT_CONFIG])
+  {
+    case 0:
+    case 1:  
+      // IN STABLE MODE we convert stick positions to absolute angles
+      // For + mode -  - front pointing towards front motor
+      // For X mode - front between front and right motor 
+      command_rx_roll = (ch_roll - parameter[roll_mid]) / parameter[STICK_TO_ANGLE_FACTOR];       // Convert stick position to absolute angles
+      command_rx_nick = (ch_nick - parameter[nick_mid]) / parameter[STICK_TO_ANGLE_FACTOR];
+      break;
+    case 2:
+      // For X mode - front pointing towards front motor 
+      float aux_roll = (ch_roll - parameter[roll_mid]) / parameter[STICK_TO_ANGLE_FACTOR];
+      float aux_nick = (ch_nick - parameter[nick_mid]) / parameter[STICK_TO_ANGLE_FACTOR];
+      command_rx_roll = aux_roll - aux_nick;
+      command_rx_nick = aux_roll + aux_nick;
+      break;
+  }
   // YAW
   if (abs(ch_yaw-yaw_mid)>6)   // Take into account a bit of "dead zone" on yaw
   {

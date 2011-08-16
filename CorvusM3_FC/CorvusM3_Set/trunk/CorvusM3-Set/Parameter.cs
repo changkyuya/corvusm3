@@ -32,7 +32,7 @@ namespace CorvusM3
 {
     class Parameter
     {
-        public float [] parameter = new float[43];
+        public float [] parameter = new float[45];
         private Serial serialComm;
         private PropertyGrid propGrid;
 
@@ -326,6 +326,20 @@ namespace CorvusM3
         {
             set { parameter[42] = value; serialComm.setParameter(42, value); }
             get { return parameter[42]; }
+        }
+
+        [CategoryAttribute("Basis"), DisplayName("Max Motor output"), DescriptionAttribute("Default 200")]
+        public float MAX_MOTOR_OUTPUT
+        {
+            set { parameter[43] = value; serialComm.setParameter(43, value); }
+            get { return parameter[43]; }
+        }
+
+        [CategoryAttribute("Basis"), DisplayName("Motor config"), DescriptionAttribute("Default 0 = + (front pointing towards front motor), 1 = X (front between front and right motor), 2 = X (front pointing towards front motor)")]
+        public float MOT_CONF
+        {
+            set { parameter[44] = value; serialComm.setParameter(44, value); }
+            get { return parameter[44]; }
         }
 
 

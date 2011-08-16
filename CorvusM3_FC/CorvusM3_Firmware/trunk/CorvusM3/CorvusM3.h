@@ -293,8 +293,10 @@ unsigned long elapsedTime			= 0;		// for doing custom events
 #define GYRO_GAIN_X                     40
 #define GYRO_GAIN_Y                     41
 #define GYRO_GAIN_Z                     42
+#define MAX_MOTOR_OUTPUT                43
+#define MOT_CONFIG                      44
 
-#define LAST_PARAMETER                  42
+#define LAST_PARAMETER                  44
 
 float parameter[LAST_PARAMETER + 1];
 
@@ -345,6 +347,8 @@ void defaultUserConfig()
   parameter[GYRO_GAIN_X]                  = 0.9;
   parameter[GYRO_GAIN_Y]                  = 0.9;
   parameter[GYRO_GAIN_Z]                  = 0.9;
+  parameter[MAX_MOTOR_OUTPUT]             = 200;
+  parameter[MOT_CONFIG]                   = 0;
 }
 
 
