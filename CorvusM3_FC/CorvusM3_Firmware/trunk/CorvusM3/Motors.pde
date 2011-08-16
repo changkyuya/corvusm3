@@ -49,14 +49,72 @@ void motor_output()
   // Copter mix
   if (motorArmed == 1) 
   {   
-    // minThrottle= 0 to MIN_THROTTLE = remote value from EEPR
-    rightMotor = constrain(pitch - control_roll + control_yaw, minPitch, 2000);
-    leftMotor = constrain(pitch + control_roll + control_yaw, minPitch, 2000);
-    frontMotor = constrain(pitch + control_nick - control_yaw, minPitch, 2000);
-    backMotor = constrain(pitch - control_nick - control_yaw, minPitch, 2000);
+    switch ((int)parameter[MOT_CONFIG])
+    {
+      case 0:
+      case 2:
+        // For + mode - front pointing towards front motor
+        // For X mode - front pointing towards front motor 
+        rightMotor = constrain(pitch - control_roll + control_yaw, minPitch, 2000);
+        leftMotor = constrain(pitch + control_roll + control_yaw, minPitch, 2000);
+        frontMotor = constrain(pitch + control_nick - control_yaw, minPitch, 2000);
+        backMotor = constrain(pitch - control_nick - control_yaw, minPitch, 2000);
+        break;
+      case 1:
+        // For X mode - front between front and right motor 
+        rightMotor = constrain(pitch - control_roll + control_nick + control_yaw, minPitch, 2000); // Right motor
+        leftMotor = constrain(pitch + control_roll - control_nick + control_yaw, minPitch, 2000);  // Left motor
+        frontMotor = constrain(pitch + control_roll + control_nick - control_yaw, minPitch, 2000); // Front motor
+        backMotor = constrain(pitch - control_roll - control_nick - control_yaw, minPitch, 2000);  // Back motor
+        break;
+    }
+    /// TEST START
+//    int tmpRightMotor = pitch - control_roll + control_yaw;
+//    int tmpLeftMotor = pitch + control_roll + control_yaw;
+//    int tmpFrontMotor = pitch + control_nick - control_yaw;
+//    int tmpBackMotor = pitch - control_nick - control_yaw;
+//    //limit max Motor output
+//    rightMotor = ((tmpRightMotor - rightMotor) > parameter[MAX_MOTOR_OUTPUT]) ? (rightMotor + parameter[MAX_MOTOR_OUTPUT]) : tmpRightMotor;
+//    leftMotor = ((tmpLeftMotor - leftMotor) > parameter[MAX_MOTOR_OUTPUT]) ? (leftMotor + parameter[MAX_MOTOR_OUTPUT]) : tmpLeftMotor;
+//    frontMotor = ((tmpFrontMotor - frontMotor) > parameter[MAX_MOTOR_OUTPUT]) ? (frontMotor + parameter[MAX_MOTOR_OUTPUT]) : tmpFrontMotor;
+//    backMotor = ((tmpBackMotor - backMotor) > parameter[MAX_MOTOR_OUTPUT]) ? (backMotor + parameter[MAX_MOTOR_OUTPUT]) : tmpBackMotor;
+//
+//    // DTC Dynamic thrust control
+//    int minMotor;
+//    int maxMotor;
+//   
+//    //search min max Motor values
+//    minMotor = (rightMotor < minMotor) ? rightMotor : minMotor;
+//    maxMotor = (rightMotor > maxMotor) ? rightMotor : maxMotor;
+//    minMotor = (leftMotor < minMotor) ? leftMotor : minMotor;
+//    maxMotor = (leftMotor > maxMotor) ? leftMotor : maxMotor;
+//    minMotor = (frontMotor < minMotor) ? frontMotor : minMotor;
+//    maxMotor = (frontMotor > maxMotor) ? frontMotor : maxMotor;
+//    minMotor = (backMotor < minMotor) ? backMotor : minMotor;
+//    maxMotor = (backMotor > maxMotor) ? backMotor : maxMotor;
+//   
+//    //correkt all motors
+//    minMotor = minMotor - parameter[MIN_GAS];
+//    maxMotor = maxMotor - 2000;
+//    
+//    if (maxMotor > 0)
+//    {
+//      rightMotor = ((rightMotor - maxMotor) < parameter[MIN_GAS]) ? parameter[MIN_GAS] : (rightMotor - maxMotor);
+//      leftMotor = ((leftMotor - maxMotor) < parameter[MIN_GAS]) ? parameter[MIN_GAS] : (leftMotor - maxMotor);
+//      frontMotor = ((frontMotor - maxMotor) < parameter[MIN_GAS]) ? parameter[MIN_GAS] : (frontMotor - maxMotor);
+//      backMotor = ((backMotor - maxMotor) < parameter[MIN_GAS]) ? parameter[MIN_GAS] : (backMotor - maxMotor);
+//    }
+//    else if (minMotor < 0)
+//    {
+//      rightMotor = ((rightMotor - minMotor) > 2000) ? 2000 : (rightMotor - minMotor);
+//      leftMotor = ((leftMotor - minMotor) > 2000) ? 2000 : (leftMotor - minMotor);
+//      frontMotor = ((frontMotor - minMotor) > 2000) ? 2000 : (frontMotor - minMotor);
+//      backMotor = ((backMotor - minMotor) > 2000) ? 2000 : (backMotor - minMotor);
+//    }
+  /// TEST END
   } 
-  else 
-  {    // MOTORS DISARMED
+  else  // MOTORS DISARMED
+  {   
     //rightMotor = MIN_THROTTLE;
     rightMotor = parameter[MIN_PITCH];
     leftMotor = parameter[MIN_PITCH];
@@ -79,10 +137,10 @@ void motor_output()
   //    CM3_RC.OutputCh(3, backMotor);    // Back motor   
   
   //we use 10 as mingas
-  char sr = map(rightMotor, parameter[MIN_PITCH], 2000, 0, 200);
-  char sl = map(leftMotor, parameter[MIN_PITCH], 2000, 0, 200);
-  char sf = map(frontMotor, parameter[MIN_PITCH], 2000, 0, 200);
-  char sb = map(backMotor, parameter[MIN_PITCH], 2000, 0, 200);
+  char sr = map(rightMotor, parameter[MIN_PITCH], 2000, 0, parameter[MAX_MOTOR_OUTPUT]);
+  char sl = map(leftMotor, parameter[MIN_PITCH], 2000, 0, parameter[MAX_MOTOR_OUTPUT]);
+  char sf = map(frontMotor, parameter[MIN_PITCH], 2000, 0, parameter[MAX_MOTOR_OUTPUT]);
+  char sb = map(backMotor, parameter[MIN_PITCH], 2000, 0, parameter[MAX_MOTOR_OUTPUT]);
   
   char start = 0xF5;
   Serial3.write(start);

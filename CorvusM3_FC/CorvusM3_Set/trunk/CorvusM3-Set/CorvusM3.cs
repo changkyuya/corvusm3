@@ -473,9 +473,9 @@ namespace CorvusM3
                     }
                 }
             }
-            catch
+            catch (Exception exep)
             {
-                MessageBox.Show("Please select COM Port!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(exep.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

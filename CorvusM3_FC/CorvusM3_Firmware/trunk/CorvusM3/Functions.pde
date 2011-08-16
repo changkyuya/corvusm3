@@ -27,10 +27,14 @@ void FullBlink(int count, int blinkdelay)
   for(int i = 0; i <= count; i++) 
   {
     digitalWrite(LED_Red, HIGH);
+    digitalWrite(BEEPER_PIN, LOW);
     delay(blinkdelay);
     digitalWrite(LED_Red, LOW);
+    digitalWrite(BEEPER_PIN, HIGH);
     delay(blinkdelay);
   }
+  digitalWrite(LED_Red, HIGH);
+  digitalWrite(BEEPER_PIN, LOW);
 }
 
 //******************************************************************************
