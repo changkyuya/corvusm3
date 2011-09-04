@@ -455,11 +455,11 @@ void Show_Sensor_Data()
     SerPri(adc.Ch(sensors[6])); //BAT
     //SerPri(AN[5]);
     comma();
-    SerPri(degrees(roll));
+    SerPri(ToDeg(roll));
     comma();
-    SerPri(degrees(nick));
+    SerPri(ToDeg(nick));
     comma();
-    SerPrln(degrees(yaw));
+    SerPrln(ToDeg(yaw));
 	
 }
 
